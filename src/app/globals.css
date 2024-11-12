@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+@layer components {
+  .text-t1 {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: bold;
+  }
+  .text-t2 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+  }
+  .text-t3 {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .text-t4 {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: bold;
+  }
+  .text-bd1 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .text-bd2 {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .text-bd3 {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .text-bd4 {
+    font-size: 10px;
+    line-height: 10px;
+  }
+  .text-btn1 {
+    font-size: 16px;
+    line-height: 16px;
+  }
+  .text-btn2 {
+    font-size: 14px;
+    line-height: 14px;
+  }
+}
