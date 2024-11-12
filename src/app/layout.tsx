@@ -1,31 +1,10 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-
-const SUIT = localFont({
-  src: [
-    {
-      path: "./fonts/SUIT-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/SUIT-SemiBold.woff2",
-      weight: "600",
-      style: "semibold",
-    },
-    {
-      path: "./fonts/SUIT-Bold.woff2",
-      weight: "700",
-      style: "bold",
-    },
-  ],
-  variable: "--font-suit",
-});
+import { SUIT } from "../styles/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Plantify",
-  description: "",
+  description: "나만의 숲 꾸미기",
 };
 
 export default function RootLayout({
