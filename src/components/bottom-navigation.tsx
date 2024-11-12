@@ -13,7 +13,7 @@ export default function BottomNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 bg-white" style={{ width: "inherit" }}>
+    <nav className="fixed h-16 bottom-0 bg-white" style={{ width: "inherit" }}>
       <ul className="flex text-center">
         {navigation.map(({ href, label }) => (
           <li key={href} className="flex-1 px-8 py-4">
