@@ -14,8 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${SUIT.variable} ${SUIT.className} antialiased`}>
-        {children}
+      <body
+        className={`${SUIT.variable} ${SUIT.className} antialiased bg-[#6D8EEB]`}
+      >
+        <section className="flex flex-row justify-center gap-[100px] h-full">
+          <aside className="max-xl:hidden w-[500px]">Ads</aside>
+          <div className="w-[375px] bg-white">{children}</div>
+        </section>
       </body>
     </html>
   );
