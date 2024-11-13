@@ -19,7 +19,7 @@ export default function RootLayout({
       <body
         className={`${SUIT.variable} ${SUIT.className} antialiased bg-purple`}
       >
-        <section className="flex flex-row justify-center gap-[20%] h-full ">
+        <section className="flex flex-row justify-center gap-[5%] h-full ">
           <AdBanner />
           <div className="w-[500px]  bg-darkBg text-white h-screen overflow-auto">
             <Header />
