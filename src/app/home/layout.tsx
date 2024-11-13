@@ -14,7 +14,7 @@ export default function Layout({
   return (
     <>
       <Header />
-      {children}
+      <main className="px-4 pb-9">{children}</main>
       {/* <BottomNavigation /> */}
     </>
   );

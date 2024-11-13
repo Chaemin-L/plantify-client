@@ -1,3 +1,3 @@
 export default function ForestPage() {
-  return <main>Forest Page</main>;
+  return <div>Forest Page</div>;
 }
