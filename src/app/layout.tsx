@@ -15,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${SUIT.variable} ${SUIT.className} antialiased bg-[#6D8EEB]`}
+        className={`${SUIT.variable} ${SUIT.className} antialiased bg-purple`}
       >
-        <section className="flex flex-row justify-center gap-[20%] h-full">
+        <section className="flex flex-row justify-center gap-[20%] h-full ">
           <aside className="max-xl:hidden w-[500px] flex flex-col justify-center">
             <div className="flex flex-col justify-between gap-[150px]">
               <div>
@@ -38,7 +38,9 @@ export default function RootLayout({
               </ul>
             </div>
           </aside>
-          <div className="w-[375px] bg-white">{children}</div>
+          <div className="w-[500px] bg-lightBg text-shadow-900 dark:bg-darkBg dark:text-white">
+            {children}
+          </div>
         </section>
       </body>
     </html>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import BottomNavigation from "@/components/bottom-navigation";
 
 export const metadata: Metadata = {
   title: "Plantify - 홈",
@@ -14,7 +13,7 @@ export default function Layout({
   return (
     <>
       {children}
-      <BottomNavigation />
+      {/* <BottomNavigation /> */}
     </>
   );
 }
