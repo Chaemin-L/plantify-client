@@ -11,11 +11,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <Header />
-      <main className="px-4 pb-9">{children}</main>
-      {/* <BottomNavigation /> */}
-    </>
-  );
+  return <>{children}</>;
 }
