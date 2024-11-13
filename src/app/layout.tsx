@@ -38,7 +38,7 @@ export default function RootLayout({
               </ul>
             </div>
           </aside>
-          <div className="w-[500px] bg-lightBg text-shadow-900 dark:bg-darkBg dark:text-white">
+          <div className="w-[500px]  bg-darkBg text-white h-screen overflow-auto">
             {children}
           </div>
         </section>
