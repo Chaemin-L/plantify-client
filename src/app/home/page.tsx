@@ -1,5 +1,6 @@
 import Progressbar from "@/components/progressbar";
 import Link from "next/link";
+import Point from "./(components)/point";
 
 export default function HomePage() {
   // TODO: 실제 데이터 fetching
@@ -24,10 +25,7 @@ export default function HomePage() {
       </div>
 
       {/** 포인트, 머니 */}
-      <div className="card bg-accent-green  flex justify-between">
-        <h1 className="card-title text-black">포인트 ・머니</h1>
-        <span className="card-title text-black">8,436원</span>
-      </div>
+      <Point />
 
       {/** 펀딩 현황 */}
       <div className="card flex gap-4 flex-col ">
