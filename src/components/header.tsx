@@ -19,7 +19,7 @@ export default function Header() {
     pathname === PATH.FUNDRAISINGS;
 
   return (
-    <header className=" bg-darkBg sticky top-0">
+    <header className=" bg-darkBg sticky top-0 z-10">
       {/** logo and home */}
       <div className={clsx(!isTabMain ? "hidden" : "flex justify-between p-4")}>
         <div>LOGO</div>
