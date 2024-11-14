@@ -34,9 +34,9 @@ export default function HomePage() {
       </div>
 
       {/** 획득 배지 및 펀딩 */}
-      <div className="card flex justify-between gap-10">
-        <img src="/illusts/3d-forest.svg" className="flex-1 h-[134px]" />
-        <div className="flex-1 flex flex-col text-left justify-center gap-5">
+      <div className="card flex justify-between gap-[10%]">
+        <img src="/illusts/3d-forest.svg" className="w-[50%]" />
+        <div className="flex-grow flex flex-col text-left justify-center gap-5">
           <div className="flex flex-col">
             <span className="text-bd3">획득한 배지</span>
             <span className="card-title">3개</span>
