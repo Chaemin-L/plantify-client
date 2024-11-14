@@ -11,9 +11,11 @@ export default {
         xs: "320px",
       },
       colors: {
-        purple: "#9974F8",
-        green: "#B2F142",
-        red: "#FF4C47",
+        accent: {
+          purple: "#9974F8",
+          green: "#B2F142",
+          red: "#FF4C47",
+        },
         shadow: {
           50: "#ffffff",
           100: "#e6e6e6",

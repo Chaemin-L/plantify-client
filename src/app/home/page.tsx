@@ -16,7 +16,7 @@ export default function HomePage() {
             <p className="text-sm">
               올리브영에서 <br /> 20,000원 결제하셨어요.
             </p>
-            <button className="text-btn1 px-3 py-2 bg-red rounded-full">
+            <button className="text-btn1 px-3 py-2 bg-accent-red rounded-full">
               이용내역
             </button>
           </div>
@@ -24,7 +24,7 @@ export default function HomePage() {
       </div>
 
       {/** 포인트, 머니 */}
-      <div className="card bg-green  flex justify-between">
+      <div className="card bg-accent-green  flex justify-between">
         <h1 className="card-title text-black">포인트 ・머니</h1>
         <span className="card-title text-black">8,436원</span>
       </div>

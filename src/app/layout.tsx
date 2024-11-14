@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${SUIT.variable} ${SUIT.className} antialiased bg-purple`}
+        className={`${SUIT.variable} ${SUIT.className} antialiased bg-accent-purple`}
       >
         <section className="flex flex-row justify-center gap-[5%] h-full ">
           <AdBanner />
