@@ -1,4 +1,11 @@
 import localFont from "next/font/local";
+import { Noto_Sans } from "next/font/google";
+
+export const NOTOSANS = Noto_Sans({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const SUIT = localFont({
   src: [
@@ -14,6 +21,22 @@ export const SUIT = localFont({
     },
     {
       path: "SUIT-Bold.woff2",
+      weight: "700",
+      style: "bold",
+    },
+  ],
+  variable: "--font-suit",
+});
+
+export const MONEYGRAPHY = localFont({
+  src: [
+    {
+      path: "Moneygraphy-Rounded.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "Moneygraphy-Rounded.woff2",
       weight: "700",
       style: "bold",
     },
