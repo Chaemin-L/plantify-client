@@ -1,6 +1,7 @@
 import Progressbar from "@/components/progressbar";
 import Link from "next/link";
 import Point from "./(components)/point";
+import FundingStatus from "@/components/funding-status";
 
 export default function HomePage() {
   // TODO: 실제 데이터 fetching
@@ -28,13 +29,8 @@ export default function HomePage() {
       <Point />
 
       {/** 펀딩 현황 */}
-      <div className="card flex gap-4 flex-col ">
-        <div className="flex justify-between">
-          <h1 className="card-title">펀딩현황</h1>
-          <span className="card-title">64%</span>
-        </div>
-        <Progressbar percent={64} />
-        <span className="text-bd3">목표 금액: 1억</span>
+      <div className="card">
+        <FundingStatus />
       </div>
 
       {/** 획득 배지 및 펀딩 */}
