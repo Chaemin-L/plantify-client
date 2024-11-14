@@ -19,7 +19,7 @@ export default function Header() {
     pathname === PATH.FUNDRAISINGS;
 
   return (
-    <header className=" bg-darkBg sticky top-0">
+    <header className=" bg-darkBg sticky top-0 z-10">
       {/** logo and home */}
       <div className={clsx(!isTabMain ? "hidden" : "flex justify-between p-4")}>
         <div>LOGO</div>
@@ -32,7 +32,7 @@ export default function Header() {
 
       {/** Navigation */}
       <nav
-        className={clsx(!isTabMain ? "hidden" : "h-9 flex justify-end px-3")}
+        className={clsx(!isTabMain ? "hidden" : "flex justify-end px-3 pb-5")}
       >
         <ul className="flex text-center gap-3">
           {navigation.map(({ href, label, icon }) => (
@@ -42,17 +42,22 @@ export default function Header() {
                 pathname === href
                   ? "font-bold border-white text-white "
                   : "font-normal border-shadow-400 text-shadow-400 ",
-                "flex-1 px-3 py-2 gap-2 whitespace-nowrap border  flex justify-center items-center rounded-full text-t4"
+                "flex-1 px-3 py-2 whitespace-nowrap border  rounded-full text-t4"
               )}
             >
-              <img
-                src={icon}
-                className={clsx(
-                  "w-5 h-5",
-                  pathname === href ? "" : "opacity-50"
-                )}
-              />
-              <Link href={href}>{label}</Link>
+              <Link
+                href={href}
+                className="flex justify-center items-center  gap-2 "
+              >
+                <img
+                  src={icon}
+                  className={clsx(
+                    "w-5 h-5",
+                    pathname === href ? "" : "opacity-50"
+                  )}
+                />
+                {label}
+              </Link>
             </li>
           ))}
         </ul>
