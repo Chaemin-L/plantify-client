@@ -8,7 +8,7 @@ export default function Point() {
 
   return (
     <div
-      className="card bg-accent-green  flex justify-between cursor-pointer w-full"
+      className="card bg-accent-green  flex justify-between cursor-pointer w-full select-none"
       onClick={onClick}
     >
       {payOn ? (
