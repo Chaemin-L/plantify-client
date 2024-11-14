@@ -32,7 +32,7 @@ export default function Header() {
 
       {/** Navigation */}
       <nav
-        className={clsx(!isTabMain ? "hidden" : "h-9 flex justify-end px-3")}
+        className={clsx(!isTabMain ? "hidden" : "flex justify-end px-3 pb-5")}
       >
         <ul className="flex text-center gap-3">
           {navigation.map(({ href, label, icon }) => (

@@ -9,6 +9,21 @@ body {
 }
 
 @layer components {
+  /* card */
+  .card {
+    padding: 20px;
+    border-radius: 16px;
+    background-color: #1e1e1e;
+    color: white;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+  }
+
+  /* typography */
   .text-t1 {
     font-size: 24px;
     line-height: 28px;
@@ -48,9 +63,11 @@ body {
   .text-btn1 {
     font-size: 16px;
     line-height: 16px;
+    font-weight: bold;
   }
   .text-btn2 {
     font-size: 14px;
     line-height: 14px;
+    font-weight: bold;
   }
 }

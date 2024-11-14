@@ -17,7 +17,7 @@ export default {
         shadow: {
           50: "#ffffff",
           100: "#e6e6e6",
-          200: "#cfcfcf",
+          200: "#dcdcdc",
           300: "#bbbbbb",
           400: "#a0a0a0",
           500: "#7d7d7d",
