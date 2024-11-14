@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function Point() {
+export default function PointMoney() {
   const [payOn, setPayOn] = useState<boolean>(false);
 
   const onClick = () => setPayOn(!payOn);
