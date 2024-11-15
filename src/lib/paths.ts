@@ -4,6 +4,7 @@ export const PATH = {
   HOME: "/home",
   FUNDRAISINGS: "/fundraisings",
 
-  //
+  // in home
   PAYMENTS: "/payments",
+  CARD_BENEFIT: "/card-benefit",
 };
