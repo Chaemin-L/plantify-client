@@ -15,7 +15,7 @@ export default function PayNotice() {
           </p>
           <Link
             href={PATH.PAYMENTS}
-            className="text-btn1 px-3 py-2 bg-accent-red rounded-full"
+            className="text-btn2 px-3 py-2 bg-accent-red rounded-full"
           >
             이용내역
           </Link>

@@ -47,7 +47,7 @@ export default function Header() {
       <nav
         className={clsx(!isTabMain ? "hidden" : "flex justify-end px-3 pb-5")}
       >
-        <ul className="flex text-center gap-3">
+        <ul className="flex text-center gap-3 ">
           {navigation.map(({ href, label, icon }) => (
             <li
               key={href}
@@ -55,7 +55,7 @@ export default function Header() {
                 pathname === href
                   ? "font-bold border-white text-white "
                   : "font-normal border-shadow-400 text-shadow-400 ",
-                "flex-1 px-3 py-2 whitespace-nowrap border  rounded-full text-t4"
+                "flex-1 px-3 py-2 whitespace-nowrap border  rounded-full text-t4 transition-colors duration-300"
               )}
             >
               <Link
