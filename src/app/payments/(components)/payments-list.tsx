@@ -1,8 +1,8 @@
 "use client";
-import Select, { SelectItemType } from "@/components/Select";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PaymentsItem from "./payments-item";
+import Select, { SelectItemType } from "@/components/select";
 
 export interface PaymentsType {
   orderName: string;
@@ -57,10 +57,17 @@ export default function PaymentsList() {
   const [selectedItem, setSelectedItem] = useState<CategoryValueType>("all");
   const [orderBy, setOrderBy] = useState<OrderByType>("recent");
 
+  const isAll = selectedItem === "all";
+
   // TODO: data fetching (SWR)
 
   const onClickCategory = (value: CategoryValueType) => setSelectedItem(value);
   const onClickOrderBy = (value: OrderByType) => setOrderBy(value);
+
+  useEffect(() => {
+    // 전체보기 클릭시, 이전 정렬 조건 초기화
+    setOrderBy((orderBy) => (isAll ? "recent" : orderBy));
+  }, [selectedItem]);
 
   return (
     <div className="space-y-5">
@@ -69,20 +76,24 @@ export default function PaymentsList() {
         selectedItem={selectedItem}
         onClick={onClickCategory}
       />
-      <div className="py-3 border-y border-white justify-end gap-2 flex divide-white select-none">
+      <div className="py-3 border-y border-white justify-end gap-2 flex divide-white select-none text-bd3 font-bold ">
         <span
           className={clsx(orderBy !== "recent" && "opacity-80")}
           onClick={() => onClickOrderBy("recent")}
         >
           최신순
         </span>
-        <span>|</span>
-        <span
-          className={clsx(orderBy !== "desc" && "opacity-70")}
-          onClick={() => onClickOrderBy("desc")}
-        >
-          고액순
-        </span>
+        {!isAll && (
+          <>
+            <span>|</span>
+            <span
+              className={clsx(orderBy !== "desc" && "opacity-70")}
+              onClick={() => onClickOrderBy("desc")}
+            >
+              고액순
+            </span>
+          </>
+        )}
       </div>
       <ul className="flex flex-col gap-5">
         {payments.map((payment) => (

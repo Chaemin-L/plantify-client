@@ -15,7 +15,7 @@ interface Props<T> {
 
 export default function Select<T>({ items, selectedItem, onClick }: Props<T>) {
   return (
-    <ul className="flex gap-2">
+    <ul className="flex gap-2 select-none">
       {items.map(({ label, value }: SelectItemType<T>) => (
         <li
           key={`${value}`}
