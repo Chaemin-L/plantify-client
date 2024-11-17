@@ -3,6 +3,8 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import PaymentsItem from "./payments-item";
 import Select, { SelectItemType } from "@/components/select";
+import { PATH } from "@/lib/paths";
+import { CategoryValueType } from "../[type]/page";
 
 export interface PaymentsType {
   orderName: string;
@@ -10,14 +12,7 @@ export interface PaymentsType {
   amount: number;
   createdAt: string;
 }
-export type CategoryValueType = "all" | "pay" | "add";
 export type OrderByType = "recent" | "desc";
-
-const categories: SelectItemType<CategoryValueType>[] = [
-  { label: "전체", value: "all" },
-  { label: "결제", value: "pay" },
-  { label: "충전", value: "add" },
-];
 
 // dummy data
 const payments: PaymentsType[] = [
@@ -71,30 +66,6 @@ export default function PaymentsList() {
 
   return (
     <div className="space-y-5">
-      <Select
-        items={categories}
-        selectedItem={selectedItem}
-        onClick={onClickCategory}
-      />
-      <div className="py-3 border-y border-white justify-end gap-2 flex divide-white select-none text-bd3 font-bold ">
-        <span
-          className={clsx(orderBy !== "recent" && "opacity-80")}
-          onClick={() => onClickOrderBy("recent")}
-        >
-          최신순
-        </span>
-        {!isAll && (
-          <>
-            <span>|</span>
-            <span
-              className={clsx(orderBy !== "desc" && "opacity-70")}
-              onClick={() => onClickOrderBy("desc")}
-            >
-              고액순
-            </span>
-          </>
-        )}
-      </div>
       <ul className="flex flex-col gap-5">
         {payments.map((payment) => (
           <PaymentsItem key={payment.createdAt} {...payment} />

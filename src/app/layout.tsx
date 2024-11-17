@@ -21,13 +21,13 @@ export default function RootLayout({
         // className={`${MONEYGRAPHY.variable} ${MONEYGRAPHY.className} antialiased bg-accent-purple w-screen`}
         // className={`${NOTOSANS.className} antialiased bg-accent-purple w-screen`}
       >
-        <section className="flex flex-row justify-center gap-[5%] h-full w-full ">
+        <div className="flex flex-row justify-center gap-[5%] h-full w-full ">
           <AdBanner />
           <div className="w-[400px] min-w-0 bg-darkBg text-white h-screen  flex flex-col">
             <Header />
             <main className="px-4 pb-9 flex-1 overflow-auto">{children}</main>
           </div>
-        </section>
+        </div>
       </body>
     </html>
   );
