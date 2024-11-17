@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import PaymentsItem from "./payments-item";
 import Select, { SelectItemType } from "@/components/select";
 import { PATH } from "@/lib/paths";
-import { CategoryValueType } from "../[type]/page";
+import { CategoryValueType } from "../[transType]/page";
 
 export interface PaymentsType {
   orderName: string;
