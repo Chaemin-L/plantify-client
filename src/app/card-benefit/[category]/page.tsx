@@ -2,15 +2,7 @@ import Select, { SelectItemType } from "@/components/select";
 import BestCard from "../(components)/best-card";
 import OtherBenefit from "../(components)/other-benefit";
 import { PATH } from "@/lib/paths";
-
-type BenefitValueType =
-  | "traffic"
-  | "communication"
-  | "abroad"
-  | "oiling"
-  | "mart"
-  | "shopping"
-  | "cafe";
+import { BenefitValueType } from "./layout";
 
 const categories: SelectItemType<BenefitValueType>[] = [
   {
@@ -52,7 +44,6 @@ export default async function CardBenefitByCategoryPage({
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-t2">어디서 결제 할 예정이신가요?</h1>
       <Select
         baseUrl={PATH.CARD_BENEFIT}
         items={categories}

@@ -14,7 +14,7 @@ export default function PayNotice() {
             올리브영에서 <br /> 20,000원 결제하셨어요.
           </p>
           <Link
-            href={PATH.PAYMENTS}
+            href={PATH.PAYMENTS_DEFAULT}
             className="text-btn2 px-3 py-2 bg-accent-red rounded-full"
           >
             이용내역
