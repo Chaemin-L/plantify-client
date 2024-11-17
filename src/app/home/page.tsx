@@ -1,4 +1,4 @@
-import FundingStatus from "@/components/funding-status";
+import FundingStatus from "@/app/(_components)/funding-status";
 import PayNotice from "./(components)/pay-notice";
 import BadgeStatus from "./(components)/badge-status";
 import CardSearch from "./(components)/card-search";

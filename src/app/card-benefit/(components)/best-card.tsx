@@ -1,5 +1,5 @@
 "use client";
-import Accordion from "@/components/accordion";
+import Accordion from "@/app/(_components)/accordion";
 import CardItem from "./card-item";
 
 export default function BestCard() {

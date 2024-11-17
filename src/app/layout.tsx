@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { MONEYGRAPHY, NOTOSANS, SUIT } from "../styles/fonts/fonts";
-import Header from "@/components/header";
-import AdBanner from "@/components/ad-banner";
+import Header from "@/app/(_components)/header";
+import AdBanner from "@/app/(_components)/ad-banner";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Plantify",

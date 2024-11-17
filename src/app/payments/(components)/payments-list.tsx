@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import PaymentsItem from "./payments-item";
-import Select, { SelectItemType } from "@/components/select";
+import Select, { SelectItemType } from "@/app/(_components)/select";
 import { PATH } from "@/lib/paths";
 import { CategoryValueType } from "../[transType]/page";
 

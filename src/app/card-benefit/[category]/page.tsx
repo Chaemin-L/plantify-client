@@ -1,4 +1,4 @@
-import Select, { SelectItemType } from "@/components/select";
+import Select, { SelectItemType } from "@/app/(_components)/select";
 import BestCard from "../(components)/best-card";
 import OtherBenefit from "../(components)/other-benefit";
 import { PATH } from "@/lib/paths";

@@ -1,4 +1,4 @@
-import ItemSlider from "@/components/item-slider";
+import ItemSlider from "@/app/(_components)/item-slider";
 import { PATH } from "@/lib/paths";
 import Link from "next/link";
 

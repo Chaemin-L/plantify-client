@@ -1,4 +1,4 @@
-import FundingStatus from "@/components/funding-status";
+import FundingStatus from "@/app/(_components)/funding-status";
 import Link from "next/link";
 
 export default function BestFunding() {

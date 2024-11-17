@@ -1,5 +1,5 @@
 import { kdayjs } from "@/lib/kdayjs";
-import Select, { SelectItemType } from "@/components/select";
+import Select, { SelectItemType } from "@/app/(_components)/select";
 import { PATH } from "@/lib/paths";
 import PaymentsList from "../(components)/payments-list";
 import clsx from "clsx";
