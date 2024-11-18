@@ -1,4 +1,4 @@
-import FundingStatus from "@/components/funding-status";
+import FundingStatus from "@/app/(_components)/funding-status";
 import Link from "next/link";
 
 export default function BestFunding() {
@@ -9,7 +9,7 @@ export default function BestFunding() {
         <br />
         숲을 만날 수 있기를
       </div>
-      <div className="bg-gray-200 w-full h-[156px] rounded-2xl" />
+      <div className="bg-gray-200 w-full  aspect-[2/1.2] rounded-2xl" />
       <FundingStatus />
     </Link>
   );

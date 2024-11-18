@@ -1,5 +1,5 @@
-import ItemSlider from "@/components/item-slider";
-import { PATH } from "@/lib/paths";
+import ItemSlider from "@/app/(_components)/item-slider";
+import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 
 const items = new Array(7).fill({

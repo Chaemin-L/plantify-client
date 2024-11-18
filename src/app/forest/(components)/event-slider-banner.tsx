@@ -1,4 +1,4 @@
-import LinkSlider from "@/components/link-slider";
+import LinkSlider from "@/app/(_components)/link-slider";
 
 // dummy data
 const events = [

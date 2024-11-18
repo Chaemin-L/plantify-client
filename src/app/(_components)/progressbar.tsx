@@ -16,7 +16,7 @@ export default function Progressbar({ isShort, percent }: Props) {
       <div
         className={clsx(
           isShort ? "h-2" : "h-3",
-          "absolute  h-3 bg-accent-red rounded-full left-0 top-0"
+          "absolute bg-accent-red rounded-full left-0 top-0"
         )}
         style={{ width: `${percent}%` }}
       ></div>
