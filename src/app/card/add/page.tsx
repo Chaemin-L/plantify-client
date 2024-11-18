@@ -1,5 +1,5 @@
-import BottomFixedButton from "../(_components)/bottom-fixed-button";
-import SearchBar from "../(_components)/searchbar";
+import BottomFixedButton from "@/app/(_components)/bottom-fixed-button";
+import SearchBar from "@/app/(_components)/searchbar";
 import CheckList from "./(components)/checklist";
 
 export interface CardType {
