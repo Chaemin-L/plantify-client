@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function PointMoney() {
   const [payOn, setPayOn] = useState<boolean>(false);
@@ -12,9 +13,21 @@ export default function PointMoney() {
       onClick={onClick}
     >
       {payOn ? (
-        <div className="text-black flex flex-col items-center w-full gap-4 ">
-          <img src="/temp/qr.svg" className="w-24 h-24" />
-          <img src="/temp/barcode.svg" className="w-full" />
+        <div className="text-black flex flex-col items-center w-full gap-4 p-1 ">
+          <Image
+            src="/temp/qr.svg"
+            width={250}
+            height={250}
+            alt="페이 QRcode"
+            className="aspect-square  max-w-32"
+          />
+          <Image
+            src="/temp/barcode.svg"
+            width={250}
+            height={250}
+            className="min-w-full"
+            alt="페이 Barcode"
+          />
           <div className="flex justify-between w-[200px]">
             <span className="text-bd3">포인트</span>
             <span className="text-t4">8106원</span>
