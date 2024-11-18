@@ -7,7 +7,7 @@ import {
 } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { useScrollToBottom } from "@/lib/useScrollToBottom";
+import { useScrollToBottom } from "@/lib/_hooks/useScrollToBottom";
 
 interface MessageType {
   isMe: boolean;
@@ -54,7 +54,7 @@ export default function Chat() {
 
   return (
     <div className="h-full overflow-hidden pb-32">
-      <h1 className="text-t1 my-5">AI 채팅</h1>
+      <h1 className="text-t1 my-5">채팅</h1>
       <ul
         className="flex-col flex gap-3 w-full h-full overflow-auto"
         ref={containerRef}

@@ -1,4 +1,4 @@
-import { PATH } from "@/lib/paths";
+import { PATH } from "@/lib/_shared/paths";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 

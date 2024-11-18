@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { PATH } from "@/lib/paths";
+import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 import clsx from "clsx";
 import Image from "next/image";

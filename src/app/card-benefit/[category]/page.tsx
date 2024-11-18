@@ -1,7 +1,7 @@
 import Select, { SelectItemType } from "@/app/(_components)/select";
 import BestCard from "../(components)/best-card";
 import OtherBenefit from "../(components)/other-benefit";
-import { PATH } from "@/lib/paths";
+import { PATH } from "@/lib/_shared/paths";
 import { BenefitValueType } from "./layout";
 
 const categories: SelectItemType<BenefitValueType>[] = [

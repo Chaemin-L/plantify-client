@@ -1,7 +1,7 @@
 import Ranking from "./(components)/ranking";
 import GoForest from "./(components)/go-forest";
 import EventSliderBanner from "./(components)/event-slider-banner";
-import { PATH } from "@/lib/paths";
+import { PATH } from "@/lib/_shared/paths";
 import FeatureCard from "./(components)/feature-card";
 
 const menuTabInfo = [

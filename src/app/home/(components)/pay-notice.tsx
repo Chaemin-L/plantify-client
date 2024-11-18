@@ -1,4 +1,4 @@
-import { PATH } from "@/lib/paths";
+import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 
 export default function PayNotice() {

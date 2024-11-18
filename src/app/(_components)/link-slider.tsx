@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css";
 import "@/styles/swiper.css";
 import Link from "next/link";
-import { PATH } from "@/lib/paths";
+import { PATH } from "@/lib/_shared/paths";
 
 interface LinkType {
   title: string;

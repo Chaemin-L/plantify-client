@@ -1,4 +1,4 @@
-import { PATH } from "@/lib/paths";
+import { PATH } from "@/lib/_shared/paths";
 import { redirect } from "next/navigation";
 
 export default function Page() {
