@@ -3,6 +3,7 @@ export const PATH = {
   FOREST: "/forest",
   HOME: "/home",
   FUNDRAISINGS: "/fundraisings",
+  CHAT: "/chat",
 
   // in home
   PAYMENTS: "/payments",
