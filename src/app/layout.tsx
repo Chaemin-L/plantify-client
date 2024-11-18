@@ -23,9 +23,11 @@ export default function RootLayout({
       >
         <div className="flex flex-row justify-center gap-[5%] h-full w-full ">
           <AdBanner />
-          <div className="w-[400px] min-w-0 bg-darkBg text-white h-screen  flex flex-col">
+          <div className="w-[500px] max-w-[500px] min-w-0 bg-darkBg text-white h-screen  flex flex-col">
             <Header />
-            <main className="px-4 pb-9 flex-1 overflow-auto">{children}</main>
+            <main className="w-full px-4 pb-9 flex-1 overflow-auto">
+              {children}
+            </main>
           </div>
         </div>
       </body>
