@@ -41,10 +41,14 @@ export default function CheckList({ cardList }: { cardList: CardType[] }) {
 
   return (
     <div className="flex flex-col relative ">
-      <Checkbox label="전체 선택" onClick={onCheckAll} />
+      <div className="px-5">
+        <Checkbox label="전체 선택" onClick={onCheckAll} />
+      </div>
       <div className="bg-shadow-200 h-[1px] w-full" />
 
-      <div className={clsx("flex flex-col ", !checkedCard.length && "hidden")}>
+      <div
+        className={clsx("flex flex-col px-5", !checkedCard.length && "hidden")}
+      >
         {checkedCard.map((card) => (
           <Checkbox
             key={card.id}
@@ -56,7 +60,7 @@ export default function CheckList({ cardList }: { cardList: CardType[] }) {
         ))}
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col px-5">
         {cardList
           .filter((card) => !checkedCard.includes(card))
           .map((card) => (
