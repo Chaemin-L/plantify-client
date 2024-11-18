@@ -1,7 +1,7 @@
 import { PATH } from "@/lib/paths";
 import Link from "next/link";
 
-export default function CardSearch() {
+export default function GoCardBenefit() {
   return (
     <Link
       href={PATH.CARD_BENEFIT_DEFAULT}

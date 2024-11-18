@@ -1,7 +1,7 @@
 import FundingStatus from "@/app/(_components)/funding-status";
 import PayNotice from "./(components)/pay-notice";
 import BadgeStatus from "./(components)/badge-status";
-import CardSearch from "./(components)/card-search";
+import GoCardBenefit from "./(components)/go-card-benefit";
 import PointMoney from "./(components)/point-money";
 
 export default function HomePage() {
@@ -23,7 +23,7 @@ export default function HomePage() {
       <BadgeStatus />
 
       {/** 더 큰 혜택 찾기 */}
-      <CardSearch />
+      <GoCardBenefit />
 
       {/** 카드 추가하기 */}
     </div>
