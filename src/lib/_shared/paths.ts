@@ -1,5 +1,3 @@
-import CardAddPage from "@/app/card/add/page";
-
 export const PATH = {
   // navigation tab
   FOREST: "/forest",

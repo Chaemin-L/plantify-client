@@ -1,35 +1,32 @@
-import { Metadata } from "next";
-import FundingList from "../(components)/funding-list";
-import { animalData, youth } from "../(_dummy)/list-data";
 import Select, { SelectItemType } from "@/app/(_components)/select";
 import { PATH } from "@/lib/_shared/paths";
+import { SearchParams } from "@/types/utils";
+import { FundingCategoryType } from "@/types/fundings";
+import { youth } from "../(_dummy)/list-data";
+import FundingList from "../(components)/funding-list";
 
-export const metaData: Metadata = {
-  title: "Plantify - 펀딩 목록",
-  description: "여러 모금 활동이 궁금할 때",
-  keywords: ["펀딩", "모금", "기부"],
-};
+interface Props {
+  searchParams: SearchParams;
+}
 
-type CategoryType = "all" | "environment" | "animal" | "youth";
-
-const categories: SelectItemType<CategoryType>[] = [
+const categories: SelectItemType<FundingCategoryType>[] = [
   { label: "전체", value: "all" },
   { label: "환경", value: "environment" },
   { label: "동물", value: "animal" },
   { label: "아동・청소년", value: "youth" },
 ];
-
-export default function FundRaisingsListPage() {
-  // TODO: all data fetching
+export default async function FundRaisingsListPage({ searchParams }: Props) {
+  const { category } = await searchParams;
+  // TODO: data fetching by category
   return (
     <>
       <Select
         baseUrl={PATH.FUNDRAISINGS_LIST}
         items={categories}
-        selectedItem="all"
+        selectedItem={(category as string) ?? "all"}
         sticky
       />
-      <FundingList category="all" listData={[...animalData, ...youth]} />
+      <FundingList category={category as string} listData={youth} />
     </>
   );
 }

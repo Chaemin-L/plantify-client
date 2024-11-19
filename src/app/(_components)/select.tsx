@@ -29,7 +29,7 @@ export default function Select<T>({
       {items.map(({ label, value }: SelectItemType<T>) => (
         <Link
           key={`${value}`}
-          href={`${baseUrl}/${value}`}
+          href={`${baseUrl}?category=${value}`}
           className={clsx(
             "rounded-full px-4 py-2 text-bd2 cursor-pointer whitespace-nowrap",
             selectedItem === value
