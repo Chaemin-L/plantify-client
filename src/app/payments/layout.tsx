@@ -1,6 +1,5 @@
 import { kdayjs } from "@/lib/kdayjs";
 import { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Plantify - 이용내역",
@@ -12,18 +11,12 @@ type Props = {
   children: React.ReactNode;
 };
 
-const TRANS_TYPE = ["all", "pay", "add"];
-
 // TODO: data fetching
 const totalPayment = 365000;
 const startDate = kdayjs().subtract(1, "month").format("MM월 DD일");
 const endDate = kdayjs().format("MM월 DD일");
 
-export default async function Layout({ params, children }: Props) {
-  //  params validation (transType)
-  const transType = (await params).transType;
-  if (!TRANS_TYPE.includes(transType)) throw notFound();
-
+export default async function Layout({ children }: Props) {
   return (
     <div className="flex flex-col gap-5">
       <div className="space-y-1 text-white">

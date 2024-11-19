@@ -8,6 +8,7 @@ export interface SelectItemType<T> {
 
 interface Props<T> {
   baseUrl: string;
+  name: string;
   items: SelectItemType<T>[];
   selectedItem: string;
   sticky?: boolean;
@@ -15,6 +16,7 @@ interface Props<T> {
 
 export default function Select<T>({
   baseUrl,
+  name,
   items,
   selectedItem,
   sticky = false,
@@ -29,7 +31,7 @@ export default function Select<T>({
       {items.map(({ label, value }: SelectItemType<T>) => (
         <Link
           key={`${value}`}
-          href={`${baseUrl}?category=${value}`}
+          href={`${baseUrl}?${name}=${value}`}
           className={clsx(
             "rounded-full px-4 py-2 text-bd2 cursor-pointer whitespace-nowrap",
             selectedItem === value

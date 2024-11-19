@@ -2,11 +2,7 @@ import BottomFixedButton from "@/app/(_components)/bottom-fixed-button";
 import FundingStatus from "@/app/(_components)/funding-status";
 import { data } from "../../(_dummy)/detail-data";
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
-
-export default async function Page({ params }: Props) {
+export default async function Page() {
   // const {id} = await params;
   // TODO: 이후 param으로 전달된 id로 data fetching
   const {
@@ -39,7 +35,9 @@ export default async function Page({ params }: Props) {
         targetAmount={targetAmount}
         organizationName={organizationName}
       />
-      <p className="text-bd2 whitespace-pre-line">{description}</p>
+      <p className="text-bd1 max-md:text-bd2 whitespace-pre-line">
+        {description}
+      </p>
       <BottomFixedButton>기부하기</BottomFixedButton>
     </div>
   );

@@ -13,29 +13,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export type BenefitValueType =
-  | "traffic"
-  | "communication"
-  | "abroad"
-  | "oiling"
-  | "mart"
-  | "shopping"
-  | "cafe";
-
-const BENEFIT_CATEGORY: BenefitValueType[] = [
-  "traffic",
-  "communication",
-  "abroad",
-  "oiling",
-  "mart",
-  "shopping",
-  "cafe",
-];
-
-export default async function Layout({ params, children }: Props) {
-  const category = (await params).category as BenefitValueType;
-  if (!BENEFIT_CATEGORY.includes(category)) throw notFound();
-
+export default async function Layout({ children }: Props) {
   return (
     <div className="space-y-5">
       <h1 className="text-t2">어디서 결제 할 예정이신가요?</h1>

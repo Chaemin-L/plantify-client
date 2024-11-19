@@ -22,6 +22,7 @@ export default async function FundRaisingsListPage({ searchParams }: Props) {
     <>
       <Select
         baseUrl={PATH.FUNDRAISINGS_LIST}
+        name="category"
         items={categories}
         selectedItem={(category as string) ?? "all"}
         sticky

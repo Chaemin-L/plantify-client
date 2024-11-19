@@ -7,7 +7,7 @@ import PointMoney from "./(components)/point-money";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 
-export default function HomePage() {
+export default async function HomePage() {
   // TODO: 실제 데이터 fetching
   return (
     <div className="flex flex-col gap-5">
