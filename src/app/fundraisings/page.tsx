@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AdSliderBanner from "./(components)/ad-slider-banner";
 import BestFunding from "./(components)/best-funding";
-import FundingList from "./(components)/funding-list";
+import LatestFunding from "./(components)/latest-funding";
 import { PATH } from "@/lib/_shared/paths";
 
 export default function FundraisingsPage() {
@@ -16,7 +16,7 @@ export default function FundraisingsPage() {
       <BestFunding />
 
       {/** 펀딩 리스트 */}
-      <FundingList />
+      <LatestFunding />
 
       <Link
         href={PATH.CHAT}

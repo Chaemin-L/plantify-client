@@ -19,7 +19,9 @@ export default function FundingStatus({ size = "lg", percent }: FundingStatus) {
         <span>{percent}%</span>
       </div>
       <Progressbar percent={percent} />
-      <div className="text-bd3 mt-3">목표 금액: 1억</div>
+      <div className={clsx(size === "lg" ? "text-bd3" : "text-bd4", "mt-3")}>
+        목표 금액: 1억
+      </div>
     </div>
   );
 }

@@ -1,26 +1,39 @@
-import ItemSlider from "@/app/(_components)/item-slider";
-import { PATH } from "@/lib/_shared/paths";
-import Link from "next/link";
+import FundingStatus from "@/app/(_components)/funding-status";
 
-const items = new Array(7).fill({
-  category: "동물",
-  title: "유기견에게 꿈과 희망을 어쩌구 저쩌구 라라라라라라라",
-  percent: "30",
-  image: "/temp/funding-illust.png",
-});
+interface FundingType {
+  image: string;
+  category: string;
+  title: string;
+  percent: number;
+  targetAmount: number;
+}
+interface Props {
+  listData: FundingType[];
+  category: string;
+}
 
-export default function FundingList() {
+// TODO: 스크롤/페이지네이션 -> client component로 변경 예정
+export default function FundingList({ listData }: Props) {
   return (
-    <div className="flex flex-col gap-2 overflow-x-hidden">
-      <div className="text-right">
-        <Link
-          href={PATH.HOME}
-          className="text-t3 text-right select-none hover:opacity-80"
-        >
-          더보기 &gt;
-        </Link>
-      </div>
-      <ItemSlider items={items} />
-    </div>
+    <ul className="flex flex-col gap-3">
+      {listData.map(
+        ({ image, category, title, percent, targetAmount }, idx) => (
+          <li
+            key={idx}
+            className="flex rounded-xl divide-x divide-white bg-shadow-800"
+          >
+            <img src={image} className="w-1/4 aspect-[1/1.2] rounded-l-xl" />
+            <div className="px-5 py-4 w-full">
+              <span className="mb-1 text-bd4"> {category}</span>
+
+              <div className="flex flex-col gap-3 flex-1">
+                <h2 className="text-bd3 font-bold line-clamp-1"> {title}</h2>
+                <FundingStatus size="sm" percent={percent} />
+              </div>
+            </div>
+          </li>
+        )
+      )}
+    </ul>
   );
 }
