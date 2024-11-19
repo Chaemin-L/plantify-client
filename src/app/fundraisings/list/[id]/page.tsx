@@ -20,7 +20,7 @@ export default async function Page({ params }: Props) {
   } = data;
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 pb-20">
       <div className="relative">
         <img src={image} className="w-full aspect-[2/1.2] rounded-xl " />
         {like.isLiked ? (

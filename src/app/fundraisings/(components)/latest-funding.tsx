@@ -2,12 +2,14 @@ import ItemSlider from "@/app/(_components)/item-slider";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 
-const items = new Array(7).fill({
-  category: "동물",
-  title: "유기견에게 꿈과 희망을 어쩌구 저쩌구 라라라라라라라",
-  percent: "30",
-  image: "/temp/funding-illust.png",
-});
+const items = new Array(7)
+  .fill({
+    category: "동물",
+    title: "유기견에게 꿈과 희망을 어쩌구 저쩌구 라라라라라라라",
+    percent: "30",
+    image: "/temp/funding-illust.png",
+  })
+  .map((item, idx) => ({ ...item, id: idx }));
 
 export default function LatestFunding() {
   return (
