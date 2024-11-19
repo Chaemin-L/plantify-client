@@ -10,11 +10,22 @@ interface Props<T> {
   baseUrl: string;
   items: SelectItemType<T>[];
   selectedItem: string;
+  sticky?: boolean;
 }
 
-export default function Select<T>({ baseUrl, items, selectedItem }: Props<T>) {
+export default function Select<T>({
+  baseUrl,
+  items,
+  selectedItem,
+  sticky = false,
+}: Props<T>) {
   return (
-    <ul className="flex gap-2 select-none flex-wrap">
+    <ul
+      className={clsx(
+        "flex gap-2 select-none flex-wrap  bg-black ",
+        sticky && "sticky top-0 z-20 pb-5"
+      )}
+    >
       {items.map(({ label, value }: SelectItemType<T>) => (
         <Link
           key={`${value}`}

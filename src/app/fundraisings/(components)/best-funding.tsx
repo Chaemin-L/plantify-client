@@ -10,7 +10,7 @@ export default function BestFunding() {
         숲을 만날 수 있기를
       </div>
       <div className="bg-gray-200 w-full  aspect-[2/1.2] rounded-2xl" />
-      <FundingStatus />
+      <FundingStatus percent={89} />
     </Link>
   );
 }

@@ -1,13 +1,24 @@
+import clsx from "clsx";
 import Progressbar from "./progressbar";
 
-export default function FundingStatus() {
+interface FundingStatus {
+  size?: "sm" | "lg";
+  percent: number;
+}
+
+export default function FundingStatus({ size = "lg", percent }: FundingStatus) {
   return (
-    <div className="">
-      <div className="flex justify-between mb-4">
-        <h1 className="card-title">펀딩현황</h1>
-        <span className="card-title">64%</span>
+    <div>
+      <div
+        className={clsx(
+          size === "lg" ? "card-title" : "text-bd3",
+          "flex justify-between mb-4 "
+        )}
+      >
+        <h1>펀딩현황</h1>
+        <span>{percent}%</span>
       </div>
-      <Progressbar percent={64} />
+      <Progressbar percent={percent} />
       <div className="text-bd3 mt-3">목표 금액: 1억</div>
     </div>
   );
