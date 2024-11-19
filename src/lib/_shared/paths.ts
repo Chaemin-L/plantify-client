@@ -2,7 +2,7 @@ export const PATH = {
   // navigation tab
   FOREST: "/forest",
   HOME: "/card",
-  FUNDRAISINGS: "/fundraisings",
+  FUNDING: "/funding",
   CHAT: "/chat",
 
   // in home
@@ -10,5 +10,5 @@ export const PATH = {
   CARD_BENEFIT: "/card/benefit",
 
   // in fundraisings
-  FUNDRAISINGS_LIST: "/fundraisings/list",
+  FUNDING_LIST: "/funding/list",
 };

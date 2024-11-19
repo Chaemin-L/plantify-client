@@ -22,7 +22,7 @@ export default function FundingList({ listData }: Props) {
       {listData.map(({ id, image, category, title, percent, targetAmount }) => (
         <li key={id}>
           <Link
-            href={`${PATH.FUNDRAISINGS_LIST}/${id}`}
+            href={`${PATH.FUNDING_LIST}/${id}`}
             className="flex rounded-xl  bg-shadow-800"
           >
             <img

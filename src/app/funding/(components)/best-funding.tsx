@@ -4,10 +4,7 @@ import Link from "next/link";
 
 export default function BestFunding() {
   return (
-    <Link
-      href={`${PATH.FUNDRAISINGS_LIST}/0`}
-      className="card flex flex-col gap-5"
-    >
+    <Link href={`${PATH.FUNDING_LIST}/0`} className="card flex flex-col gap-5">
       <div className="text-t3">
         누구나 일상에서
         <br />

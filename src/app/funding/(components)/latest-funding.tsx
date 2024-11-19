@@ -16,7 +16,7 @@ export default function LatestFunding() {
     <div className="flex flex-col gap-2 overflow-x-hidden">
       <div className="text-right">
         <Link
-          href={PATH.FUNDRAISINGS_LIST}
+          href={PATH.FUNDING_LIST}
           className="text-t3 text-right select-none hover:opacity-80"
         >
           더보기 &gt;

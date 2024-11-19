@@ -9,7 +9,7 @@ import Image from "next/image";
 const navigation = [
   { href: PATH.FOREST, label: "숲꾸", icon: "/icons/forest.svg" },
   { href: PATH.HOME, label: "홈", icon: "/icons/home.svg" },
-  { href: PATH.FUNDRAISINGS, label: "기부", icon: "/icons/fundraisings.svg" },
+  { href: PATH.FUNDING, label: "기부", icon: "/icons/fundraisings.svg" },
 ];
 
 export default function Header() {
@@ -18,7 +18,7 @@ export default function Header() {
   const isTabMain =
     pathname === PATH.FOREST ||
     pathname === PATH.HOME ||
-    pathname === PATH.FUNDRAISINGS;
+    pathname === PATH.FUNDING;
 
   return (
     <header className=" bg-darkBg sticky top-0 z-10">

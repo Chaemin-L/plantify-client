@@ -21,7 +21,7 @@ export default function ItemSlider({ items }: Props) {
         {items.map(({ id, title, category, percent, image }) => (
           <li key={id} className="w-40">
             <Link
-              href={`${PATH.FUNDRAISINGS_LIST}/${id}`}
+              href={`${PATH.FUNDING_LIST}/${id}`}
               className="select-none cursor-pointer group hover:opacity-80"
             >
               <img
