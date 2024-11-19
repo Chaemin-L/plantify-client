@@ -5,12 +5,14 @@ interface FundingStatus {
   size?: "sm" | "lg";
   percent: number;
   targetAmount: number;
+  organizationName?: string;
 }
 
 export default function FundingStatus({
   size = "lg",
   percent,
   targetAmount,
+  organizationName = "",
 }: FundingStatus) {
   return (
     <div>
@@ -24,8 +26,14 @@ export default function FundingStatus({
         <span>{percent}%</span>
       </div>
       <Progressbar percent={percent} />
-      <div className={clsx(size === "lg" ? "text-bd3" : "text-bd4", "mt-3")}>
-        목표 금액: {targetAmount}
+      <div
+        className={clsx(
+          size === "lg" ? "text-bd3" : "text-bd4",
+          "mt-3 flex justify-between"
+        )}
+      >
+        <span>목표 금액: {targetAmount.toLocaleString()}원</span>
+        <span>{organizationName}</span>
       </div>
     </div>
   );

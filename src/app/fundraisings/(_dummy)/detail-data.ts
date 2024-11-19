@@ -26,7 +26,7 @@ export const data = {
         kant oaktat prens pod jag öling gigafast. Nil lalor.`,
   image:
     "https://mud-kage.kakaocdn.net/dn/k7R1V/btsKmi9SOTb/pUw7572lDCnB8wKpRjKyK1/c640.jpg",
-
+  organizationName: "초록우산",
   percent: 70,
   targetAmount: 13000000,
   like: {

@@ -9,7 +9,15 @@ interface Props {
 export default async function Page({ params }: Props) {
   // const {id} = await params;
   // TODO: 이후 param으로 전달된 id로 data fetching
-  const { title, description, image, like, percent, targetAmount } = data;
+  const {
+    title,
+    description,
+    image,
+    like,
+    percent,
+    targetAmount,
+    organizationName,
+  } = data;
 
   return (
     <div className="flex flex-col gap-5">
@@ -26,8 +34,12 @@ export default async function Page({ params }: Props) {
         )}
       </div>
       <h1 className="text-t2">{title}</h1>
-      <FundingStatus percent={percent} targetAmount={targetAmount} />
-      <p>{description}</p>
+      <FundingStatus
+        percent={percent}
+        targetAmount={targetAmount}
+        organizationName={organizationName}
+      />
+      <p className="text-bd2 whitespace-pre-line">{description}</p>
       <BottomFixedButton>기부하기</BottomFixedButton>
     </div>
   );
