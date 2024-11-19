@@ -22,7 +22,7 @@ export default function CardAddPage() {
     <div className="space-y-5 h-full">
       <SearchBar />
       <CheckList cardList={cardList} />
-      <BottomFixedButton />
+      <BottomFixedButton>확인</BottomFixedButton>
     </div>
   );
 }

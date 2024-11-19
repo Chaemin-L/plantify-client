@@ -19,7 +19,7 @@ export default function HomePage() {
 
       {/** 펀딩 현황 */}
       <div className="card">
-        <FundingStatus percent={58} />
+        <FundingStatus percent={58} targetAmount={100000000} />
       </div>
 
       {/** 획득 배지 및 펀딩 */}

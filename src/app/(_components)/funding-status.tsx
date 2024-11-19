@@ -4,9 +4,14 @@ import Progressbar from "./progressbar";
 interface FundingStatus {
   size?: "sm" | "lg";
   percent: number;
+  targetAmount: number;
 }
 
-export default function FundingStatus({ size = "lg", percent }: FundingStatus) {
+export default function FundingStatus({
+  size = "lg",
+  percent,
+  targetAmount,
+}: FundingStatus) {
   return (
     <div>
       <div
@@ -20,7 +25,7 @@ export default function FundingStatus({ size = "lg", percent }: FundingStatus) {
       </div>
       <Progressbar percent={percent} />
       <div className={clsx(size === "lg" ? "text-bd3" : "text-bd4", "mt-3")}>
-        목표 금액: 1억
+        목표 금액: {targetAmount}
       </div>
     </div>
   );
