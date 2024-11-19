@@ -30,7 +30,7 @@ export default function ItemSlider({ items }: Props) {
               />
               <div className="flex flex-col gap-2 bg-shadow-800 rounded-b-xl px-3 py-4">
                 <span className="text-bd4 font-normal">{category}</span>
-                <h1 className="text-bd4 line-clamp-1 group-hover:underline">
+                <h1 className="text-bd3 max-md:text-bd4 line-clamp-1 group-hover:underline">
                   {title}
                 </h1>
                 <Progressbar isShort percent={percent} />
