@@ -11,4 +11,7 @@ export const PATH = {
 
   // in fundraisings
   FUNDING_LIST: "/funding/list",
+
+  // in forest
+  FOREST_STORE: "/forest/store",
 };

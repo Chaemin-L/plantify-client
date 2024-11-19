@@ -9,7 +9,7 @@ import Image from "next/image";
 const menuTabInfo = [
   {
     title: "상점",
-    href: PATH.HOME,
+    href: PATH.FOREST_STORE,
     thumbnail: "/illusts/3d-forest.svg",
   },
   {
