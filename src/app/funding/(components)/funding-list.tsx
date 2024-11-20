@@ -39,6 +39,7 @@ export default function FundingList({ listData }: Props) {
                   {title}
                 </h2>
                 <FundingStatus
+                  id={id}
                   size="sm"
                   percent={percent}
                   targetAmount={targetAmount}

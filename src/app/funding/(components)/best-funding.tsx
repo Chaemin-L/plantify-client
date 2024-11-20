@@ -14,7 +14,7 @@ export default function BestFunding() {
         src="/temp/funding-illust.png"
         className="w-full  aspect-[2/1.2] rounded-2xl"
       />
-      <FundingStatus percent={89} targetAmount={100000000} />
+      <FundingStatus id={10} percent={89} targetAmount={100000000} />
     </Link>
   );
 }

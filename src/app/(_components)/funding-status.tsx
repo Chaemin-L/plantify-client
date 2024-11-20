@@ -1,7 +1,10 @@
 import clsx from "clsx";
 import Progressbar from "./progressbar";
+import Link from "next/link";
+import { PATH } from "@/lib/_shared/paths";
 
 interface FundingStatus {
+  id: number;
   size?: "sm" | "lg";
   percent: number;
   targetAmount: number;
@@ -9,6 +12,7 @@ interface FundingStatus {
 }
 
 export default function FundingStatus({
+  id,
   size = "lg",
   percent,
   targetAmount,
@@ -33,7 +37,9 @@ export default function FundingStatus({
         )}
       >
         <span>목표 금액: {targetAmount.toLocaleString()}원</span>
-        <span>{organizationName}</span>
+        <Link href={`${PATH.FUNDING_ORGANIZATION}#org_${id}`}>
+          {organizationName}
+        </Link>
       </div>
     </div>
   );

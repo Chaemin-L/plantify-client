@@ -1,14 +1,22 @@
 "use client";
 import Accordion from "@/app/(_components)/accordion";
+import { useEffect, useState } from "react";
 
 interface Props {
+  id: number;
   name: string;
   description: string;
 }
 
-export default function CompanyItem({ name, description }: Props) {
+export default function OrganizationItem({ id, name, description }: Props) {
+  const [orgId, setOrgId] = useState<string | undefined>();
+
+  useEffect(() => {
+    setOrgId(window.location.hash);
+  }, [window.location.hash]);
+
   return (
-    <Accordion iconMode={false}>
+    <Accordion iconMode={false} defaultValue={`#org_${id}` == orgId}>
       <Accordion.Summary>
         <button className="text-t4 md:text-t3 py-2 select-none">{name}</button>
       </Accordion.Summary>

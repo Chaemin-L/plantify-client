@@ -6,6 +6,7 @@ export default async function Page() {
   // const {id} = await params;
   // TODO: 이후 param으로 전달된 id로 data fetching
   const {
+    id,
     title,
     description,
     image,
@@ -35,6 +36,7 @@ export default async function Page() {
         </div>
         <h1 className="text-t2">{title}</h1>
         <FundingStatus
+          id={id}
           percent={percent}
           targetAmount={targetAmount}
           organizationName={organizationName}

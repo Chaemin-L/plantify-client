@@ -4,6 +4,7 @@ import React, {
   createContext,
   PropsWithChildren,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -13,6 +14,7 @@ export interface AccordionContextType {
 }
 
 interface Props {
+  defaultValue?: boolean;
   iconMode?: boolean;
   children: React.ReactNode;
 }
@@ -21,8 +23,14 @@ export const AccordionContext = createContext<AccordionContextType | null>(
   null
 );
 
-export default function Accordion({ iconMode = true, children }: Props) {
+export default function Accordion({
+  defaultValue = false,
+  iconMode = true,
+  children,
+}: Props) {
   const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => setOpen(defaultValue), [defaultValue]);
 
   const toggle = () => setOpen(!open);
 

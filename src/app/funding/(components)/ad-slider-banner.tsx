@@ -4,7 +4,7 @@ import { PATH } from "@/lib/_shared/paths";
 // dummy data
 const links = [
   {
-    href: PATH.FUNDING_COMPANY,
+    href: PATH.FUNDING_ORGANIZATION,
     title: "기부사 검색하러 가기",
     description: "기부사에 대해 더 깊이 알아보아요",
   },
