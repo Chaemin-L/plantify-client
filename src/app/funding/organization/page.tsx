@@ -33,8 +33,9 @@ export default function OrganizationPage() {
   const onSubmit = (e) => {
     e.preventDefault();
     router.replace(`/funding/organization`);
+    const searchKeyword = e.target.search.value.replace(/\s/g, "");
     setListData(
-      organizations.filter((org) => org.name.includes(e.target.search.value))
+      organizations.filter((org) => org.name.includes(searchKeyword))
     );
   };
 
