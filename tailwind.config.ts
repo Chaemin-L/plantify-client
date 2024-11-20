@@ -10,6 +10,7 @@ export default {
     extend: {
       screens: {
         xs: "320px",
+        "3xl": "1920px",
       },
       colors: {
         accent: {

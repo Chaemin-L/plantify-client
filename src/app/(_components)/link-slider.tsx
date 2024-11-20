@@ -30,8 +30,8 @@ export default function LinkSlider({ links }: Props) {
       style={{ margin: -20, padding: 20 }}
     >
       {links.map(({ href, title, description }, idx) => (
-        <SwiperSlide className="select-none space-y-1" key={`${title}_${idx}`}>
-          <a href={href}>
+        <SwiperSlide className="select-none py-1" key={`${title}_${idx}`}>
+          <a href={href} className="space-y-1">
             <h1 className="text-t4">{title}</h1>
             <p className="text-bd3"> {description}</p>
           </a>

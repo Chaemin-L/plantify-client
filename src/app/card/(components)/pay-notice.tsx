@@ -3,14 +3,14 @@ import Link from "next/link";
 
 export default function PayNotice() {
   return (
-    <div className="card space-y-7">
+    <div className="card space-y-4">
       <div className="flex justify-between">
         <h1 className="card-title">알림</h1>
         <p className="text-xs">2024.11.04</p>
       </div>
       <div>
         <div className="flex justify-between items-end">
-          <p className="text-sm">
+          <p className="text-bd2">
             올리브영에서 <br /> 20,000원 결제하셨어요.
           </p>
           <Link
