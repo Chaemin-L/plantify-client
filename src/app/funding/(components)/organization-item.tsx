@@ -16,15 +16,19 @@ export default function OrganizationItem({ id, name, description }: Props) {
   }, []);
 
   return (
-    <Accordion iconMode={false} defaultValue={`#org_${id}` == orgId}>
-      <Accordion.Summary>
-        <button className="text-t4 md:text-t3 py-2 select-none">{name}</button>
-      </Accordion.Summary>
-      <Accordion.Details>
-        <p className="whitespace-pre-line text-bd3 md:text-bd2 bg-shadow-700 p-2 rounded-b-xl">
-          {description}
-        </p>
-      </Accordion.Details>
-    </Accordion>
+    <div className="bg-shadow-700 rounded-xl">
+      <Accordion defaultValue={`#org_${id}` == orgId}>
+        <Accordion.Summary className="mr-2">
+          <div className="text-t4 md:text-t3 select-none hover:bg-shadow-700 cursor-pointer p-3 py-4 rounded-xl">
+            {name}
+          </div>
+        </Accordion.Summary>
+        <Accordion.Details>
+          <p className="whitespace-pre-line text-bd3 md:text-bd2 p-2 rounded-b-xl">
+            {description}
+          </p>
+        </Accordion.Details>
+      </Accordion>
+    </div>
   );
 }

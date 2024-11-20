@@ -6,12 +6,12 @@ export default function BestCard() {
   return (
     <section className="card">
       <Accordion>
-        <Accordion.Summary>
-          <div className="space-y-5">
-            <h1 className="card-title">추천 카드</h1>
+        <div className="space-y-5">
+          <h1 className="card-title">추천 카드</h1>
+          <Accordion.Summary>
             <CardItem name="SBI저축 PAY백" point={40} />
-          </div>
-        </Accordion.Summary>
+          </Accordion.Summary>
+        </div>
         <Accordion.Details>
           <div className="ml-4 pt-7 text-bd3 font-bold flex flex-col gap-4">
             <div className="flex gap-10">
