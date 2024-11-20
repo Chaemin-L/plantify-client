@@ -1,6 +1,6 @@
 "use client";
 import Accordion from "@/app/(_components)/accordion";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Props {
   id: number;
@@ -13,7 +13,7 @@ export default function OrganizationItem({ id, name, description }: Props) {
 
   useEffect(() => {
     setOrgId(window.location.hash);
-  }, [window.location.hash]);
+  }, []);
 
   return (
     <Accordion iconMode={false} defaultValue={`#org_${id}` == orgId}>

@@ -1,6 +1,8 @@
-import Accordion from "@/app/(_components)/accordion";
+"use client";
 import SearchBar from "@/app/(_components)/searchbar";
 import OrganizationItem from "../(components)/organization-item";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const organizations = Array(20)
   .fill([
@@ -23,12 +25,24 @@ const organizations = Array(20)
   .flat()
   .map((item, idx) => ({ ...item, id: idx }));
 
-export default async function OrganizationPage() {
+export default function OrganizationPage() {
+  const [listData, setListData] = useState(organizations);
+  const router = useRouter();
+
+  // TODO: data fetching (SWR)
+  const onSubmit = (e) => {
+    e.preventDefault();
+    router.replace(`/funding/organization`);
+    setListData(
+      organizations.filter((org) => org.name.includes(e.target.search.value))
+    );
+  };
+
   return (
     <div className="px-4 flex flex-col gap-2 md:gap-5">
-      <SearchBar />
+      <SearchBar onSubmit={onSubmit} />
       <ul className="flex flex-col gap-4">
-        {organizations.map((org) => (
+        {listData.map((org) => (
           <li key={org.id} id={`org_${org.id}`}>
             <OrganizationItem {...org} />
           </li>
