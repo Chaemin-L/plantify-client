@@ -40,9 +40,9 @@ export default function OrganizationPage() {
   };
 
   return (
-    <div className="px-4 flex flex-col gap-2 md:gap-5">
+    <div className="px-4 flex flex-col gap-5">
       <SearchBar onSubmit={onSubmit} />
-      <ul className="flex flex-col gap-4">
+      <ul className="flex flex-col gap-3">
         {listData.map((org) => (
           <li key={org.id} id={`org_${org.id}`}>
             <OrganizationItem {...org} />
