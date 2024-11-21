@@ -10,7 +10,7 @@ import { ChangeEvent, useState } from "react";
 
 export default function Page() {
   const [selectedBank, setSelectedBank] = useState<BankIdValue>();
-  const [bankNum, setBankNum] = useState<string>();
+  const [bankNum, setBankNum] = useState<string>("");
   const [arsCert, setArsCert] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean | null>(null);
   const router = useRouter();

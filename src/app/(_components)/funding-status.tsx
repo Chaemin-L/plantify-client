@@ -1,7 +1,9 @@
+"use client";
 import clsx from "clsx";
 import Progressbar from "./progressbar";
 import Link from "next/link";
 import { PATH } from "@/lib/_shared/paths";
+import { useRouter } from "next/navigation";
 
 interface FundingStatus {
   id: number;
@@ -18,6 +20,8 @@ export default function FundingStatus({
   targetAmount,
   organizationName = "",
 }: FundingStatus) {
+  const router = useRouter();
+
   return (
     <div>
       <div
@@ -37,9 +41,11 @@ export default function FundingStatus({
         )}
       >
         <span>목표 금액: {targetAmount.toLocaleString()}원</span>
-        <Link href={`${PATH.FUNDING_ORGANIZATION}#org_${id}`}>
+        <button
+          onClick={() => router.push(`${PATH.FUNDING_ORGANIZATION}#org_${id}`)}
+        >
           {organizationName}
-        </Link>
+        </button>
       </div>
     </div>
   );
