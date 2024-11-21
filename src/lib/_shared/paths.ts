@@ -8,6 +8,8 @@ export const PATH = {
   // in home
   PAYMENTS: "/payments",
   CARD_BENEFIT: "/card/benefit",
+  CARD_ACCOUNT_LIST: "/card/account-list",
+  CARD_ACCOUNT_ADD: "/card/account-add",
 
   // in fundraisings
   FUNDING_LIST: "/funding/list",

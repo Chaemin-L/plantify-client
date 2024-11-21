@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { PATH } from "@/lib/_shared/paths";
 
 export default function PointMoney() {
   const [payOn, setPayOn] = useState<boolean>(false);
@@ -9,11 +11,21 @@ export default function PointMoney() {
 
   return (
     <div
-      className="card bg-accent-green  flex justify-between cursor-pointer w-full select-none"
+      className="card bg-accent-green  flex justify-between cursor-pointer select-none w-full relative"
       onClick={onClick}
     >
       {payOn ? (
-        <div className="text-black flex flex-col items-center w-full gap-4 p-1 ">
+        <div className="text-black flex flex-col items-center w-full gap-4 p-1">
+          <Link href={PATH.CARD_ACCOUNT_LIST}>
+            <Image
+              src="/icons/plus.svg"
+              width={28}
+              height={28}
+              alt="설정"
+              className="absolute right-4 top-4"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </Link>
           <Image
             src="/temp/qr.svg"
             width={250}
