@@ -14,7 +14,7 @@ export interface AccordionContextType {
 }
 
 interface Props {
-  defaultValue?: boolean;
+  defaultValue?: boolean | null;
   iconMode?: boolean;
   children: React.ReactNode;
 }
@@ -30,7 +30,10 @@ export default function Accordion({
 }: Props) {
   const [open, setOpen] = useState<boolean>(false);
 
-  useEffect(() => setOpen(defaultValue), [defaultValue]);
+  useEffect(() => {
+    if (defaultValue === null) return;
+    setOpen(defaultValue);
+  }, [defaultValue]);
 
   const toggle = () => setOpen(!open);
 
