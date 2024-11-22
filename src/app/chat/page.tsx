@@ -8,48 +8,56 @@ import {
 import Image from "next/image";
 import clsx from "clsx";
 import { useScrollToBottom } from "@/lib/_hooks/useScrollToBottom";
+import { chatClient } from "@/lib/chatClient";
 
 interface MessageType {
-  isMe: boolean;
+  sender: "User" | "AI";
   message: string;
 }
 
-const dummy: MessageType[] = new Array(10).fill({
-  isMe: false,
-  message:
-    "첫만남은 너무 어려워 계획대로 되는 게 없어서\n첫만남은 너무 어려워 랄라라라랄ㄹ",
-});
-
 export default function Chat() {
   const [message, setMessage] = useState<string>("");
-  const [chatList, setChatList] = useState(dummy);
+  const [chatList, setChatList] = useState<MessageType[]>([]);
   const { containerRef, scrollToBottom } = useScrollToBottom();
 
   useEffect(() => {
     scrollToBottom();
     setMessage("");
-    console.log("useEffect");
   }, [chatList]);
+
+  useEffect(() => {
+    chatClient.onConnect = (frame) => {
+      if (chatClient.connected)
+        chatClient.subscribe("/topic/public", (message) => {
+          const messageData = JSON.parse(message.body);
+          console.log("Message received:", messageData);
+          setChatList((prev) => [...prev, messageData]);
+        });
+    };
+    chatClient.activate();
+    return () => {
+      chatClient.deactivate();
+    };
+  }, [chatClient]);
+
+  const sendMessage = () => {
+    if (message.trim().length != 0 && chatClient.connected) {
+      chatClient.publish({
+        destination: "/app/chat.sendMessage",
+        body: JSON.stringify({ sender: "User", message }),
+      });
+
+      setMessage("");
+    }
+  };
 
   const handleTextarea: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setMessage(e.target.value);
   };
 
   const handleEnter: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) handleSubmit();
-  };
-
-  const handleSubmit = () => {
-    if (message.trim().length) {
-      setChatList((chatList) => [
-        ...chatList,
-        {
-          isMe: true,
-          message,
-        },
-      ]);
-      setMessage("");
-    }
+    e.preventDefault();
+    if (!e.shiftKey && e.key === "Enter") sendMessage();
   };
 
   return (
@@ -63,10 +71,10 @@ export default function Chat() {
           <li
             key={idx}
             className={clsx(
-              m.isMe
+              m.sender === "User"
                 ? "bg-white text-black self-end"
-                : "text-white bg-shadow-700",
-              "p-3 whitespace-pre-wrap rounded-md text-bd2 max-w-[90%] min-h-fit break-words max-h-fit "
+                : "text-white bg-shadow-700 ",
+              "p-3 whitespace-pre-wrap rounded-2xl text-bd2 max-w-[90%] w-fit min-h-fit break-words max-h-fit "
             )}
           >
             <p className="w-full">{m.message}</p>
@@ -83,7 +91,7 @@ export default function Chat() {
         />
         <button
           className="bg-accent-purple p-2 rounded-full w-fit h-fit"
-          onClick={handleSubmit}
+          onClick={sendMessage}
         >
           <Image width={16} height={16} src="/icons/send.svg" alt="전송" />
         </button>
