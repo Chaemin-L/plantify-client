@@ -66,14 +66,14 @@ export default function Chat() {
               m.isMe
                 ? "bg-white text-black self-end"
                 : "text-white bg-shadow-700",
-              "p-3 whitespace-pre-line rounded-md text-bd2 max-w-[90%]"
+              "p-3 whitespace-pre-wrap rounded-md text-bd2 max-w-[90%] min-h-fit break-words max-h-fit "
             )}
           >
-            {m.message}
+            <p className="w-full">{m.message}</p>
           </li>
         ))}
       </ul>
-      <div className="flex gap-4 bg-shadow-800 -mx-4 p-5 items-top fixed bottom-0 w-full max-w-[500px]">
+      <div className="flex gap-4 bg-shadow-800 -mx-4 p-3 items-top fixed bottom-0 w-full max-w-[500px]">
         <textarea
           className="bg-transparent focus:outline-0 w-full text-bd2"
           name="mychat"
