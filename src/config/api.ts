@@ -3,5 +3,5 @@ export const BASE_URL =
 
 export const API_ENDPOINTS = {
   FUNDING: `${BASE_URL}/v1/funding`,
-  ITEM: `${BASE_URL}/v1/item`,
+  ITEM: `${BASE_URL}/v1/items`,
 };
