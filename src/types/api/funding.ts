@@ -28,3 +28,9 @@ export interface FundingType {
   donationStartDate: Date | null;
   donationEndDate: Date | null;
 }
+
+export interface OrganizationType {
+  organizationId: string;
+  name: string;
+  content: string;
+}

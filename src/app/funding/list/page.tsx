@@ -24,6 +24,9 @@ export default async function FundRaisingsListPage({ searchParams }: Props) {
   // const funding = await getFundingDetail("67403b24b22cea6ecde6c8da");
   // console.log(funding);
 
+  // const organizations = await getOrganizations();
+  // console.log(organizations);
+
   const { category } = await searchParams;
   // TODO: data fetching by category
   return (
