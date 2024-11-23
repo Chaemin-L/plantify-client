@@ -4,11 +4,13 @@ export default {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       screens: {
         xs: "320px",
+        "3xl": "1920px",
       },
       colors: {
         accent: {

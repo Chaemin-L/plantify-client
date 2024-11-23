@@ -1,13 +1,20 @@
 export const PATH = {
   // navigation tab
   FOREST: "/forest",
-  HOME: "/home",
-  FUNDRAISINGS: "/fundraisings",
+  HOME: "/card",
+  FUNDING: "/funding",
   CHAT: "/chat",
 
   // in home
   PAYMENTS: "/payments",
-  PAYMENTS_DEFAULT: "/payments/all?sort=recent",
-  CARD_BENEFIT: "/card-benefit",
-  CARD_BENEFIT_DEFAULT: "/card-benefit/traffic",
+  CARD_BENEFIT: "/card/benefit",
+  CARD_ACCOUNT_LIST: "/card/account-list",
+  CARD_ACCOUNT_ADD: "/card/account-add",
+
+  // in fundraisings
+  FUNDING_LIST: "/funding/list",
+  FUNDING_ORGANIZATION: "/funding/organization",
+
+  // in forest
+  FOREST_STORE: "/forest/store",
 };

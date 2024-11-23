@@ -1,16 +1,39 @@
 "use client";
 
-import { createContext, PropsWithChildren, useContext, useState } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-export interface AccordionType {
+export interface AccordionContextType {
   open: boolean;
   toggle: () => void;
 }
 
-export const AccordionContext = createContext<AccordionType | null>(null);
+interface Props {
+  defaultValue?: boolean | null;
+  iconMode?: boolean;
+  children: React.ReactNode;
+}
 
-export default function Accordion({ children }: PropsWithChildren) {
+export const AccordionContext = createContext<AccordionContextType | null>(
+  null
+);
+
+export default function Accordion({
+  defaultValue = false,
+  iconMode = true,
+  children,
+}: Props) {
   const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (defaultValue === null) return;
+    setOpen(defaultValue);
+  }, [defaultValue]);
 
   const toggle = () => setOpen(!open);
 
@@ -22,9 +45,27 @@ export default function Accordion({ children }: PropsWithChildren) {
       }}
     >
       {children}
-      <div className="text-right h-6">
-        <button onClick={toggle} className="self-right">
-          {open ? (
+    </AccordionContext.Provider>
+  );
+}
+
+function Summary({
+  children,
+  className,
+}: PropsWithChildren<{
+  className?: React.ComponentProps<"div">["className"];
+}>) {
+  const context = useContext(AccordionContext);
+  if (!context) return <></>;
+  return (
+    <div
+      onClick={context?.toggle}
+      className={`relative hover:cursor-pointer ${className}`}
+    >
+      {children}
+      <div className="text-right h-6 absolute top-1/2 -translate-y-1/2 right-0">
+        <div className="self-right">
+          {context?.open ? (
             <svg
               className="w-6 h-6 p-1"
               viewBox="0 0 21 11"
@@ -49,15 +90,10 @@ export default function Accordion({ children }: PropsWithChildren) {
               />
             </svg>
           )}
-        </button>
+        </div>
       </div>
-    </AccordionContext.Provider>
+    </div>
   );
-}
-
-function Summary({ children }: PropsWithChildren) {
-  const context = useContext(AccordionContext);
-  return <div onClick={context?.toggle}>{children}</div>;
 }
 
 function Details({ children }: PropsWithChildren) {

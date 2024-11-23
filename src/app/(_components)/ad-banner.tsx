@@ -1,6 +1,6 @@
 export default function AdBanner() {
   return (
-    <aside className="max-xl:hidden w-[500px] flex flex-col justify-center">
+    <aside className="max-2xl:hidden w-[500px] flex flex-col justify-center">
       <div className="flex flex-col justify-between gap-[150px]">
         <div>
           <span className="text-[40px] leading-none">나만의 숲 만들기</span>

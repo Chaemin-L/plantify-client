@@ -1,14 +1,52 @@
+"use client";
+import clsx from "clsx";
 import Progressbar from "./progressbar";
+import Link from "next/link";
+import { PATH } from "@/lib/_shared/paths";
+import { useRouter } from "next/navigation";
 
-export default function FundingStatus() {
+interface FundingStatus {
+  id: number;
+  size?: "sm" | "lg";
+  percent: number;
+  targetAmount: number;
+  organizationName?: string;
+}
+
+export default function FundingStatus({
+  id,
+  size = "lg",
+  percent,
+  targetAmount,
+  organizationName = "",
+}: FundingStatus) {
+  const router = useRouter();
+
   return (
-    <div className="">
-      <div className="flex justify-between mb-4">
-        <h1 className="card-title">펀딩현황</h1>
-        <span className="card-title">64%</span>
+    <div>
+      <div
+        className={clsx(
+          size === "lg" ? "card-title" : "text-bd3",
+          "flex justify-between mb-4 "
+        )}
+      >
+        <h1>펀딩현황</h1>
+        <span>{percent}%</span>
       </div>
-      <Progressbar percent={64} />
-      <div className="text-bd3 mt-3">목표 금액: 1억</div>
+      <Progressbar percent={percent} />
+      <div
+        className={clsx(
+          size === "lg" ? "text-bd3" : "text-bd4",
+          "mt-3 flex justify-between"
+        )}
+      >
+        <span>목표 금액: {targetAmount.toLocaleString()}원</span>
+        <button
+          onClick={() => router.push(`${PATH.FUNDING_ORGANIZATION}#org_${id}`)}
+        >
+          {organizationName}
+        </button>
+      </div>
     </div>
   );
 }

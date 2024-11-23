@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { FormEventHandler, MouseEventHandler } from "react";
+import { FormEventHandler } from "react";
 
 interface Props {
   onSubmit?: FormEventHandler<HTMLFormElement>;
@@ -14,6 +14,7 @@ export default function SearchBar({ onSubmit }: Props) {
     >
       <input
         type="text"
+        name="search"
         className="flex-1 bg-transparent focus:outline-0 text-t4"
         autoFocus
       />
