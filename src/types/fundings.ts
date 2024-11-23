@@ -1,1 +1,8 @@
-export type FundingCategoryType = "all" | "environment" | "animal" | "youth";
+export const FundingCategory = [
+  "all",
+  "environment",
+  "animal",
+  "youth",
+] as const;
+
+export type FundingCategoryType = (typeof FundingCategory)[number];
