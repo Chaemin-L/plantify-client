@@ -29,7 +29,7 @@ export default function FundRaisingsListPage() {
         items={categories}
         sticky
       />
-      <FundingList category={category as string} listData={youth} />
+      <FundingList listData={youth} />
     </>
   );
 }

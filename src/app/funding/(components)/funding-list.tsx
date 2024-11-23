@@ -12,7 +12,6 @@ interface FundingType {
 }
 interface Props {
   listData: FundingType[];
-  category: string;
 }
 
 // TODO: 스크롤/페이지네이션 -> client component로 변경 예정

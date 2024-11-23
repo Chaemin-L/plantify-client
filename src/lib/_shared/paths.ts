@@ -12,6 +12,7 @@ export const PATH = {
   CARD_ACCOUNT_ADD: "/card/account-add",
 
   // in fundraisings
+  FUNDING_MY: "/funding/my",
   FUNDING_LIST: "/funding/list",
   FUNDING_ORGANIZATION: "/funding/organization",
 

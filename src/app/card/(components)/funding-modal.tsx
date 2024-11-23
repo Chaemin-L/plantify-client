@@ -23,7 +23,7 @@ export default function FundingModal() {
   return (
     <>
       <div className="card cursor-pointer " onClick={openModal}>
-        <FundingStatus id={0} percent={58} targetAmount={100000000} />
+        <FundingStatus id="0" percent={58} targetAmount={100000000} />
       </div>
       {show &&
         ReactDOM.createPortal(
@@ -38,7 +38,7 @@ export default function FundingModal() {
             >
               {/** TODO: 마이 펀딩 리스트 라우팅 경로로 변경 */}
               <Link
-                href={PATH.FUNDING_LIST}
+                href={PATH.FUNDING_MY}
                 className="self-end text-bd2 hover:underline mb-2"
               >
                 전체보기 &gt;
@@ -72,7 +72,7 @@ const FundingItem = (props: Props) => {
   const { id, title, percent, targetAmount, organizationName } = props;
 
   return (
-    <Link href={PATH.FUNDING_LIST} className="inline-block p-2 h-fit ">
+    <Link href={PATH.FUNDING_MY} className="inline-block p-2 h-fit ">
       <FundingStatus
         size="reactive"
         showProgress
