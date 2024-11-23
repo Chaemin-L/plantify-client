@@ -3,7 +3,7 @@ import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 
 interface FundingType {
-  id: number;
+  id: string;
   image: string;
   category: string;
   title: string;
@@ -27,7 +27,7 @@ export default function FundingList({ listData }: Props) {
           >
             <img
               src={image}
-              className="w-1/4 aspect-[1/1.2] rounded-l-xl object-cover"
+              className="w-[30%] md:w-[25%]  aspect-[1/1.2] rounded-l-xl object-cover"
             />
             <div className="px-5 py-4 w-full">
               <div className=" max-md:mb-1 mb-2 max-md:text-bd4 text-bd2">

@@ -1,11 +1,11 @@
 import Image from "next/image";
-import FundingStatus from "@/app/(_components)/funding-status";
 import PayNotice from "./(components)/pay-notice";
 import BadgeStatus from "./(components)/badge-status";
 import GoCardBenefit from "./(components)/go-card-benefit";
 import PointMoney from "./(components)/point-money";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
+import FundingModal from "./(components)/funding-modal";
 
 export default async function HomePage() {
   // TODO: 실제 데이터 fetching
@@ -18,9 +18,7 @@ export default async function HomePage() {
       <PointMoney />
 
       {/** 펀딩 현황 */}
-      <div className="card">
-        <FundingStatus id={0} percent={58} targetAmount={100000000} />
-      </div>
+      <FundingModal />
 
       {/** 획득 배지 및 펀딩 */}
       <BadgeStatus />

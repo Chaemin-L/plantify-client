@@ -1,21 +1,26 @@
 "use client";
 import clsx from "clsx";
 import Progressbar from "./progressbar";
-import Link from "next/link";
 import { PATH } from "@/lib/_shared/paths";
 import { useRouter } from "next/navigation";
 
 interface FundingStatus {
-  id: number;
-  size?: "sm" | "lg";
+  // styling
+  size?: "sm" | "lg" | "reactive";
+  showProgress?: boolean;
+  // data
+  id: string;
+  title?: string;
   percent: number;
   targetAmount: number;
   organizationName?: string;
 }
 
 export default function FundingStatus({
-  id,
   size = "lg",
+  showProgress = false,
+  id,
+  title = "펀딩현황",
   percent,
   targetAmount,
   organizationName = "",
@@ -23,24 +28,39 @@ export default function FundingStatus({
   const router = useRouter();
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <div
         className={clsx(
           size === "lg" ? "card-title" : "text-bd3",
-          "flex justify-between mb-4 "
+          "flex justify-between items-center"
         )}
       >
-        <h1>펀딩현황</h1>
+        <div className="flex space-x-1 items-center">
+          {showProgress && (
+            <div className="rounded-full border border-accent-green w-fit py-1 px-2 text-bd4 text-accent-green">
+              진행중
+            </div>
+          )}
+          <h1
+            className={clsx(
+              size === "reactive" && "text-bd3 md:text-t3",
+
+              "flex-1 line-clamp-1 break-all pr-2"
+            )}
+          >
+            {title}
+          </h1>
+        </div>
         <span>{percent}%</span>
       </div>
-      <Progressbar percent={percent} />
+      <Progressbar isShort={size === "sm"} percent={percent} />
       <div
         className={clsx(
           size === "lg" ? "text-bd3" : "text-bd4",
-          "mt-3 flex justify-between"
+          " flex justify-between"
         )}
       >
-        <span>목표 금액: {targetAmount.toLocaleString()}원</span>
+        <span>{targetAmount.toLocaleString()}원</span>
         <button
           onClick={() => router.push(`${PATH.FUNDING_ORGANIZATION}#org_${id}`)}
         >
