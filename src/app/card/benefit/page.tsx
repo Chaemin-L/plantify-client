@@ -1,10 +1,18 @@
-import Select, { SelectItemType } from "@/app/(_components)/select";
+"use client";
+import { SelectItemType } from "@/app/_deprecated/select";
 import { PATH } from "@/lib/_shared/paths";
 import BestCard from "./(components)/best-card";
 import OtherBenefit from "./(components)/other-benefit";
-import { notFound } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
+import SelectClient from "@/app/(_components)/select";
+import { Benefit, BenefitType } from "@/types/card";
+import { isBenefitType } from "@/utils/typeCheck";
 
-const categories: SelectItemType<BenefitValueType>[] = [
+const categories: SelectItemType<BenefitType>[] = [
+  {
+    label: "전체",
+    value: "all",
+  },
   {
     label: "교통",
     value: "traffic",
@@ -35,41 +43,19 @@ const categories: SelectItemType<BenefitValueType>[] = [
   },
 ];
 
-const BENEFIT_CATEGORY: BenefitValueType[] = [
-  "traffic",
-  "communication",
-  "abroad",
-  "oiling",
-  "mart",
-  "shopping",
-  "cafe",
-];
+export default function CardBenefitPage() {
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category") ?? "all";
 
-export type BenefitValueType =
-  | "traffic"
-  | "communication"
-  | "abroad"
-  | "oiling"
-  | "mart"
-  | "shopping"
-  | "cafe";
-
-interface Props {
-  searchParams: Promise<{ category: string }>;
-}
-
-export default async function CardBenefitPage({ searchParams }: Props) {
-  const { category } = await searchParams;
-  if (category && !BENEFIT_CATEGORY.includes(category as BenefitValueType))
-    throw notFound();
+  if (!isBenefitType(category)) return notFound();
 
   return (
     <div className="flex flex-col gap-5">
-      <Select
+      <SelectClient
         baseUrl={PATH.CARD_BENEFIT}
         name="category"
+        selected={category}
         items={categories}
-        selectedItem={category ?? "traffic"}
       />
       <BestCard />
       <OtherBenefit />

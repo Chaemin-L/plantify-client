@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
-import Select from "@/app/(_components)/select";
 import { PATH } from "@/lib/_shared/paths";
 import StoreItemCard from "../(components)/store-item-card";
 import { useModal } from "@/lib/_hooks/useModal";
-import { useSearchParams } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
+import Select from "@/app/(_components)/select";
+import { isItemCategoryType } from "@/utils/typeCheck";
 
 const categories = [
   { label: "전체", value: "all" },
@@ -25,12 +26,11 @@ const storeItems = [
   imgUrl: `/temp/forest/ground-item${idx + 1}.png`,
 }));
 
-interface Props {
-  searchParams: { category: string };
-}
 export default function Page() {
   const searchParams = useSearchParams();
-  const category = searchParams.get("category");
+  const category = searchParams.get("category") ?? "all";
+
+  if (!isItemCategoryType(category)) return notFound();
 
   // TODO: user's coin, store data fetching api
   const userCoins = 1618;
@@ -45,8 +45,8 @@ export default function Page() {
       <Select
         baseUrl={PATH.FOREST_STORE}
         name="category"
+        selected={category}
         items={categories}
-        selectedItem={category ?? "all"}
       />
       <div className="w-full gap-2 flex justify-end">
         <Image
