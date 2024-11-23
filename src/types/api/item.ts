@@ -11,6 +11,13 @@ export interface ItemType {
   updatedAt: Date;
 }
 
+export interface MyItemType {
+  usingItemId: number;
+  myItemId: number;
+  posX: number;
+  posY: number;
+}
+
 export interface Position {
   posX: number;
   posY: number;
