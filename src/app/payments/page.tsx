@@ -3,7 +3,7 @@ import { PATH } from "@/lib/_shared/paths";
 import PaymentsList from "./(components)/payments-list";
 import clsx from "clsx";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
-import { PaymentCategory, PaymentCategoryType } from "@/types/pay";
+import { PaymentCategoryType, PaymentSorting } from "@/types/pay";
 import Select, { SelectItemType } from "../(_components)/select";
 import { isPaymentCategoryType, isPaymentSortingType } from "@/utils/typeCheck";
 
@@ -36,7 +36,7 @@ export default function PaymentsPage() {
         <button
           onClick={() =>
             router.replace(
-              `${PATH.PAYMENTS}?category=${category}&sorting=${PaymentCategory[0]}`
+              `${PATH.PAYMENTS}?category=${category}&sorting=${PaymentSorting[0]}`
             )
           }
           className={clsx(sorting !== "latest" && "opacity-80")}
@@ -49,7 +49,7 @@ export default function PaymentsPage() {
             <button
               onClick={() =>
                 router.replace(
-                  `${PATH.PAYMENTS}?category=${category}&sorting=${PaymentCategory[1]}`
+                  `${PATH.PAYMENTS}?category=${category}&sorting=${PaymentSorting[1]}`
                 )
               }
               className={clsx(sorting !== "desc" && "opacity-70")}
