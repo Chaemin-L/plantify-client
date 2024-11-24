@@ -7,7 +7,11 @@ import {
   OrganizationType,
 } from "@/types/api/funding";
 
-export async function getFunding(page: number, size: number, sort: string[]) {
+export async function getFundingList(
+  page: number,
+  size: number,
+  sort: string[]
+) {
   let data = await fetchClient(
     `${
       API_ENDPOINTS.FUNDING

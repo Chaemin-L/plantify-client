@@ -1,7 +1,7 @@
 export type DirectionType = "ASC" | "DESC";
 
 export interface FinalResponse<T> {
-  status: string;
+  status: number;
   message: string;
   data: T;
 }

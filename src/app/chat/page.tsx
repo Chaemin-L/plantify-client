@@ -7,7 +7,7 @@ import {
 } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { useScrollToBottom } from "@/lib/_hooks/useScrollToBottom";
+import { useScrollToBottom } from "@/hooks/useScrollToBottom";
 import { chatClient } from "@/lib/chatClient";
 
 interface MessageType {

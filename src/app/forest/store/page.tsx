@@ -3,7 +3,7 @@ import Image from "next/image";
 import Select from "@/app/(_components)/select";
 import { PATH } from "@/lib/_shared/paths";
 import StoreItemCard from "../(components)/store-item-card";
-import { useModal } from "@/lib/_hooks/useModal";
+import { useModal } from "@/hooks/useModal";
 import { useSearchParams } from "next/navigation";
 
 const categories = [
