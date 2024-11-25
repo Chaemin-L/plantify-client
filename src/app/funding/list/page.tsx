@@ -4,11 +4,9 @@ import { youth } from "../(_dummy)/list-data";
 import FundingList from "../(components)/funding-list";
 import Select, { SelectItemType } from "@/app/(_components)/select";
 import { notFound, useSearchParams } from "next/navigation";
-import {
-  ExpandedFundingCategoryType,
-  FundingCategoryType,
-} from "@/types/funding";
+import { ExpandedFundingCategoryType } from "@/types/funding";
 import { isFundingCategoryType } from "@/utils/typeCheck";
+import { useFundingListByCategory } from "@/hooks/api/useFundingByCategory";
 
 const categories: SelectItemType<ExpandedFundingCategoryType>[] = [
   { label: "전체", value: "ALL" },
@@ -25,8 +23,9 @@ export default function FundRaisingsListPage() {
 
   if (!isFundingCategoryType(category)) return notFound();
 
-  // const myFunding = await getMyFundings(0, 1, ["title"]);
-  // console.log(myFunding);
+  // const funding = useFundingList(10, ["title"]);
+  // const funding = useFundingListByCategory("ANIMAL", 10);
+  // console.log(funding.data);
 
   return (
     <>
