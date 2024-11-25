@@ -6,7 +6,6 @@ import Select, { SelectItemType } from "@/app/(_components)/select";
 import { notFound, useSearchParams } from "next/navigation";
 import { ExpandedFundingCategoryType } from "@/types/funding";
 import { isFundingCategoryType } from "@/utils/typeCheck";
-import { useGetFundingListByCategory } from "@/hooks/api/useGetFundingByCategory";
 
 const categories: SelectItemType<ExpandedFundingCategoryType>[] = [
   { label: "전체", value: "ALL" },
@@ -23,8 +22,9 @@ export default function FundRaisingsListPage() {
 
   if (!isFundingCategoryType(category)) return notFound();
 
-  // const funding = useFundingList(10, ["title"]);
-  // const funding = useFundingListByCategory("ANIMAL", 10);
+  // const funding = useGetFundingList(10, ["title"]);
+  // const funding = useGetFundingDetail("67403b24b22cea6ecde6c8da");
+  // const funding = useGetOrganizations();
   // console.log(funding.data);
 
   return (
