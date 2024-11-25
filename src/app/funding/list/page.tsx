@@ -6,7 +6,7 @@ import Select, { SelectItemType } from "@/app/(_components)/select";
 import { notFound, useSearchParams } from "next/navigation";
 import { ExpandedFundingCategoryType } from "@/types/funding";
 import { isFundingCategoryType } from "@/utils/typeCheck";
-import { useFundingListByCategory } from "@/hooks/api/useFundingByCategory";
+import { useGetFundingListByCategory } from "@/hooks/api/useGetFundingByCategory";
 
 const categories: SelectItemType<ExpandedFundingCategoryType>[] = [
   { label: "전체", value: "ALL" },

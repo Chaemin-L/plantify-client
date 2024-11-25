@@ -2,7 +2,7 @@ import { getFundingByCategory } from "@/services/funding";
 import { CategoryType } from "@/types/api/funding";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-export const useFundingListByCategory = (
+export const useGetFundingListByCategory = (
   category: CategoryType,
   size: number,
   sort: string[] = ["title"]
