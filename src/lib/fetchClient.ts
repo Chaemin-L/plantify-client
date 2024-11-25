@@ -1,12 +1,14 @@
+import { FinalResponse } from "@/types/api/common";
+
 const fetchClient = async (url: string, options: RequestInit = {}) => {
   let token;
   if (process.env.NODE_ENV === "development") {
+    token = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
+  } else {
     token =
       typeof window !== "undefined"
         ? localStorage.getItem("accessToken")
         : null;
-  } else {
-    token = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
   }
 
   const defaultHeaders: HeadersInit = {
@@ -23,12 +25,15 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
   };
 
   const response = await fetch(url, mergedOptions);
+  // 통신 에러
   if (!response.ok) {
-    throw new Error(
-      `HTTP error! status: ${response.status}${response.statusText}`
-    );
+    throw new Error(`${response.status} ${response.statusText}`);
+  } else {
+    const data: FinalResponse<any> = await response.json();
+    if (data.status === 200) return data;
+    // 비지니스 로직 에러
+    throw new Error(`[${data.status} ERROR] ${data.message}`);
   }
-  return response.json();
 };
 
 export default fetchClient;
