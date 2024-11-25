@@ -7,6 +7,7 @@ import {
   OrganizationType,
 } from "@/types/api/funding";
 
+// OK
 export async function getFundingList(
   page: number,
   size: number,
@@ -23,6 +24,7 @@ export async function getFundingList(
   throw new Error(data.message);
 }
 
+//OK
 export async function getFundingByCategory(
   category: CategoryType,
   page: number,
@@ -49,6 +51,7 @@ export async function getFundingDetail(id: string) {
   throw new Error(data.message);
 }
 
+// OK
 export async function getOrganizations() {
   let data = await fetchClient(`${API_ENDPOINTS.FUNDING}/organizations`);
 

@@ -19,26 +19,17 @@ const categories: SelectItemType<FundingCategoryType>[] = [
   { label: "사회", value: "SOCIAL" },
 ];
 export default async function FundRaisingsListPage({ searchParams }: Props) {
-  // const funding = await getFundingList(0, 1, ["title"]);
-  // const funding = await getFundingByCategory("ELDERLY", 0, 1, ["title"]);
-  // const funding = await getFundingDetail("67403b24b22cea6ecde6c8da");
-  // console.log(funding);
-
-  // const organizations = await getOrganizations();
-  // console.log(organizations);
-
   // not yet
   // const myFunding = await getMyFundings(0, 1, ["title"]);
   // console.log(myFunding);
 
-  // const storeItems = await getStoreItems();
-  // console.log(storeItems);
+  // const { data } = useStoreItemsQuery();
 
-  // const storeItems = await getStoreItemsByCategory("BACKGROUND");
-  // console.log(storeItems);
+  // const data = await purchaseItem(1, 1);
+  // console.log(data);
 
   const { category } = await searchParams;
-  // TODO: data fetching by category
+
   return (
     <>
       <Select
