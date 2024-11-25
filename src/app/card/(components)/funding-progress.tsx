@@ -19,7 +19,7 @@ export default function FundingProgress() {
         <h2 className="card-title select-none">펀딩현황</h2>
         <Link
           href={PATH.FUNDING_MY}
-          className=" ml-auto w-fit text-bd2 hover:underline"
+          className=" ml-auto w-fit text-bd2 hover:opacity-80"
         >
           전체보기 &gt;
         </Link>
