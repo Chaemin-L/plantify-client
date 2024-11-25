@@ -10,3 +10,14 @@ export async function getCash() {
   if (data.status === 200) return data as FinalResponse<CashType>;
   throw new Error();
 }
+
+export async function postCash(amount: number, type: string) {
+  const data = await fetchClient(`${API_ENDPOINTS.CASH}/use`, {
+    method: "POST",
+    body: JSON.stringify({
+      amount,
+      type,
+    }),
+  });
+  if (data.status === 200) return data as FinalResponse<CashType>;
+}

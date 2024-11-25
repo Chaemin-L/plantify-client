@@ -30,9 +30,7 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
     throw new Error(`${response.status} ${response.statusText}`);
   } else {
     const data: FinalResponse<any> = await response.json();
-    if (data.status === 200) return data;
-    // 비지니스 로직 에러
-    throw new Error(`[${data.status} ERROR] ${data.message}`);
+    return data;
   }
 };
 
