@@ -5,7 +5,7 @@ import GoCardBenefit from "./(components)/go-card-benefit";
 import PointMoney from "./(components)/point-money";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
-import FundingModal from "./(components)/funding-modal";
+import FundingProgress from "./(components)/funding-progress";
 
 export default async function HomePage() {
   // TODO: 실제 데이터 fetching
@@ -18,7 +18,7 @@ export default async function HomePage() {
       <PointMoney />
 
       {/** 펀딩 현황 */}
-      <FundingModal />
+      <FundingProgress />
 
       {/** 획득 배지 및 펀딩 */}
       <BadgeStatus />

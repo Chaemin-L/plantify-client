@@ -35,16 +35,15 @@ export default function FundingStatus({
           "flex justify-between items-center"
         )}
       >
-        <div className="flex space-x-1 items-center">
+        <div className="flex space-x-1.5 items-center">
           {showProgress && (
-            <div className="rounded-full border border-accent-green w-fit py-1 px-2 text-bd4 text-accent-green">
+            <div className="rounded-full border border-accent-green w-fit py-1 px-1 text-bd4 text-accent-green">
               진행중
             </div>
           )}
           <h1
             className={clsx(
-              size === "reactive" && "text-bd3 md:text-t3",
-
+              size === "reactive" && "text-bd3 md:text-t4",
               "flex-1 line-clamp-1 break-all pr-2"
             )}
           >
