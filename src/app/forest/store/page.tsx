@@ -5,6 +5,8 @@ import { PATH } from "@/lib/_shared/paths";
 import StoreItemCard from "../(components)/store-item-card";
 import { useModal } from "@/hooks/useModal";
 import { useSearchParams } from "next/navigation";
+import { useStoreItemsQuery } from "@/hooks/api/useStoreItems";
+import { useStoreItemsByCategoryQuery } from "@/hooks/api/useStoreItemsByCategory";
 
 const categories = [
   { label: "전체", value: "all" },
@@ -25,12 +27,13 @@ const storeItems = [
   imgUrl: `/temp/forest/ground-item${idx + 1}.png`,
 }));
 
-interface Props {
-  searchParams: { category: string };
-}
 export default function Page() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
+
+  // const { data } = useStoreItemsQuery();
+  // const { data } = useStoreItemsByCategoryQuery("BACKGROUND");
+  // console.log(data);
 
   // TODO: user's coin, store data fetching api
   const userCoins = 1618;
