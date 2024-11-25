@@ -12,17 +12,22 @@ export interface ItemType {
 }
 
 export interface MyItemType {
-  usingItemId: number;
   myItemId: number;
-  posX: number;
-  posY: number;
+  itemId: number;
+  itemName: string;
+  quantity: number;
+  userId: number;
 }
 
 export interface Position {
   posX: number;
   posY: number;
 }
+export interface MyUsingItemType extends Position {
+  usingItemId: number;
+  myItemId: number;
+}
 
-export interface GetUsingMyItemRequest extends Position {
+export interface PostUsingItem extends Position {
   myItemId: number;
 }

@@ -18,9 +18,7 @@ export async function getFundingList(
       API_ENDPOINTS.FUNDING
     }?page=${page}&size=${size}&sort=${encodeURIComponent(sort.toString())}`
   );
-
   if (data.status === 200) return data as FinalResponse<Pageable<FundingType>>;
-
   throw new Error(data.message);
 }
 
@@ -39,23 +37,18 @@ export async function getFundingByCategory(
     )}`
   );
   if (data.status === 200) return data as FinalResponse<Pageable<FundingType>>;
-
   throw new Error(data.message);
 }
 
 export async function getFundingDetail(id: string) {
   let data = await fetchClient(`${API_ENDPOINTS.FUNDING}/${id}`);
-
   if (data.status === 200) return data as FinalResponse<FundingType>;
-
   throw new Error(data.message);
 }
 
 // OK
 export async function getOrganizations() {
   let data = await fetchClient(`${API_ENDPOINTS.FUNDING}/organizations`);
-
   if (data.status === 200) return data as FinalResponse<OrganizationType[]>;
-
   throw new Error(data.message);
 }
