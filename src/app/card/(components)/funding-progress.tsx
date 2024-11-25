@@ -1,10 +1,7 @@
 "use client";
-import Accordion from "@/app/(_components)/accordion";
 import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
-import { useState } from "react";
-import ReactDOM from "react-dom";
 
 const dummy = Array(3)
   .fill({
@@ -17,39 +14,34 @@ const dummy = Array(3)
 
 export default function FundingProgress() {
   return (
-    <Accordion iconMode={false}>
-      <Accordion.Summary>
-        <div className="card cursor-pointer ">
-          {/* <FundingStatus id="0" percent={58} targetAmount={100000000} /> */}
-          <h2 className="card-title select-none">펀딩현황</h2>
-        </div>
-      </Accordion.Summary>
-      <Accordion.Details>
-        <div
-          className=" bg-shadow-800 rounded-2xl text-center  text-white flex flex-col gap-2 p-4 -mt-3"
-          onClick={(e) => e.stopPropagation()}
+    <div className="card cursor-pointer flex flex-col gap-8">
+      <div className="flex justify-between">
+        <h2 className="card-title select-none">펀딩현황</h2>
+        <Link
+          href={PATH.FUNDING_MY}
+          className=" ml-auto w-fit text-bd2 hover:underline"
         >
-          {/** TODO: 마이 펀딩 리스트 라우팅 경로로 변경 */}
+          전체보기 &gt;
+        </Link>
+      </div>
+      <div
+        className=" bg-shadow-800 rounded-2xl text-center  text-white flex flex-col gap-2 -mt-3"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/** TODO: 마이 펀딩 리스트 라우팅 경로로 변경 */}
 
-          <ul className="w-full flex flex-col ">
-            {dummy.map((item, idx) => (
-              <li
-                key={idx}
-                className="h-fit w-full hover:bg-shadow-700 p-2 rounded-2xl"
-              >
-                <FundingItem {...item} />
-              </li>
-            ))}
-          </ul>
-          <Link
-            href={PATH.FUNDING_MY}
-            className=" mx-auto w-fit text-bd2 hover:underline"
-          >
-            전체보기 &gt;
-          </Link>
-        </div>
-      </Accordion.Details>
-    </Accordion>
+        <ul className="w-full flex flex-col gap-5">
+          {dummy.map((item, idx) => (
+            <li
+              key={idx}
+              className="h-fit w-full hover:bg-shadow-700 rounded-2xl transition-colors"
+            >
+              <FundingItem {...item} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
@@ -64,7 +56,10 @@ const FundingItem = (props: Props) => {
   const { id, title, percent, targetAmount, organizationName } = props;
 
   return (
-    <Link href={PATH.FUNDING_MY} className="inline-block p-1 h-fit w-full">
+    <Link
+      href={PATH.FUNDING_MY}
+      className="inline-block p-2 h-fit w-full hover:scale-95 transition-all"
+    >
       <FundingStatus
         size="reactive"
         showProgress
