@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
-import Select from "@/app/(_components)/select";
 import { PATH } from "@/lib/_shared/paths";
 import StoreItemCard from "../(components)/store-item-card";
 import { useModal } from "@/hooks/useModal";
-import { useSearchParams } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import { useStoreItemsQuery } from "@/hooks/api/useStoreItems";
 import { useStoreItemsByCategoryQuery } from "@/hooks/api/useStoreItemsByCategory";
+import Select from "@/app/(_components)/select";
+import { isItemCategoryType } from "@/utils/typeCheck";
 
 const categories = [
   { label: "전체", value: "all" },
@@ -29,7 +30,9 @@ const storeItems = [
 
 export default function Page() {
   const searchParams = useSearchParams();
-  const category = searchParams.get("category");
+  const category = searchParams.get("category") ?? "all";
+
+  if (!isItemCategoryType(category)) return notFound();
 
   // const { data } = useStoreItemsQuery();
   // const { data } = useStoreItemsByCategoryQuery("BACKGROUND");
@@ -48,8 +51,8 @@ export default function Page() {
       <Select
         baseUrl={PATH.FOREST_STORE}
         name="category"
+        selected={category}
         items={categories}
-        selectedItem={category ?? "all"}
       />
       <div className="w-full gap-2 flex justify-end">
         <Image

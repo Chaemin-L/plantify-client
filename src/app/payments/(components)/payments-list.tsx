@@ -2,9 +2,9 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import PaymentsItem from "./payments-item";
-import Select, { SelectItemType } from "@/app/(_components)/select";
+import Select, { SelectItemType } from "@/app/_deprecated/select";
 import { PATH } from "@/lib/_shared/paths";
-import { CategoryValueType } from "../page";
+import { PaymentCategoryType } from "@/types/pay";
 
 export interface PaymentsType {
   orderName: string;
@@ -49,14 +49,15 @@ const payments: PaymentsType[] = [
 ];
 
 export default function PaymentsList() {
-  const [selectedItem, setSelectedItem] = useState<CategoryValueType>("all");
+  const [selectedItem, setSelectedItem] = useState<PaymentCategoryType>("all");
   const [orderBy, setOrderBy] = useState<OrderByType>("recent");
 
   const isAll = selectedItem === "all";
 
   // TODO: data fetching (SWR)
 
-  const onClickCategory = (value: CategoryValueType) => setSelectedItem(value);
+  const onClickCategory = (value: PaymentCategoryType) =>
+    setSelectedItem(value);
   const onClickOrderBy = (value: OrderByType) => setOrderBy(value);
 
   useEffect(() => {

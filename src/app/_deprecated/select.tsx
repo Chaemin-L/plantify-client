@@ -1,6 +1,5 @@
-"use client";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export interface SelectItemType<T> {
   label: string;
@@ -10,20 +9,18 @@ export interface SelectItemType<T> {
 interface Props<T> {
   baseUrl: string;
   name: string;
-  selected: string;
   items: SelectItemType<T>[];
+  selectedItem: string;
   sticky?: boolean;
 }
 
 export default function Select<T>({
   baseUrl,
   name,
-  selected,
   items,
+  selectedItem,
   sticky = false,
 }: Props<T>) {
-  const router = useRouter();
-  console.log(items, selected);
   return (
     <ul
       className={clsx(
@@ -32,18 +29,18 @@ export default function Select<T>({
       )}
     >
       {items.map(({ label, value }: SelectItemType<T>) => (
-        <button
+        <Link
           key={`${value}`}
+          href={`${baseUrl}?${name}=${value}`}
           className={clsx(
             "rounded-full px-4 py-2 text-bd2 cursor-pointer whitespace-nowrap",
-            selected === value
+            selectedItem === value
               ? "bg-accent-purple text-black"
               : "text-white bg-shadow-800"
           )}
-          onClick={() => router.replace(`${baseUrl}?${name}=${value}`)}
         >
           {label}
-        </button>
+        </Link>
       ))}
     </ul>
   );
