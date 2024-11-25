@@ -20,6 +20,8 @@ export default function Chat() {
   const [chatList, setChatList] = useState<MessageType[]>([]);
   const { containerRef, scrollToBottom } = useScrollToBottom();
 
+  const isLoading = chatList.length === 0;
+
   useEffect(() => {
     scrollToBottom();
     setMessage("");
@@ -67,19 +69,25 @@ export default function Chat() {
         className="flex-col flex gap-3 w-full h-full overflow-auto"
         ref={containerRef}
       >
-        {chatList.map((m, idx) => (
-          <li
-            key={idx}
-            className={clsx(
-              m.sender === "User"
-                ? "bg-white text-black self-end"
-                : "text-white bg-shadow-700 ",
-              "p-3 whitespace-pre-wrap rounded-2xl text-bd2 max-w-[90%] w-fit min-h-fit break-words max-h-fit "
-            )}
-          >
-            <p className="w-full">{m.message}</p>
-          </li>
-        ))}
+        {isLoading ? (
+          <p className="whitespace-pre">
+            AI를 불러오고 있어요!{"\n"}조금만 기다려주세요 🙏
+          </p>
+        ) : (
+          chatList.map((m, idx) => (
+            <li
+              key={idx}
+              className={clsx(
+                m.sender === "User"
+                  ? "bg-white text-black self-end"
+                  : "text-white bg-shadow-700 ",
+                "p-3 whitespace-pre-wrap rounded-2xl text-bd2 max-w-[90%] w-fit min-h-fit break-words max-h-fit "
+              )}
+            >
+              <p className="w-full">{m.message}</p>
+            </li>
+          ))
+        )}
       </ul>
       <div className="flex gap-4 bg-shadow-800 -mx-4 p-3 items-top fixed bottom-0 w-full max-w-[500px]">
         <textarea
