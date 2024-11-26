@@ -64,10 +64,10 @@ const FundingItem = (props: Props) => {
         size="reactive"
         showProgress
         id={id}
-        title={title}
+        leftTop={title}
         percent={percent}
         targetAmount={targetAmount}
-        organizationName={organizationName}
+        rightBottom={organizationName}
       />
     </Link>
   );

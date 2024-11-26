@@ -34,24 +34,16 @@ export default function FundingList({ showProgress = false, listData }: Props) {
           <li key={id}>
             <Link
               href={`${PATH.FUNDING_LIST}/${id}`}
-              className="flex rounded-xl  bg-shadow-800"
+              className="flex rounded-xl  bg-shadow-800 h-[102px] md:h-[116px]"
             >
-              <img
-                src={image}
-                className="w-[30%] md:w-[25%]  aspect-[1/1.2] rounded-l-xl object-cover"
-              />
-              <div className="px-5 py-4 w-full">
+              <img src={image} className="w-[40%]  rounded-l-xl object-cover" />
+              <div className="px-5 py-4 w-full h-fit flex justify-between flex-col ">
                 <div className=" max-md:mb-1 mb-2 max-md:text-bd4 text-bd2">
                   {category}
                 </div>
 
                 <div className="flex flex-col max-md:gap-3 md:gap-4 flex-1">
                   <div className="flex gap-2 items-center">
-                    {showProgress && (
-                      <div className="rounded-full border border-accent-green w-fit py-1 px-1 text-bd4 text-accent-green">
-                        진행중 {/** progress */}
-                      </div>
-                    )}
                     <h2 className="max-md:text-bd3 font-bold line-clamp-1 text-bd2 ">
                       {title}
                     </h2>
@@ -61,7 +53,11 @@ export default function FundingList({ showProgress = false, listData }: Props) {
                     size="sm"
                     percent={percent}
                     targetAmount={targetAmount}
-                    organizationName={organizationName}
+                    rightBottom={
+                      <Link href={`${PATH.FUNDING_ORGANIZATION}#org_${id}`}>
+                        {organizationName}
+                      </Link>
+                    }
                   />
                 </div>
               </div>
