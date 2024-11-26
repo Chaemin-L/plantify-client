@@ -29,6 +29,15 @@ export interface FundingType {
   donationEndDate: Date | null;
 }
 
+export interface MyFundingType {
+  myFundingId: string;
+  fundingId: string;
+  price: number;
+  status: StatusType;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface OrganizationType {
   organizationId: string;
   name: string;
