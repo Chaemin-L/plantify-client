@@ -23,7 +23,6 @@ export default function Select<T>({
   sticky = false,
 }: Props<T>) {
   const router = useRouter();
-  console.log(items, selected);
   return (
     <ul
       className={clsx(
