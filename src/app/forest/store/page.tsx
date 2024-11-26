@@ -2,8 +2,10 @@
 import Image from "next/image";
 import { PATH } from "@/lib/_shared/paths";
 import StoreItemCard from "../(components)/store-item-card";
-import { useModal } from "@/lib/_hooks/useModal";
+import { useModal } from "@/hooks/useModal";
 import { notFound, useSearchParams } from "next/navigation";
+import { useGetStoreItemsQuery } from "@/hooks/api/useGetStoreItems";
+import { useGetStoreItemsByCategoryQuery } from "@/hooks/api/useGEtStoreItemsByCategory";
 import Select from "@/app/(_components)/select";
 import { isItemCategoryType } from "@/utils/typeCheck";
 
@@ -31,6 +33,10 @@ export default function Page() {
   const category = searchParams.get("category") ?? "all";
 
   if (!isItemCategoryType(category)) return notFound();
+
+  // const { data } = useStoreItemsQuery();
+  // const { data } = useStoreItemsByCategoryQuery("BACKGROUND");
+  // console.log(data);
 
   // TODO: user's coin, store data fetching api
   const userCoins = 1618;

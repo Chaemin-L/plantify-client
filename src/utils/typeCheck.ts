@@ -1,6 +1,6 @@
 import { BenefitType, Benefit } from "@/types/card";
 import { ItemCategory, ItemCategoryType } from "@/types/forest";
-import { FundingCategoryType, FundingCategory } from "@/types/fundings";
+import { FundingCategoryType, FundingCategory } from "@/types/funding";
 import {
   PaymentCategoryType,
   PaymentCategory,
@@ -20,7 +20,7 @@ export const isBenefitType = (x: any): x is BenefitType => Benefit.includes(x);
 
 /** Funding */
 export const isFundingCategoryType = (x: any): x is FundingCategoryType =>
-  FundingCategory.includes(x);
+  [...FundingCategory, "ALL"].includes(x);
 
 /** Forest */
 export const isItemCategoryType = (x: any): x is ItemCategoryType =>
