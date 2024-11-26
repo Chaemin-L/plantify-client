@@ -34,7 +34,7 @@ export default function FundingList({ showProgress = false, listData }: Props) {
           <li key={id}>
             <Link
               href={`${PATH.FUNDING_LIST}/${id}`}
-              className="flex rounded-xl  bg-shadow-800 h-[102px] md:h-[116px]"
+              className="flex rounded-xl  bg-shadow-800 h-[106px] md:h-[128px]"
             >
               <img src={image} className="w-[40%]  rounded-l-xl object-cover" />
               <div className="px-5 py-4 w-full h-fit flex justify-between flex-col ">

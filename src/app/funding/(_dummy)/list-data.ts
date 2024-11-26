@@ -6,6 +6,7 @@ export const animalData = Array(10)
     title: "우리는 대한민국에 사는 방치견입니다",
     percent: 70,
     targetAmount: 13000000,
+    organizationName: "초록우산",
   })
   .map((item, idx) => ({ id: idx, ...item }));
 
@@ -17,5 +18,6 @@ export const youth = Array(10)
     title: "“산타 할아버지는 우리 집에만 안 와요.”",
     percent: 16,
     targetAmount: 5200000,
+    organizationName: "초록우산",
   })
   .map((item, idx) => ({ id: idx, ...item }));
