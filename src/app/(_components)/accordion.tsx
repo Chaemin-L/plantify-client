@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import React, {
   createContext,
   PropsWithChildren,
@@ -62,7 +63,7 @@ function Summary({
   return (
     <div
       onClick={context?.toggle}
-      className={`relative hover:cursor-pointer ${className}`}
+      className={`relative hover:cursor-pointer  ${className}`}
     >
       {children}
       {context.iconMode && (
@@ -103,8 +104,19 @@ function Summary({
 function Details({ children }: PropsWithChildren) {
   const context = useContext(AccordionContext);
 
-  if (!context?.open) return <></>;
-  return <div>{children}</div>;
+  return (
+    <div
+      className={clsx(
+        "transition-all",
+        !context?.open
+          ? "hidden"
+          : // "animate-slideDown duration-500"
+            ""
+      )}
+    >
+      {children}
+    </div>
+  );
 }
 
 Accordion.Summary = Summary;
