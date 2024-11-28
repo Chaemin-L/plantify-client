@@ -4,6 +4,7 @@ import Header from "@/app/(_components)/header";
 import AdBanner from "@/app/(_components)/ad-banner";
 import "./globals.css";
 import { TanstackQueryClientProvider } from "@/providers/tanstackProviders";
+import "@/styles/swiper.css";
 
 export const metadata: Metadata = {
   title: "Plantify",

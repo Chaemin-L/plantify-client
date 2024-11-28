@@ -1,3 +1,18 @@
-.swiper-pagination-bullet {
+.my-card .swiper-pagination-bullets {
+  display: hidden;
+  /* bottom: 0 !important; */
+}
+.my-card .swiper-pagination-bullet {
   background: white;
 }
+.my-card .swiper-slide-active {
+  z-index: 20;
+}
+.my-card .swiper-slide-next {
+  z-index: 10;
+}
+
+/* .my-card .swiper-wrapper {
+  display: flex;
+  margin: auto;
+} */
