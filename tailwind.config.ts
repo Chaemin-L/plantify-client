@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        xs: "320px",
+        xs: "420px",
         "3xl": "1920px",
       },
       colors: {
@@ -32,6 +32,44 @@ export default {
         },
         lightBg: "#ffffff", // shadow 50
         darkBg: "#000000", // shadow 900
+      },
+      animation: {
+        slideUp: "slideUp 0.4s ease-in-out",
+        slideDown: "slideDown 0.4s ease-in-out",
+      },
+      keyframes: {
+        slideUp: {
+          from: {
+            transform: "scaleY(1)",
+            transformOrigin: "top center",
+          },
+          to: {
+            transform: "scaleY(0)",
+          },
+        },
+        slideDown: {
+          // from: {
+          //   transform: "scaleY(0)",
+          //   transformOrigin: "top center",
+          // },
+          // "50%": {
+          //   transform: "scaleY(1.1)",
+          //   transformOrigin: "top center",
+          // },
+          // to: {
+          //   transform: "scaleY(1)",
+          // },
+          from: {
+            maxHeight: "0px",
+            transform: "scaleY(0)",
+            transformOrigin: "top center",
+          },
+          to: {
+            maxHeight: "fit-content",
+            transform: "scaleY(1)",
+            transformOrigin: "top center",
+          },
+        },
       },
     },
   },

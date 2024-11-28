@@ -31,7 +31,13 @@ export default function Header() {
       </div>
       <div className={clsx(isTabMain ? "hidden" : "flex justify-between p-4")}>
         <button onClick={back}>
-          <Image width={8} height={8} src="/icons/back.svg" alt="뒤로가기" />
+          <Image
+            width={8}
+            height={8}
+            src="/icons/back.svg"
+            alt="뒤로가기"
+            className="w-4 h-4"
+          />
         </button>
         <Link href={PATH.HOME}>
           <Image
@@ -39,6 +45,7 @@ export default function Header() {
             height={16}
             src="/icons/home.svg"
             alt="홈으로 가기"
+            className="w-4 h-4"
           />
         </Link>
       </div>
@@ -67,7 +74,7 @@ export default function Header() {
                   width={16}
                   height={16}
                   className={clsx(
-                    " select-none",
+                    " select-none w-4 h-4",
                     pathname !== href && "opacity-50"
                   )}
                   alt={`${label} 탭으로 이동`}
