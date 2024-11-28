@@ -24,8 +24,9 @@ export default function Page() {
     setBankNum(e.target.value);
 
   const validate = () => {
-    if (selectedBank && bankNum!.length > 10 && arsCert)
-      router.push(PATH.CARD_ACCOUNT_LIST);
+    if (selectedBank && bankNum!.length > 10 && arsCert) {
+      router.back();
+    }
   };
 
   return (
