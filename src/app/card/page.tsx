@@ -32,7 +32,7 @@ export default async function HomePage() {
 
       <Link
         href={PATH.CHAT}
-        className="fixed bottom-4 right-4  bg-shadow-600 rounded-full p-3"
+        className="fixed bottom-4 right-4  bg-shadow-600 rounded-full p-3 z-30"
       >
         <Image width={32} height={32} src="/icons/chat.svg" alt="채팅" />
       </Link>
