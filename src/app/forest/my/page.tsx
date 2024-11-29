@@ -2,7 +2,9 @@
 import { PostUsingItem } from "@/types/api/item";
 import { useEffect, useState } from "react";
 import { DraggableData } from "react-draggable";
-import DraggableItem from "../(components)/draggable-item";
+import DraggableItem from "./draggable-item";
+import clsx from "clsx";
+import MyBox from "./my-box";
 
 const dummy = [
   {
@@ -58,92 +60,123 @@ export default function Page() {
   };
 
   return (
-    <div className="-mx-4 flex flex-col gap-3 justify-center h-full items-center">
-      <div
-        className="bg-green-600"
-        style={{ width: cellHalfWidth * 20, margin: "0 auto", padding: "auto" }}
-      >
+    <div className={clsx("relative -mx-4 flex flex-col gap-3 h-full")}>
+      <div className="overflow-hidden h-full space-y-3 flex flex-col justify-center">
+        {/** Field */}
         <div
-          className="App"
+          className="bg-green-600"
           style={{
-            position: "relative",
-            display: "flex",
-            flexWrap: "wrap",
+            width: cellHalfWidth * 20,
+            margin: "0 auto",
+            padding: "auto",
           }}
         >
-          {items.map((item, idx) => (
-            <DraggableItem
-              myItemId={item.myItemId}
-              position={{ x: item.posX, y: item.posY }}
-              width={cellHalfWidth * 2} // custom variable
-              height={cellHalfWidth} // custom variable
-              disabled={!isEdit}
-              onStop={(e: any, position: DraggableData) =>
-                onControlledDrag(e, position, item.myItemId)
-              }
-              grid={[cellHalfWidth, cellHalfWidth / 2]}
-              bounds="parent"
-              defaultPosition={{ x: 0, y: 0 }}
-            />
-          ))}
-
-          {Array(250)
-            .fill(0)
-            .map((_, idx) => (
-              <div
+          <div
+            className="App"
+            style={{
+              position: "relative",
+              display: "flex",
+              flexWrap: "wrap",
+            }}
+          >
+            {items.map((item, idx) => (
+              <DraggableItem
                 key={idx}
-                style={{ display: "flex", flexShrink: 0, opacity: 0.4 }}
-              >
-                <div
-                  className="box-border w-0 h-0"
-                  style={{
-                    ...(isEdit
-                      ? {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderRight: `${cellHalfWidth}px solid white`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
-                        }
-                      : {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderRight: `${cellHalfWidth}px solid transparent`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
-                        }),
-                  }}
-                />
-                <div
-                  className="box-border border-transparent w-0 h-0"
-                  style={{
-                    ...(isEdit
-                      ? {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderLeft: `${cellHalfWidth}px solid white`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
-                        }
-                      : {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderLeft: `${cellHalfWidth}px solid transparent`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
-                        }),
-                  }}
-                />
-              </div>
+                myItemId={item.myItemId}
+                position={{ x: item.posX, y: item.posY }}
+                width={cellHalfWidth * 2} // custom variable
+                height={cellHalfWidth} // custom variable
+                disabled={!isEdit}
+                onStop={(e: any, position: DraggableData) =>
+                  onControlledDrag(e, position, item.myItemId)
+                }
+                grid={[cellHalfWidth, cellHalfWidth / 2]}
+                bounds="parent"
+                defaultPosition={{ x: 0, y: 0 }}
+              />
             ))}
+
+            {Array(250)
+              .fill(0)
+              .map((_, idx) => (
+                <div
+                  key={idx}
+                  className="flex shrink-0 opacity-40 transition-opacity"
+                >
+                  <div
+                    className="box-border w-0 h-0"
+                    style={{
+                      ...(isEdit
+                        ? {
+                            borderTop: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                            borderRight: `${cellHalfWidth}px solid white`,
+                            borderBottom: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                          }
+                        : {
+                            borderTop: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                            borderRight: `${cellHalfWidth}px solid transparent`,
+                            borderBottom: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                          }),
+                    }}
+                  />
+                  <div
+                    className="box-border border-transparent w-0 h-0"
+                    style={{
+                      ...(isEdit
+                        ? {
+                            borderTop: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                            borderLeft: `${cellHalfWidth}px solid white`,
+                            borderBottom: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                          }
+                        : {
+                            borderTop: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                            borderLeft: `${cellHalfWidth}px solid transparent`,
+                            borderBottom: `${
+                              cellHalfWidth / 2
+                            }px solid transparent`,
+                          }),
+                    }}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+        {/** button & my */}
+        <div className="relative w-full h-[100px]">
+          <button
+            onClick={() => setIsEdit(!isEdit)}
+            className={clsx(
+              !isEdit ? "right-0" : "-right-full",
+              "absolute w-fit px-5 py-2 bg-accent-green rounded-l-xl text-shadow-800 transition-all duration-1000 "
+            )}
+          >
+            편집
+          </button>
+          <div
+            onClick={() => setIsEdit(!isEdit)}
+            className={clsx(
+              "absolute transition-all duration-1000  bg-shadow-800 w-full flex-grow h-32 ",
+              isEdit ? "right-0" : " -right-full"
+            )}
+          >
+            <MyBox />
+          </div>
         </div>
       </div>
-      <button
-        onClick={() => setIsEdit(!isEdit)}
-        className="w-fit px-10 py-1 bg-accent-green rounded-2xl text-shadow-800 mx-4 "
-      >
-        {isEdit ? "완료" : "편집"}
-      </button>
     </div>
   );
 }
