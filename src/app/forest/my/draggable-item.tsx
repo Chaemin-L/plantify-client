@@ -27,6 +27,7 @@ export default function DraggableItem({
         }}
       >
         <div
+          // className="drop-shadow-[0px_0px_10px_white]"
           style={{
             width,
             height,

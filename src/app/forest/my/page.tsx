@@ -1,12 +1,50 @@
 "use client";
-import { PostUsingItem } from "@/types/api/item";
+import { MyItemType, MyUsingItemType, PostUsingItem } from "@/types/api/item";
 import { useEffect, useState } from "react";
 import { DraggableData } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import clsx from "clsx";
 import MyBox from "./my-box";
 
-const dummy = [
+const myItems: MyItemType[] = [
+  {
+    myItemId: 0,
+    itemId: 0,
+    itemName: "마른땅",
+    quantity: 1,
+    userId: 1,
+  },
+  {
+    myItemId: 1,
+    itemId: 2,
+    itemName: "마른땅",
+    quantity: 1,
+    userId: 1,
+  },
+  {
+    myItemId: 2,
+    itemId: 3,
+    itemName: "마른땅",
+    quantity: 1,
+    userId: 1,
+  },
+  {
+    myItemId: 3,
+    itemId: 4,
+    itemName: "마른땅",
+    quantity: 1,
+    userId: 1,
+  },
+  {
+    myItemId: 4,
+    itemId: 5,
+    itemName: "마른땅",
+    quantity: 1,
+    userId: 1,
+  },
+];
+
+const usingItems: Partial<MyUsingItemType & { isOld: boolean }>[] = [
   {
     myItemId: 1,
     posX: 0,
@@ -27,7 +65,7 @@ interface DraggableItemType extends PostUsingItem {
 
 export default function Page() {
   const [isEdit, setIsEdit] = useState(false);
-  const [items, setItems] = useState<DraggableItemType[] | []>(dummy);
+  const [items, setItems] = useState<DraggableItemType[]>(usingItems);
   const [cellHalfWidth, setCellHalfWidth] = useState<number>(0);
 
   useEffect(() => {
@@ -80,6 +118,7 @@ export default function Page() {
             }}
           >
             {items.map((item, idx) => (
+              //@ts-ignore
               <DraggableItem
                 key={idx}
                 myItemId={item.myItemId}
@@ -155,6 +194,7 @@ export default function Page() {
               ))}
           </div>
         </div>
+
         {/** button & my */}
         <div className="relative w-full h-[100px]">
           <button
@@ -169,11 +209,11 @@ export default function Page() {
           <div
             onClick={() => setIsEdit(!isEdit)}
             className={clsx(
-              "absolute transition-all duration-1000  bg-shadow-800 w-full flex-grow h-32 ",
+              "absolute transition-all duration-1000  bg-shadow-800 w-full flex-grow h-fit ",
               isEdit ? "right-0" : " -right-full"
             )}
           >
-            <MyBox />
+            <MyBox myItems={myItems} usingItems={usingItems} />
           </div>
         </div>
       </div>
