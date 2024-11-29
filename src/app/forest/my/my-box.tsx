@@ -1,11 +1,9 @@
-import { MouseEvent } from "react";
-import StoreItemCard from "../(components)/store-item-card";
-import { MyItemType, MyUsingItemType } from "@/types/api/item";
+import { MyItemType, PostUsingItem } from "@/types/api/item";
 import clsx from "clsx";
 
 interface Props {
   myItems: MyItemType[];
-  usingItems: Partial<MyUsingItemType & { isOld: boolean }>[];
+  usingItems: PostUsingItem[];
 }
 export default function MyBox({ myItems, usingItems }: Props) {
   return (

@@ -1,4 +1,5 @@
 "use client";
+import clsx from "clsx";
 import { useRef } from "react";
 import Draggable, { DraggableProps } from "react-draggable";
 
@@ -6,12 +7,18 @@ interface Props extends DraggableProps {
   myItemId: number;
   width: number;
   height: number;
+  editMode: boolean;
+  editingItem: number | null;
+  setEditingItem: (value: number) => void;
 }
 
 export default function DraggableItem({
   myItemId,
   width,
   height,
+  editMode,
+  editingItem,
+  setEditingItem,
   ...props
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,7 +34,11 @@ export default function DraggableItem({
         }}
       >
         <div
-          // className="drop-shadow-[0px_0px_10px_white]"
+          className={
+            (editMode && editingItem == null) || editingItem === myItemId
+              ? "drop-shadow-[0px_5px_5px_black]"
+              : "drop-shadow-none"
+          }
           style={{
             width,
             height,
