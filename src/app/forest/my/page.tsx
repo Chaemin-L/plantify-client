@@ -1,46 +1,60 @@
 "use client";
-import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
-import Draggable, { DraggableData } from "react-draggable";
+import { PostUsingItem } from "@/types/api/item";
+import { useEffect, useState } from "react";
+import { DraggableData } from "react-draggable";
+import DraggableItem from "../(components)/draggable-item";
+
+const dummy = [
+  {
+    myItemId: 1,
+    posX: 0,
+    posY: 0,
+    isOld: false,
+  },
+  {
+    myItemId: 2,
+    posX: 0,
+    posY: 0,
+    isOld: false,
+  },
+];
+
+interface DraggableItemType extends PostUsingItem {
+  isOld: boolean;
+}
 
 export default function Page() {
   const [isEdit, setIsEdit] = useState(false);
-  const [pos, setPos] = useState();
-  const [state, setState] = useState({
-    x: 0,
-    y: 0,
-  });
+  const [items, setItems] = useState<DraggableItemType[] | []>(dummy);
   const [cellHalfWidth, setCellHalfWidth] = useState<number>(0);
-  const nodeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const viewportWidth = Math.min(window.innerWidth, 500);
-    if (nodeRef.current)
-      setCellHalfWidth(
-        (nodeRef.current.getBoundingClientRect().width = Math.floor(
-          viewportWidth / 20
-        ))
-      );
-    console.log(window.innerWidth, viewportWidth);
-  }, [nodeRef.current]);
+    setCellHalfWidth(Math.floor(viewportWidth / 20));
+  }, []);
 
-  console.log(cellHalfWidth);
-
-  const onControlledDrag = (e: Event, position: DraggableData) => {
+  const onControlledDrag = (e: Event, position: DraggableData, id: number) => {
     const { x, y } = position;
     const xCond = x % (cellHalfWidth * 2) === 0;
     const yCond = y % cellHalfWidth === 0;
-    if (xCond != yCond)
-      setState(() => ({
-        x: x - cellHalfWidth,
-        y,
-      }));
-    else
-      setState(() => ({
-        x,
-        y,
-      }));
-    console.log(x, y);
+    const targetItem = items.find((item) => item.myItemId === id);
+
+    if (!targetItem) return;
+
+    if (xCond != yCond) {
+      setItems((prev) =>
+        prev.map((item: DraggableItemType) =>
+          item.myItemId === id
+            ? { ...item, posX: x - cellHalfWidth, posY: y }
+            : item
+        )
+      );
+    } else
+      setItems((prev) =>
+        prev.map((item: DraggableItemType) =>
+          item.myItemId === id ? { ...item, posX: x, posY: y } : item
+        )
+      );
   };
 
   return (
@@ -57,33 +71,22 @@ export default function Page() {
             flexWrap: "wrap",
           }}
         >
-          <Draggable
-            nodeRef={nodeRef}
-            position={state}
-            disabled={!isEdit}
-            onStop={onControlledDrag}
-            grid={[cellHalfWidth, cellHalfWidth / 2]}
-            bounds="parent"
-            defaultPosition={{ x: 0, y: 0 }}
-          >
-            <div
-              ref={nodeRef}
-              style={{
-                position: "absolute",
-                display: "flex",
-                flexShrink: 0,
-                zIndex: 20,
-              }}
-            >
-              <div
-                style={{
-                  width: cellHalfWidth * 2,
-                  height: cellHalfWidth,
-                  background: `url('/temp/forest/ground-item3.png') center / contain`,
-                }}
-              />
-            </div>
-          </Draggable>
+          {items.map((item, idx) => (
+            <DraggableItem
+              myItemId={item.myItemId}
+              position={{ x: item.posX, y: item.posY }}
+              width={cellHalfWidth * 2} // custom variable
+              height={cellHalfWidth} // custom variable
+              disabled={!isEdit}
+              onStop={(e: any, position: DraggableData) =>
+                onControlledDrag(e, position, item.myItemId)
+              }
+              grid={[cellHalfWidth, cellHalfWidth / 2]}
+              bounds="parent"
+              defaultPosition={{ x: 0, y: 0 }}
+            />
+          ))}
+
           {Array(250)
             .fill(0)
             .map((_, idx) => (
@@ -94,17 +97,41 @@ export default function Page() {
                 <div
                   className="box-border w-0 h-0"
                   style={{
-                    borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                    borderRight: `${cellHalfWidth}px solid white`,
-                    borderBottom: `${cellHalfWidth / 2}px solid transparent`,
+                    ...(isEdit
+                      ? {
+                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
+                          borderRight: `${cellHalfWidth}px solid white`,
+                          borderBottom: `${
+                            cellHalfWidth / 2
+                          }px solid transparent`,
+                        }
+                      : {
+                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
+                          borderRight: `${cellHalfWidth}px solid transparent`,
+                          borderBottom: `${
+                            cellHalfWidth / 2
+                          }px solid transparent`,
+                        }),
                   }}
                 />
                 <div
                   className="box-border border-transparent w-0 h-0"
                   style={{
-                    borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                    borderLeft: `${cellHalfWidth}px solid white`,
-                    borderBottom: `${cellHalfWidth / 2}px solid transparent`,
+                    ...(isEdit
+                      ? {
+                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
+                          borderLeft: `${cellHalfWidth}px solid white`,
+                          borderBottom: `${
+                            cellHalfWidth / 2
+                          }px solid transparent`,
+                        }
+                      : {
+                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
+                          borderLeft: `${cellHalfWidth}px solid transparent`,
+                          borderBottom: `${
+                            cellHalfWidth / 2
+                          }px solid transparent`,
+                        }),
                   }}
                 />
               </div>
