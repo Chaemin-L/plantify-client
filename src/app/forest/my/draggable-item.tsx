@@ -10,7 +10,8 @@ interface Props extends Omit<DraggableProps, "cancel"> {
   height: number;
   editMode: boolean;
   editingItem: number | null;
-  setEditingItem: (value: number) => void;
+  setEditingItem: (myItemId: number) => void;
+  handleRemove: (myItemId: number) => void;
   handleComplete: () => void;
 }
 
@@ -21,34 +22,43 @@ export default function DraggableItem({
   editMode,
   editingItem,
   setEditingItem,
+  handleRemove,
   handleComplete,
   ...props
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const isFocusing = editingItem === myItemId;
+
   return (
     <Draggable key={`${myItemId}`} nodeRef={ref} cancel="button" {...props}>
       <div
         ref={ref}
-        style={{
-          position: "absolute",
-          display: "flex",
-          flexShrink: 0,
-          zIndex: 20,
-        }}
+        className={clsx("absolute flex shrink-0", isFocusing ? "z-30" : "z-10")}
       >
         <div
-          className={clsx(
-            "relative",
+          className={
             (editMode && editingItem == null) || editingItem === myItemId
               ? "drop-shadow-[0px_5px_5px_black]"
               : "drop-shadow-none"
-          )}
+          }
           style={{
             width,
             height,
             background: `url('${image}') no-repeat center / contain`,
           }}
         ></div>
+        {editMode && editingItem === myItemId && (
+          <>
+            <button
+              className="absolute z-30 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain"
+              onClick={() => handleRemove(myItemId)}
+            />
+            <button
+              className="absolute -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain"
+              onClick={handleComplete}
+            />
+          </>
+        )}
       </div>
     </Draggable>
   );

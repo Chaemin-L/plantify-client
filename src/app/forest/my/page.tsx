@@ -29,6 +29,15 @@ export default function Page() {
     if (editingItem) setEditMode(true);
   }, [editingItem]);
 
+  const handleRemove = (myItemId: number) => {
+    setItems((prev) => prev.filter((item) => item.myItemId !== myItemId));
+    setEditMode(false);
+  };
+
+  const handleComplete = () => {
+    setEditMode(false);
+  };
+
   const handleClickItem = (myItemId: number) => {
     if (editingItem === null) {
       setEditingItem(myItemId);
@@ -42,10 +51,6 @@ export default function Page() {
       { myItemId, image, category, posX: 0, posY: 0 },
     ]);
     setEditingItem(myItemId);
-  };
-
-  const handleComplete = () => {
-    setEditMode(false);
   };
 
   const onControlledDrag = (e: Event, position: DraggableData, id: number) => {
@@ -86,14 +91,6 @@ export default function Page() {
         }}
       >
         <div className="relative flex flex-wrap">
-          {editMode && (
-            <button
-              className="absolute top-full left-1/2 -translate-x-1/2 py-2"
-              onClick={handleComplete}
-            >
-              완료
-            </button>
-          )}
           {items.map((item, idx) => (
             //@ts-ignore
             <DraggableItem
@@ -104,6 +101,8 @@ export default function Page() {
               height={cellHalfWidth} // custom variable
               editMode={editMode}
               editingItem={editingItem}
+              handleRemove={handleRemove}
+              handleComplete={handleComplete}
               disabled={
                 !editMode || (editMode && editingItem !== item.myItemId)
               }
