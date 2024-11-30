@@ -15,6 +15,7 @@ export interface MyItemType {
   myItemId: number;
   itemId: number;
   itemName: string;
+  image: string; // api not yet
   quantity: number;
   userId: number;
 }
@@ -30,4 +31,5 @@ export interface MyUsingItemType extends Position {
 
 export interface PostUsingItem extends Position {
   myItemId: number;
+  image: string; // api not yet
 }

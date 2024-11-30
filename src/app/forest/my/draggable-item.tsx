@@ -5,6 +5,7 @@ import Draggable, { DraggableProps } from "react-draggable";
 
 interface Props extends DraggableProps {
   myItemId: number;
+  image: string;
   width: number;
   height: number;
   editMode: boolean;
@@ -14,6 +15,7 @@ interface Props extends DraggableProps {
 
 export default function DraggableItem({
   myItemId,
+  image,
   width,
   height,
   editMode,
@@ -42,7 +44,7 @@ export default function DraggableItem({
           style={{
             width,
             height,
-            background: `url('/temp/forest/ground-item3.png') no-repeat center / contain`,
+            background: `url('${image}') no-repeat center / contain`,
           }}
         />
       </div>

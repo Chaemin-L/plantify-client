@@ -1,85 +1,64 @@
 "use client";
+
 import { MyItemType, PostUsingItem } from "@/types/api/item";
-import { useEffect, useState } from "react";
-import { DraggableData } from "react-draggable";
+import { useEffect, useRef, useState } from "react";
+import Draggable, { DraggableData } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import clsx from "clsx";
-
-const myItems: MyItemType[] = [
-  {
-    myItemId: 0,
-    itemId: 0,
-    itemName: "마른땅",
-    quantity: 1,
-    userId: 1,
-  },
-  {
-    myItemId: 1,
-    itemId: 2,
-    itemName: "마른땅",
-    quantity: 1,
-    userId: 1,
-  },
-  {
-    myItemId: 2,
-    itemId: 3,
-    itemName: "마른땅",
-    quantity: 1,
-    userId: 1,
-  },
-  {
-    myItemId: 3,
-    itemId: 4,
-    itemName: "마른땅",
-    quantity: 1,
-    userId: 1,
-  },
-  {
-    myItemId: 4,
-    itemId: 5,
-    itemName: "마른땅",
-    quantity: 1,
-    userId: 1,
-  },
-];
+import MyBox from "./my-box-btn";
 
 const usingItems: PostUsingItem[] = [
   {
     myItemId: 1,
+    image: "/temp/forest/ground-item3.png",
     posX: 0,
     posY: 0,
   },
   {
     myItemId: 2,
+    image: "/temp/forest/ground-item3.png",
     posX: 50,
     posY: 0,
   },
 ];
 
-// interface DraggableItemType extends PostUsingItem {
-//   isOld: boolean;
-// }
-
 export default function Page() {
   const [editMode, setEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<null | number>(null);
   const [items, setItems] = useState<PostUsingItem[]>(usingItems);
-  // const [cellHalfWidth, setCellHalfWidth] = useState<number>(0);
+  const [newItem, setNextItem] = useState<MyItemType>();
 
-  const viewportWidth = Math.min(window.innerWidth, 500);
+  const [viewportWidth, setViewportWidth] = useState<number>(500); // 초기값 설정
   const cellHalfWidth = Math.floor(viewportWidth / 20);
+
+  useEffect(() => {
+    const updateViewportWidth = () => {
+      const width = Math.min(window.innerWidth, 500);
+      setViewportWidth(width);
+    };
+
+    if (typeof window !== "undefined") {
+      updateViewportWidth();
+      window.addEventListener("resize", updateViewportWidth);
+    }
+
+    return () => {
+      window.removeEventListener("resize", updateViewportWidth);
+    };
+  }, []);
 
   useEffect(() => {
     if (!editMode) setEditingItem(null);
   }, [editMode]);
 
+  const handleNewItem = (newItem: MyItemType) => {
+    const { myItemId, image } = newItem;
+    setItems((prev) => [...prev, { myItemId, image, posX: 0, posY: 0 }]);
+    setEditingItem(myItemId);
+    setEditMode(true);
+  };
+
   const onControlledDrag = (e: Event, position: DraggableData, id: number) => {
-    console.log(
-      id,
-      editingItem,
-      editMode,
-      editingItem == null || editingItem === id
-    );
     const { x, y } = position;
     const xCond = x % (cellHalfWidth * 2) === 0;
     const yCond = y % cellHalfWidth === 0;
@@ -139,6 +118,7 @@ export default function Page() {
             <DraggableItem
               key={idx}
               myItemId={item.myItemId}
+              image={item.image}
               position={{ x: item.posX, y: item.posY }}
               width={cellHalfWidth * 2} // custom variable
               height={cellHalfWidth} // custom variable
@@ -162,7 +142,7 @@ export default function Page() {
             />
           ))}
 
-          {Array(300)
+          {Array(260)
             .fill(0)
             .map((_, idx) => (
               <div
@@ -213,6 +193,8 @@ export default function Page() {
             ))}
         </div>
       </div>
+
+      {!editMode && <MyBox handleNewItem={handleNewItem} />}
     </div>
   );
 }
