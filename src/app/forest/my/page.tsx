@@ -2,60 +2,50 @@
 
 import { MyItemType, PostUsingItem } from "@/types/api/item";
 import { useEffect, useRef, useState } from "react";
-import Draggable, { DraggableData } from "react-draggable";
+import { DraggableData } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import clsx from "clsx";
 import MyBox from "./my-box-btn";
+import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
 
-const usingItems: PostUsingItem[] = [
-  {
-    myItemId: 1,
-    image: "/temp/forest/ground-item3.png",
-    posX: 0,
-    posY: 0,
-  },
-  {
-    myItemId: 2,
-    image: "/temp/forest/ground-item3.png",
-    posX: 50,
-    posY: 0,
-  },
-];
+const CELL_ROW_CNT = 10;
+const CELL_COL_CNT = 25;
 
 export default function Page() {
   const [editMode, setEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<null | number>(null);
   const [items, setItems] = useState<PostUsingItem[]>(usingItems);
-  const [newItem, setNextItem] = useState<MyItemType>();
+  const [groundBoard, setGroundBoard] = useState<boolean[]>(
+    Array(CELL_ROW_CNT).fill(() => Array(CELL_COL_CNT).fill(false))
+  );
 
-  const [viewportWidth, setViewportWidth] = useState<number>(500); // 초기값 설정
-  const cellHalfWidth = Math.floor(viewportWidth / 20);
-
-  useEffect(() => {
-    const updateViewportWidth = () => {
-      const width = Math.min(window.innerWidth, 500);
-      setViewportWidth(width);
-    };
-
-    if (typeof window !== "undefined") {
-      updateViewportWidth();
-      window.addEventListener("resize", updateViewportWidth);
-    }
-
-    return () => {
-      window.removeEventListener("resize", updateViewportWidth);
-    };
-  }, []);
+  const { cellHalfWidth } = useResizeWindowCell();
 
   useEffect(() => {
     if (!editMode) setEditingItem(null);
   }, [editMode]);
 
+  useEffect(() => {
+    if (editingItem) setEditMode(true);
+  }, [editingItem]);
+
+  const handleClickItem = (myItemId: number) => {
+    if (editingItem === null) {
+      setEditingItem(myItemId);
+    }
+  };
+
   const handleNewItem = (newItem: MyItemType) => {
-    const { myItemId, image } = newItem;
-    setItems((prev) => [...prev, { myItemId, image, posX: 0, posY: 0 }]);
+    const { myItemId, image, category } = newItem;
+    setItems((prev) => [
+      ...prev,
+      { myItemId, image, category, posX: 0, posY: 0 },
+    ]);
     setEditingItem(myItemId);
-    setEditMode(true);
+  };
+
+  const handleComplete = () => {
+    setEditMode(false);
   };
 
   const onControlledDrag = (e: Event, position: DraggableData, id: number) => {
@@ -90,25 +80,16 @@ export default function Page() {
     >
       {/** Field */}
       <div
-        className="bg-green-600"
+        className="bg-green-600 mx-auto p-auto"
         style={{
-          width: cellHalfWidth * 20,
-          margin: "0 auto",
-          padding: "auto",
+          width: cellHalfWidth * 2 * CELL_ROW_CNT,
         }}
       >
-        <div
-          className="App"
-          style={{
-            position: "relative",
-            display: "flex",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="relative flex flex-wrap">
           {editMode && (
             <button
               className="absolute top-full left-1/2 -translate-x-1/2 py-2"
-              onClick={() => setEditMode(false)}
+              onClick={handleComplete}
             >
               완료
             </button>
@@ -117,8 +98,7 @@ export default function Page() {
             //@ts-ignore
             <DraggableItem
               key={idx}
-              myItemId={item.myItemId}
-              image={item.image}
+              item={item}
               position={{ x: item.posX, y: item.posY }}
               width={cellHalfWidth * 2} // custom variable
               height={cellHalfWidth} // custom variable
@@ -127,12 +107,7 @@ export default function Page() {
               disabled={
                 !editMode || (editMode && editingItem !== item.myItemId)
               }
-              onMouseDown={() => {
-                if (editingItem === null) {
-                  setEditingItem(item.myItemId);
-                  setEditMode(true);
-                }
-              }}
+              onMouseDown={() => handleClickItem(item.myItemId)}
               onStop={(e: any, position: DraggableData) =>
                 onControlledDrag(e, position, item.myItemId)
               }
@@ -142,13 +117,10 @@ export default function Page() {
             />
           ))}
 
-          {Array(260)
+          {Array(CELL_ROW_CNT * CELL_COL_CNT)
             .fill(0)
             .map((_, idx) => (
-              <div
-                key={idx}
-                className="flex shrink-0 opacity-40 transition-opacity"
-              >
+              <div key={idx} className="flex shrink-0 opacity-40">
                 <div
                   className="box-border w-0 h-0"
                   style={{
@@ -198,3 +170,20 @@ export default function Page() {
     </div>
   );
 }
+
+const usingItems: PostUsingItem[] = [
+  {
+    myItemId: 1,
+    image: "/temp/forest/ground-item3.png",
+    posX: 0,
+    posY: 0,
+    category: "GROUND",
+  },
+  {
+    myItemId: 2,
+    image: "/temp/forest/ground-item3.png",
+    posX: 50,
+    posY: 0,
+    category: "GROUND",
+  },
+];

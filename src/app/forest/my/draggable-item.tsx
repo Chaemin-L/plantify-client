@@ -1,31 +1,32 @@
 "use client";
+import { PostUsingItem } from "@/types/api/item";
 import clsx from "clsx";
 import { useRef } from "react";
 import Draggable, { DraggableProps } from "react-draggable";
 
-interface Props extends DraggableProps {
-  myItemId: number;
-  image: string;
+interface Props extends Omit<DraggableProps, "cancel"> {
+  item: PostUsingItem;
   width: number;
   height: number;
   editMode: boolean;
   editingItem: number | null;
   setEditingItem: (value: number) => void;
+  handleComplete: () => void;
 }
 
 export default function DraggableItem({
-  myItemId,
-  image,
+  item: { myItemId, image },
   width,
   height,
   editMode,
   editingItem,
   setEditingItem,
+  handleComplete,
   ...props
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   return (
-    <Draggable key={`${myItemId}`} nodeRef={ref} {...props}>
+    <Draggable key={`${myItemId}`} nodeRef={ref} cancel="button" {...props}>
       <div
         ref={ref}
         style={{
@@ -36,17 +37,18 @@ export default function DraggableItem({
         }}
       >
         <div
-          className={
+          className={clsx(
+            "relative",
             (editMode && editingItem == null) || editingItem === myItemId
               ? "drop-shadow-[0px_5px_5px_black]"
               : "drop-shadow-none"
-          }
+          )}
           style={{
             width,
             height,
             background: `url('${image}') no-repeat center / contain`,
           }}
-        />
+        ></div>
       </div>
     </Draggable>
   );

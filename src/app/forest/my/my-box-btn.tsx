@@ -9,7 +9,6 @@ interface Props {
 }
 export default function MyBoxBtn({ handleNewItem }: Props) {
   const [show, setShow] = useState<boolean>(false);
-  // const [isDragging, setIsDragging] = useState(false);
   const myBoxBtn = useRef<HTMLButtonElement>(null);
   const isDragging = useRef<boolean>(false);
 
@@ -116,44 +115,45 @@ const myItems: MyItemType[] = [
   {
     myItemId: 3,
     itemId: 0,
-    itemName: "마른땅",
+    itemName: "풀밭",
     image: "/temp/forest/ground-item1.png",
+    category: "GROUND",
     quantity: 1,
     userId: 1,
   },
   {
     myItemId: 4,
     itemId: 2,
-    itemName: "마른땅",
+    itemName: "밭",
     image: "/temp/forest/ground-item2.png",
-
+    category: "GROUND",
     quantity: 1,
     userId: 1,
   },
   {
     myItemId: 5,
     itemId: 3,
-    itemName: "마른땅",
+    itemName: "마룻바닥",
     image: "/temp/forest/ground-item3.png",
-
+    category: "GROUND",
     quantity: 1,
     userId: 1,
   },
   {
     myItemId: 6,
     itemId: 4,
-    itemName: "마른땅",
+    itemName: "광나는 마룻바닥",
     image: "/temp/forest/ground-item4.png",
-
+    category: "GROUND",
     quantity: 1,
     userId: 1,
   },
   {
     myItemId: 7,
     itemId: 5,
-    itemName: "마른땅",
+    itemName: "대리석",
     image: "/temp/forest/ground-item5.png",
-
+    category: "GROUND",
     quantity: 1,
     userId: 1,
   },
