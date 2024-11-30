@@ -22,6 +22,16 @@ export default function Page() {
   const { cellHalfWidth } = useResizeWindowCell();
 
   useEffect(() => {
+    setItems(
+      usingItems.map((item) => ({
+        ...item,
+        posX: item.posX * cellHalfWidth * 2,
+        posY: item.posY * cellHalfWidth * 2,
+      }))
+    );
+  }, [cellHalfWidth]);
+
+  useEffect(() => {
     if (!editMode) setEditingItem(null);
   }, [editMode]);
 
@@ -181,7 +191,7 @@ const usingItems: PostUsingItem[] = [
   {
     myItemId: 2,
     image: "/temp/forest/ground-item3.png",
-    posX: 50,
+    posX: 1,
     posY: 0,
     category: "GROUND",
   },
