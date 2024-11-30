@@ -1,31 +1,31 @@
 import Image from "next/image";
-import { MyItemType, PostUsingItem } from "@/types/api/item";
-import clsx from "clsx";
+import { MyItemType } from "@/types/api/item";
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Draggable, { DraggableEvent } from "react-draggable";
+import Draggable from "react-draggable";
 
 interface Props {
   handleNewItem: (myItemId: MyItemType) => void;
 }
 export default function MyBoxBtn({ handleNewItem }: Props) {
   const [show, setShow] = useState<boolean>(false);
-  const [isDragging, setIsDragging] = useState(false);
+  // const [isDragging, setIsDragging] = useState(false);
   const myBoxBtn = useRef<HTMLButtonElement>(null);
+  const isDragging = useRef<boolean>(false);
 
   const handleClose = () => setShow(false);
 
-  const handleOnDrag = (e: DraggableEvent) => {
-    setIsDragging(true);
+  const handleOnDrag = () => {
+    isDragging.current = true;
   };
-  const handleOnStop = (e: DraggableEvent) => {
-    setTimeout(() => setIsDragging(false), 100);
+  const handleOnStop = () => {
+    setTimeout(() => {
+      isDragging.current = false;
+    }, 600);
   };
 
-  const handleOnClick = (e) => {
-    console.log(e.target);
-    if (!isDragging) {
-      console.log(e.target, isDragging);
+  const handleOnClick = () => {
+    if (!isDragging.current) {
       setShow(true);
     }
   };
@@ -40,23 +40,19 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
         enableUserSelectHack={true}
       >
         <button
-          className=" absolute right-4 bottom-4 p-2 rounded-full bg-accent-green w-fit aspect-square text-shadow-900 z-30 shadow-lg "
+          className=" absolute right-4 bottom-4 p-2 rounded-full bg-accent-green w-fit aspect-square text-shadow-900 z-20 shadow-lg "
           ref={myBoxBtn}
           onClick={handleOnClick}
         >
           <Image
-            // className="touch-none"
+            className="by"
             src="/icons/storage.webp"
             blurDataURL="/icons/storage.webp"
             draggable={false}
             width={48}
             height={48}
             alt="보관함"
-            // onClick={handleOnClick}
-            // onTouchStart={(e) => {
-            //   e.stopPropagation();
-            //   handleOnClick;
-            // }}
+            onTouchEnd={handleOnClick}
           />
         </button>
       </Draggable>
@@ -77,7 +73,7 @@ interface MyBoxProps {
 const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
   return (
     <div
-      className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center bg-shadow-900/40"
+      className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center bg-shadow-900/40 z-20"
       onClick={handleClose}
     >
       <div
