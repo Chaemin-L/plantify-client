@@ -1,7 +1,7 @@
 "use client";
 
 import { MyItemType, PostUsingItem } from "@/types/api/item";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { DraggableData } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import clsx from "clsx";
@@ -17,17 +17,17 @@ export default function Page() {
     Array(CELL_COL_CNT).fill(() => Array(CELL_ROW_CNT).fill(false))
   );
 
-  const { cellHalfWidth } = useResizeWindowCell();
+  const { cellWidth, cellHalfWidth } = useResizeWindowCell();
 
   useEffect(() => {
     setItems(
       usingItems.map((item) => ({
         ...item,
-        posX: item.posX * cellHalfWidth * 2,
-        posY: item.posY * cellHalfWidth * 2,
+        posX: item.posX * cellWidth,
+        posY: item.posY * cellWidth,
       }))
     );
-  }, [cellHalfWidth]);
+  }, [cellWidth]);
 
   useEffect(() => {
     if (!editMode) setEditingItem(null);
@@ -63,17 +63,22 @@ export default function Page() {
 
   const onControlledDrag = (e: Event, position: DraggableData, id: number) => {
     const { x, y } = position;
-    const xCond = x % (cellHalfWidth * 2) === 0;
+    const xCond = x % cellWidth === 0;
     const yCond = y % cellHalfWidth === 0;
     const targetItem = items.find((item) => item.myItemId === id);
 
     if (!targetItem) return;
 
     if (xCond != yCond) {
+      const isOver = x === 0; // 왼쪽 끝으로 마름모 반이 잘리는 현상 방지
       setItems((prev) =>
         prev.map((item: PostUsingItem) =>
           item.myItemId === id
-            ? { ...item, posX: x - cellHalfWidth, posY: y }
+            ? {
+                ...item,
+                posX: isOver ? x + cellHalfWidth : x - cellHalfWidth,
+                posY: y,
+              }
             : item
         )
       );
@@ -95,7 +100,7 @@ export default function Page() {
       <div
         className="bg-green-600 mx-auto p-auto"
         style={{
-          width: cellHalfWidth * 2 * CELL_COL_CNT,
+          width: cellWidth * CELL_COL_CNT,
         }}
       >
         <div className="relative flex flex-wrap">
@@ -105,7 +110,7 @@ export default function Page() {
               key={idx}
               item={item}
               position={{ x: item.posX, y: item.posY }}
-              width={cellHalfWidth * 2} // custom variable
+              width={cellWidth} // custom variable
               height={cellHalfWidth} // custom variable
               editMode={editMode}
               editingItem={editingItem}
