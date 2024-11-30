@@ -46,19 +46,20 @@ export default function DraggableItem({
             height,
             background: `url('${image}') no-repeat center / contain`,
           }}
-        ></div>
-        {editMode && editingItem === myItemId && (
-          <>
-            <button
-              className="absolute z-30 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain"
-              onClick={() => handleRemove(myItemId)}
-            />
-            <button
-              className="absolute -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain"
-              onClick={handleComplete}
-            />
-          </>
-        )}
+        >
+          {editMode && editingItem === myItemId && (
+            <>
+              <button
+                className="absolute z-30 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain"
+                onClick={() => handleRemove(myItemId)}
+              />
+              <button
+                className="absolute -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain"
+                onClick={handleComplete}
+              />
+            </>
+          )}
+        </div>
       </div>
     </Draggable>
   );

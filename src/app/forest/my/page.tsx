@@ -7,16 +7,14 @@ import DraggableItem from "./draggable-item";
 import clsx from "clsx";
 import MyBox from "./my-box-btn";
 import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
-
-const CELL_ROW_CNT = 10;
-const CELL_COL_CNT = 25;
+import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
 
 export default function Page() {
   const [editMode, setEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<null | number>(null);
   const [items, setItems] = useState<PostUsingItem[]>(usingItems);
   const [groundBoard, setGroundBoard] = useState<boolean[]>(
-    Array(CELL_ROW_CNT).fill(() => Array(CELL_COL_CNT).fill(false))
+    Array(CELL_COL_CNT).fill(() => Array(CELL_ROW_CNT).fill(false))
   );
 
   const { cellHalfWidth } = useResizeWindowCell();
@@ -97,7 +95,7 @@ export default function Page() {
       <div
         className="bg-green-600 mx-auto p-auto"
         style={{
-          width: cellHalfWidth * 2 * CELL_ROW_CNT,
+          width: cellHalfWidth * 2 * CELL_COL_CNT,
         }}
       >
         <div className="relative flex flex-wrap">
@@ -126,7 +124,7 @@ export default function Page() {
             />
           ))}
 
-          {Array(CELL_ROW_CNT * CELL_COL_CNT)
+          {Array(CELL_COL_CNT * CELL_ROW_CNT)
             .fill(0)
             .map((_, idx) => (
               <div key={idx} className="flex shrink-0 opacity-40">
