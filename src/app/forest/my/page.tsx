@@ -1,13 +1,14 @@
 "use client";
 
 import { MyItemType, PostUsingItem } from "@/types/api/item";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { DraggableData } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import clsx from "clsx";
 import MyBox from "./my-box-btn";
 import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
 import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
+import { useForestField } from "@/hooks/useForestField";
 
 export default function Page() {
   const [editMode, setEditMode] = useState(false);
@@ -15,13 +16,8 @@ export default function Page() {
   const [editError, setEditError] = useState<boolean>(false);
   const [items, setItems] = useState<PostUsingItem[]>(usingItems);
 
-  const groundBoard = useRef<boolean[][]>(
-    Array(CELL_ROW_CNT)
-      .fill(null)
-      .map(() => Array(CELL_COL_CNT).fill(false))
-  );
-
-  const { cellWidth, cellHalfWidth } = useResizeWindowCell();
+  const { cellWidth, cellHeight } = useResizeWindowCell();
+  const { groundBoard, fillField, emptyField } = useForestField(cellWidth);
 
   useEffect(() => {
     setItems(
@@ -31,7 +27,7 @@ export default function Page() {
         return {
           ...item,
           posX: item.posX * cellWidth,
-          posY: item.posY * cellWidth,
+          posY: item.posY * cellHeight,
         };
       })
     );
@@ -51,18 +47,9 @@ export default function Page() {
   };
 
   const handleComplete = (item: PostUsingItem) => {
-    if (
-      item.category === "GROUND" &&
-      groundBoard.current[Math.floor(item.posX / (cellWidth / 2))][
-        Math.floor(item.posY / (cellHalfWidth / 2))
-      ]
-    )
-      setEditError(true);
+    if (!fillField(item)) setEditError(true);
     else {
       setEditMode(false);
-      groundBoard.current[Math.floor(item.posX / (cellWidth / 2))][
-        Math.floor(item.posY / (cellHalfWidth / 2))
-      ] = true;
     }
   };
 
@@ -78,9 +65,7 @@ export default function Page() {
   const handleClickItem = (item: PostUsingItem) => {
     if (editingItem === null) {
       setEditingItem(item.myItemId);
-      groundBoard.current[Math.floor(item.posX / (cellWidth / 2))][
-        Math.floor(item.posY / (cellHalfWidth / 2))
-      ] = false;
+      emptyField(item);
     }
   };
 
@@ -89,7 +74,7 @@ export default function Page() {
     const { x, y } = position;
 
     const xCond = x % cellWidth === 0;
-    const yCond = y % cellHalfWidth === 0;
+    const yCond = y % cellHeight === 0;
     const targetItem = items.find((item) => item.myItemId === id);
 
     if (!targetItem) return;
@@ -101,7 +86,7 @@ export default function Page() {
           item.myItemId === id
             ? {
                 ...item,
-                posX: isOver ? x + cellHalfWidth : x - cellHalfWidth,
+                posX: isOver ? x + cellHeight : x - cellHeight,
                 posY: y,
               }
             : item
@@ -136,7 +121,7 @@ export default function Page() {
               item={item}
               position={{ x: item.posX, y: item.posY }}
               width={cellWidth} // custom variable
-              height={cellHalfWidth} // custom variable
+              height={cellHeight} // custom variable
               editMode={editMode}
               editingItem={editingItem}
               handleRemove={handleRemove}
@@ -149,7 +134,7 @@ export default function Page() {
               onStop={(e: any, position: DraggableData) =>
                 onControlledDrag(e, position, item.myItemId)
               }
-              grid={[cellHalfWidth, cellHalfWidth / 2]}
+              grid={[cellHeight, cellHeight / 2]}
               bounds="parent"
               defaultPosition={{ x: 0, y: 0 }}
             />
@@ -164,18 +149,14 @@ export default function Page() {
                   style={{
                     ...(editMode
                       ? {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderRight: `${cellHalfWidth}px solid white`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
+                          borderTop: `${cellHeight / 2}px solid transparent`,
+                          borderRight: `${cellHeight}px solid white`,
+                          borderBottom: `${cellHeight / 2}px solid transparent`,
                         }
                       : {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderRight: `${cellHalfWidth}px solid transparent`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
+                          borderTop: `${cellHeight / 2}px solid transparent`,
+                          borderRight: `${cellHeight}px solid transparent`,
+                          borderBottom: `${cellHeight / 2}px solid transparent`,
                         }),
                   }}
                 />
@@ -184,18 +165,14 @@ export default function Page() {
                   style={{
                     ...(editMode
                       ? {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderLeft: `${cellHalfWidth}px solid white`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
+                          borderTop: `${cellHeight / 2}px solid transparent`,
+                          borderLeft: `${cellHeight}px solid white`,
+                          borderBottom: `${cellHeight / 2}px solid transparent`,
                         }
                       : {
-                          borderTop: `${cellHalfWidth / 2}px solid transparent`,
-                          borderLeft: `${cellHalfWidth}px solid transparent`,
-                          borderBottom: `${
-                            cellHalfWidth / 2
-                          }px solid transparent`,
+                          borderTop: `${cellHeight / 2}px solid transparent`,
+                          borderLeft: `${cellHeight}px solid transparent`,
+                          borderBottom: `${cellHeight / 2}px solid transparent`,
                         }),
                   }}
                 />
