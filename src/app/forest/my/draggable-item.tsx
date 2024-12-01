@@ -4,14 +4,24 @@ import clsx from "clsx";
 import { useRef } from "react";
 import Draggable, { DraggableProps } from "react-draggable";
 
-interface Props extends Omit<DraggableProps, "cancel"> {
+type AllowedDraggableProps =
+  | "grid"
+  | "position"
+  | "onStop"
+  | "onMouseDown"
+  | "disabled"
+  | "defaultPosition"
+  | "nodeRef"
+  | "bounds";
+
+interface Props
+  extends Omit<Pick<DraggableProps, AllowedDraggableProps>, "cancel"> {
   item: PostUsingItem;
   width: number;
   height: number;
   editMode: boolean;
   editingItem: number | null;
   editError: boolean;
-  setEditingItem: (myItemId: number) => void;
   handleRemove: (myItemId: number) => void;
   handleComplete: (item: PostUsingItem) => void;
 }
@@ -23,20 +33,23 @@ export default function DraggableItem({
   editMode,
   editingItem,
   editError,
-  setEditingItem,
   handleRemove,
   handleComplete,
   ...props
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const { myItemId, image } = item;
+  const { myItemId, category, image } = item;
   const isFocusing = editingItem === myItemId;
+  const isGround = category === "GROUND";
 
   return (
     <Draggable key={`${myItemId}`} nodeRef={ref} cancel="button" {...props}>
       <div
         ref={ref}
-        className={clsx("absolute flex shrink-0", isFocusing ? "z-30" : "z-10")}
+        className={clsx(
+          "absolute flex shrink-0",
+          isFocusing ? "z-40" : isGround ? "z-10" : "z-30"
+        )}
       >
         <div
           className={
@@ -55,11 +68,11 @@ export default function DraggableItem({
         {editMode && editingItem === myItemId && (
           <>
             <button
-              className="absolute z-30 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
+              className="absolute z-20 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
               onClick={() => handleRemove(myItemId)}
             />
             <button
-              className="absolute -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
+              className="absolute z-20 -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
               onClick={() => handleComplete(item)}
             />
           </>

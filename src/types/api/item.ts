@@ -1,7 +1,7 @@
 import { ItemCategoryType } from "../forest";
 
 // export type CategoryType = "BACKGROUND" | "FLOWER" | "ETC";
-export type CategoryType = "BACKGROUND" | "GROUND";
+export type CategoryType = "BACKGROUND" | "GROUND" | "TREE";
 
 export interface ItemType {
   itemId: number;

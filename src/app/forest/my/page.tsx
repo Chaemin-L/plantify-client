@@ -2,7 +2,7 @@
 
 import { MyItemType, PostUsingItem } from "@/types/api/item";
 import { useEffect, useState } from "react";
-import { DraggableData } from "react-draggable";
+import { DraggableData, DraggableEvent } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import clsx from "clsx";
 import MyBox from "./my-box-btn";
@@ -69,7 +69,11 @@ export default function Page() {
     }
   };
 
-  const onControlledDrag = (e: Event, position: DraggableData, id: number) => {
+  const onControlledDrag = (
+    e: DraggableEvent,
+    position: DraggableData,
+    id: number
+  ) => {
     setEditError(false);
     const { x, y } = position;
 
@@ -115,7 +119,6 @@ export default function Page() {
       >
         <div className="relative flex flex-wrap">
           {items.map((item, idx) => (
-            //@ts-ignore
             <DraggableItem
               key={idx}
               item={item}
@@ -131,7 +134,7 @@ export default function Page() {
                 !editMode || (editMode && editingItem !== item.myItemId)
               }
               onMouseDown={() => handleClickItem(item)}
-              onStop={(e: any, position: DraggableData) =>
+              onStop={(e: DraggableEvent, position: DraggableData) =>
                 onControlledDrag(e, position, item.myItemId)
               }
               grid={[cellHeight, cellHeight / 2]}
