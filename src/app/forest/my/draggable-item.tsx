@@ -10,23 +10,26 @@ interface Props extends Omit<DraggableProps, "cancel"> {
   height: number;
   editMode: boolean;
   editingItem: number | null;
+  editError: boolean;
   setEditingItem: (myItemId: number) => void;
   handleRemove: (myItemId: number) => void;
-  handleComplete: () => void;
+  handleComplete: (item: PostUsingItem) => void;
 }
 
 export default function DraggableItem({
-  item: { myItemId, image },
+  item,
   width,
   height,
   editMode,
   editingItem,
+  editError,
   setEditingItem,
   handleRemove,
   handleComplete,
   ...props
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const { myItemId, image } = item;
   const isFocusing = editingItem === myItemId;
 
   return (
@@ -38,7 +41,9 @@ export default function DraggableItem({
         <div
           className={
             (editMode && editingItem == null) || editingItem === myItemId
-              ? "drop-shadow-[0px_5px_5px_black]"
+              ? editError
+                ? "drop-shadow-[0px_5px_5px_red]"
+                : "drop-shadow-[0px_5px_5px_black]"
               : "drop-shadow-none"
           }
           style={{
@@ -46,20 +51,19 @@ export default function DraggableItem({
             height,
             background: `url('${image}') no-repeat center / contain`,
           }}
-        >
-          {editMode && editingItem === myItemId && (
-            <>
-              <button
-                className="absolute z-30 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain"
-                onClick={() => handleRemove(myItemId)}
-              />
-              <button
-                className="absolute -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain"
-                onClick={handleComplete}
-              />
-            </>
-          )}
-        </div>
+        />
+        {editMode && editingItem === myItemId && (
+          <>
+            <button
+              className="absolute z-30 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
+              onClick={() => handleRemove(myItemId)}
+            />
+            <button
+              className="absolute -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
+              onClick={() => handleComplete(item)}
+            />
+          </>
+        )}
       </div>
     </Draggable>
   );

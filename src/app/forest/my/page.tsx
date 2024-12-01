@@ -1,7 +1,7 @@
 "use client";
 
 import { MyItemType, PostUsingItem } from "@/types/api/item";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import { DraggableData } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import clsx from "clsx";
@@ -12,20 +12,28 @@ import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
 export default function Page() {
   const [editMode, setEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<null | number>(null);
+  const [editError, setEditError] = useState<boolean>(false);
   const [items, setItems] = useState<PostUsingItem[]>(usingItems);
-  const [groundBoard, setGroundBoard] = useState<boolean[]>(
-    Array(CELL_COL_CNT).fill(() => Array(CELL_ROW_CNT).fill(false))
+
+  const groundBoard = useRef<boolean[][]>(
+    Array(CELL_ROW_CNT)
+      .fill(null)
+      .map(() => Array(CELL_COL_CNT).fill(false))
   );
 
   const { cellWidth, cellHalfWidth } = useResizeWindowCell();
 
   useEffect(() => {
     setItems(
-      usingItems.map((item) => ({
-        ...item,
-        posX: item.posX * cellWidth,
-        posY: item.posY * cellWidth,
-      }))
+      usingItems.map((item) => {
+        if (item.category === "GROUND")
+          groundBoard.current[item.posX][item.posY] = true;
+        return {
+          ...item,
+          posX: item.posX * cellWidth,
+          posY: item.posY * cellWidth,
+        };
+      })
     );
   }, [cellWidth]);
 
@@ -42,13 +50,19 @@ export default function Page() {
     setEditMode(false);
   };
 
-  const handleComplete = () => {
-    setEditMode(false);
-  };
-
-  const handleClickItem = (myItemId: number) => {
-    if (editingItem === null) {
-      setEditingItem(myItemId);
+  const handleComplete = (item: PostUsingItem) => {
+    if (
+      item.category === "GROUND" &&
+      groundBoard.current[Math.floor(item.posX / cellWidth)][
+        Math.floor(item.posY / cellWidth)
+      ]
+    )
+      setEditError(true);
+    else {
+      setEditMode(false);
+      groundBoard.current[Math.floor(item.posX / cellWidth)][
+        Math.floor(item.posY / cellWidth)
+      ] = true;
     }
   };
 
@@ -61,8 +75,19 @@ export default function Page() {
     setEditingItem(myItemId);
   };
 
+  const handleClickItem = (item: PostUsingItem) => {
+    if (editingItem === null) {
+      setEditingItem(item.myItemId);
+      groundBoard.current[Math.floor(item.posX / cellWidth)][
+        Math.floor(item.posY / cellWidth)
+      ] = false;
+    }
+  };
+
   const onControlledDrag = (e: Event, position: DraggableData, id: number) => {
+    setEditError(false);
     const { x, y } = position;
+
     const xCond = x % cellWidth === 0;
     const yCond = y % cellHalfWidth === 0;
     const targetItem = items.find((item) => item.myItemId === id);
@@ -116,10 +141,11 @@ export default function Page() {
               editingItem={editingItem}
               handleRemove={handleRemove}
               handleComplete={handleComplete}
+              editError={editError}
               disabled={
                 !editMode || (editMode && editingItem !== item.myItemId)
               }
-              onMouseDown={() => handleClickItem(item.myItemId)}
+              onMouseDown={() => handleClickItem(item)}
               onStop={(e: any, position: DraggableData) =>
                 onControlledDrag(e, position, item.myItemId)
               }
