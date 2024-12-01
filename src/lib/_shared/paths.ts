@@ -19,4 +19,5 @@ export const PATH = {
 
   // in forest
   FOREST_STORE: "/forest/store",
+  FOREST_MY: "/forest/my",
 };
