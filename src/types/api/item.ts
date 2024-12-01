@@ -21,6 +21,7 @@ export interface MyItemType {
   image: string; // api not yet
   category: CategoryType;
   quantity: number;
+  usingQuantity: number;
   userId: number;
 }
 

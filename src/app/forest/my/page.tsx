@@ -77,6 +77,7 @@ export default function Page() {
     setEditError(false);
     const { x, y } = position;
 
+    console.log(x, y, cellWidth, cellHeight);
     const xCond = x % cellWidth === 0;
     const yCond = y % cellHeight === 0;
     const targetItem = items.find((item) => item.myItemId === id);
@@ -137,7 +138,7 @@ export default function Page() {
               onStop={(e: DraggableEvent, position: DraggableData) =>
                 onControlledDrag(e, position, item.myItemId)
               }
-              grid={[cellHeight, cellHeight / 2]}
+              grid={[cellWidth / 2, cellHeight / 2]}
               bounds="parent"
               defaultPosition={{ x: 0, y: 0 }}
             />

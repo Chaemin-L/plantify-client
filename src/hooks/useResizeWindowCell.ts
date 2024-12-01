@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export function useResizeWindowCell() {
   const [viewportWidth, setViewportWidth] = useState<number>(500); // 초기값 설정
   const cellWidth = Math.floor(viewportWidth / CELL_COL_CNT);
-  const cellHeight = Math.floor(cellWidth / 2);
+  const cellHeight = cellWidth / 2;
 
   useEffect(() => {
     const updateViewportWidth = () => {

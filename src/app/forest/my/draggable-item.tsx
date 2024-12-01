@@ -48,20 +48,20 @@ export default function DraggableItem({
         ref={ref}
         className={clsx(
           "absolute flex shrink-0",
-          isFocusing ? "z-40" : isGround ? "z-10" : "z-30"
+          isFocusing ? "z-40" : isGround ? "z-10" : "z-50"
         )}
       >
         <div
-          className={
+          className={clsx(
             (editMode && editingItem == null) || editingItem === myItemId
               ? editError
                 ? "drop-shadow-[0px_5px_5px_red]"
                 : "drop-shadow-[0px_5px_5px_black]"
               : "drop-shadow-none"
-          }
+          )}
           style={{
             width,
-            height,
+            height: isGround ? height : 1.5 * height,
             background: `url('${image}') no-repeat center / contain`,
           }}
         />

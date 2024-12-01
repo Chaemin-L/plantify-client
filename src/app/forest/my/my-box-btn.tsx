@@ -113,16 +113,21 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
           {myItems
             .filter((item) => item.category === categories[selectedCat].key)
             .map((item) => {
-              const { myItemId, itemName, image } = item;
+              const { myItemId, itemName, image, quantity, usingQuantity } =
+                item;
               return (
                 <button
                   key={myItemId}
-                  className=" w-full p-3 flex flex-col justify-center items-center gap-3 hover:opacity-70 object-contain"
+                  className="relative w-full p-3 flex flex-col justify-center items-center gap-3 hover:opacity-70 object-contain disabled:opacity-40"
                   onClick={() => {
                     handleNewItem(item);
                     handleClose();
                   }}
+                  disabled={quantity === usingQuantity}
                 >
+                  <span className="absolute top-0 right-4 text-bd4">
+                    {usingQuantity} / {quantity}
+                  </span>
                   <Image
                     className="w-[80%] max-h-[100px]"
                     src={image}
@@ -150,7 +155,8 @@ const myItems: MyItemType[] = [
     itemName: "풀밭",
     image: "/temp/forest/ground-item1.png",
     category: "GROUND",
-    quantity: 1,
+    quantity: 3,
+    usingQuantity: 1,
     userId: 1,
   },
   {
@@ -160,6 +166,7 @@ const myItems: MyItemType[] = [
     image: "/temp/forest/ground-item2.png",
     category: "GROUND",
     quantity: 1,
+    usingQuantity: 1,
     userId: 1,
   },
   {
@@ -169,6 +176,7 @@ const myItems: MyItemType[] = [
     image: "/temp/forest/ground-item3.png",
     category: "GROUND",
     quantity: 1,
+    usingQuantity: 1,
     userId: 1,
   },
   {
@@ -178,6 +186,7 @@ const myItems: MyItemType[] = [
     image: "/temp/forest/ground-item4.png",
     category: "GROUND",
     quantity: 1,
+    usingQuantity: 1,
     userId: 1,
   },
   {
@@ -186,7 +195,8 @@ const myItems: MyItemType[] = [
     itemName: "대리석",
     image: "/temp/forest/ground-item5.png",
     category: "GROUND",
-    quantity: 1,
+    quantity: 4,
+    usingQuantity: 2,
     userId: 1,
   },
   {
@@ -195,7 +205,8 @@ const myItems: MyItemType[] = [
     itemName: "2층 나무",
     image: "/temp/forest/tree-item1.svg",
     category: "TREE",
-    quantity: 1,
+    quantity: 5,
+    usingQuantity: 1,
     userId: 1,
   },
   {
@@ -205,15 +216,17 @@ const myItems: MyItemType[] = [
     image: "/temp/forest/tree-item2.svg",
     category: "TREE",
     quantity: 1,
+    usingQuantity: 1,
     userId: 1,
   },
   {
-    myItemId: 9,
-    itemId: 7,
+    myItemId: 10,
+    itemId: 8,
     itemName: "육각 나무",
     image: "/temp/forest/tree-item3.svg",
     category: "TREE",
-    quantity: 1,
+    quantity: 2,
+    usingQuantity: 1,
     userId: 1,
   },
 ];
