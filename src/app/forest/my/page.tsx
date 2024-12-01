@@ -53,15 +53,15 @@ export default function Page() {
   const handleComplete = (item: PostUsingItem) => {
     if (
       item.category === "GROUND" &&
-      groundBoard.current[Math.floor(item.posX / cellWidth)][
-        Math.floor(item.posY / cellWidth)
+      groundBoard.current[Math.floor(item.posX / (cellWidth / 2))][
+        Math.floor(item.posY / (cellHalfWidth / 2))
       ]
     )
       setEditError(true);
     else {
       setEditMode(false);
-      groundBoard.current[Math.floor(item.posX / cellWidth)][
-        Math.floor(item.posY / cellWidth)
+      groundBoard.current[Math.floor(item.posX / (cellWidth / 2))][
+        Math.floor(item.posY / (cellHalfWidth / 2))
       ] = true;
     }
   };
@@ -78,8 +78,8 @@ export default function Page() {
   const handleClickItem = (item: PostUsingItem) => {
     if (editingItem === null) {
       setEditingItem(item.myItemId);
-      groundBoard.current[Math.floor(item.posX / cellWidth)][
-        Math.floor(item.posY / cellWidth)
+      groundBoard.current[Math.floor(item.posX / (cellWidth / 2))][
+        Math.floor(item.posY / (cellHalfWidth / 2))
       ] = false;
     }
   };

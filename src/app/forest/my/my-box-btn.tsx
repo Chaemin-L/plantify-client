@@ -20,13 +20,11 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
   const handleOnStop = () => {
     setTimeout(() => {
       isDragging.current = false;
-    }, 600);
+    }, 100);
   };
 
   const handleOnClick = () => {
-    if (!isDragging.current) {
-      setShow(true);
-    }
+    if (!isDragging.current) setShow(true);
   };
 
   return (
@@ -51,6 +49,7 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
             width={48}
             height={48}
             alt="보관함"
+            onClick={handleOnClick}
             onTouchEnd={handleOnClick}
           />
         </button>
