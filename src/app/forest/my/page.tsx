@@ -77,7 +77,6 @@ export default function Page() {
     setEditError(false);
     const { x, y } = position;
 
-    console.log(x, y, cellWidth, cellHeight);
     const xCond = x % cellWidth === 0;
     const yCond = y % cellHeight === 0;
     const targetItem = items.find((item) => item.myItemId === id);

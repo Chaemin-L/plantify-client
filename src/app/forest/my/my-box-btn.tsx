@@ -76,7 +76,7 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
   const [selectedCat, setSelectedCat] = useState<number>(0);
   return (
     <div
-      className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center bg-shadow-900/40 z-30"
+      className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center bg-shadow-900/40 z-50"
       onClick={handleClose}
     >
       <div
