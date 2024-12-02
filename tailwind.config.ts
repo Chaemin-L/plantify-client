@@ -70,6 +70,14 @@ export default {
             transformOrigin: "top center",
           },
         },
+        fadeIn: {
+          from: {
+            opacity: "0 ",
+          },
+          to: {
+            opacity: "1",
+          },
+        },
       },
     },
   },

@@ -1,4 +1,8 @@
 export const PATH = {
+  // intro
+  SPLASH: "/",
+  INTRO: "/intro",
+
   // navigation tab
   FOREST: "/forest",
   HOME: "/card",
