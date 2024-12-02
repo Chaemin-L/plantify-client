@@ -6,7 +6,7 @@ interface Props {
   thumbnail: string;
 }
 
-export default function FeatureCard({ title, href, thumbnail }: Props) {
+export default function IconCard({ title, href, thumbnail }: Props) {
   return (
     <Link href={href} className="flex-1 card h-full flex flex-col ">
       <h1 className="card-title">{title}</h1>
