@@ -20,13 +20,16 @@ export default function Header() {
     pathname === PATH.HOME ||
     pathname === PATH.FUNDING;
   const isIntro = pathname === PATH.SPLASH || pathname === PATH.INTRO;
-  console.log(isTabMain, isIntro);
 
   return (
     <header className=" bg-darkBg sticky top-0 z-0">
       {/** logo and home */}
       <div className={clsx(!isTabMain ? "hidden" : "flex justify-between p-4")}>
-        <div>LOGO</div>
+        <div className="text-lg font-bold select-none flex justify-center items-center">
+          <span>PLANT</span>
+          <img src="/icons/logo.svg" className="inline w-5 h-5 -mx-0.5" />
+          <span>FY</span>
+        </div>
         <Link href={PATH.PAYMENTS} className="flex items-center select-none">
           <Image width={16} height={16} src="/icons/bell.svg" alt="알림내역" />
         </Link>
