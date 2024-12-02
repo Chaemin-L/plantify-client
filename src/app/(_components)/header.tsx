@@ -19,6 +19,8 @@ export default function Header() {
     pathname === PATH.FOREST ||
     pathname === PATH.HOME ||
     pathname === PATH.FUNDING;
+  const isIntro = pathname === PATH.SPLASH || pathname === PATH.INTRO;
+  console.log(isTabMain, isIntro);
 
   return (
     <header className=" bg-darkBg sticky top-0 z-0">
@@ -29,7 +31,11 @@ export default function Header() {
           <Image width={16} height={16} src="/icons/bell.svg" alt="알림내역" />
         </Link>
       </div>
-      <div className={clsx(isTabMain ? "hidden" : "flex justify-between p-4")}>
+      <div
+        className={clsx(
+          isTabMain || isIntro ? "hidden" : "flex justify-between p-4"
+        )}
+      >
         <button onClick={back}>
           <Image
             width={8}
