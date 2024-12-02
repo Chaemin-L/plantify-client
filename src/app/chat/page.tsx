@@ -1,14 +1,9 @@
 "use client";
-import {
-  ChangeEventHandler,
-  KeyboardEventHandler,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEventHandler, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { useScrollToBottom } from "@/hooks/useScrollToBottom";
-import { chatClient } from "@/lib/chatClient";
+import { API_ENDPOINTS } from "@/config/api";
 
 interface MessageType {
   sender: "User" | "AI";
@@ -17,49 +12,66 @@ interface MessageType {
 
 export default function Chat() {
   const [message, setMessage] = useState<string>("");
-  const [chatList, setChatList] = useState<MessageType[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const { containerRef, scrollToBottom } = useScrollToBottom();
+  const socketRef = useRef<WebSocket | null>(null);
 
-  const isLoading = chatList.length === 0;
+  const isLoading = messages.length === 0;
+
+  useEffect(() => {
+    const ws = new WebSocket(API_ENDPOINTS.CHAT);
+    const connect = async () => {
+      ws.onopen = () => {
+        console.log(">> AI 채팅 서버 연결 성공!");
+      };
+      ws.onmessage = (event) => {
+        console.log(">> 메시지 수신 ");
+        const data = JSON.parse(event.data);
+        setMessages((prev) => [...prev, data]);
+      };
+
+      ws.onerror = (error) => {
+        console.error("WebSocket 에러: ", error);
+      };
+
+      ws.onclose = () => {
+        console.log("WebSocket 연결 끊김");
+      };
+      socketRef.current = ws;
+    };
+
+    connect();
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
     setMessage("");
-  }, [chatList]);
+  }, [messages]);
 
-  useEffect(() => {
-    chatClient.onConnect = (frame) => {
-      if (chatClient.connected)
-        chatClient.subscribe("/topic/public", (message) => {
-          const messageData = JSON.parse(message.body);
-          console.log("Message received:", messageData);
-          setChatList((prev) => [...prev, messageData]);
-        });
-    };
-    chatClient.activate();
-    return () => {
-      chatClient.deactivate();
-    };
-  }, [chatClient]);
+  const handleSendMessage = () => {
+    if (message.length && message.trim() && socketRef.current) {
+      const data: MessageType = { sender: "User", message };
+      socketRef.current.send(JSON.stringify(data));
+      setMessages((prev) => [...prev, data]);
+    }
+    setMessage("");
+  };
 
-  const sendMessage = () => {
-    if (message.trim().length != 0 && chatClient.connected) {
-      chatClient.publish({
-        destination: "/app/chat.sendMessage",
-        body: JSON.stringify({ sender: "User", message }),
-      });
-
-      setMessage("");
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
   };
 
   const handleTextarea: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setMessage(e.target.value);
-  };
-
-  const handleEnter: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-    e.preventDefault();
-    if (!e.shiftKey && e.key === "Enter") sendMessage();
   };
 
   return (
@@ -74,7 +86,7 @@ export default function Chat() {
             AI를 불러오고 있어요!{"\n"}조금만 기다려주세요 🙏
           </p>
         ) : (
-          chatList.map((m, idx) => (
+          messages.map((m, idx) => (
             <li
               key={idx}
               className={clsx(
@@ -95,11 +107,12 @@ export default function Chat() {
           name="mychat"
           value={message}
           onChange={handleTextarea}
-          onKeyUp={handleEnter}
+          onKeyUp={handleKeyPress}
         />
         <button
           className="bg-accent-purple p-2 rounded-full w-fit h-fit"
-          onClick={sendMessage}
+          onClick={handleSendMessage}
+          disabled={!socketRef.current}
         >
           <Image width={16} height={16} src="/icons/send.svg" alt="전송" />
         </button>
