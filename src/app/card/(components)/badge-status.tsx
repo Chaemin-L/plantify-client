@@ -1,7 +1,7 @@
 export default function BadgeStatusSection() {
   return (
     <div className="card flex justify-between gap-[10%]">
-      <img src="/illusts/3d-forest.svg" className="w-[50%]" />
+      <img src="/icons/badge.webp" className="w-[50%]" alt="성공한 배지" />
       <div className="flex-grow flex flex-col text-left justify-center gap-5">
         <div className="flex flex-col">
           <span className="text-bd3">획득한 배지</span>

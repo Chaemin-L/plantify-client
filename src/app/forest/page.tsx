@@ -10,12 +10,12 @@ const menuTabInfo = [
   {
     title: "상점",
     href: PATH.FOREST_STORE,
-    thumbnail: "/illusts/3d-forest.svg",
+    thumbnail: "/icons/shopping.webp",
   },
   {
     title: "출석체크",
     href: PATH.HOME,
-    thumbnail: "/illusts/3d-forest.svg",
+    thumbnail: "/icons/calendar.webp",
   },
 ];
 

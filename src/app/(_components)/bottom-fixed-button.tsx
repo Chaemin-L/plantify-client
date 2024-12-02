@@ -6,7 +6,7 @@ export default function BottomFixedButton({
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <div
-      className="fixed bottom-0 bg-black px-9 pt-3 pb-10 w-full  max-w-[500px] -mx-4" // -mx-4: 레이아웃 패딩
+      className="fixed bottom-0 bg-black px-4 md:px-9 pt-3 pb-10 w-full  max-w-[500px] -mx-4" // -mx-4: 레이아웃 패딩
       style={{ left: "inherit" }}
     >
       <button

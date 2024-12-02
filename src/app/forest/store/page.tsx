@@ -54,12 +54,13 @@ export default function Page() {
         selected={category}
         items={categories}
       />
-      <div className="w-full gap-2 flex justify-end">
+      <div className="w-full gap-2 flex justify-end items-center">
         <Image
           width={16}
           height={16}
           src="/icons/tree-coin.svg"
           alt="트리코인"
+          className="w-4 h-4"
         />
         <span>{userCoins.toLocaleString()}</span>
       </div>
