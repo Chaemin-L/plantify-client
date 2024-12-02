@@ -48,7 +48,8 @@ export default function DraggableItem({
         ref={ref}
         className={clsx(
           "absolute flex shrink-0",
-          isFocusing ? "z-40" : isGround ? "z-10" : "z-50"
+          isFocusing ? "z-40" : isGround ? "z-10" : "z-50",
+          editMode && !isFocusing && "pointer-events-none opacity-75"
         )}
       >
         <div

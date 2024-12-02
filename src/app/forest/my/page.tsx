@@ -26,6 +26,8 @@ export default function Page() {
           groundBoard.current[item.posX][item.posY] = true;
         return {
           ...item,
+          // posX: (item.posX * viewportWidth) / cellWidth,
+          // posY: (item.posY * viewportWidth) / cellHeight,
           posX: item.posX * cellWidth,
           posY: item.posY * cellHeight,
         };
@@ -76,6 +78,7 @@ export default function Page() {
   ) => {
     setEditError(false);
     const { x, y } = position;
+    console.log(x, y);
 
     const xCond = x % cellWidth === 0;
     const yCond = y % cellHeight === 0;
@@ -193,15 +196,29 @@ const usingItems: PostUsingItem[] = [
   {
     myItemId: 1,
     image: "/temp/forest/ground-item3.png",
-    posX: 0,
-    posY: 0,
+    posX: 4,
+    posY: 10,
     category: "GROUND",
   },
   {
     myItemId: 2,
     image: "/temp/forest/ground-item3.png",
-    posX: 1,
-    posY: 0,
+    posX: 4,
+    posY: 11,
     category: "GROUND",
+  },
+  {
+    myItemId: 11,
+    image: "/temp/forest/ground-item3.png",
+    posX: 6,
+    posY: 10.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 12,
+    image: "/temp/forest/tree-item2.svg",
+    posX: 6,
+    posY: 10.5,
+    category: "TREE",
   },
 ];
