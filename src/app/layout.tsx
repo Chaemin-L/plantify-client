@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { MONEYGRAPHY, NOTOSANS, SUIT } from "../styles/fonts/fonts";
+import {
+  MONEYGRAPHY,
+  NOTOSANS,
+  SPOQA_HAN_SANS_NEO,
+  SUIT,
+} from "../styles/fonts/fonts";
 import Header from "@/app/(_components)/header";
 import AdBanner from "@/app/(_components)/ad-banner";
 import "./globals.css";
@@ -19,9 +24,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${SUIT.variable} ${SUIT.className} antialiased bg-shadow-900 w-screen`}
+        // className={`${SUIT.variable} ${SUIT.className} antialiased bg-shadow-900 w-screen`}
         // className={`${MONEYGRAPHY.variable} ${MONEYGRAPHY.className} antialiased bg-accent-purple w-screen`}
         // className={`${NOTOSANS.className} antialiased bg-accent-purple w-screen`}
+        className={`${SPOQA_HAN_SANS_NEO.variable} ${SPOQA_HAN_SANS_NEO.className} antialiased bg-accent-purple w-screen`}
       >
         <TanstackQueryClientProvider>
           {/* <div className="flex flex-row justify-center gap-[5%] h-full w-full "> */}
