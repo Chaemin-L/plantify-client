@@ -17,19 +17,20 @@ export default function Page() {
   const [items, setItems] = useState<PostUsingItem[]>(usingItems);
 
   const { cellWidth, cellHeight } = useResizeWindowCell();
-  const { groundBoard, fillField, emptyField } = useForestField(cellWidth);
+  const { fillField, emptyField } = useForestField(cellWidth, cellHeight);
 
   useEffect(() => {
     setItems(
-      usingItems.map((item) => {
-        if (item.category === "GROUND")
-          groundBoard.current[item.posX][item.posY] = true;
+      usingItems.map(({ category, posX, posY, ...rest }) => {
+        const fieldPosX = posX * cellWidth;
+        const fieldPosY = posY * cellHeight;
+        if (category === "GROUND")
+          fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
         return {
-          ...item,
-          // posX: (item.posX * viewportWidth) / cellWidth,
-          // posY: (item.posY * viewportWidth) / cellHeight,
-          posX: item.posX * cellWidth,
-          posY: item.posY * cellHeight,
+          category,
+          ...rest,
+          posX: fieldPosX,
+          posY: fieldPosY,
         };
       })
     );
@@ -78,7 +79,6 @@ export default function Page() {
   ) => {
     setEditError(false);
     const { x, y } = position;
-    console.log(x, y);
 
     const xCond = x % cellWidth === 0;
     const yCond = y % cellHeight === 0;
@@ -196,29 +196,29 @@ const usingItems: PostUsingItem[] = [
   {
     myItemId: 1,
     image: "/temp/forest/ground-item3.png",
-    posX: 4,
-    posY: 10,
+    posX: 3,
+    posY: 2,
     category: "GROUND",
   },
   {
     myItemId: 2,
     image: "/temp/forest/ground-item3.png",
-    posX: 4,
-    posY: 11,
+    posX: 3,
+    posY: 3,
     category: "GROUND",
   },
   {
     myItemId: 11,
     image: "/temp/forest/ground-item3.png",
-    posX: 6,
-    posY: 10.5,
+    posX: 2,
+    posY: 2,
     category: "GROUND",
   },
   {
     myItemId: 12,
     image: "/temp/forest/tree-item2.svg",
     posX: 6,
-    posY: 10.5,
+    posY: 10,
     category: "TREE",
   },
 ];

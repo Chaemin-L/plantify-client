@@ -2,49 +2,49 @@ import { CELL_ROW_CNT, CELL_COL_CNT } from "@/lib/_shared/item";
 import { PostUsingItem } from "@/types/api/item";
 import { useRef } from "react";
 
-export function useForestField(cellWidth: number) {
-  const ratioX = cellWidth / 2;
-  const ratioY = ratioX / 2;
+export function useForestField(cellWidth: number, cellHeight: number) {
+  const xUnit = cellWidth / 2;
+  const yUnit = cellHeight / 2;
 
   const groundBoard = useRef<boolean[][]>(
-    Array(CELL_ROW_CNT)
+    Array(CELL_ROW_CNT * 2)
       .fill(null)
-      .map(() => Array(CELL_COL_CNT).fill(false))
+      .map(() => Array(CELL_COL_CNT * 2).fill(false))
   );
 
   const theOtherBoard = useRef<boolean[][]>(
-    Array(CELL_ROW_CNT)
+    Array(CELL_ROW_CNT * 2)
       .fill(null)
-      .map(() => Array(CELL_COL_CNT).fill(false))
+      .map(() => Array(CELL_COL_CNT * 2).fill(false))
   );
 
   // posX, posY 은 현재 필드 기준 실제 위치(px)값.
   const fillField = ({ category, posX, posY }: PostUsingItem) => {
-    const x = Math.floor(posX / ratioX);
-    const y = Math.floor(posY / ratioY);
+    const x = posX / xUnit;
+    const y = posY / yUnit;
 
     switch (category) {
       case "GROUND":
-        if (groundBoard.current[x][y]) return false;
-        groundBoard.current[x][y] = true;
+        if (groundBoard.current[y][x]) return false;
+        groundBoard.current[y][x] = true;
         return true;
       default:
-        if (theOtherBoard.current[x][y]) return false;
-        theOtherBoard.current[x][y] = true;
+        if (theOtherBoard.current[y][x]) return false;
+        theOtherBoard.current[y][x] = true;
         return true;
     }
   };
 
   const emptyField = ({ category, posX, posY }: PostUsingItem) => {
-    const x = Math.floor(posX / ratioX);
-    const y = Math.floor(posY / ratioY);
+    const x = posX / xUnit;
+    const y = posY / yUnit;
 
     switch (category) {
       case "GROUND":
-        groundBoard.current[x][y] = false;
+        groundBoard.current[y][x] = false;
         return true;
       default:
-        theOtherBoard.current[x][y] = false;
+        theOtherBoard.current[y][x] = false;
         return true;
     }
   };
