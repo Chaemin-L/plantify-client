@@ -1,6 +1,6 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
-import { CardType } from "@/types/api/card";
+import { BenefitCardListType } from "@/types/api/card";
 
 // OK
 export async function getCardBenefit(category: string) {
@@ -14,7 +14,7 @@ export async function getCardBenefit(category: string) {
       cache: "no-cache",
     });
     console.log(data);
-    return data.formatted_cards as CardType[];
+    return data as BenefitCardListType;
   } catch (e) {
     throw new Error("추천 카드를 가져오는데 실패했습니다");
   }

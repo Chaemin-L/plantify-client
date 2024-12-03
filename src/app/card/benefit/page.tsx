@@ -2,10 +2,9 @@
 import { SelectItemType } from "@/app/_deprecated/select";
 import { PATH } from "@/lib/_shared/paths";
 import CardList from "./(components)/card-list";
-import { notFound, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Select from "@/app/(_components)/select";
 import { BenefitType } from "@/types/card";
-import { isBenefitType } from "@/utils/typeCheck";
 import { useCardBenefit } from "@/hooks/api/useCardBenefit";
 
 const categories: SelectItemType<BenefitType>[] = [
@@ -22,8 +21,8 @@ const categories: SelectItemType<BenefitType>[] = [
     value: "communication",
   },
   {
-    label: "해외",
-    value: "abroad",
+    label: "여행",
+    value: "travel",
   },
   {
     label: "주유",
@@ -41,13 +40,20 @@ const categories: SelectItemType<BenefitType>[] = [
     label: "카페/디저트",
     value: "cafe",
   },
+  {
+    label: "문화",
+    value: "culture",
+  },
+  { label: "병원", value: "hospital" },
+  { label: "금융", value: "finance" },
+  { label: "기타", value: "etc" },
 ];
 
 export default function CardBenefitPage() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "traffic";
 
-  if (!isBenefitType(category)) return notFound();
+  // if (!isBenefitType(category)) return notFound();
 
   const { data } = useCardBenefit(
     categories.filter((c) => c.value === category)[0].label

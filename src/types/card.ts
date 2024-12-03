@@ -2,11 +2,15 @@ export const Benefit = [
   "all",
   "traffic",
   "communication",
-  "abroad",
+  "travel",
   "oiling",
   "mart",
   "shopping",
   "cafe",
+  "culture",
+  "hospital",
+  "finance",
+  "etc",
 ] as const;
 
 export type BenefitType = (typeof Benefit)[number];
