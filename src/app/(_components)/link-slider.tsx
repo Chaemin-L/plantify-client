@@ -4,8 +4,8 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css";
 
-interface LinkType {
-  href: string;
+export interface LinkType {
+  href?: string;
   title: string;
   description: string;
   icon?: string;
