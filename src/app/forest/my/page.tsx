@@ -113,77 +113,90 @@ export default function Page() {
         "relative -mx-4 flex flex-col gap-3 h-full justify-center"
       )}
     >
-      {/** Field */}
-      <div
-        className="bg-green-600 mx-auto p-auto"
-        style={{
-          width: cellWidth * CELL_COL_CNT,
-        }}
-      >
-        <div className="relative flex flex-wrap">
-          {items.map((item, idx) => (
-            <DraggableItem
-              key={idx}
-              item={item}
-              position={{ x: item.posX, y: item.posY }}
-              width={cellWidth} // custom variable
-              height={cellHeight} // custom variable
-              editMode={editMode}
-              editingItem={editingItem}
-              handleRemove={handleRemove}
-              handleComplete={handleComplete}
-              editError={editError}
-              disabled={
-                !editMode || (editMode && editingItem !== item.myItemId)
-              }
-              onMouseDown={() => handleClickItem(item)}
-              onStop={(e: DraggableEvent, position: DraggableData) =>
-                onControlledDrag(e, position, item.myItemId)
-              }
-              grid={[cellWidth / 2, cellHeight / 2]}
-              bounds="parent"
-              defaultPosition={{ x: 0, y: 0 }}
-            />
-          ))}
-
-          {Array(CELL_COL_CNT * CELL_ROW_CNT)
-            .fill(0)
-            .map((_, idx) => (
-              <div key={idx} className="flex shrink-0 opacity-40">
-                <div
-                  className="box-border w-0 h-0"
-                  style={{
-                    ...(editMode
-                      ? {
-                          borderTop: `${cellHeight / 2}px solid transparent`,
-                          borderRight: `${cellHeight}px solid white`,
-                          borderBottom: `${cellHeight / 2}px solid transparent`,
-                        }
-                      : {
-                          borderTop: `${cellHeight / 2}px solid transparent`,
-                          borderRight: `${cellHeight}px solid transparent`,
-                          borderBottom: `${cellHeight / 2}px solid transparent`,
-                        }),
-                  }}
-                />
-                <div
-                  className="box-border border-transparent w-0 h-0"
-                  style={{
-                    ...(editMode
-                      ? {
-                          borderTop: `${cellHeight / 2}px solid transparent`,
-                          borderLeft: `${cellHeight}px solid white`,
-                          borderBottom: `${cellHeight / 2}px solid transparent`,
-                        }
-                      : {
-                          borderTop: `${cellHeight / 2}px solid transparent`,
-                          borderLeft: `${cellHeight}px solid transparent`,
-                          borderBottom: `${cellHeight / 2}px solid transparent`,
-                        }),
-                  }}
-                />
-              </div>
+      <div>
+        {/** sky */}
+        {/* <div
+          className="h-32 bg-blue-300 mx-auto"
+          style={{ width: cellWidth * CELL_COL_CNT }}
+        /> */}
+        {/** Field */}
+        <div
+          className="mx-auto p-auto"
+          style={{
+            width: cellWidth * CELL_COL_CNT,
+            background: "url(/temp/forest/ground-item1.png) repeat center",
+            backgroundSize: `${cellWidth}px ${cellHeight}px `,
+          }}
+        >
+          {/** Draggable Field */}
+          <div className="relative flex flex-wrap">
+            {items.map((item, idx) => (
+              <DraggableItem
+                key={idx}
+                item={item}
+                position={{ x: item.posX, y: item.posY }}
+                width={cellWidth} // custom variable
+                height={cellHeight} // custom variable
+                editMode={editMode}
+                editingItem={editingItem}
+                handleRemove={handleRemove}
+                handleComplete={handleComplete}
+                editError={editError}
+                disabled={
+                  !editMode || (editMode && editingItem !== item.myItemId)
+                }
+                onMouseDown={() => handleClickItem(item)}
+                onStop={(e: DraggableEvent, position: DraggableData) =>
+                  onControlledDrag(e, position, item.myItemId)
+                }
+                grid={[cellWidth / 2, cellHeight / 2]}
+                bounds="parent"
+                defaultPosition={{ x: 0, y: 0 }}
+              />
             ))}
+
+            {Array(CELL_COL_CNT * CELL_ROW_CNT)
+              .fill(0)
+              .map((_, idx) => (
+                <div key={idx} className=" flex shrink-0">
+                  <div
+                    className="relative"
+                    style={{
+                      width: cellWidth,
+                      height: cellHeight,
+                      background:
+                        "url(/temp/forest/ground-item1.png) repeat center",
+                      backgroundSize: `${cellWidth}px ${cellHeight}px `,
+                    }}
+                  >
+                    {editMode && (
+                      <div className="absolute top-0 left-0 flex">
+                        <div
+                          className="box-border border-transparent w-0 h-0 opacity-20"
+                          style={{
+                            borderTop: `${cellHeight / 2}px solid transparent`,
+                            borderRight: `${cellHeight}px solid white`,
+                            borderBottom: `${
+                              cellHeight / 2
+                            }px solid transparent`,
+                          }}
+                        />
+                        <div
+                          className="box-border border-transparent w-0 h-0 opacity-20"
+                          style={{
+                            borderTop: `${cellHeight / 2}px solid transparent`,
+                            borderLeft: `${cellHeight}px solid white`,
+                            borderBottom: `${
+                              cellHeight / 2
+                            }px solid transparent`,
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
 
