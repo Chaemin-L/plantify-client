@@ -4,7 +4,7 @@ import PaymentsList from "./(components)/payments-list";
 import clsx from "clsx";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { PaymentCategoryType, PaymentSorting } from "@/types/pay";
-import Select, { SelectItemType } from "../(_components)/select";
+import Select, { SelectItemType } from "@/app/(_components)/select";
 import { isPaymentCategoryType, isPaymentSortingType } from "@/utils/typeCheck";
 
 const categories: SelectItemType<PaymentCategoryType>[] = [
