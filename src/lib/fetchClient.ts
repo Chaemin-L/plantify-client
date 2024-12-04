@@ -29,7 +29,7 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
   } else {
-    const data: FinalResponse<any> = await response.json();
+    const data = await response.json();
     return data;
   }
 };
