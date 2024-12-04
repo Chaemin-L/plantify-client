@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 export function useScrollToBottom() {
-  const containerRef = useRef<any>();
+  const containerRef = useRef<HTMLDivElement>();
 
   const scrollToBottom = () => {
     if (!containerRef || !containerRef.current) {

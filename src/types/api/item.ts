@@ -1,4 +1,7 @@
-export type CategoryType = "BACKGROUND" | "FLOWER" | "ETC";
+import { ItemCategoryType } from "../forest";
+
+// export type CategoryType = "BACKGROUND" | "FLOWER" | "ETC";
+export type CategoryType = "BACKGROUND" | "GROUND" | "TREE";
 
 export interface ItemType {
   itemId: number;
@@ -15,7 +18,10 @@ export interface MyItemType {
   myItemId: number;
   itemId: number;
   itemName: string;
+  image: string; // api not yet
+  category: CategoryType;
   quantity: number;
+  usingQuantity: number;
   userId: number;
 }
 
@@ -30,4 +36,6 @@ export interface MyUsingItemType extends Position {
 
 export interface PostUsingItem extends Position {
   myItemId: number;
+  image: string; // api not yet
+  category: ItemCategoryType;
 }

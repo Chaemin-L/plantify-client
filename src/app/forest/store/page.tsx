@@ -4,8 +4,6 @@ import { PATH } from "@/lib/_shared/paths";
 import StoreItemCard from "../(components)/store-item-card";
 import { useModal } from "@/hooks/useModal";
 import { notFound, useSearchParams } from "next/navigation";
-import { useGetStoreItemsQuery } from "@/hooks/api/useGetStoreItems";
-import { useGetStoreItemsByCategoryQuery } from "@/hooks/api/useGEtStoreItemsByCategory";
 import Select from "@/app/(_components)/select";
 import { isItemCategoryType } from "@/utils/typeCheck";
 
