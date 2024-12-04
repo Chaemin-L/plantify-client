@@ -6,15 +6,24 @@ export default function BottomFixedButton({
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <div
-      className="fixed bottom-0 bg-black px-4 md:px-9 pt-3 pb-10 w-full  max-w-[500px] -mx-4" // -mx-4: 레이아웃 패딩
+      className="fixed bottom-0 bg-black px-6 sm:px-8 pt-3 pb-10 w-full  max-w-[500px] -mx-4" // -mx-4: 레이아웃 패딩
       style={{ left: "inherit" }}
     >
-      <button
-        className="py-3 bg-accent-green rounded-xl text-black text-t3 w-full"
-        {...props}
-      >
-        {children}
-      </button>
+      <Button {...props}>{children}</Button>
     </div>
+  );
+}
+
+export function Button({
+  children,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      className="py-3 bg-accent-green rounded-xl text-black text-t3 w-full"
+      {...props}
+    >
+      {children}
+    </button>
   );
 }

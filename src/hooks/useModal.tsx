@@ -15,7 +15,7 @@ export function useModal(modalText: string, confirmText: string) {
     return ReactDOM.createPortal(
       <div
         className="absolute top-0 z-10 w-full h-full flex justify-center items-center"
-        style={{ backgroundColor: "rgba(0,0,0,0.4" }}
+        style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
         onClick={closeModal}
       >
         <div

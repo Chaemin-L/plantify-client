@@ -1,8 +1,11 @@
+"use client";
 import BottomFixedButton from "@/app/(_components)/bottom-fixed-button";
 import FundingStatus from "@/app/(_components)/funding-status";
 import { data } from "../../(_dummy)/detail-data";
+import { useState } from "react";
+import InputModal from "./input-modal";
 
-export default async function Page() {
+export default function Page() {
   // const {id} = await params;
   // TODO: 이후 param으로 전달된 id로 data fetching
   const {
@@ -15,6 +18,10 @@ export default async function Page() {
     targetAmount,
     organizationName,
   } = data;
+
+  const [isOpen, setOpen] = useState(false);
+
+  const openBottomSheet = () => setOpen(true);
 
   return (
     <>
@@ -53,7 +60,10 @@ export default async function Page() {
           {description}
         </p>
       </div>
-      <BottomFixedButton>기부하기</BottomFixedButton>
+      <BottomFixedButton onClick={() => setOpen(true)}>
+        기부하기
+      </BottomFixedButton>
+      <InputModal isOpen={isOpen} setOpen={setOpen} />
     </>
   );
 }

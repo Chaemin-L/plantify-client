@@ -2,7 +2,6 @@
 import Accordion from "@/app/(_components)/accordion";
 import BottomFixedButton from "@/app/(_components)/bottom-fixed-button";
 import { bankList } from "@/lib/_shared/bankInfo";
-import { PATH } from "@/lib/_shared/paths";
 import { BankIdValue } from "@/types/bank";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
