@@ -23,8 +23,6 @@ export default function Page() {
 
   const [isOpen, setOpen] = useState(false);
 
-  const openBottomSheet = () => setOpen(true);
-
   return (
     <>
       <div className="flex flex-col gap-6 p-2 sm:p-4 mb-20 ">
