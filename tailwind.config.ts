@@ -78,6 +78,14 @@ export default {
             opacity: "1",
           },
         },
+        marquee: {
+          from: {
+            transform: "translateX(0)",
+          },
+          to: {
+            transform: "translateX(calc(0px - 50%))",
+          },
+        },
       },
     },
   },
