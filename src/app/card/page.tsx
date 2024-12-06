@@ -7,6 +7,7 @@ import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 import FundingProgress from "./(components)/funding-progress";
 import Wallet from "./(components)/wallet";
+import PayCard from "./(components)/pay-card";
 
 export default async function HomePage() {
   // TODO: 실제 데이터 fetching
@@ -14,6 +15,9 @@ export default async function HomePage() {
     <div className="flex flex-col gap-5 w-full">
       {/** 알림 */}
       <PayNotice />
+
+      {/** 페이 */}
+      <PayCard />
 
       {/** 포인트, 머니 */}
       <PointMoney />
