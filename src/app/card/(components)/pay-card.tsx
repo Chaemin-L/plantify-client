@@ -106,7 +106,7 @@ export default function PayCard() {
                 quality={100}
                 src="/icons/ic.png"
                 alt="카드 IC칩"
-                className="h-[15%] w-auto absolute top-1/2 -translate-y-1/2 ml-5 rotate-0"
+                className="h-[15%] w-auto absolute left-5 top-1/2 -translate-y-1/2 ml-5 rotate-0"
                 style={{
                   transform: "rotate(0deg)",
                   WebkitTransform: "rotate(0deg)",
@@ -116,8 +116,6 @@ export default function PayCard() {
                 <img
                   src="/icons/card-logo.svg"
                   className="absolute w-[60%] top-16 max-xs:top-10 right-0 "
-                  width={300}
-                  height={300}
                   alt="카드 로고"
                 />
               </div>
