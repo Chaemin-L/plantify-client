@@ -76,6 +76,8 @@ export default function PayCard() {
       transition: "all 0.3s",
       zIndex: "0",
       transform: "scale(1/2) translate(0, 0)",
+
+      WebkitTransform: "rotate(90deg) scale(2) translate(0, -100%)", // 추가
     };
     target.addEventListener("transitionend", () =>
       handleMoveOriginTransitionEnd(target)
@@ -85,7 +87,7 @@ export default function PayCard() {
   return (
     <>
       <Swiper
-        className="w-full h-full"
+        className="w-full h-full "
         loop={true}
         effect={"flip"}
         modules={[EffectFlip]}
@@ -95,15 +97,20 @@ export default function PayCard() {
         <SwiperSlide>
           <div
             className="
-            card aspect-[1.6/1] relative overflow-hidden p-0 bg-accent-green"
+            card aspect-[1.6/1] w-full relative min-h-36 overflow-hidden p-0 bg-accent-green will-change-transform h-auto"
           >
             <div className=" w-full h-full ">
               <Image
-                width={300}
-                height={300}
-                src="/icons/ic.svg"
+                width={90}
+                height={90}
+                quality={100}
+                src="/icons/ic.png"
                 alt="카드 IC칩"
-                className="h-[15%] w-auto absolute top-1/2 -translate-y-1/2 ml-5 "
+                className="h-[15%] w-auto absolute top-1/2 -translate-y-1/2 ml-5 rotate-0"
+                style={{
+                  transform: "rotate(0deg)",
+                  WebkitTransform: "rotate(0deg)",
+                }}
               />
               <div className="w-full h-full">
                 <img
@@ -118,17 +125,15 @@ export default function PayCard() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="card aspect-[1.6/1] relative bg-white">
+          <div className="card aspect-[1.6/1] w-full min-h-36 relative bg-white">
             <div className="text-black flex flex-col items-center justify-center max-xs:gap-2 gap-10 w-full h-full">
               <div id="pay" className="flex gap-4">
-                <Image
+                <img
                   ref={qrcodeRef}
                   id="qrcode"
-                  src="/temp/qr.svg"
-                  width={300}
-                  height={300}
+                  src="/temp/qr.png"
                   alt="페이 QRcode"
-                  className="no-swiper w-fit max-h-24 aspect-square transition-all"
+                  className="no-swiper w-auto max-h-24 aspect-square transition-all"
                   onClick={(e) => {
                     if (loading.current) return;
                     handleQRFullScreenMode(e);
