@@ -31,7 +31,7 @@ export default function Wallet() {
 
         <SwiperSlide>
           <Link
-            href={PATH.CARD_ADD}
+            href={PATH.CARD_BENEFIT_ADD}
             className=" w-[80%] bg-shadow-700 rounded-lg aspect-[1.6/1] flex justify-center items-center m-auto"
           >
             카드 추가하기 +

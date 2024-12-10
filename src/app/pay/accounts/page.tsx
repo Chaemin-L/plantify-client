@@ -70,7 +70,7 @@ export default function AccountListPage() {
         ))}
       </ul>
       <BottomFixedButton>
-        <Link href={PATH.CARD_ACCOUNT_ADD} className="w-full block h-full">
+        <Link href={PATH.PAY_ACCOUNTS_ADD} className="w-full block h-full">
           계좌 추가하기
         </Link>
       </BottomFixedButton>
