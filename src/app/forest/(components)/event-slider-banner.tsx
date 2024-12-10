@@ -1,10 +1,11 @@
-import LinkSlider from "@/app/(_components)/link-slider";
+import LinkSlider, { LinkType } from "@/app/(_components)/link-slider";
 
 // dummy data
-const events = [
+const events: LinkType[] = [
   {
     title: "출석체크 이벤트!",
-    description: "매일 출석하고 5캐시를 받아보세요",
+    description: "매일 출석하고\n5캐시를 받아보세요",
+    icon: "/icons/dart.svg",
   },
   {
     title: "이벤트 1",

@@ -4,13 +4,14 @@ import { PATH } from "@/lib/_shared/paths";
 import StoreItemCard from "../(components)/store-item-card";
 import { useModal } from "@/hooks/useModal";
 import { notFound, useSearchParams } from "next/navigation";
-import Select from "@/app/(_components)/select";
+import Select, { SelectItemType } from "@/app/(_components)/select";
 import { isItemCategoryType } from "@/utils/typeCheck";
+import { ItemCategoryType } from "@/types/forest";
 
-const categories = [
-  { label: "전체", value: "all" },
-  { label: "하늘", value: "sky" },
-  { label: "땅", value: "ground" },
+const categories: SelectItemType<ItemCategoryType>[] = [
+  { label: "전체", value: "ALL" },
+  { label: "땅", value: "GROUND" },
+  { label: "나무", value: "TREE" },
 ];
 
 const storeItems = [
@@ -28,7 +29,7 @@ const storeItems = [
 
 export default function Page() {
   const searchParams = useSearchParams();
-  const category = searchParams.get("category") ?? "all";
+  const category = searchParams.get("category") ?? "ALL";
 
   if (!isItemCategoryType(category)) return notFound();
 

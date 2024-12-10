@@ -1,11 +1,10 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFlip, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-flip";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
+import "swiper/css/effect-flip";
+import "swiper/css";
 
 export default function Wallet() {
   return (
@@ -31,7 +30,7 @@ export default function Wallet() {
 
         <SwiperSlide>
           <Link
-            href={PATH.CARD_ADD}
+            href={PATH.CARD_BENEFIT_ADD}
             className=" w-[80%] bg-shadow-700 rounded-lg aspect-[1.6/1] flex justify-center items-center m-auto"
           >
             카드 추가하기 +

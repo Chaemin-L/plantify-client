@@ -3,7 +3,7 @@
 import Checkbox from "@/app/(_components)/checkbox";
 import clsx from "clsx";
 import { useState } from "react";
-import { CardType } from "../page";
+import { CardType } from "./page";
 
 export default function CheckList({ cardList }: { cardList: CardType[] }) {
   const [checkedCard, setCheckedCard] = useState<CardType[]>([]);
