@@ -5,16 +5,16 @@ export const PATH = {
 
   // navigation tab
   FOREST: "/forest",
-  HOME: "/card",
+  HOME: "/pay",
   FUNDING: "/funding",
   CHAT: "/chat",
 
   // in home
   PAYMENTS: "/payments",
-  CARD_BENEFIT: "/card/benefit",
-  CARD_ADD: "/card/add",
-  CARD_ACCOUNT_LIST: "/card/account-list",
-  CARD_ACCOUNT_ADD: "/card/account-add",
+  CARD_BENEFIT: "/card-benefit",
+  CARD_BENEFIT_ADD: "/card-benefit/add",
+  PAY_ACCOUNTS: "/pay/accounts",
+  PAY_ACCOUNTS_ADD: "/pay/accounts/add",
 
   // in fundraisings
   FUNDING_MY: "/funding/my",

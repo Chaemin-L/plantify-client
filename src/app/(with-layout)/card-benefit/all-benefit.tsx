@@ -49,7 +49,7 @@ const categories: SelectItemType<BenefitType>[] = [
   { label: "기타", value: "etc" },
 ];
 
-export default function CardBenefitPage() {
+export default function AllBenefit() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "traffic";
 

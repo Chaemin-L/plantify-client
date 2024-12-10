@@ -1,6 +1,6 @@
 import BottomFixedButton from "@/app/(_components)/bottom-fixed-button";
 import SearchBar from "@/app/(_components)/searchbar";
-import CheckList from "./(components)/checklist";
+import CheckList from "./checklist";
 
 export interface CardType {
   id: number;

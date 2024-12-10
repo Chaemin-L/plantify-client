@@ -1,5 +1,15 @@
-import { MONEYGRAPHY, NOTOSANS, SUIT } from "@/styles/fonts/fonts";
-import "@/app/globals.css";
+import type { Metadata } from "next";
+import {
+  MONEYGRAPHY,
+  NOTOSANS,
+  SPOQA_HAN_SANS_NEO,
+  SUIT,
+} from "../styles/fonts/fonts";
+import Header from "@/app/(_components)/header";
+import AdBanner from "@/app/(_components)/ad-banner";
+import "./globals.css";
+import { TanstackQueryClientProvider } from "@/providers/tanstackProviders";
+import "@/styles/swiper.css";
 
 export const metadata = {
   title: "Next.js",
@@ -14,9 +24,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${MONEYGRAPHY.variable} ${MONEYGRAPHY.className} antialiased bg-shadow-800 w-screen  `}
+        // className={`${SUIT.variable} ${SUIT.className} antialiased bg-shadow-900 w-screen`}
         // className={`${MONEYGRAPHY.variable} ${MONEYGRAPHY.className} antialiased bg-accent-purple w-screen`}
         // className={`${NOTOSANS.className} antialiased bg-accent-purple w-screen`}
+        className={`${SPOQA_HAN_SANS_NEO.variable} ${SPOQA_HAN_SANS_NEO.className} antialiased bg-accent-purple w-screen`}
       >
         {/* <div className="flex flex-row justify-center gap-[5%] h-full w-full "> */}
         <div className="flex justify-center h-full w-full ">

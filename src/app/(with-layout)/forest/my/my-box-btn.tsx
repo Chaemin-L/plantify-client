@@ -15,14 +15,14 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
 
   const handleClose = () => setShow(false);
 
-  const handleOnDrag = () => {
-    isDragging.current = true;
-  };
-  const handleOnStop = () => {
-    setTimeout(() => {
-      isDragging.current = false;
-    }, 100);
-  };
+  // const handleOnDrag = () => {
+  //   isDragging.current = true;
+  // };
+  // const handleOnStop = () => {
+  //   setTimeout(() => {
+  //     isDragging.current = false;
+  //   }, 100);
+  // };
 
   const handleOnClick = () => {
     if (!isDragging.current) setShow(true);
@@ -30,30 +30,30 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
 
   return (
     <>
-      <Draggable
+      {/* <Draggable
         nodeRef={myBoxBtn}
         bounds="parent"
         onDrag={handleOnDrag}
         onStop={handleOnStop}
         enableUserSelectHack={true}
+      > */}
+      <button
+        className=" absolute right-4 bottom-4 p-2 rounded-full bg-accent-green w-fit aspect-square text-shadow-900 z-30 shadow-lg "
+        ref={myBoxBtn}
+        onClick={handleOnClick}
       >
-        <button
-          className=" absolute right-4 bottom-4 p-2 rounded-full bg-accent-green w-fit aspect-square text-shadow-900 z-30 shadow-lg "
-          ref={myBoxBtn}
+        <Image
+          src="/icons/storage.webp"
+          blurDataURL="/icons/storage.webp"
+          draggable={false}
+          width={48}
+          height={48}
+          alt="보관함"
           onClick={handleOnClick}
-        >
-          <Image
-            src="/icons/storage.webp"
-            blurDataURL="/icons/storage.webp"
-            draggable={false}
-            width={48}
-            height={48}
-            alt="보관함"
-            onClick={handleOnClick}
-            onTouchEnd={handleOnClick}
-          />
-        </button>
-      </Draggable>
+          // onTouchEnd={handleOnClick}
+        />
+      </button>
+      {/* </Draggable> */}
       {show &&
         createPortal(
           <MyBox handleClose={handleClose} handleNewItem={handleNewItem} />,
@@ -70,7 +70,7 @@ interface MyBoxProps {
 
 const categories = [
   { key: "GROUND", image: "/temp/forest/ground-item3.png" },
-  { key: "TREE", image: "/temp/forest/tree-item1.png" },
+  { key: "TREE", image: "/temp/forest/tree-item1.svg" },
 ];
 const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
   const [selectedCat, setSelectedCat] = useState<number>(0);
@@ -99,7 +99,7 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
               >
                 <div className="w-8 md:w-12 h-2 md:h-3" />
                 <Image
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-7 md:w-10 "
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-7 md:w-10 max-h-[95%]"
                   src={image}
                   width={100}
                   height={100}
@@ -133,7 +133,7 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
                     src={image}
                     width={200}
                     height={200}
-                    alt={`${itemName} 이미지`}
+                    alt={`${itemName}`}
                   />
                   <span className="text-bd3 md:text-bd2 whitespace-pre">
                     {item.itemName}

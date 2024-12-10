@@ -35,7 +35,7 @@ export default function FundingStatus({
       {(leftTop || rightTop) && (
         <div
           className={clsx(
-            size === "lg" ? "card-title" : "text-bd3",
+            size === "lg" ? "card-title" : "text-bd2",
             "flex justify-between items-center"
           )}
         >
@@ -45,7 +45,7 @@ export default function FundingStatus({
                 진행중 {/** progress */}
               </div>
             )}
-            {leftTop}
+            <span className=" line-clamp-1">{leftTop}</span>
           </div>
           {rightTop}
         </div>

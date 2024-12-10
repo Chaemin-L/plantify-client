@@ -14,8 +14,8 @@ const dummy = Array(3)
 
 export default function FundingProgress() {
   return (
-    <div className="card cursor-pointer flex flex-col gap-8">
-      <div className="flex justify-between">
+    <>
+      <div className="flex justify-between px-2">
         <h2 className="card-title select-none">펀딩현황</h2>
         <Link
           href={PATH.FUNDING_MY}
@@ -24,24 +24,26 @@ export default function FundingProgress() {
           전체보기 &gt;
         </Link>
       </div>
-      <div
-        className=" bg-shadow-800 rounded-2xl text-center  text-white flex flex-col gap-2 -mt-3"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/** TODO: 마이 펀딩 리스트 라우팅 경로로 변경 */}
+      <div className="card cursor-pointer flex flex-col gap-8">
+        <div
+          className=" bg-shadow-800 rounded-2xl text-center  text-white flex flex-col gap-2"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/** TODO: 마이 펀딩 리스트 라우팅 경로로 변경 */}
 
-        <ul className="w-full flex flex-col gap-5">
-          {dummy.map((item, idx) => (
-            <li
-              key={idx}
-              className="h-fit w-full hover:bg-shadow-700 rounded-2xl transition-colors"
-            >
-              <FundingItem {...item} />
-            </li>
-          ))}
-        </ul>
+          <ul className="w-full flex flex-col gap-5">
+            {dummy.map((item, idx) => (
+              <li
+                key={idx}
+                className="h-fit w-full hover:bg-shadow-700 rounded-2xl transition-colors"
+              >
+                <FundingItem {...item} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
