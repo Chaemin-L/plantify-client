@@ -1,73 +1,44 @@
 "use client";
-import { SelectItemType } from "@/app/_deprecated/select";
-import { PATH } from "@/lib/_shared/paths";
-import CardList from "./(components)/card-list";
-import { useSearchParams } from "next/navigation";
-import Select from "@/app/(_components)/select";
-import { BenefitType } from "@/types/card";
-import { useCardBenefit } from "@/hooks/api/useCardBenefit";
+import clsx from "clsx";
+import AllBenefit from "./all-benefit";
+import { useState } from "react";
+import { SelectItemType } from "../(_components)/select";
+import MyBenefit from "./my-benefit";
 
-const categories: SelectItemType<BenefitType>[] = [
-  // {
-  //   label: "전체",
-  //   value: "all",
-  // },
-  {
-    label: "교통",
-    value: "traffic",
-  },
-  {
-    label: "통신",
-    value: "communication",
-  },
-  {
-    label: "여행",
-    value: "travel",
-  },
-  {
-    label: "주유",
-    value: "oiling",
-  },
-  {
-    label: "마트/편의점",
-    value: "mart",
-  },
-  {
-    label: "쇼핑",
-    value: "shopping",
-  },
-  {
-    label: "카페/디저트",
-    value: "cafe",
-  },
-  {
-    label: "문화",
-    value: "culture",
-  },
-  { label: "병원", value: "hospital" },
-  { label: "금융", value: "finance" },
-  { label: "기타", value: "etc" },
+type TabType = "all" | "my";
+
+const tabMenus: SelectItemType<TabType>[] = [
+  { label: "My", value: "my" },
+  { label: "전체", value: "all" },
 ];
-
 export default function CardBenefitPage() {
-  const searchParams = useSearchParams();
-  const category = searchParams.get("category") ?? "traffic";
+  const [tab, setTab] = useState<TabType>("my");
 
-  // if (!isBenefitType(category)) return notFound();
-
-  const { data } = useCardBenefit(
-    categories.filter((c) => c.value === category)[0].label
-  );
+  const handleClick = (menu: TabType) => setTab(menu);
 
   return (
-    <div className="flex flex-col gap-5">
-      <Select
-        baseUrl={PATH.CARD_BENEFIT}
-        name="category"
-        selected={category}
-        items={categories}
-      />
-      <CardList listData={data ? data : null} />
+    <div>
+      <ul className="w-full flex">
+        {tabMenus.map((menu) => (
+          <li
+            key={menu.value}
+            className={clsx(
+              "flex-1 px-2 py-2 text-center",
+              tab === menu.value
+                ? "border-b-2 border-accent-purple opacity-100 transition-opacity"
+                : "opacity-40"
+            )}
+            onClick={() => handleClick(menu.value)}
+          >
+            {menu.label}
+          </li>
+        ))}
+      </ul>
+
+      <div className="pt-5">
+        {tab === "all" && <AllBenefit />}
+        {tab === "my" && <MyBenefit />}
+      </div>
     </div>
   );
 }
