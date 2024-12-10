@@ -3,6 +3,8 @@ import Image from "next/image";
 import { MouseEventHandler, useRef, useState } from "react";
 import { EffectFlip } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css/effect-flip";
+import "swiper/css";
 
 export default function PayCard() {
   const [fullScreen, setFullScreen] = useState<boolean | HTMLImageElement>(
@@ -87,79 +89,72 @@ export default function PayCard() {
   return (
     <>
       <Swiper
-        className="w-full h-full "
         loop={true}
         effect={"flip"}
         modules={[EffectFlip]}
+        className="relative w-full h-full"
         onClick={(swiper) => swiper.slideNext()}
         noSwipingClass="no-swiper"
       >
-        <SwiperSlide>
-          <div
-            className="
-            card aspect-[1.6/1] w-full relative min-h-36 overflow-hidden p-0 bg-accent-green will-change-transform h-auto"
-          >
-            <div className=" w-full h-full ">
-              <Image
-                width={90}
-                height={90}
-                quality={100}
-                src="/icons/ic.png"
-                alt="카드 IC칩"
-                className="h-[15%] w-auto absolute left-5 top-1/2 -translate-y-1/2 ml-5 rotate-0"
-                style={{
-                  transform: "rotate(0deg)",
-                  WebkitTransform: "rotate(0deg)",
-                }}
+        <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 overflow-hidden p-0 bg-accent-green will-change-transform ">
+          <div className=" w-full">
+            <Image
+              width={90}
+              height={90}
+              quality={100}
+              src="/icons/ic.png"
+              alt="카드 IC칩"
+              className="h-[15%] w-auto absolute left-5 top-1/2 -translate-y-1/2 ml-5 rotate-0"
+              style={{
+                transform: "rotate(0deg)",
+                WebkitTransform: "rotate(0deg)",
+              }}
+            />
+            <div className="w-full h-full">
+              <img
+                src="/icons/card-logo.svg"
+                className="absolute w-[60%] top-16 max-xs:top-10 right-0 "
+                alt="카드 로고"
               />
-              <div className="w-full h-full">
-                <img
-                  src="/icons/card-logo.svg"
-                  className="absolute w-[60%] top-16 max-xs:top-10 right-0 "
-                  alt="카드 로고"
-                />
-              </div>
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide>
-          <div className="card aspect-[1.6/1] w-full min-h-36 relative bg-white">
-            <div className="text-black flex flex-col items-center justify-center max-xs:gap-2 gap-10 w-full h-full">
-              <div id="pay" className="flex gap-4">
-                <img
-                  ref={qrcodeRef}
-                  id="qrcode"
-                  src="/temp/qr.png"
-                  alt="페이 QRcode"
-                  className="no-swiper w-auto max-h-24 aspect-square transition-all"
-                  onClick={(e) => {
-                    if (loading.current) return;
-                    handleQRFullScreenMode(e);
-                  }}
-                />
-                <Image
-                  ref={barcodeRef}
-                  id="barcode"
-                  src="/temp/barcode.png"
-                  width={300}
-                  height={300}
-                  className="no-swiper flex-1 min-w-0 max-h-24 aspect-[4/1] rounded-md transition-all"
-                  alt="페이 Barcode"
-                  onClick={(e) => {
-                    if (loading.current) return;
-                    handleBarcodeFullScreenMode(e);
-                  }}
-                />
+        <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 bg-white">
+          <div className="text-black flex flex-col items-center justify-center max-xs:gap-2 gap-10 w-full h-full">
+            <div id="pay" className="flex gap-4">
+              <img
+                ref={qrcodeRef}
+                id="qrcode"
+                src="/temp/qr.png"
+                alt="페이 QRcode"
+                className="no-swiper w-auto max-h-24 aspect-square transition-all"
+                onClick={(e) => {
+                  if (loading.current) return;
+                  handleQRFullScreenMode(e);
+                }}
+              />
+              <Image
+                ref={barcodeRef}
+                id="barcode"
+                src="/temp/barcode.png"
+                width={300}
+                height={300}
+                className="no-swiper flex-1 min-w-0 max-h-24 aspect-[4/1] rounded-md transition-all"
+                alt="페이 Barcode"
+                onClick={(e) => {
+                  if (loading.current) return;
+                  handleBarcodeFullScreenMode(e);
+                }}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between w-[200px]">
+                <span className="text-bd3 xs:text-bd1">포인트</span>
+                <span className="text-t4 xs:text-t3">8106원</span>
               </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex justify-between w-[200px]">
-                  <span className="text-bd3 xs:text-bd1">포인트</span>
-                  <span className="text-t4 xs:text-t3">8106원</span>
-                </div>
-                <div className="flex items-center justify-between w-[200px]">
-                  <span className="text-bd3 xs:text-bd1">머니</span>
-                  <span className="text-t4 xs:text-t3">330원</span>
-                </div>
+              <div className="flex items-center justify-between w-[200px]">
+                <span className="text-bd3 xs:text-bd1">머니</span>
+                <span className="text-t4 xs:text-t3">330원</span>
               </div>
             </div>
           </div>

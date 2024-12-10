@@ -6,6 +6,7 @@ import PointMoney from "./(components)/point-money";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 import FundingProgress from "./(components)/funding-progress";
+import Wallet from "./(components)/wallet";
 import PayCard from "./(components)/pay-card";
 
 export default async function HomePage() {
@@ -29,6 +30,9 @@ export default async function HomePage() {
 
       {/** 더 큰 혜택 찾기 */}
       <GoCardBenefit />
+
+      {/** 카드 추가하기 */}
+      {/* <Wallet /> */}
 
       <Link
         href={PATH.CHAT}
