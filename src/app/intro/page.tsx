@@ -10,6 +10,7 @@ import PlantiProfit from "./planti-profit";
 import PlantiForest from "./planti-forest";
 import PlantiPrompt from "./planti-prompt";
 import PlantiCTA from "./plantify-cta";
+import { MONEYGRAPHY, MONEYGRAPHY_PIXEL } from "@/styles/fonts/fonts";
 
 export default function Page() {
   useEffect(() => {
@@ -27,7 +28,9 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="h-full *:relative *:h-full *:w-full *:bg-shadow-900">
+    <div
+      className={`${MONEYGRAPHY.variable} ${MONEYGRAPHY.className} h-full *:relative *:h-full *:w-full *:bg-shadow-900`}
+    >
       <section className="panel panel-1 flex items-center justify-center">
         <Welcome />
       </section>

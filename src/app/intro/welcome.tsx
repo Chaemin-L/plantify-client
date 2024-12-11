@@ -18,11 +18,11 @@ export default function Welcome() {
       </h1>
       <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ">
         <Image
-          src="/icons/logo.svg"
+          src="/icons/logo.png"
           width={200}
           height={200}
           alt="서비스 로고"
-          className="logo w-40 h-40"
+          className="logo w-40 h-auto"
         />
       </div>
 

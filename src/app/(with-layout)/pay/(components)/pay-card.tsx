@@ -112,8 +112,8 @@ export default function PayCard() {
             />
             <div className="w-full h-full">
               <img
-                src="/icons/card-logo.svg"
-                className="absolute w-[60%] top-16 max-xs:top-10 right-0 "
+                src="/icons/card-logo.png"
+                className="absolute w-[35%] top-16 max-xs:top-10 right-10 "
                 alt="카드 로고"
               />
             </div>

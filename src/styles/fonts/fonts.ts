@@ -44,6 +44,22 @@ export const MONEYGRAPHY = localFont({
   variable: "--font-suit",
 });
 
+export const MONEYGRAPHY_PIXEL = localFont({
+  src: [
+    {
+      path: "Moneygraphy-Pixel.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "Moneygraphy-Pixel.woff2",
+      weight: "700",
+      style: "bold",
+    },
+  ],
+  variable: "--font-suit",
+});
+
 export const SPOQA_HAN_SANS_NEO = localFont({
   src: [
     {

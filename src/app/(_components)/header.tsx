@@ -26,9 +26,7 @@ export default function Header() {
       {/** logo and home */}
       <div className={clsx(!isTabMain ? "hidden" : "flex justify-between p-4")}>
         <div className="text-lg font-bold select-none flex justify-center items-center">
-          <span>PLANT</span>
-          <img src="/icons/logo.svg" className="inline w-5 h-5 -mx-0.5" />
-          <span>FY</span>
+          <img src="/icons/logo.png" className="inline w-8 h-auto -mx-0.5" />
         </div>
         <Link href={PATH.PAYMENTS} className="flex items-center select-none">
           <Image width={16} height={16} src="/icons/bell.svg" alt="알림내역" />
