@@ -1,6 +1,7 @@
 "use client";
 import Select, { SelectItemType } from "@/app/(_components)/select";
 import Loading from "@/app/loading";
+import { useGetCash } from "@/hooks/api/useGetCash";
 import { useGetStoreItemsByCategory } from "@/hooks/api/useGetStoreItemsByCategory";
 import { usePostPurchaseItems } from "@/hooks/api/usePostPurchaseItems";
 import { useModal } from "@/hooks/useModal";
@@ -41,18 +42,19 @@ export default function Page() {
 
   if (!isItemCategoryType(category)) return notFound();
 
+  const { data: cash } = useGetCash();
   const { data: storeItems } = useGetStoreItemsByCategory(category);
-  // console.log(data);
-
-  // TODO: user's coin, store data fetching api
   const { mutate } = usePostPurchaseItems();
-
-  const userCoins = 1618;
 
   const { openModal, Modal, confirm } = useModal(
     "아이템을 구매하시겠습니까?",
     "구매"
   );
+
+  const handlePurchase = (itemId: number) => {
+    openModal();
+    setItemId(itemId);
+  };
 
   useEffect(() => {
     if (confirm) {
@@ -61,12 +63,7 @@ export default function Page() {
     }
   }, [confirm]);
 
-  const handlePurchase = (itemId: number) => {
-    openModal();
-    setItemId(itemId);
-  };
-
-  if (!storeItems) return <Loading />;
+  if (!storeItems || !cash) return <Loading />;
 
   return (
     <div className="flex flex-col gap-5">
@@ -84,10 +81,9 @@ export default function Page() {
           alt="트리코인"
           className="w-4 h-4"
         />
-        <span>{userCoins.toLocaleString()}</span>
+        <span>{cash.cashBalance.toLocaleString()}</span>
       </div>
       <div className="grid-cols-3 w-full grid gap-3">
-        {/* {storeItems.map((storeItem) => ( */}
         {storeItems.map((storeItem: ItemType) => (
           <StoreItemCard
             key={storeItem.itemId}
