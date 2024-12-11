@@ -1,6 +1,6 @@
+import "@/styles/swiper.css";
 import { SPOQA_HAN_SANS_NEO } from "../styles/fonts/fonts";
 import "./globals.css";
-import "@/styles/swiper.css";
 
 export const metadata = {
   title: "Next.js",

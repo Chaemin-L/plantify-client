@@ -18,7 +18,7 @@ interface Props {
 }
 
 // TODO: 스크롤/페이지네이션 -> client component로 변경 예정
-export default function FundingList({ showProgress = false, listData }: Props) {
+export default function FundingList({ listData }: Props) {
   return (
     <ul className="flex flex-col max-md:gap-3 gap-5">
       {listData.map(

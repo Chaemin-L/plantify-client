@@ -1,6 +1,4 @@
-import { PATH } from "@/lib/_shared/paths";
 import { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
 
 export const meta: Metadata = {
   title: "Plantify - 더 큰 카드 혜택 추천",

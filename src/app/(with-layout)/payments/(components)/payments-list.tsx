@@ -1,10 +1,7 @@
 "use client";
-import clsx from "clsx";
+import { PaymentCategoryType } from "@/types/pay";
 import { useEffect, useState } from "react";
 import PaymentsItem from "./payments-item";
-import Select, { SelectItemType } from "@/app/_deprecated/select";
-import { PATH } from "@/lib/_shared/paths";
-import { PaymentCategoryType } from "@/types/pay";
 
 export interface PaymentsType {
   orderName: string;

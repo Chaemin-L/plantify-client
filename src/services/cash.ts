@@ -2,7 +2,6 @@ import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
 import { CashType } from "@/types/api/cash";
 import { FinalResponse } from "@/types/api/common";
-import { ItemType } from "@/types/api/item";
 
 // OK
 export async function getCash() {

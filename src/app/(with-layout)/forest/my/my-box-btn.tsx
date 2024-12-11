@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { MyItemType } from "@/types/api/item";
+import clsx from "clsx";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Draggable from "react-draggable";
-import clsx from "clsx";
 
 interface Props {
   handleNewItem: (myItemId: MyItemType) => void;

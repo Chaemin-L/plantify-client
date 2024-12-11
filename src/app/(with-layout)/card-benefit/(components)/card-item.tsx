@@ -1,6 +1,6 @@
 import { CardType } from "@/types/api/card";
 import { rotateCard } from "@/utils/rotateCard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function CardItem({
   card_name,

@@ -1,13 +1,12 @@
-import Image from "next/image";
-import PayNotice from "./(components)/pay-notice";
-import BadgeStatus from "./(components)/badge-status";
-import GoCardBenefit from "./(components)/go-card-benefit";
-import PointMoney from "./(components)/point-money";
 import { PATH } from "@/lib/_shared/paths";
+import Image from "next/image";
 import Link from "next/link";
+import BadgeStatus from "./(components)/badge-status";
 import FundingProgress from "./(components)/funding-progress";
-import Wallet from "./(components)/wallet";
+import GoCardBenefit from "./(components)/go-card-benefit";
 import PayCard from "./(components)/pay-card";
+import PayNotice from "./(components)/pay-notice";
+import PointMoney from "./(components)/point-money";
 
 export default async function HomePage() {
   // TODO: 실제 데이터 fetching

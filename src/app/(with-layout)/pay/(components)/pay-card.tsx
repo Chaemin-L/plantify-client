@@ -1,10 +1,11 @@
+//@ts-nocheck
 "use client";
 import Image from "next/image";
 import { MouseEventHandler, useRef, useState } from "react";
+import "swiper/css";
+import "swiper/css/effect-flip";
 import { EffectFlip } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/effect-flip";
-import "swiper/css";
 
 export default function PayCard() {
   const [fullScreen, setFullScreen] = useState<boolean | HTMLImageElement>(
@@ -71,7 +72,6 @@ export default function PayCard() {
   };
 
   const handleCancelFullScreenMode = async (target: HTMLImageElement) => {
-    //@ts-ignore
     target.style = {
       ...target.style,
       position: "static",

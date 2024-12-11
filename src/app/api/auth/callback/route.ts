@@ -1,4 +1,4 @@
-import { API_ENDPOINTS, BASE_URL } from "@/config/api";
+import { API_ENDPOINTS } from "@/config/api";
 import { PATH } from "@/lib/_shared/paths";
 import fetchClient from "@/lib/fetchClient";
 import { redirect } from "next/navigation";

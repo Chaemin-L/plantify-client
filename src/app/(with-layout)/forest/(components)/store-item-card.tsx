@@ -8,7 +8,7 @@ interface Props {
   imgUrl: string;
   onClick: MouseEventHandler;
 }
-export default function StoreItemCard({ id, price, imgUrl, onClick }: Props) {
+export default function StoreItemCard({ price, imgUrl, onClick }: Props) {
   return (
     <button
       className="card space-y-2 md:space-y-4 p-2 hover:opacity-80"

@@ -1,12 +1,12 @@
 "use client";
-import Image from "next/image";
-import { PATH } from "@/lib/_shared/paths";
-import StoreItemCard from "../(components)/store-item-card";
-import { useModal } from "@/hooks/useModal";
-import { notFound, useSearchParams } from "next/navigation";
 import Select, { SelectItemType } from "@/app/(_components)/select";
-import { isItemCategoryType } from "@/utils/typeCheck";
+import { useModal } from "@/hooks/useModal";
+import { PATH } from "@/lib/_shared/paths";
 import { ItemCategoryType } from "@/types/forest";
+import { isItemCategoryType } from "@/utils/typeCheck";
+import Image from "next/image";
+import { notFound, useSearchParams } from "next/navigation";
+import StoreItemCard from "../(components)/store-item-card";
 
 const categories: SelectItemType<ItemCategoryType>[] = [
   { label: "전체", value: "ALL" },
@@ -40,10 +40,7 @@ export default function Page() {
   // TODO: user's coin, store data fetching api
   const userCoins = 1618;
 
-  const { openModal, Modal, confirm } = useModal(
-    "아이템을 구매하시겠습니까?",
-    "구매"
-  );
+  const { openModal, Modal } = useModal("아이템을 구매하시겠습니까?", "구매");
 
   return (
     <div className="flex flex-col gap-5">

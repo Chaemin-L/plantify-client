@@ -1,5 +1,3 @@
-import { FinalResponse } from "@/types/api/common";
-
 const fetchClient = async (url: string, options: RequestInit = {}) => {
   let token;
   if (process.env.NODE_ENV === "development") {

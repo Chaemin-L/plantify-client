@@ -1,5 +1,5 @@
-import { InputHTMLAttributes, MouseEventHandler } from "react";
 import Image from "next/image";
+import { InputHTMLAttributes } from "react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

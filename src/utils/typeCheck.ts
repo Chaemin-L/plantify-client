@@ -1,27 +1,29 @@
-import { BenefitType, Benefit } from "@/types/card";
+import { Benefit, BenefitType } from "@/types/card";
 import { ItemCategory, ItemCategoryType } from "@/types/forest";
-import { FundingCategoryType, FundingCategory } from "@/types/funding";
+import { FundingCategory, FundingCategoryType } from "@/types/funding";
 import {
-  PaymentCategoryType,
   PaymentCategory,
-  PaymentSortingType,
+  PaymentCategoryType,
   PaymentSorting,
+  PaymentSortingType,
 } from "@/types/pay";
 
 /** Payments */
-export const isPaymentCategoryType = (x: any): x is PaymentCategoryType =>
-  PaymentCategory.includes(x);
+export const isPaymentCategoryType = (x: unknown): x is PaymentCategoryType =>
+  typeof x === "string" && PaymentCategory.includes(x as PaymentCategoryType);
 
-export const isPaymentSortingType = (x: any): x is PaymentSortingType =>
-  PaymentSorting.includes(x);
+export const isPaymentSortingType = (x: unknown): x is PaymentSortingType =>
+  typeof x === "string" && PaymentSorting.includes(x as PaymentSortingType);
 
 /** Benefit */
-export const isBenefitType = (x: any): x is BenefitType => Benefit.includes(x);
+export const isBenefitType = (x: unknown): x is BenefitType =>
+  typeof x === "string" && Benefit.includes(x as BenefitType);
 
 /** Funding */
-export const isFundingCategoryType = (x: any): x is FundingCategoryType =>
-  [...FundingCategory, "ALL"].includes(x);
+export const isFundingCategoryType = (x: unknown): x is FundingCategoryType =>
+  typeof x === "string" &&
+  [...FundingCategory, "ALL"].includes(x as FundingCategoryType);
 
 /** Forest */
-export const isItemCategoryType = (x: any): x is ItemCategoryType =>
-  ItemCategory.includes(x);
+export const isItemCategoryType = (x: unknown): x is ItemCategoryType =>
+  typeof x === "string" && ItemCategory.includes(x as ItemCategoryType);

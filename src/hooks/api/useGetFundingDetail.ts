@@ -1,4 +1,4 @@
-import { getFundingDetail, getOrganizations } from "@/services/funding";
+import { getFundingDetail } from "@/services/funding";
 import { useQuery } from "@tanstack/react-query";
 
 // OK

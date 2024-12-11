@@ -16,6 +16,7 @@ export async function getCardBenefit(category: string) {
     console.log(data);
     return data as BenefitCardListType;
   } catch (e) {
+    console.log(e);
     throw new Error("추천 카드를 가져오는데 실패했습니다");
   }
 }

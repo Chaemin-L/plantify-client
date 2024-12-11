@@ -1,10 +1,10 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFlip, Pagination } from "swiper/modules";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
-import "swiper/css/effect-flip";
 import "swiper/css";
+import "swiper/css/effect-flip";
+import { EffectFlip, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Wallet() {
   return (

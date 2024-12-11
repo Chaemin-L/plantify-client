@@ -1,9 +1,8 @@
 "use client";
 import clsx from "clsx";
-import Progressbar from "./progressbar";
-import { PATH } from "@/lib/_shared/paths";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
+import Progressbar from "./progressbar";
 
 interface FundingStatus {
   // styling
@@ -21,7 +20,6 @@ interface FundingStatus {
 export default function FundingStatus({
   size = "lg",
   showProgress,
-  id,
   percent,
   targetAmount,
   leftTop = "",
@@ -63,24 +61,3 @@ export default function FundingStatus({
     </div>
   );
 }
-
-/** left top
- *         <div className="flex space-x-1.5 items-center  whitespace-nowrap">
-          <h1
-            className={clsx(
-              size === "reactive" && "text-bd3 md:text-t4",
-              "flex-1 line-clamp-1 break-all pr-2"
-            )}
-          >
-            {leftTop}
-          </h1>
-        </div>
- * 
- */
-/** rightBottom
- *         <button
-          onClick={() => router.push(`${PATH.FUNDING_ORGANIZATION}#org_${id}`)}
-        >
-          {organizationName}
-        </button>
- */
