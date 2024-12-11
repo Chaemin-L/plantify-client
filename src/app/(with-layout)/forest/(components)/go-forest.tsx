@@ -11,7 +11,7 @@ export default function GoForest() {
       <h1 className="text-t1">숲 꾸미기</h1>
       <img
         src="/illusts/3d-forest.svg"
-        className="absolute bottom-3 right-3 w-[240px]"
+        className="absolute bottom-3 right-3 w-[200px] sm:w-[240px]"
       />
     </Link>
   );
