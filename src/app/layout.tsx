@@ -13,21 +13,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body
-        // className={`${SUIT.variable} ${SUIT.className} antialiased bg-shadow-900 w-screen`}
-        // className={`${MONEYGRAPHY.variable} ${MONEYGRAPHY.className} antialiased bg-accent-purple w-screen`}
-        // className={`${NOTOSANS.className} antialiased bg-accent-purple w-screen`}
-        className={`${SPOQA_HAN_SANS_NEO.variable} ${SPOQA_HAN_SANS_NEO.className} antialiased bg-shadow-800 w-screen`}
-      >
-        {/* <div className="flex flex-row justify-center gap-[5%] h-full w-full "> */}
-        <div className="flex justify-center h-full w-full ">
-          {/* <AdBanner /> */}
-          <div className="w-[500px] max-w-[500px] min-w-0 bg-darkBg text-white">
-            {children}
+    <>
+      <html lang="ko">
+        <body
+          className={`${SPOQA_HAN_SANS_NEO.variable} ${SPOQA_HAN_SANS_NEO.className} antialiased bg-shadow-800 w-screen`}
+        >
+          <div className="flex justify-center h-full w-full ">
+            <div className="w-[500px] max-w-[500px] min-w-0 bg-darkBg text-white">
+              {children}
+            </div>
           </div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </>
   );
 }

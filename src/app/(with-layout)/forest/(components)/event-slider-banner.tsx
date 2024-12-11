@@ -1,4 +1,6 @@
+"use client";
 import LinkSlider, { LinkType } from "@/app/(_components)/link-slider";
+import { showToast } from "@/utils/toast";
 
 // dummy data
 const events: LinkType[] = [
@@ -6,6 +8,7 @@ const events: LinkType[] = [
     title: "출석체크 이벤트!",
     description: "매일 출석하고\n5캐시를 받아보세요",
     icon: "/icons/dart.svg",
+    onClick: () => showToast("어쩌구", "info"),
   },
   {
     title: "이벤트 1",

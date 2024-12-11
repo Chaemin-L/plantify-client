@@ -2,22 +2,9 @@ import Ranking from "./(components)/ranking";
 import GoForest from "./(components)/go-forest";
 import EventSliderBanner from "./(components)/event-slider-banner";
 import { PATH } from "@/lib/_shared/paths";
-import IconCard from "./(components)/icon-card";
 import Link from "next/link";
 import Image from "next/image";
-
-const menuTabInfo = [
-  {
-    title: "상점",
-    href: PATH.FOREST_STORE,
-    thumbnail: "/icons/shopping.webp",
-  },
-  {
-    title: "출석체크",
-    href: PATH.HOME,
-    thumbnail: "/icons/calendar.webp",
-  },
-];
+import FeatureGroup from "./(components)/feature-group";
 
 export default function ForestPage() {
   return (
@@ -29,11 +16,7 @@ export default function ForestPage() {
       <GoForest />
 
       {/** 상점, 출석체크 */}
-      <div className="flex gap-4">
-        {menuTabInfo.map((item, idx) => (
-          <IconCard key={`${item.title}_${idx}`} {...item} />
-        ))}
-      </div>
+      <FeatureGroup />
 
       {/** 명예의 전당 */}
       <Ranking />
