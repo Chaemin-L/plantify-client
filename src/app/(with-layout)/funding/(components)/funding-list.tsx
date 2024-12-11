@@ -1,39 +1,82 @@
+"use client";
 import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
+import { Pageable } from "@/types/api/common";
+import { CategoryType } from "@/types/api/funding";
+import {
+  FetchNextPageOptions,
+  InfiniteData,
+  InfiniteQueryObserverResult,
+} from "@tanstack/react-query";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 interface FundingType {
-  id: string;
+  fundingId: string;
   image: string;
   category: string;
   title: string;
   percent: number;
   targetAmount: number;
-  organizationName: string;
-  progress?: string;
+  organizationName?: string;
 }
+
 interface Props {
-  showProgress?: boolean;
+  category: CategoryType;
   listData: FundingType[];
+  fetchNextPage: (
+    options?: FetchNextPageOptions
+  ) => Promise<
+    InfiniteQueryObserverResult<
+      InfiniteData<Pageable<FundingType>, unknown>,
+      Error
+    >
+  >;
+  hasNextPage: boolean;
 }
 
 // TODO: 스크롤/페이지네이션 -> client component로 변경 예정
-export default function FundingList({ listData }: Props) {
+export default function FundingList({
+  category,
+  listData,
+  fetchNextPage,
+  hasNextPage,
+}: Props) {
+  const observerRef = useRef(null);
+  useEffect(() => {
+    console.log(hasNextPage);
+    if (!hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerRef.current) observer.observe(observerRef.current);
+
+    return () => {
+      if (observerRef.current) observer.disconnect();
+    };
+  }, [fetchNextPage, hasNextPage]);
+
   return (
     <ul className="flex flex-col max-md:gap-3 gap-5">
       {listData.map(
         ({
-          id,
+          fundingId,
           image,
-          category,
           title,
           percent,
           targetAmount,
           organizationName,
         }) => (
-          <li key={id}>
+          <li key={fundingId}>
             <Link
-              href={`${PATH.FUNDING_LIST}/${id}`}
+              href={`${PATH.FUNDING_LIST}/${fundingId}`}
               className="flex rounded-xl  bg-shadow-800 h-[106px] md:h-[128px]"
             >
               <img src={image} className="w-[40%]  rounded-l-xl object-cover" />
@@ -49,15 +92,11 @@ export default function FundingList({ listData }: Props) {
                     </h2>
                   </div>
                   <FundingStatus
-                    id={id}
+                    id={fundingId}
                     size="sm"
                     percent={percent}
                     targetAmount={targetAmount}
-                    rightBottom={
-                      <Link href={`${PATH.FUNDING_ORGANIZATION}#org_${id}`}>
-                        {organizationName}
-                      </Link>
-                    }
+                    rightBottom={<span>{organizationName}</span>}
                   />
                 </div>
               </div>
@@ -65,6 +104,7 @@ export default function FundingList({ listData }: Props) {
           </li>
         )
       )}
+      {hasNextPage && <li ref={observerRef}>Loading...</li>}
     </ul>
   );
 }

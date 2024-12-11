@@ -1,9 +1,9 @@
-import Link from "next/link";
+import { PATH } from "@/lib/_shared/paths";
 import Image from "next/image";
+import Link from "next/link";
 import AdSliderBanner from "./(components)/ad-slider-banner";
 import BestFunding from "./(components)/best-funding";
 import LatestFunding from "./(components)/latest-funding";
-import { PATH } from "@/lib/_shared/paths";
 
 export default function FundraisingsPage() {
   // TODO: data fetch

@@ -7,6 +7,7 @@ export const FundingCategory: CategoryType[] = [
   "DISABILITY",
   "GLOBAL",
   "ELDERLY",
+  "SOCIAL",
 ] as const;
 
 export type FundingCategoryType = (typeof FundingCategory)[number];

@@ -2,10 +2,12 @@
 import BottomFixedButton, {
   Button,
 } from "@/app/(_components)/bottom-fixed-button";
-import FundingStatus from "@/app/(_components)/funding-status";
-import { data } from "../../(_dummy)/detail-data";
-import { useState } from "react";
 import BottomSheet from "@/app/(_components)/bottom-sheet";
+import FundingStatus from "@/app/(_components)/funding-status";
+import { PATH } from "@/lib/_shared/paths";
+import Link from "next/link";
+import { useState } from "react";
+import { data } from "../../(_dummy)/detail-data";
 
 export default function Page() {
   // const {id} = await params;
@@ -53,7 +55,11 @@ export default function Page() {
             id={id}
             percent={percent}
             targetAmount={targetAmount}
-            rightBottom={organizationName}
+            rightBottom={
+              <Link href={`${PATH.FUNDING_ORGANIZATION}#org_${id}`}>
+                {organizationName}
+              </Link>
+            }
           />
         </div>
         <p className="text-bd1 max-md:text-bd2 whitespace-pre-line">

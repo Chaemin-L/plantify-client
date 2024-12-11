@@ -7,6 +7,6 @@ export const useGetFundingList = (size: number, sort: string[] = ["title"]) => {
     queryKey: ["funding-list"],
     queryFn: ({ pageParam = 0 }) => getFundingList(pageParam, size, sort),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => lastPage.data.pageable.pageNumber + 1,
+    getNextPageParam: (lastPage) => lastPage.pageable.pageNumber + 1,
   });
 };
