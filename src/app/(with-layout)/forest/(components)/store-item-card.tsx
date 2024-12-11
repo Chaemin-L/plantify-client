@@ -1,21 +1,19 @@
 "use client";
+import { ItemType } from "@/types/api/item";
 import Image from "next/image";
 import { MouseEventHandler } from "react";
 
-interface Props {
-  id: number;
-  price: number;
-  imgUrl: string;
+interface Props extends ItemType {
   onClick: MouseEventHandler;
 }
-export default function StoreItemCard({ price, imgUrl, onClick }: Props) {
+export default function StoreItemCard({ price, imageUri, onClick }: Props) {
   return (
     <button
       className="card space-y-2 md:space-y-4 p-2 hover:opacity-80"
       onClick={onClick}
     >
       <div className="pt-2 px-2">
-        <img src={imgUrl} className="w-full" />
+        <img src={imageUri} className="w-full" />
       </div>
       <div className="rounded-2xl py-2 w-full bg-shadow-700 flex gap-1 md:gap-2 justify-center text-bd2 items-center">
         <Image
