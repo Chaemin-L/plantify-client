@@ -35,7 +35,7 @@ export default function LinkSlider({ links }: Props) {
       {links.map(({ href, title, description, icon, onClick }, idx) => (
         <SwiperSlide className="select-none py-1" key={`${title}_${idx}`}>
           <button
-            className="flex items-center h-full"
+            className="w-full h-full py-full flex items-center text-left"
             onClick={() => (onClick ? onClick() : router.push(href!))}
           >
             <div className="space-y-1 max-w-[50%]">
