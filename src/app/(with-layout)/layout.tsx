@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
-import { SUIT } from "@/styles/fonts/fonts";
 import Header from "@/app/(_components)/header";
 import "@/app/globals.css";
-import { TanstackQueryClientProvider } from "@/providers/tanstackProviders";
+import { TanstackQueryClientProvider } from "@/providers/tanstack-provider";
+import ToastProvider from "@/providers/toast-provider";
 import "@/styles/swiper.css";
-import ToastProvider from "@/providers/toast-providers";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Plantify",
