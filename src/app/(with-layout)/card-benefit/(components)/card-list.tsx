@@ -1,9 +1,9 @@
 "use client";
 import Accordion from "@/app/(_components)/accordion";
-import CardItem from "./card-item";
+import Loading from "@/app/loading";
 import { BenefitCardListType } from "@/types/api/card";
 import { useState } from "react";
-import Loading from "@/app/(_components)/loading";
+import CardItem from "./card-item";
 
 interface Props {
   listData: BenefitCardListType | null;

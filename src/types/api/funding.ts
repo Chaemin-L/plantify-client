@@ -29,6 +29,10 @@ export interface FundingType {
   donationEndDate: Date | null;
 }
 
+export interface FundingDetailType extends FundingType {
+  organizationName: string;
+}
+
 export interface MyFundingType {
   myFundingId: string;
   fundingId: string;

@@ -23,13 +23,6 @@ export async function getFundingList(
 }
 
 // OK
-export async function getFundingDetail(id: string) {
-  const data = await fetchClient(`${API_ENDPOINTS.FUNDING}/${id}`);
-  if (data.status === 200) return data as FinalResponse<FundingType>;
-  throw new Error(data.message);
-}
-
-// OK
 export async function getMyFundingList(
   page: number,
   size: number,

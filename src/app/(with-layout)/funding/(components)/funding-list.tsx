@@ -92,7 +92,6 @@ export default function FundingList({
                     </h2>
                   </div>
                   <FundingStatus
-                    id={fundingId}
                     size="sm"
                     percent={percent}
                     targetAmount={targetAmount}

@@ -34,7 +34,6 @@ export default function FundRaisingsListPage() {
   // const funding = useGetOrganizations();
 
   if (isLoading) return <Loading />;
-  console.log(listData);
 
   return (
     <>

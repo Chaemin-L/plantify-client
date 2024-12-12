@@ -14,9 +14,7 @@ export default function Page() {
       className={`flex justify-center items-center h-full ${MONEYGRAPHY.variable} ${MONEYGRAPHY.className}`}
     >
       <div className="text-[36px] font-bold animate-[fadeIn_1s] select-none flex justify-center items-center">
-        <span>PLANT</span>
-        <img src="/icons/logo.svg" className="inline w-8 h-8 -mx-0.5" />
-        <span> FY</span>
+        <img src="/icons/logo.png" className="inline w-12-mx-0.5" />
       </div>
     </div>
   );

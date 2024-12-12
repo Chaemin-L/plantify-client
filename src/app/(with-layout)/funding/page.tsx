@@ -7,6 +7,10 @@ import BestFunding from "./(components)/best-funding";
 import FundingSlider from "./(components)/funding-slider";
 
 export default async function FundraisingsPage() {
+  const { content: bestFunding } = await getFundingList(0, 1, [
+    "percent",
+    "desc",
+  ]);
   const { content: fundingByStartDate } = await getFundingList(0, 7, [
     "donationStartDate",
   ]);
@@ -20,7 +24,7 @@ export default async function FundraisingsPage() {
       <AdSliderBanner />
 
       {/** 베스트 펀딩 */}
-      <BestFunding />
+      <BestFunding data={bestFunding[0]} />
 
       {/** 최신순 리스트 */}
       <FundingSlider title="최신순" listData={fundingByStartDate} />
