@@ -1,6 +1,6 @@
 "use client";
-import Loading from "@/app/(_components)/loading";
 import Select, { SelectItemType } from "@/app/(_components)/select";
+import Loading from "@/app/loading";
 import { useGetFundingListByCategory } from "@/hooks/api/useGetFundingListByCategory";
 import { PATH } from "@/lib/_shared/paths";
 import { CategoryType } from "@/types/api/funding";

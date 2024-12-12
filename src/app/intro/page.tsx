@@ -1,16 +1,15 @@
 "use client";
-import { useEffect } from "react";
+import { MONEYGRAPHY } from "@/styles/fonts/fonts";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { TextPlugin } from "gsap/dist/TextPlugin";
-import Welcome from "./welcome";
-import PlantiPay from "./planti-pay";
-import PlantiFunding from "./planti-funding";
-import PlantiProfit from "./planti-profit";
+import { useEffect } from "react";
 import PlantiForest from "./planti-forest";
+import PlantiFunding from "./planti-funding";
+import PlantiPay from "./planti-pay";
+import PlantiProfit from "./planti-profit";
 import PlantiPrompt from "./planti-prompt";
 import PlantiCTA from "./plantify-cta";
-import { MONEYGRAPHY, MONEYGRAPHY_PIXEL } from "@/styles/fonts/fonts";
+import Welcome from "./welcome";
 
 export default function Page() {
   useEffect(() => {

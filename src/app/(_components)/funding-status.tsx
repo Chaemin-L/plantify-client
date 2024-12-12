@@ -9,7 +9,6 @@ interface FundingStatus {
   size?: "sm" | "lg" | "reactive";
   showProgress?: boolean;
   // data
-  id: string;
   percent: number;
   targetAmount: number;
   leftTop?: string | ReactNode;

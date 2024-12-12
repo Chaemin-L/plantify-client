@@ -1,3 +1,6 @@
+import { redirect } from "next/navigation";
+import { PATH } from "./_shared/paths";
+
 const fetchClient = async (url: string, options: RequestInit = {}) => {
   let token;
   if (process.env.NODE_ENV === "development") {
@@ -25,7 +28,12 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
   const response = await fetch(url, mergedOptions);
   // 통신 에러
   if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
+    switch (response.status) {
+      case 403:
+        redirect(PATH.LOGIN);
+      default:
+        throw new Error(`${response.status} ${response.statusText}`);
+    }
   } else {
     const data = await response.json();
     return data;

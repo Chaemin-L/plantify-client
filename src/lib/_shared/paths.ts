@@ -2,6 +2,7 @@ export const PATH = {
   // intro
   SPLASH: "/",
   INTRO: "/intro",
+  LOGIN: "/auth",
 
   // navigation tab
   FOREST: "/forest",
