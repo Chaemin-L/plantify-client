@@ -41,14 +41,14 @@ export default function Page() {
             </Accordion.Summary>
           </div>
           <Accordion.Details>
-            <div className="grid grid-cols-4 gap-5">
+            <div className="grid grid-cols-4 gap-2">
               {bankList.map((bank) => (
                 <button
                   key={bank.id}
-                  className="hover:bg-shadow-800 aspect-square rounded-xl place-content-center select-none"
+                  className="hover:bg-shadow-800 p-2 aspect-square rounded-xl flex justify-center items-center select-none"
                   onClick={() => handleBankClick(bank)}
                 >
-                  <div className="flex flex-col gap-3 justify-center items-center">
+                  <div className="flex flex-col gap-2 justify-center items-center">
                     <div className="bg-white rounded-xl p-2">
                       <Image
                         width={24}
@@ -58,7 +58,7 @@ export default function Page() {
                         className="w-8 h-8"
                       />
                     </div>
-                    <div className="text-bd1 font-bold text-center">
+                    <div className="text-bd4 xs:text-bd3 sm:text-bd1 font-bold text-center">
                       {bank.name}
                     </div>
                   </div>

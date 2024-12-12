@@ -2,20 +2,38 @@
 import BottomFixedButton, {
   Button,
 } from "@/app/(_components)/bottom-fixed-button";
-import Link from "next/link";
-import { PATH } from "@/lib/_shared/paths";
-import Image from "next/image";
 import BottomSheet from "@/app/(_components)/bottom-sheet";
+import { PATH } from "@/lib/_shared/paths";
+import { AccountType } from "@/types/api/pay";
+import getBankId from "@/utils/getBankName";
+import Image from "next/image";
+import Link from "next/link";
 import {
-  useState,
   ChangeEventHandler,
   KeyboardEventHandler,
   useEffect,
+  useState,
 } from "react";
 
-const accounts = [
-  { id: "hana", name: "하나", accountNum: 1010102030210 },
-  { id: "woori", name: "우리", accountNum: 1000023366635 },
+const accounts: AccountType[] = [
+  {
+    accountId: 123,
+    bankName: "하나",
+    accountNum: 1010102030210,
+    accountStatus: "ACTIVE",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    accountHolder: "이채민",
+  },
+  {
+    accountId: 2322,
+    bankName: "우리",
+    accountNum: 1000023366635,
+    accountStatus: "ACTIVE",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    accountHolder: "이채민",
+  },
 ];
 
 const pay = 12230;
@@ -41,7 +59,12 @@ export default function AccountListPage() {
     <div className="flex flex-col gap-10 pt-5">
       <h1 className="text-t2">연결 계좌</h1>
       <ul className="flex flex-col ">
-        {accounts.map(({ id, name, accountNum }) => (
+        {accounts.length === 0 && (
+          <div className="text-center text-shadow-500">
+            등록된 계좌가 없습니다
+          </div>
+        )}
+        {accounts.map(({ bankName, accountNum }) => (
           <div
             key={accountNum}
             className="flex justify-between hover:bg-shadow-800 p-5 rounded-xl"
@@ -51,12 +74,12 @@ export default function AccountListPage() {
                 <Image
                   width={28}
                   height={28}
-                  src={`/icons/bank/${id}.svg`}
-                  alt={name}
+                  src={`/icons/bank/${getBankId(bankName)}.svg`}
+                  alt={bankName}
                 />
               </div>
               <div className="text-bd1">
-                {name}&nbsp;
+                {bankName}&nbsp;
                 {accountNum.toString().slice(-4)}
               </div>
             </div>

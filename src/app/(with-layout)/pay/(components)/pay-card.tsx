@@ -7,7 +7,11 @@ import "swiper/css/effect-flip";
 import { EffectFlip } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function PayCard() {
+interface Props {
+  balance: number;
+}
+
+export default function PayCard({ balance }: Props) {
   const [fullScreen, setFullScreen] = useState<boolean | HTMLImageElement>(
     false
   );
@@ -150,7 +154,7 @@ export default function PayCard() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between w-[200px]">
                 <span className="text-bd3 xs:text-bd1">포인트</span>
-                <span className="text-t4 xs:text-t3">8106원</span>
+                <span className="text-t4 xs:text-t3">{balance}원</span>
               </div>
               <div className="flex items-center justify-between w-[200px]">
                 <span className="text-bd3 xs:text-bd1">머니</span>

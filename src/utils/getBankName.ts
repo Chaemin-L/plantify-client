@@ -1,26 +1,27 @@
-// @deprecated
-export default function getBankName(bankId: string) {
-  switch (bankId) {
-    case "hana":
-      return "하나";
-    case "ibk":
-      return "IBK";
-    case "kakao":
-      return "카카오";
-    case "kb":
-      return "KB";
-    case "kbank":
-      return "케이뱅크";
-    case "nonghyup":
-      return "농협";
-    case "sc":
-      return "SC제일";
-    case "shinhan":
-      return "신한";
-    case "toss":
-      return "토스";
-    case "woori":
-      return "우리";
+import { BankNameType } from "@/types/bank";
+
+export default function getBankId(bankName: BankNameType) {
+  switch (bankName) {
+    case "하나":
+      return "hana";
+    case "IBK기업":
+      return "ibk";
+    case "카카오뱅크":
+      return "kakao";
+    case "국민":
+      return "kb";
+    case "케이뱅크":
+      return "kbank";
+    case "농협":
+      return "nonghyup";
+    case "SC제일":
+      return "sc";
+    case "신한":
+      return "shinhan";
+    case "토스뱅크":
+      return "toss";
+    case "우리":
+      return "woori";
     default:
       return null;
   }
