@@ -127,8 +127,8 @@ export default function PayPoint() {
               </div>
             </div>
           </SwiperSlide>
-          <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 bg-white overflow-hidden">
-            <div className="text-black flex flex-col items-center justify-between pt-5 max-xs:gap-2 gap-10 w-full h-full">
+          <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 bg-white">
+            <div className="text-black flex flex-col items-center justify-between xs:pt-5 max-xs:gap-2 gap-10 w-full h-full">
               <div id="pay" className="flex gap-4">
                 <img
                   ref={qrcodeRef}
@@ -158,7 +158,7 @@ export default function PayPoint() {
               <div className="w-full flex justify-between ">
                 <img
                   src="/icons/card-back-logo.png"
-                  className="absolute -bottom-2 left-10 h-28 w-auto"
+                  className="absolute -bottom-0 left-10 h-[30%] xs:h-[40%] w-auto"
                 />
                 <div className="w-full flex flex-col gap-1 mr-2">
                   <div className="flex-1 flex items-center justify-end gap-2">

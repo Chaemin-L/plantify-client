@@ -1,4 +1,4 @@
-import { ToastType } from "@/providers/toast-providers";
+import { ToastType } from "@/providers/toast-provider";
 
 // 단순 함수로 토스트 메시지를 띄우기 위한 유틸리티
 export const showToast = (message: string, type: ToastType) => {
