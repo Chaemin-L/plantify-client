@@ -17,8 +17,4 @@ export const API_ENDPOINTS = {
   CARD: `${BASE_URL}/v1/recommend/cards`,
 };
 
-export const NEXT_API_ENDPOINTS = {
-  PAY: `${NEXT_BASE_URL}/pay`,
-};
-
 export const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${REDIRECT_URI}&response_type=code`;

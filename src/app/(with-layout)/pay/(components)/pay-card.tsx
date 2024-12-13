@@ -19,7 +19,6 @@ export default function PayPoint() {
   const loading = useRef<boolean>(false);
 
   const { data: pay } = useGetPay();
-  console.log(pay);
 
   const balance = 102;
   const hasPay = pay === null;

@@ -3,8 +3,9 @@ import BottomFixedButton, {
   Button,
 } from "@/app/(_components)/bottom-fixed-button";
 import BottomSheet from "@/app/(_components)/bottom-sheet";
+import Loading from "@/app/loading";
+import { useGetAccounts } from "@/hooks/api/useGetAccounts";
 import { PATH } from "@/lib/_shared/paths";
-import { AccountType } from "@/types/api/pay";
 import getBankId from "@/utils/getBankName";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,26 +16,26 @@ import {
   useState,
 } from "react";
 
-const accounts: AccountType[] = [
-  {
-    accountId: 123,
-    bankName: "하나",
-    accountNum: 1010102030210,
-    accountStatus: "ACTIVE",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    accountHolder: "이채민",
-  },
-  {
-    accountId: 2322,
-    bankName: "우리",
-    accountNum: 1000023366635,
-    accountStatus: "ACTIVE",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    accountHolder: "이채민",
-  },
-];
+// const accounts: AccountType[] = [
+//   {
+//     accountId: 123,
+//     bankName: "하나",
+//     accountNum: 1010102030210,
+//     accountStatus: "ACTIVE",
+//     createdAt: new Date(),
+//     updatedAt: new Date(),
+//     accountHolder: "이채민",
+//   },
+//   {
+//     accountId: 2322,
+//     bankName: "우리",
+//     accountNum: 1000023366635,
+//     accountStatus: "ACTIVE",
+//     createdAt: new Date(),
+//     updatedAt: new Date(),
+//     accountHolder: "이채민",
+//   },
+// ];
 
 const pay = 12230;
 
@@ -45,26 +46,30 @@ export default function AccountListPage() {
   const [charge, setCharge] = useState<string>("");
   const [isOpen, setOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    setCharge("");
+  }, [isOpen]);
+
+  const { data: accounts, isLoading } = useGetAccounts();
+
+  if (isLoading) return <Loading />;
+
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) =>
     setCharge(e.target.value.replace(firstZero, ""));
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) =>
     ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault();
 
-  useEffect(() => {
-    setCharge("");
-  }, [isOpen]);
-
   return (
     <div className="flex flex-col gap-10 pt-5">
       <h1 className="text-t2">연결 계좌</h1>
       <ul className="flex flex-col ">
-        {accounts.length === 0 && (
+        {accounts?.length === 0 && (
           <div className="text-center text-shadow-500">
             등록된 계좌가 없습니다
           </div>
         )}
-        {accounts.map(({ bankName, accountNum }) => (
+        {accounts?.map(({ bankName, accountNum }) => (
           <div
             key={accountNum}
             className="flex justify-between hover:bg-shadow-800 p-5 rounded-xl"
