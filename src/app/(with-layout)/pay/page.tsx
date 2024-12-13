@@ -8,7 +8,6 @@ import PayPoint from "./(components)/pay-card";
 import PayNotice from "./(components)/pay-notice";
 
 export default async function HomePage() {
-  // TODO: 실제 데이터 fetching
   return (
     <div className="flex flex-col gap-5 w-full">
       {/** 알림 */}

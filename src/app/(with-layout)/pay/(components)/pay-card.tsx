@@ -1,5 +1,6 @@
 //@ts-nocheck
 "use client";
+import { useGetPay } from "@/hooks/api/useGetPay";
 import { PATH } from "@/lib/_shared/paths";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,10 +18,11 @@ export default function PayPoint() {
   const barcodeRef = useRef<HTMLImageElement>(null);
   const loading = useRef<boolean>(false);
 
-  // const { data: pay } = useGetPay();
-  // console.log(pay); // balance or pay 보유 유무
+  const { data: pay } = useGetPay();
+  console.log(pay);
+
   const balance = 102;
-  const hasPay = true;
+  const hasPay = pay === null;
 
   const handleMoveBodyTransitionEnd = (target: HTMLImageElement) => {
     setFullScreen(target);

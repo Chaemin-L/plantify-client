@@ -1,16 +1,8 @@
-import { redirect } from "next/navigation";
-import { PATH } from "./_shared/paths";
-
 const fetchClient = async (url: string, options: RequestInit = {}) => {
-  let token;
-  if (process.env.NODE_ENV === "development") {
-    token = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-  } else {
-    token =
-      typeof window !== "undefined"
-        ? localStorage.getItem("accessToken")
-        : null;
-  }
+  let token =
+    typeof window !== "undefined"
+      ? sessionStorage.getItem("accessToken")
+      : null;
 
   const defaultHeaders: HeadersInit = {
     "Content-Type": "application/json",
@@ -29,8 +21,8 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
   // 통신 에러
   if (!response.ok) {
     switch (response.status) {
-      case 403:
-        redirect(PATH.LOGIN);
+      // case 403:
+      //   redirect(PATH.LOGIN);
       default:
         throw new Error(`${response.status} ${response.statusText}`);
     }
