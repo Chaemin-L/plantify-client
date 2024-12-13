@@ -10,12 +10,13 @@ export async function signIn(code: string) {
       method: "POST",
     });
 
+  console.log("signIn data: ", data);
   if (data.status === 200) {
     const {
       data: { accessToken, refreshToken },
     } = data;
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
+    sessionStorage.setItem("accessToken", accessToken);
+    sessionStorage.setItem("refreshToken", refreshToken);
     redirect(PATH.HOME);
   } else throw new Error("로그인에 실패하였습니다.");
 }

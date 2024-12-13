@@ -5,5 +5,6 @@ interface Props {
 }
 export default async function Page({ searchParams }: Props) {
   const { code } = await searchParams;
+
   return <KakaoLogin code={code} />;
 }

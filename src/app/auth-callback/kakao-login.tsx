@@ -1,8 +1,7 @@
 "use client";
-
-import Loading from "@/app/loading";
 import { signIn } from "@/services/auth";
 import { useEffect } from "react";
+import Loading from "../loading";
 
 interface Props {
   code: string;
