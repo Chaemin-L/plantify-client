@@ -3,9 +3,7 @@ import { PATH } from "./_shared/paths";
 
 const fetchClient = async (url: string, options: RequestInit = {}) => {
   let token =
-    typeof window !== "undefined"
-      ? sessionStorage.getItem("accessToken")
-      : null;
+    typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
 
   const defaultHeaders: HeadersInit = {
     "Content-Type": "application/json",

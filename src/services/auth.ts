@@ -14,8 +14,8 @@ export async function signIn(code: string) {
     const {
       data: { accessToken, refreshToken },
     } = data;
-    sessionStorage.setItem("accessToken", accessToken);
-    sessionStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
     redirect(PATH.HOME);
   } else throw new Error("로그인에 실패하였습니다.");
 }
@@ -44,7 +44,7 @@ export async function requestAccessToken(token: string) {
     }
   ).then((res) => res.json());
   if (response.status === 200 && response.data) {
-    sessionStorage.setItem("accessToken", response.data);
+    localStorage.setItem("accessToken", response.data);
   }
   return response;
 }

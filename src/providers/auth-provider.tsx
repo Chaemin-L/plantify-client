@@ -8,8 +8,8 @@ import { PropsWithChildren, useEffect } from "react";
 export default function AuthProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     const verify = async () => {
-      const accessToken = sessionStorage.getItem("accessToken");
-      const refreshToken = sessionStorage.getItem("refreshToken");
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
 
       if (accessToken && refreshToken) {
         const response = await validateToken(accessToken);
