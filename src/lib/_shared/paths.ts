@@ -16,6 +16,7 @@ export const PATH = {
   CARD_BENEFIT_ADD: "/card-benefit/add",
   PAY_ACCOUNTS: "/pay/accounts",
   PAY_ACCOUNTS_ADD: "/pay/accounts/add",
+  PAY_TERMS: "/pay/terms",
 
   // in fundraisings
   FUNDING_MY: "/funding/my",

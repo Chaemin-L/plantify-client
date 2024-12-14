@@ -1,26 +1,27 @@
+"use client";
+import PayCard from "@/app/(_components)/pay-card";
+import Loading from "@/app/loading";
+import { useGetPay } from "@/hooks/api/useGetPay";
 import { PATH } from "@/lib/_shared/paths";
 import Image from "next/image";
 import Link from "next/link";
 import EventSliderBanner from "../forest/(components)/event-slider-banner";
 import FundingProgress from "./(components)/funding-progress";
 import GoCardBenefit from "./(components)/go-card-benefit";
-import PayPoint from "./(components)/pay-card";
 import PayNotice from "./(components)/pay-notice";
 
 export default async function HomePage() {
+  const { data: pay, isLoading } = useGetPay();
+
+  if (isLoading) return <Loading />;
+
   return (
     <div className="flex flex-col gap-5 w-full">
       {/** 알림 */}
       <PayNotice />
 
       {/** 페이 및 포인트*/}
-      {/* <Link
-        href={PATH.PAY_ACCOUNTS}
-        className="card aspect-[1.6/1] w-full min-h-36 flex p-0 justify-center items-center "
-      >
-        페이 등록하기 +
-      </Link> */}
-      <PayPoint />
+      <PayCard pay={pay!} />
       <EventSliderBanner />
 
       {/** 펀딩 현황 */}

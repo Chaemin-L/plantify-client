@@ -46,11 +46,11 @@ export default function AccountListPage() {
   const [charge, setCharge] = useState<string>("");
   const [isOpen, setOpen] = useState<boolean>(false);
 
+  const { data: accounts, isLoading } = useGetAccounts();
+
   useEffect(() => {
     setCharge("");
   }, [isOpen]);
-
-  const { data: accounts, isLoading } = useGetAccounts();
 
   if (isLoading) return <Loading />;
 

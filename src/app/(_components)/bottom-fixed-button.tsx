@@ -20,7 +20,7 @@ export function Button({
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      className="py-3 bg-accent-green rounded-xl text-black text-t3 w-full"
+      className="py-3 bg-accent-green rounded-xl text-black text-t3 w-full disabled:bg-shadow-600"
       {...props}
     >
       {children}

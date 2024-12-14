@@ -6,15 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 
 // OK
 export async function getPay() {
-  const data: FinalResponse<PayType> = await fetchClient(
+  const response: FinalResponse<PayType> = await fetchClient(
     `${API_ENDPOINTS.PAY}`
   );
-  try {
-    return data.data;
-  } catch (e) {
-    if (e.code === 404) return data.data;
-    throw new Error("페이를 가져오는데 실패했습니다");
-  }
+  if (response.status === 200) return response.data;
+  throw new Error("페이를 가져오는데 실패했습니다");
 }
 
 export const useGetPay = () => {

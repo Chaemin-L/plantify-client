@@ -9,12 +9,13 @@ export async function getAccounts() {
     `${API_ENDPOINTS.PAY}/accounts`
   );
   if (data.status === 200) return data.data;
-  throw new Error();
+  throw new Error("계좌 정보를 가져오는데에 문제가 생겼습니다");
 }
 
 export const useGetAccounts = () => {
   return useQuery({
-    queryKey: ["pay", "accounts"],
+    queryKey: ["accounts"],
     queryFn: async () => await getAccounts(),
+    refetchOnMount: "always",
   });
 };

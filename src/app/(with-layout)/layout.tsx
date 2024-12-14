@@ -4,6 +4,7 @@ import AuthProvider from "@/providers/auth-provider";
 import { TanstackQueryClientProvider } from "@/providers/tanstack-provider";
 import ToastProvider from "@/providers/toast-provider";
 import "@/styles/swiper.css";
+import { Provider } from "jotai";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,7 +24,9 @@ export default function RootLayout({
           <div className="w-[500px] max-w-[500px] min-w-0 bg-shadow-900 text-white h-screen  flex flex-col">
             <Header />
             <main className="w-full px-4 pb-9 flex-1 overflow-auto">
-              <AuthProvider>{children}</AuthProvider>
+              <Provider>
+                <AuthProvider>{children}</AuthProvider>
+              </Provider>
             </main>
           </div>
         </div>

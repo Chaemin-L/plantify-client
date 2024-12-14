@@ -1,7 +1,6 @@
-//@ts-nocheck
 "use client";
-import { useGetPay } from "@/hooks/api/useGetPay";
 import { PATH } from "@/lib/_shared/paths";
+import { PayType } from "@/types/api/pay";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEventHandler, useRef, useState } from "react";
@@ -10,15 +9,17 @@ import "swiper/css/effect-flip";
 import { EffectFlip } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function PayPoint() {
+interface Props {
+  pay: PayType;
+}
+
+export default function PayCard({ pay }: Props) {
   const [fullScreen, setFullScreen] = useState<boolean | HTMLImageElement>(
     false
   );
   const qrcodeRef = useRef<HTMLImageElement>(null);
   const barcodeRef = useRef<HTMLImageElement>(null);
   const loading = useRef<boolean>(false);
-
-  const { data: pay } = useGetPay();
 
   const balance = 102;
   const hasPay = pay === null;

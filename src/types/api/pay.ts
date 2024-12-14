@@ -22,3 +22,8 @@ export interface AccountType {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CreateAccountRequest {
+  accountNum: number;
+  bankName: BankNameType;
+}
