@@ -1,21 +1,20 @@
+import ItemSlider from "@/app/(_components)/item-slider";
 import { PATH } from "@/lib/_shared/paths";
 import { getFundingList } from "@/services/funding";
 import Image from "next/image";
 import Link from "next/link";
 import AdSliderBanner from "./(components)/ad-slider-banner";
 import BestFunding from "./(components)/best-funding";
-import FundingSlider from "./(components)/funding-slider";
+import MyFunding from "./(components)/my-funding";
 
 export default async function FundraisingsPage() {
-  const { content: bestFunding } = await getFundingList(0, 1, [
-    "percent",
-    "desc",
-  ]);
-  const { content: fundingByStartDate } = await getFundingList(0, 7, [
-    "donationStartDate",
-  ]);
   const { content: fundingByEndDate } = await getFundingList(0, 7, [
     "donationEndDate",
+  ]);
+
+  const { content: fundingByPercent } = await getFundingList(0, 8, [
+    "percent",
+    "desc",
   ]);
 
   return (
@@ -24,13 +23,16 @@ export default async function FundraisingsPage() {
       <AdSliderBanner />
 
       {/** 베스트 펀딩 */}
-      <BestFunding data={bestFunding[0]} />
+      <BestFunding data={fundingByPercent[0]} />
 
-      {/** 최신순 리스트 */}
-      <FundingSlider title="최신순" listData={fundingByStartDate} />
+      {/** 펀딩 현황 */}
+      <MyFunding />
 
-      {/** 마감 임박 리스트 */}
-      <FundingSlider title="마감순" listData={fundingByEndDate} />
+      {/** 마감순 펀딩 리스트 */}
+      <ItemSlider title="마감순" items={fundingByEndDate} />
+
+      {/** 인기순(percent) 펀딩 리스트 */}
+      <ItemSlider title="인기순" items={fundingByPercent.slice(1)} />
 
       <Link
         href={PATH.FUNDING_LIST}

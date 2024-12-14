@@ -14,7 +14,7 @@ const dummy: FundingType[] = [];
 //   })
 //   .map((item, idx) => ({ ...item, id: idx }));
 
-export default function FundingProgress() {
+export default function MyFunding() {
   const isEmpty = dummy.length === 0;
   return (
     <>
@@ -34,7 +34,9 @@ export default function FundingProgress() {
         >
           {/** TODO: 마이 펀딩 리스트 라우팅 경로로 변경 */}
           {isEmpty ? (
-            <p>진행중인 펀딩이 존재하지 않습니다</p>
+            <p className="text-bd2 text-shadow-400">
+              진행중인 펀딩이 존재하지 않습니다
+            </p>
           ) : (
             <ul className="w-full flex flex-col gap-5 cursor-pointer">
               {dummy.map((item, idx) => (

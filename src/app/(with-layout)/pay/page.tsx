@@ -1,21 +1,26 @@
 "use client";
+import ItemSlider from "@/app/(_components)/item-slider";
 import PayCard from "@/app/(_components)/pay-card";
 import Loading from "@/app/loading";
+import { useGetFundingList } from "@/hooks/api/useGetFundingList";
 import { useGetPay } from "@/hooks/api/useGetPay";
 import { useGetPoints } from "@/hooks/api/useGetPoints";
 import { PATH } from "@/lib/_shared/paths";
 import Image from "next/image";
 import Link from "next/link";
 import EventSliderBanner from "../forest/(components)/event-slider-banner";
-import FundingProgress from "./(components)/funding-progress";
 import GoCardBenefit from "./(components)/go-card-benefit";
 import PayNotice from "./(components)/pay-notice";
 
 export default async function HomePage() {
   const { data: pay, isLoading: payFetching } = useGetPay();
   const { data: points, isLoading: pointsFetching } = useGetPoints();
+  const { data: latestFunding, isLoading: fundingFetching } = useGetFundingList(
+    7,
+    ["donationStartDate"]
+  );
 
-  if (payFetching || pointsFetching) return <Loading />;
+  if (payFetching || pointsFetching || fundingFetching) return <Loading />;
 
   return (
     <div className="flex flex-col gap-5 w-full">
@@ -26,8 +31,8 @@ export default async function HomePage() {
       <PayCard pay={pay!} points={points!} />
       <EventSliderBanner />
 
-      {/** 펀딩 현황 */}
-      <FundingProgress />
+      {/** 최신순 리스트 */}
+      <ItemSlider title="최근 펀딩" items={latestFunding?.pages[0].content!} />
 
       {/** 더 큰 혜택 찾기 */}
       <GoCardBenefit />
