@@ -4,7 +4,8 @@ import { FinalResponse } from "@/types/api/common";
 import { PayType } from "@/types/api/pay";
 import { useQuery } from "@tanstack/react-query";
 
-// OK
+export const PAY_QUERY_KEY = ["pay"];
+
 export async function getPay() {
   const response: FinalResponse<PayType> = await fetchClient(
     `${API_ENDPOINTS.PAY}`
@@ -15,7 +16,7 @@ export async function getPay() {
 
 export const useGetPay = () => {
   return useQuery({
-    queryKey: ["pay"],
+    queryKey: PAY_QUERY_KEY,
     queryFn: async () => await getPay(),
   });
 };

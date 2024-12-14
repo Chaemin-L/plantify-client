@@ -2,6 +2,7 @@
 import PayCard from "@/app/(_components)/pay-card";
 import Loading from "@/app/loading";
 import { useGetPay } from "@/hooks/api/useGetPay";
+import { useGetPoints } from "@/hooks/api/useGetPoints";
 import { PATH } from "@/lib/_shared/paths";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,9 +12,10 @@ import GoCardBenefit from "./(components)/go-card-benefit";
 import PayNotice from "./(components)/pay-notice";
 
 export default async function HomePage() {
-  const { data: pay, isLoading } = useGetPay();
+  const { data: pay, isLoading: payFetching } = useGetPay();
+  const { data: points, isLoading: pointsFetching } = useGetPoints();
 
-  if (isLoading) return <Loading />;
+  if (payFetching || pointsFetching) return <Loading />;
 
   return (
     <div className="flex flex-col gap-5 w-full">
@@ -21,7 +23,7 @@ export default async function HomePage() {
       <PayNotice />
 
       {/** 페이 및 포인트*/}
-      <PayCard pay={pay!} />
+      <PayCard pay={pay!} points={points!} />
       <EventSliderBanner />
 
       {/** 펀딩 현황 */}

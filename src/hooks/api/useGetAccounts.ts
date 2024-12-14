@@ -4,6 +4,8 @@ import { FinalResponse } from "@/types/api/common";
 import { AccountType } from "@/types/api/pay";
 import { useQuery } from "@tanstack/react-query";
 
+export const ACCOUNT_QUERY_KEY = ["account"];
+
 export async function getAccounts() {
   const data: FinalResponse<AccountType[]> = await fetchClient(
     `${API_ENDPOINTS.PAY}/accounts`
@@ -14,7 +16,7 @@ export async function getAccounts() {
 
 export const useGetAccounts = () => {
   return useQuery({
-    queryKey: ["accounts"],
+    queryKey: ACCOUNT_QUERY_KEY,
     queryFn: async () => await getAccounts(),
     refetchOnMount: "always",
   });

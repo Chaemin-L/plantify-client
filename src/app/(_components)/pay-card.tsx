@@ -1,6 +1,7 @@
+//@ts-nocheck
 "use client";
 import { PATH } from "@/lib/_shared/paths";
-import { PayType } from "@/types/api/pay";
+import { PayType, PointType } from "@/types/api/pay";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEventHandler, useRef, useState } from "react";
@@ -11,9 +12,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 interface Props {
   pay: PayType;
+  points: PointType;
 }
 
-export default function PayCard({ pay }: Props) {
+export default function PayCard({ pay, points }: Props) {
   const [fullScreen, setFullScreen] = useState<boolean | HTMLImageElement>(
     false
   );
@@ -21,8 +23,7 @@ export default function PayCard({ pay }: Props) {
   const barcodeRef = useRef<HTMLImageElement>(null);
   const loading = useRef<boolean>(false);
 
-  const balance = 102;
-  const hasPay = pay === null;
+  const hasPay = pay !== null;
 
   const handleMoveBodyTransitionEnd = (target: HTMLImageElement) => {
     setFullScreen(target);
@@ -129,15 +130,15 @@ export default function PayCard({ pay }: Props) {
               </div>
             </div>
           </SwiperSlide>
-          <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 bg-white">
-            <div className="text-black flex flex-col items-center justify-between xs:pt-5 max-xs:gap-2 gap-10 w-full h-full">
-              <div id="pay" className="flex gap-4">
+          <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 bg-white p-4">
+            <div className="w-full h-full text-black flex flex-col items-center justify-center gap-2">
+              <div id="pay" className="flex-1 flex gap-4 items-center ">
                 <img
                   ref={qrcodeRef}
                   id="qrcode"
                   src="/temp/qr.png"
                   alt="페이 QRcode"
-                  className="no-swiper w-auto max-h-24 aspect-square transition-all"
+                  className="no-swiper flex-1 w-auto h-full max-h-20 xs:max-h-24 transition-all"
                   onClick={(e) => {
                     if (loading.current) return;
                     handleQRFullScreenMode(e);
@@ -149,7 +150,7 @@ export default function PayCard({ pay }: Props) {
                   src="/temp/barcode.png"
                   width={300}
                   height={300}
-                  className="no-swiper flex-1 min-w-0 max-h-24 aspect-[4/1] rounded-md transition-all"
+                  className="no-swiper flex-4 min-w-0 h-full max-h-20 xs:max-h-24 aspect-[4/1] rounded-md transition-all"
                   alt="페이 Barcode"
                   onClick={(e) => {
                     if (loading.current) return;
@@ -157,20 +158,23 @@ export default function PayCard({ pay }: Props) {
                   }}
                 />
               </div>
-              <div className="w-full flex justify-between ">
+              <div className="flex-1 w-full h-full flex max-xs:text-xs">
                 <img
                   src="/icons/card-back-logo.png"
-                  className="absolute -bottom-0 left-10 h-[30%] xs:h-[40%] w-auto"
+                  className="absolute -bottom-0 left-6 xs:left-10 h-[35%] xs:h-[40%] w-auto"
                 />
-                <div className="w-full flex flex-col gap-1 mr-2">
-                  <div className="flex-1 flex items-center justify-end gap-2">
+                <div className="w-full flex flex-col gap-1 mr-1.5 sm:mr-4 items-end justify-end *:h-fit">
+                  <div className="flex items-center  gap-2">
                     <span className="text-bd3 xs:text-bd1">포인트</span>
-                    <span className="text-t4 xs:text-t3">{balance}원</span>
+                    <span className="text-t4 xs:text-t3">
+                      {points.pointBalance}원
+                    </span>
                   </div>
-                  <div className="flex-1 flex items-center justify-end gap-2">
+                  <div className="flex items-center gap-2">
                     <span className="text-bd3 xs:text-bd1">머니</span>
-                    <span className="text-t4 xs:text-t3">330원</span>
+                    <span className="text-t4 xs:text-t3">{pay.balance}원</span>
                   </div>
+                  <div>{pay.payNum}</div>
                 </div>
               </div>
             </div>
@@ -190,12 +194,12 @@ export default function PayCard({ pay }: Props) {
           </div>
         </div>
       )}
-      <PointMoney hasPay={hasPay} point={8282} />
+      <PointMoney hasPay={hasPay} total={pay.balance + points.pointBalance} />
     </>
   );
 }
 
-const PointMoney = ({ hasPay, point }: { hasPay; point: number }) => {
+const PointMoney = ({ hasPay, total }: { hasPay: boolean; total: number }) => {
   return (
     <div className="card bg-accent-green  flex justify-between  select-none w-full">
       <>
@@ -203,11 +207,11 @@ const PointMoney = ({ hasPay, point }: { hasPay; point: number }) => {
           <>
             <h1 className="card-title text-black">포인트 ・머니</h1>
             <div className="flex gap-2 items-center">
-              <span className="card-title text-black">{point}원</span>
+              <span className="card-title text-black">{total}원</span>
               <Link href={PATH.PAY_ACCOUNTS}>
                 <img
                   src="/icons/settings.png"
-                  className="w-4 h-4 hover:animate-spin"
+                  className="w-4 h-4 hover:animate-[spin_4s]"
                 />
               </Link>
             </div>

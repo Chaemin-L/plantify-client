@@ -2,12 +2,12 @@ import { API_ENDPOINTS } from "@/config/api";
 import { PATH } from "@/lib/_shared/paths";
 import fetchClient from "@/lib/fetchClient";
 import { FinalResponse } from "@/types/api/common";
-import { CreateAccountRequest, PayType } from "@/types/api/pay";
+import { CreateAccountReq, PayType } from "@/types/api/pay";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
 
 // OK
-export async function postPay(accounts: CreateAccountRequest) {
+export async function postPay(accounts: CreateAccountReq) {
   const data: FinalResponse<PayType> = await fetchClient(
     `${API_ENDPOINTS.PAY}`,
     {
@@ -24,10 +24,9 @@ export const usePostPay = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (accounts: CreateAccountRequest) =>
-      await postPay(accounts),
+    mutationFn: async (accounts: CreateAccountReq) => await postPay(accounts),
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries({ queryKey: ["pay"] });
       redirect(PATH.PAY_ACCOUNTS);
     },
   });

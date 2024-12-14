@@ -23,7 +23,19 @@ export interface AccountType {
   updatedAt: Date;
 }
 
-export interface CreateAccountRequest {
+export interface PointType {
+  userId: number;
+  pointBalance: number;
+  accumulatedPoints: number;
+  redeemedPoints: number;
+}
+
+export interface CreateAccountReq {
   accountNum: number;
   bankName: BankNameType;
+}
+
+export interface PostChargePayReq {
+  accountId: number;
+  balance: number;
 }
