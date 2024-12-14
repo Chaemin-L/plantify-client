@@ -1,4 +1,4 @@
-import FeatureLayout from "./(components)/feature-layout";
+import FeatureLayout from "./feature-layout";
 
 export default function PlantiProfit() {
   return (

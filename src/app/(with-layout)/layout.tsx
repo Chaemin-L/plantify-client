@@ -8,8 +8,9 @@ import { Provider } from "jotai";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Plantify",
-  description: "나만의 숲 꾸미기",
+  title: "Plantify 페이",
+  description:
+    "Plantify 페이로 결제하고, 최근 기부 펀딩에 참여해봐요. 나의 숨겨진 카드 혜택까지 찾을 수 있어요!",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <>
       <TanstackQueryClientProvider>
-        <div className="flex justify-center h-full w-full bg-shadow-800">
+        <div className="flex justify-center h-full w-full bg-shadow-50">
           <div className="w-[500px] max-w-[500px] min-w-0 bg-shadow-900 text-white h-screen  flex flex-col">
             <Header />
             <main className="w-full px-4 pb-9 flex-1 overflow-auto">

@@ -3,8 +3,8 @@ import { BankNameType } from "../bank";
 export interface PayType {
   payNum: number;
   balance: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface PaymentType {
@@ -24,10 +24,10 @@ export interface AccountType {
 }
 
 export interface PointType {
-  userId: number;
+  userId?: number;
   pointBalance: number;
-  accumulatedPoints: number;
-  redeemedPoints: number;
+  accumulatedPoints?: number;
+  redeemedPoints?: number;
 }
 
 export interface CreateAccountReq {

@@ -1,6 +1,7 @@
 "use client";
 import ItemSlider from "@/app/(_components)/item-slider";
 import PayCard from "@/app/(_components)/pay-card";
+import { PointMoney } from "@/app/(_components)/point-money";
 import Loading from "@/app/loading";
 import { useGetFundingList } from "@/hooks/api/useGetFundingList";
 import { useGetPay } from "@/hooks/api/useGetPay";
@@ -29,6 +30,12 @@ export default async function HomePage() {
 
       {/** 페이 및 포인트*/}
       <PayCard pay={pay!} points={points!} />
+      <PointMoney
+        hasPay={pay !== null}
+        total={(pay?.balance ?? 0) + (points?.pointBalance ?? 0)}
+      />
+
+      {/** 이벤트 슬라이더 */}
       <EventSliderBanner />
 
       {/** 최신순 리스트 */}

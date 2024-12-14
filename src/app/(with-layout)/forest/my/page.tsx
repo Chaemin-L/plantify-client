@@ -1,14 +1,14 @@
 "use client";
 
+import { useForestField } from "@/hooks/useForestField";
+import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
+import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
 import { MyItemType, PostUsingItem } from "@/types/api/item";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { DraggableData, DraggableEvent } from "react-draggable";
 import DraggableItem from "./draggable-item";
-import clsx from "clsx";
 import MyBox from "./my-box-btn";
-import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
-import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
-import { useForestField } from "@/hooks/useForestField";
 
 export default function Page() {
   const [editMode, setEditMode] = useState(false);
@@ -209,29 +209,157 @@ const usingItems: PostUsingItem[] = [
   {
     myItemId: 1,
     image: "/temp/forest/ground-item3.png",
-    posX: 3,
-    posY: 2,
+    posX: 1,
+    posY: 7,
     category: "GROUND",
   },
   {
     myItemId: 2,
     image: "/temp/forest/ground-item3.png",
-    posX: 3,
-    posY: 3,
+    posX: 1,
+    posY: 6,
     category: "GROUND",
   },
   {
     myItemId: 11,
     image: "/temp/forest/ground-item3.png",
-    posX: 2,
-    posY: 2,
+    posX: 1.5,
+    posY: 7.5,
     category: "GROUND",
   },
   {
-    myItemId: 12,
+    myItemId: 13,
+    image: "/temp/forest/ground-item5.png",
+    posX: 0.5,
+    posY: 6.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 14,
+    image: "/temp/forest/ground-item5.png",
+    posX: 1.5,
+    posY: 5.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 13,
+    image: "/temp/forest/ground-item3.png",
+    posX: 2,
+    posY: 6,
+    category: "GROUND",
+  },
+
+  {
+    myItemId: 15,
+    image: "/temp/forest/ground-item3.png",
+    posX: 2.5,
+    posY: 6.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 16,
+    image: "/temp/forest/ground-item5.png",
+    posX: 3,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 17,
+    image: "/temp/forest/ground-item3.png",
+    posX: 3,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 18,
+    image: "/temp/forest/ground-item3.png",
+    posX: 2,
+    posY: 8,
+    category: "GROUND",
+  },
+  {
+    myItemId: 19,
+    image: "/temp/forest/ground-item3.png",
+    posX: 3.5,
+    posY: 7.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 20,
+    image: "/temp/forest/ground-item3.png",
+    posX: 2.5,
+    posY: 8.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 23,
+    image: "/temp/forest/ground-item3.png",
+    posX: 4,
+    posY: 8,
+    category: "GROUND",
+  },
+  {
+    myItemId: 24,
+    image: "/temp/forest/ground-item3.png",
+    posX: 3,
+    posY: 9,
+    category: "GROUND",
+  },
+  {
+    myItemId: 21,
+    image: "/temp/forest/ground-item5.png",
+    posX: 4.5,
+    posY: 8.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 22,
+    image: "/temp/forest/ground-item5.png",
+    posX: 3.5,
+    posY: 9.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 22,
+    image: "/temp/forest/ground-item3.png",
+    posX: 4,
+    posY: 9,
+    category: "GROUND",
+  },
+
+  {
+    myItemId: 100,
+    image: "/temp/forest/tree-item1.svg",
+    posX: 1.5,
+    posY: 5.5,
+    category: "TREE",
+  },
+  {
+    myItemId: 101,
     image: "/temp/forest/tree-item2.svg",
-    posX: 6,
-    posY: 10,
+    posX: 2,
+    posY: 6,
+    category: "TREE",
+  },
+  {
+    myItemId: 102,
+    image: "/temp/forest/tree-item3.svg",
+    posX: 2.5,
+    posY: 6.5,
+    category: "TREE",
+  },
+  {
+    myItemId: 103,
+    image: "/temp/forest/tree-item2.svg",
+    posX: 3,
+    posY: 7,
+    category: "TREE",
+  },
+  {
+    myItemId: 104,
+    image: "/temp/forest/tree-item1.svg",
+    posX: 3.5,
+    posY: 7.5,
     category: "TREE",
   },
 ];

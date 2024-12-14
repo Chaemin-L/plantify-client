@@ -1,10 +1,7 @@
-import { useEffect } from "react";
-import { typingText, verticalMove } from "@/lib/gsap";
-
 interface Props {
   title: string;
   description: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function FeatureLayout({ title, description, children }: Props) {

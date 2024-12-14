@@ -1,9 +1,15 @@
 "use client";
-import { ChangeEventHandler, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import clsx from "clsx";
-import { useScrollToBottom } from "@/hooks/useScrollToBottom";
 import { API_ENDPOINTS } from "@/config/api";
+import { useScrollToBottom } from "@/hooks/useScrollToBottom";
+import clsx from "clsx";
+import Image from "next/image";
+import {
+  ChangeEventHandler,
+  LegacyRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface MessageType {
   sender: "User" | "AI";
@@ -79,7 +85,7 @@ export default function Chat() {
       <h1 className="text-t1 my-5">채팅</h1>
       <ul
         className="flex-col flex gap-3 w-full h-full overflow-auto"
-        ref={containerRef}
+        ref={containerRef as LegacyRef<HTMLUListElement>}
       >
         {isLoading ? (
           <p className="whitespace-pre">
@@ -101,7 +107,7 @@ export default function Chat() {
           ))
         )}
       </ul>
-      <div className="flex gap-4 bg-shadow-800 -mx-4 p-3 items-top fixed bottom-0 w-full max-w-[500px]">
+      <div className="flex gap-4 bg-shadow-700 -mx-4 p-3 items-top fixed bottom-0 w-full max-w-[500px]">
         <textarea
           className="bg-transparent focus:outline-0 w-full text-bd2"
           name="mychat"
