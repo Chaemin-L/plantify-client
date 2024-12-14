@@ -13,7 +13,6 @@ export default function AuthProvider({ children }: PropsWithChildren) {
 
       if (accessToken && refreshToken) {
         const response = await validateToken(accessToken);
-        console.log(response);
         if (response.status >= 400) {
           await requestAccessToken(refreshToken);
         }

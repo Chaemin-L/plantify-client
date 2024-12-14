@@ -45,6 +45,8 @@ export async function requestAccessToken(token: string) {
   ).then((res) => res.json());
   if (response.status === 200 && response.data) {
     localStorage.setItem("accessToken", response.data);
+  } else {
+    redirect(PATH.INTRO);
   }
   return response;
 }
