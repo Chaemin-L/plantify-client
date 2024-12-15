@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 interface Props {
-  handleNewItem: () => void;
+  handleNewItem: (myItemId: MyItemType) => void;
 }
 export default function MyBoxBtn({ handleNewItem }: Props) {
   const [show, setShow] = useState<boolean>(false);

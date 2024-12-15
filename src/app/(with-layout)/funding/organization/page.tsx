@@ -1,8 +1,8 @@
 "use client";
 import SearchBar from "@/app/(_components)/searchbar";
-import OrganizationItem from "../(components)/organization-item";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { FormEventHandler, useState } from "react";
+import OrganizationItem from "../(components)/organization-item";
 
 const organizations = Array(20)
   .fill([
@@ -30,10 +30,13 @@ export default function OrganizationPage() {
   const router = useRouter();
 
   // TODO: data fetching (SWR)
-  const onSubmit = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     router.replace(`/funding/organization`);
-    const searchKeyword = e.target.search.value.replace(/\s/g, "");
+    const searchKeyword = (e.target as HTMLFormElement).search.value.replace(
+      /\s/g,
+      ""
+    );
     setListData(
       organizations.filter((org) => org.name.includes(searchKeyword))
     );

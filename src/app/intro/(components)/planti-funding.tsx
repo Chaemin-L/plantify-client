@@ -22,6 +22,8 @@ const data: FundingType[] = [
       "https://mud-kage.kakaocdn.net/dn/fBvim/btsJvcwcRwA/cyeKV3fbenJRQUFUD0DyJ0/c640.jpg",
     percent: 50,
     category: "DISABILITY",
+    targetAmount: 0,
+    organizationName: "",
   },
 
   {
@@ -32,6 +34,8 @@ const data: FundingType[] = [
       "https://mud-kage.kakaocdn.net/dn/kK6pP/btsKlduRu5q/x5vkEjmFFkvyPEGXRi8UN0/c640.jpg",
     percent: 45,
     category: "ANIMAL",
+    targetAmount: 0,
+    organizationName: "",
   },
 
   {
@@ -42,6 +46,8 @@ const data: FundingType[] = [
       "https://mud-kage.kakaocdn.net/dn/iW7fN/btsJTMbFVO7/PRPBgnQvhV2KfDm5MC2WEK/c640.jpg",
     percent: 30,
     category: "DISABILITY",
+    targetAmount: 0,
+    organizationName: "",
   },
   {
     fundingId: "4",
@@ -51,6 +57,8 @@ const data: FundingType[] = [
       "https://mud-kage.kakaocdn.net/dn/dptVVi/btsKoTVDTAS/LUOK2Zavd74ANZZQ0i1WU1/c640.jpg",
     percent: 22,
     category: "SOCIAL",
+    targetAmount: 0,
+    organizationName: "",
   },
   {
     fundingId: "5",
@@ -60,6 +68,8 @@ const data: FundingType[] = [
       "https://mud-kage.kakaocdn.net/dn/HzwDQ/btsKuSXYpnp/AovhYUnE4FK09zCC0hysUk/c640.jpg",
     percent: 7,
     category: "SOCIAL",
+    targetAmount: 0,
+    organizationName: "",
   },
   {
     fundingId: "6",
@@ -69,5 +79,7 @@ const data: FundingType[] = [
       "https://mud-kage.kakaocdn.net/dn/Ch2cD/btsJ1GXqx0R/KDnElNtCu7JAKViy4C7RE0/c640.jpg",
     percent: 76,
     category: "ENVIRONMENT",
+    targetAmount: 0,
+    organizationName: "",
   },
 ];

@@ -1,12 +1,19 @@
 "use client";
+import Loading from "@/app/loading";
+import { useEffect, useState } from "react";
 import FundingMain from "./funding-main";
 
-export default async function TokenProvider() {
-  const accessToken = localStorage.getItem("access_token");
+export default function TokenProvider() {
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  return (
-    <>
-      <FundingMain token={accessToken!} />
-    </>
-  );
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setAccessToken(token);
+  }, []);
+
+  if (!accessToken) {
+    return <Loading />;
+  }
+
+  return <FundingMain token={accessToken} />;
 }

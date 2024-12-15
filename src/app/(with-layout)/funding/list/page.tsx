@@ -50,7 +50,7 @@ export default function FundRaisingsListPage() {
         sticky
       />
       <FundingList
-        category={category}
+        selectedCategory={category}
         listData={listData?.pages.map((p) => p.content).flat() ?? []}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}

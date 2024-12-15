@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 interface Props {
-  category: CategoryType;
+  selectedCategory?: CategoryType;
   listData: FundingType[];
   fetchNextPage: () => Promise<
     InfiniteQueryObserverResult<
@@ -25,7 +25,7 @@ interface Props {
 
 // TODO: 스크롤/페이지네이션 -> client component로 변경 예정
 export default function FundingList({
-  category,
+  selectedCategory,
   listData,
   fetchNextPage,
   hasNextPage,
@@ -59,6 +59,7 @@ export default function FundingList({
           image,
           title,
           percent,
+          category,
           targetAmount,
           organizationName,
         }) => (
@@ -70,7 +71,7 @@ export default function FundingList({
               <img src={image} className="w-[40%]  rounded-l-xl object-cover" />
               <div className="px-5 py-4 w-full h-fit flex justify-between flex-col ">
                 <div className=" max-md:mb-1 mb-2 max-md:text-bd4 text-bd2">
-                  {getCategoryName(category)}
+                  {getCategoryName(selectedCategory || category)}
                 </div>
 
                 <div className="flex flex-col max-md:gap-3 md:gap-4 flex-1">

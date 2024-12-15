@@ -79,15 +79,12 @@ export default function PayCard({ pay, points }: Props) {
   };
 
   const handleCancelFullScreenMode = async (target: HTMLImageElement) => {
-    target.style = {
-      ...target.style,
-      position: "static",
-      transition: "all 0.3s",
-      zIndex: "0",
-      transform: "scale(1/2) translate(0, 0)",
+    target.style.position = "static";
+    target.style.transition = "all 0.3s";
+    target.style.zIndex = "0";
+    target.style.transform = "scale(1/2) translate(0, 0)";
+    target.style.webkitTransform = "rotate(90deg) scale(2) translate(0, -100%)";
 
-      WebkitTransform: "rotate(90deg) scale(2) translate(0, -100%)",
-    };
     target.addEventListener("transitionend", () =>
       handleMoveOriginTransitionEnd(target)
     );
