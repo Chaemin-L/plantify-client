@@ -61,11 +61,11 @@ export function initMarquee(
   howMany: number,
   toLeft: boolean = false
 ) {
-  let totalWidth = boxWidth * howMany,
+  const totalWidth = boxWidth * howMany,
     el = document.querySelectorAll(selector),
     direction = toLeft ? "-=" + totalWidth : "+=" + totalWidth;
 
-  var mod = gsap.utils.wrap(0, totalWidth);
+  const mod = gsap.utils.wrap(0, totalWidth);
 
   gsap.set(selector, {
     x: function (i) {

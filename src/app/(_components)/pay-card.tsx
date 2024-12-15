@@ -1,4 +1,3 @@
-//@ts-nocheck
 "use client";
 import { PayType, PointType } from "@/types/api/pay";
 import Image from "next/image";
@@ -87,7 +86,7 @@ export default function PayCard({ pay, points }: Props) {
       zIndex: "0",
       transform: "scale(1/2) translate(0, 0)",
 
-      WebkitTransform: "rotate(90deg) scale(2) translate(0, -100%)", // 추가
+      WebkitTransform: "rotate(90deg) scale(2) translate(0, -100%)",
     };
     target.addEventListener("transitionend", () =>
       handleMoveOriginTransitionEnd(target)

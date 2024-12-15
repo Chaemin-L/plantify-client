@@ -22,7 +22,7 @@ export default function ToastProvider() {
   };
 
   useEffect(() => {
-    (window as any).showToast = addToast;
+    window.showToast = addToast;
   }, []);
 
   return (

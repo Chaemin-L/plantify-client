@@ -3,7 +3,7 @@ export function rotateCard(
   newElementId: string,
   horizontal: boolean = false
 ) {
-  let img = document.getElementById(oldElementId);
+  const img = document.getElementById(oldElementId);
 
   img?.addEventListener("load", () => {
     const image = document.getElementById(oldElementId) as HTMLImageElement;

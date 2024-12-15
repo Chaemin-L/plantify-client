@@ -33,7 +33,9 @@ export default function HomePage() {
       <div className="card bg-accent-green  flex justify-between  select-none w-full">
         {points ? (
           <PointMoney
-            total={(pay?.balance ?? 0) + (points?.pointBalance ?? 0)}
+            total={
+              (Number(pay?.balance) || 0) + (Number(points?.pointBalance) || 0)
+            }
           />
         ) : (
           <Link href={PATH.PAY_ACCOUNTS} className="card-title text-black">
@@ -46,7 +48,7 @@ export default function HomePage() {
       <EventSliderBanner />
 
       {/** 최신순 리스트 */}
-      <ItemSlider title="최근 펀딩" items={latestFunding?.pages[0].content!} />
+      <ItemSlider title="최근 펀딩" items={latestFunding!.pages[0].content!} />
 
       {/** 더 큰 혜택 찾기 */}
       <GoCardBenefit />

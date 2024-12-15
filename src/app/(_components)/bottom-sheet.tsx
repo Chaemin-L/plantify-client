@@ -2,7 +2,7 @@ import { Sheet } from "react-modal-sheet";
 
 interface Props {
   isOpen: boolean;
-  setOpen: (isOpen: boolean) => void;
+  setOpen: (open: boolean) => void;
   snapPoints: number[];
   children: React.ReactNode;
 }

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { PATH } from "./_shared/paths";
 
 const fetchClient = async (url: string, options: RequestInit = {}) => {
-  let token =
+  const token =
     typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
 
   const defaultHeaders: HeadersInit = {

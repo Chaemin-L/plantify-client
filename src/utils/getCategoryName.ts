@@ -14,7 +14,5 @@ export default function getCategoryName(category: CategoryType) {
       return "노인";
     case "SOCIAL":
       return "사회";
-    default:
-      return "등록되지 않은 이름";
   }
 }

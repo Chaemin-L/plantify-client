@@ -3,7 +3,6 @@ import Select, { SelectItemType } from "@/app/(_components)/select";
 import Loading from "@/app/loading";
 import { useGetFundingListByCategory } from "@/hooks/api/useGetFundingListByCategory";
 import { PATH } from "@/lib/_shared/paths";
-import { CategoryType } from "@/types/api/funding";
 import { ExpandedFundingCategoryType } from "@/types/funding";
 import { isFundingCategoryType } from "@/utils/typeCheck";
 import { notFound, useSearchParams } from "next/navigation";
@@ -19,19 +18,25 @@ const categories: SelectItemType<ExpandedFundingCategoryType>[] = [
 ];
 export default function FundRaisingsListPage() {
   const searchParams = useSearchParams();
-  const category = searchParams.get("category") ?? "ENVIRONMENT";
+  const category = searchParams.get("category") || "ENVIRONMENT";
 
-  if (!isFundingCategoryType(category)) notFound();
+  const isInvalidCategory = !isFundingCategoryType(category);
 
   const {
     data: listData,
     fetchNextPage,
     hasNextPage,
     isLoading,
-  } = useGetFundingListByCategory(category, 15);
+  } = useGetFundingListByCategory(
+    isInvalidCategory ? "ENVIRONMENT" : category,
+    15
+  );
 
   // const funding = useGetFundingDetail("67403b24b22cea6ecde6c8da");
   // const funding = useGetOrganizations();
+
+  // 유효하지 않은 category에 대한 대응
+  if (isInvalidCategory) notFound();
 
   if (isLoading) return <Loading />;
 
@@ -45,9 +50,7 @@ export default function FundRaisingsListPage() {
         sticky
       />
       <FundingList
-        category={
-          categories.find((c) => c.value === category)?.label! as CategoryType
-        }
+        category={category}
         listData={listData?.pages.map((p) => p.content).flat() ?? []}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}

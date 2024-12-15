@@ -3,6 +3,7 @@ import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
 import { Pageable } from "@/types/api/common";
 import { CategoryType, FundingType } from "@/types/api/funding";
+import getCategoryName from "@/utils/getCategoryName";
 import {
   InfiniteData,
   InfiniteQueryObserverResult,
@@ -69,7 +70,7 @@ export default function FundingList({
               <img src={image} className="w-[40%]  rounded-l-xl object-cover" />
               <div className="px-5 py-4 w-full h-fit flex justify-between flex-col ">
                 <div className=" max-md:mb-1 mb-2 max-md:text-bd4 text-bd2">
-                  {category}
+                  {getCategoryName(category)}
                 </div>
 
                 <div className="flex flex-col max-md:gap-3 md:gap-4 flex-1">

@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 interface Props {
-  handleNewItem: (myItemId: MyItemType) => void;
+  handleNewItem: () => void;
 }
 export default function MyBoxBtn({ handleNewItem }: Props) {
   const [show, setShow] = useState<boolean>(false);
@@ -29,13 +29,6 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
 
   return (
     <>
-      {/* <Draggable
-        nodeRef={myBoxBtn}
-        bounds="parent"
-        onDrag={handleOnDrag}
-        onStop={handleOnStop}
-        enableUserSelectHack={true}
-      > */}
       <button
         className=" absolute right-4 bottom-4 p-2 rounded-full bg-accent-green w-fit aspect-square text-shadow-900 z-30 shadow-lg "
         ref={myBoxBtn}
@@ -49,10 +42,8 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
           height={48}
           alt="보관함"
           onClick={handleOnClick}
-          // onTouchEnd={handleOnClick}
         />
       </button>
-      {/* </Draggable> */}
       {show &&
         createPortal(
           <MyBox handleClose={handleClose} handleNewItem={handleNewItem} />,
