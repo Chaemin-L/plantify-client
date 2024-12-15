@@ -13,7 +13,7 @@ import EventSliderBanner from "../forest/(components)/event-slider-banner";
 import GoCardBenefit from "./(components)/go-card-benefit";
 import PayNotice from "./(components)/pay-notice";
 
-export default async function HomePage() {
+export default function HomePage() {
   const { data: pay, isLoading: payFetching } = useGetPay();
   const { data: points, isLoading: pointsFetching } = useGetPoints();
   const { data: latestFunding, isLoading: fundingFetching } = useGetFundingList(
