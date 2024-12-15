@@ -8,9 +8,15 @@ export default function LatestFundingSection() {
 
   if (isLoading) return <Loading />;
 
+  const items = data?.pages[0]?.content;
+
+  if (!items) {
+    return <></>;
+  }
+
   return (
     <>
-      <ItemSlider title="최근 펀딩" items={data?.pages[0].content!} />
+      <ItemSlider title="최근 펀딩" items={items} />
     </>
   );
 }
