@@ -9,7 +9,7 @@ export default function ScrollFeatures({ children }: PropsWithChildren) {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.utils.toArray(".panel").forEach((panel, i) => {
+    gsap.utils.toArray(".panel").forEach((panel) => {
       ScrollTrigger.create({
         trigger: panel as HTMLElement,
         start: "top top",

@@ -40,7 +40,9 @@ export default function Page() {
   const category = searchParams.get("category") ?? "GROUND";
   const [itemId, setItemId] = useState<number>(0);
 
-  if (!isItemCategoryType(category)) return notFound();
+  if (!isItemCategoryType(category)) {
+    notFound();
+  }
 
   const { data: cash } = useGetCash();
   const { data: storeItems } = useGetStoreItemsByCategory(category);

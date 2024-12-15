@@ -1,10 +1,9 @@
 "use client";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import Progressbar from "./progressbar";
 
-interface FundingStatus {
+interface Props {
   // styling
   size?: "sm" | "lg" | "reactive";
   showProgress?: boolean;
@@ -24,9 +23,7 @@ export default function FundingStatus({
   leftTop = "",
   rightTop = "",
   rightBottom = "",
-}: FundingStatus) {
-  const router = useRouter();
-
+}: Props) {
   return (
     <div className="flex flex-col gap-2">
       {(leftTop || rightTop) && (

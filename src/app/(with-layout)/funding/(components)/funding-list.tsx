@@ -2,31 +2,18 @@
 import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
 import { Pageable } from "@/types/api/common";
-import { CategoryType } from "@/types/api/funding";
+import { CategoryType, FundingType } from "@/types/api/funding";
 import {
-  FetchNextPageOptions,
   InfiniteData,
   InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-interface FundingType {
-  fundingId: string;
-  image: string;
-  category: string;
-  title: string;
-  percent: number;
-  targetAmount: number;
-  organizationName?: string;
-}
-
 interface Props {
   category: CategoryType;
   listData: FundingType[];
-  fetchNextPage: (
-    options?: FetchNextPageOptions
-  ) => Promise<
+  fetchNextPage: () => Promise<
     InfiniteQueryObserverResult<
       InfiniteData<Pageable<FundingType>, unknown>,
       Error

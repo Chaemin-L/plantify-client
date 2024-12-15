@@ -1,4 +1,5 @@
 {
+  "extends": "next",
   "rules": {
     "no-unused-vars": [
       "error",

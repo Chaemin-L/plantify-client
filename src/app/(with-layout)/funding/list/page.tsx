@@ -21,7 +21,7 @@ export default function FundRaisingsListPage() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "ENVIRONMENT";
 
-  if (!isFundingCategoryType(category)) return notFound();
+  if (!isFundingCategoryType(category)) notFound();
 
   const {
     data: listData,

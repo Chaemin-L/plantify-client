@@ -46,16 +46,16 @@ const payments: PaymentsType[] = [
 ];
 
 export default function PaymentsList() {
-  const [selectedItem, setSelectedItem] = useState<PaymentCategoryType>("all");
-  const [orderBy, setOrderBy] = useState<OrderByType>("recent");
+  const [selectedItem] = useState<PaymentCategoryType>("all");
+  const [, setOrderBy] = useState<OrderByType>("recent");
 
   const isAll = selectedItem === "all";
 
   // TODO: data fetching (SWR)
 
-  const onClickCategory = (value: PaymentCategoryType) =>
-    setSelectedItem(value);
-  const onClickOrderBy = (value: OrderByType) => setOrderBy(value);
+  // const onClickCategory = (value: PaymentCategoryType) =>
+  //   setSelectedItem(value);
+  // const onClickOrderBy = (value: OrderByType) => setOrderBy(value);
 
   useEffect(() => {
     // 전체보기 클릭시, 이전 정렬 조건 초기화

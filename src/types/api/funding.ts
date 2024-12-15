@@ -19,10 +19,11 @@ export interface FundingType {
   content: string;
   image: string;
   curAmount?: number;
-  targetAmount?: number;
+  targetAmount: number;
   percent: number;
   status?: StatusType;
   category: CategoryType;
+  organizationName: string;
   fundingStartDate?: Date | null;
   fundingEndDate?: Date | null;
   donationStartDate?: Date | null;
