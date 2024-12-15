@@ -2,7 +2,6 @@ import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
 import { FinalResponse, Pageable } from "@/types/api/common";
 import {
-  CategoryType,
   FundingType,
   MyFundingType,
   OrganizationType,
@@ -12,40 +11,21 @@ import {
 export async function getFundingList(
   page: number,
   size: number,
-  sort: string[]
+  sort: string[],
+  token: string
 ) {
-  const data = await fetchClient(
+  const response: FinalResponse<Pageable<FundingType>> = await fetch(
     `${
       API_ENDPOINTS.FUNDING
-    }?page=${page}&size=${size}&sort=${encodeURIComponent(sort.toString())}`
-  );
-  if (data.status === 200) return data as FinalResponse<Pageable<FundingType>>;
-  throw new Error(data.message);
-}
-
-//OK
-export async function getFundingByCategory(
-  category: CategoryType,
-  page: number,
-  size: number,
-  sort: string[]
-) {
-  const data = await fetchClient(
-    `${
-      API_ENDPOINTS.FUNDING
-    }/category/${category}?page=${page}&size=${size}&sort=${encodeURIComponent(
-      sort.toString()
-    )}`
-  );
-  if (data.status === 200) return data as FinalResponse<Pageable<FundingType>>;
-  throw new Error(data.message);
-}
-
-// OK
-export async function getFundingDetail(id: string) {
-  const data = await fetchClient(`${API_ENDPOINTS.FUNDING}/${id}`);
-  if (data.status === 200) return data as FinalResponse<FundingType>;
-  throw new Error(data.message);
+    }?page=${page}&size=${size}&sort=${encodeURIComponent(sort.toString())}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  ).then((res) => res.json());
+  if (response.status === 200) return response.data;
+  throw new Error(response.message);
 }
 
 // OK

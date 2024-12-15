@@ -3,11 +3,7 @@
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
 
-export default function NotFound({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
+export default function NotFound() {
   return (
     <div className="flex justify-around items-center flex-col h-full">
       <div className="flex flex-col text-center gap-4">

@@ -1,12 +1,24 @@
-import { getFundingDetail, getOrganizations } from "@/services/funding";
+import { API_ENDPOINTS } from "@/config/api";
+import fetchClient from "@/lib/fetchClient";
+import { FinalResponse } from "@/types/api/common";
+import { FundingDetailType } from "@/types/api/funding";
 import { useQuery } from "@tanstack/react-query";
+
+// OK
+export async function getFundingDetail(id: string) {
+  const data: FinalResponse<FundingDetailType> = await fetchClient(
+    `${API_ENDPOINTS.FUNDING}/${id}`
+  );
+  if (data.status === 200) return data.data;
+  throw new Error(data.message);
+}
 
 // OK
 export const useGetFundingDetail = (id: string) => {
   return useQuery({
-    queryKey: ["funding-detail"],
-    queryFn: async () => {
-      return await getFundingDetail(id);
-    },
+    queryKey: ["funding-detail", id],
+    queryFn: async () => await getFundingDetail(id),
+    enabled: Boolean(id),
+    refetchOnWindowFocus: false,
   });
 };

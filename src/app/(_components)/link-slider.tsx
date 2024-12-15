@@ -3,12 +3,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css";
+import { useRouter } from "next/navigation";
 
 export interface LinkType {
   href?: string;
   title: string;
   description: string;
   icon?: string;
+  onClick?: () => void;
 }
 
 interface Props {
@@ -16,6 +18,7 @@ interface Props {
 }
 
 export default function LinkSlider({ links }: Props) {
+  const router = useRouter();
   return (
     <Swiper
       modules={[Autoplay]}
@@ -29,9 +32,12 @@ export default function LinkSlider({ links }: Props) {
       }}
       style={{ margin: -20, padding: 20, height: "120px" }}
     >
-      {links.map(({ href, title, description, icon }, idx) => (
+      {links.map(({ href, title, description, icon, onClick }, idx) => (
         <SwiperSlide className="select-none py-1" key={`${title}_${idx}`}>
-          <a href={href} className=" flex items-center h-full">
+          <button
+            className="w-full h-full py-full flex items-center text-left"
+            onClick={() => (onClick ? onClick() : router.push(href!))}
+          >
             <div className="space-y-1 max-w-[50%]">
               <h1 className=" text-t3">{title}</h1>
               <p className="text-bd3 max-xs:whitespace-pre-wrap">
@@ -45,7 +51,7 @@ export default function LinkSlider({ links }: Props) {
                 alt="기부사 검색"
               />
             )}
-          </a>
+          </button>
         </SwiperSlide>
       ))}
     </Swiper>

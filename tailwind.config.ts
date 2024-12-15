@@ -5,6 +5,7 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/providers/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -76,6 +77,14 @@ export default {
           },
           to: {
             opacity: "1",
+          },
+        },
+        marquee: {
+          from: {
+            transform: "translateX(0)",
+          },
+          to: {
+            transform: "translateX(calc(0px - 50%))",
           },
         },
       },

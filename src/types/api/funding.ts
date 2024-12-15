@@ -18,15 +18,20 @@ export interface FundingType {
   title: string;
   content: string;
   image: string;
-  curAmount: number;
+  curAmount?: number;
   targetAmount: number;
   percent: number;
-  status: StatusType;
+  status?: StatusType;
   category: CategoryType;
-  fundingStartDate: Date | null;
-  fundingEndDate: Date | null;
-  donationStartDate: Date | null;
-  donationEndDate: Date | null;
+  organizationName: string;
+  fundingStartDate?: Date | null;
+  fundingEndDate?: Date | null;
+  donationStartDate?: Date | null;
+  donationEndDate?: Date | null;
+}
+
+export interface FundingDetailType extends FundingType {
+  organizationName: string;
 }
 
 export interface MyFundingType {

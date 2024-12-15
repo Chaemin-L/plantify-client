@@ -1,26 +1,7 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
 import { FinalResponse } from "@/types/api/common";
-import {
-  CategoryType,
-  ItemType,
-  MyItemType,
-  PostUsingItem,
-} from "@/types/api/item";
-
-// OK
-export async function getStoreItems() {
-  const data = await fetchClient(`${API_ENDPOINTS.ITEM}`, {
-    credentials: "include",
-  });
-  return data as FinalResponse<ItemType[]>;
-}
-
-// OK
-export async function getStoreItemsByCategory(category: CategoryType) {
-  const data = await fetchClient(`${API_ENDPOINTS.ITEM}/${category}`);
-  return data as FinalResponse<ItemType[]>;
-}
+import { MyItemType, PostUsingItem } from "@/types/api/item";
 
 // OK
 export async function postUsingItem(

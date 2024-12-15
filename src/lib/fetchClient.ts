@@ -1,15 +1,9 @@
-import { FinalResponse } from "@/types/api/common";
+import { redirect } from "next/navigation";
+import { PATH } from "./_shared/paths";
 
 const fetchClient = async (url: string, options: RequestInit = {}) => {
-  let token;
-  if (process.env.NODE_ENV === "development") {
-    token = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-  } else {
-    token =
-      typeof window !== "undefined"
-        ? localStorage.getItem("accessToken")
-        : null;
-  }
+  let token =
+    typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
 
   const defaultHeaders: HeadersInit = {
     "Content-Type": "application/json",
@@ -25,13 +19,15 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
   };
 
   const response = await fetch(url, mergedOptions);
-  // 통신 에러
   if (!response.ok) {
+    if (response.status === 403) {
+      redirect(PATH.INTRO);
+    }
     throw new Error(`${response.status} ${response.statusText}`);
-  } else {
-    const data = await response.json();
-    return data;
   }
+
+  const data = await response.json();
+  if (data.status === 200) return data;
 };
 
 export default fetchClient;

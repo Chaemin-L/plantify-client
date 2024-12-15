@@ -1,10 +1,3 @@
-import { ReactElement } from "react";
-
-interface Args {
-  oldElementId: string;
-  newElementId: string;
-  isHorizontal: boolean;
-}
 export function rotateCard(
   oldElementId: string,
   newElementId: string,
