@@ -29,11 +29,18 @@ export default async function HomePage() {
       <PayNotice />
 
       {/** 페이 및 포인트*/}
-      <PayCard pay={pay!} points={points!} />
-      <PointMoney
-        hasPay={pay !== null}
-        total={(pay?.balance ?? 0) + (points?.pointBalance ?? 0)}
-      />
+      {pay && points && <PayCard pay={pay} points={points} />}
+      <div className="card bg-accent-green  flex justify-between  select-none w-full">
+        {points ? (
+          <PointMoney
+            total={(pay?.balance ?? 0) + (points?.pointBalance ?? 0)}
+          />
+        ) : (
+          <Link href={PATH.PAY_ACCOUNTS} className="card-title text-black">
+            페이 등록하러 가기 &gt;&gt;
+          </Link>
+        )}
+      </div>
 
       {/** 이벤트 슬라이더 */}
       <EventSliderBanner />

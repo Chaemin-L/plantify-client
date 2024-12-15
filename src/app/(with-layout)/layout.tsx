@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import AuthProvider from "@/providers/auth-provider";
 import { TanstackQueryClientProvider } from "@/providers/tanstack-provider";
 import ToastProvider from "@/providers/toast-provider";
+
 import "@/styles/swiper.css";
 import { Provider } from "jotai";
 import type { Metadata } from "next";

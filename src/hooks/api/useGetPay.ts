@@ -10,8 +10,7 @@ export async function getPay() {
   const response: FinalResponse<PayType> = await fetchClient(
     `${API_ENDPOINTS.PAY}`
   );
-  if (response.status === 200) return response.data;
-  throw new Error("페이를 가져오는데 실패했습니다");
+  return response.data;
 }
 
 export const useGetPay = () => {
