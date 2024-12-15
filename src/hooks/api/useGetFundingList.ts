@@ -3,7 +3,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 // OK
 export const useGetFundingList = (size: number, sort: string[] = ["title"]) => {
-  const token = localStorage.getItem("accessToken") || "";
+  const token =
+    typeof window !== "undefined"
+      ? localStorage.getItem("accessToken") || ""
+      : "";
+
   return useInfiniteQuery({
     queryKey: ["funding-list"],
     queryFn: ({ pageParam = 0 }) =>
