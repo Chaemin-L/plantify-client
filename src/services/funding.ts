@@ -11,15 +11,21 @@ import {
 export async function getFundingList(
   page: number,
   size: number,
-  sort: string[]
+  sort: string[],
+  token: string
 ) {
-  const data: FinalResponse<Pageable<FundingType>> = await fetchClient(
+  const response: FinalResponse<Pageable<FundingType>> = await fetch(
     `${
       API_ENDPOINTS.FUNDING
-    }?page=${page}&size=${size}&sort=${encodeURIComponent(sort.toString())}`
-  );
-  if (data.status === 200) return data.data;
-  throw new Error(data.message);
+    }?page=${page}&size=${size}&sort=${encodeURIComponent(sort.toString())}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  ).then((res) => res.json());
+  if (response.status === 200) return response.data;
+  throw new Error(response.message);
 }
 
 // OK
