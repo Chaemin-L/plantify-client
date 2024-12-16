@@ -10,12 +10,12 @@ interface Props {
 export default function SearchResult({ data, checkedCard, onCheck }: Props) {
   return (
     <div className="flex flex-col px-5">
-      {data!
-        .filter((card) => !checkedCard.includes(card))
+      {data
+        .filter((card) => !checkedCard.includes(card) && card.addable)
         .map((card, idx) => (
           <Checkbox
             key={`${card.card_id}_${idx}`}
-            label={card.name}
+            label={card.card_name}
             onClick={() => onCheck(card)}
           />
         ))}

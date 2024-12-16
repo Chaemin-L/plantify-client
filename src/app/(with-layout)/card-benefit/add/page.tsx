@@ -19,7 +19,6 @@ export default function CardAddPage() {
   return (
     <div className="space-y-5 h-full">
       <SearchBar onSubmit={onSubmit} />
-
       <CheckList query={query} />
     </div>
   );

@@ -82,7 +82,7 @@ export default function CheckList({ query }: Props) {
         {checkedCard.map((card, idx) => (
           <Checkbox
             key={`${card.card_id}_${idx}`}
-            label={card.name}
+            label={card.card_name}
             value={card.card_id}
             checked
             onChange={() => onCheck(card)}
@@ -90,7 +90,11 @@ export default function CheckList({ query }: Props) {
         ))}
       </div>
 
-      <SearchResult data={data!} checkedCard={checkedCard} onCheck={onCheck} />
+      <SearchResult
+        data={data ?? []}
+        checkedCard={checkedCard}
+        onCheck={onCheck}
+      />
       <BottomFixedButton onClick={handleClick}>확인</BottomFixedButton>
     </div>
   );

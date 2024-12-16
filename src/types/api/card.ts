@@ -17,22 +17,19 @@ interface BenefitType {
 }
 
 export interface SearchCardType {
-  name: string;
-  image_url: string;
-  company_name: string;
-  card_type: string;
+  addable: boolean;
+  card_name: string;
+  card_image: string;
+  company: string;
+  type: string;
   card_id: number;
   benefits: BenefitType[];
 }
 
-export interface GetMyCardRes {
+export type MyCardType = {
   card_id: number;
-  id: number;
-  card: {
-    name: string;
-    image: string;
-    company: string;
-    type: string;
-    id: number;
-  };
-}
+  myCard_id: number;
+  card: CardType;
+};
+
+export type GetMyCardRes = MyCardType[];

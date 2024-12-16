@@ -38,7 +38,7 @@ export default function CardBenefitPage() {
       </ul>
 
       <div className="pt-5">
-        {tab === "all" ? <AllBenefit token={accessToken} /> : <MyBenefit />}
+        {tab === "all" ? <AllBenefit /> : <MyBenefit token={accessToken!} />}
       </div>
     </div>
   );
