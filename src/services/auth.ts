@@ -5,14 +5,12 @@ import { FinalResponse } from "@/types/api/common";
 import { redirect } from "next/navigation";
 
 export async function signIn(code: string) {
-  const data: FinalResponse<{ accessToken: string; refreshToken: string }> =
+  const response: { accessToken: string; refreshToken: string } =
     await fetchClient(`${API_ENDPOINTS.AUTH}/login?code=${code}`, {
       method: "POST",
     });
 
-  const {
-    data: { accessToken, refreshToken },
-  } = data;
+  const { accessToken, refreshToken } = response;
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
   redirect(PATH.HOME);
