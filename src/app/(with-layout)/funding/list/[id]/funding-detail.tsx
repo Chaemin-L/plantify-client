@@ -26,6 +26,7 @@ export default function FundingDetail({ id }: Props) {
   const { mutate } = usePostFunding();
 
   if (!data) return <Loading />;
+  console.log(data);
 
   const {
     fundingId,

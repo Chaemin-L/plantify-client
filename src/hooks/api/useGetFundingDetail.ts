@@ -9,8 +9,7 @@ export async function getFundingDetail(id: string) {
   const data: FinalResponse<FundingDetailType> = await fetchClient(
     `${API_ENDPOINTS.FUNDING}/${id}`
   );
-  if (data.status === 200) return data.data;
-  throw new Error(data.message);
+  return data;
 }
 
 // OK

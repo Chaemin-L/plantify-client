@@ -18,8 +18,7 @@ export async function getFundingByCategory(
       sort.toString()
     )}`
   );
-  if (data.status === 200) return data.data;
-  throw new Error(data.message);
+  return data;
 }
 
 // OK

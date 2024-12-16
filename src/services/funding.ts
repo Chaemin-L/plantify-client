@@ -24,8 +24,7 @@ export async function getFundingList(
       },
     }
   ).then((res) => res.json());
-  if (response.status === 200) return response.data;
-  throw new Error(response.message);
+  return response.data;
 }
 
 // OK
@@ -58,6 +57,5 @@ export async function getOrganizations() {
   const data: FinalResponse<OrganizationType[]> = await fetchClient(
     `${API_ENDPOINTS.FUNDING}/organizations`
   );
-  if (data.status === 200) return data.data;
-  throw new Error(data.message);
+  return data;
 }
