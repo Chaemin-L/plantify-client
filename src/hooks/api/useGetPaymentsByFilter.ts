@@ -1,6 +1,6 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
-import { FinalResponse, Pageable } from "@/types/api/common";
+import { Pageable } from "@/types/api/common";
 import { PaymentsType } from "@/types/api/pay";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
@@ -12,14 +12,14 @@ const getPaymentsByFilter = async (
   size: number,
   sort: string[]
 ) => {
-  const response: FinalResponse<Pageable<PaymentsType>> = await fetchClient(
+  const response: Pageable<PaymentsType> = await fetchClient(
     `${
       API_ENDPOINTS.PAY
     }/settlements/${filter}?page=${pageParam}&size=${size}&sort=${encodeURIComponent(
       sort.toString()
     )}`
   );
-  return response.data;
+  return response;
 };
 
 export const useGetPaymentsByFilter = (

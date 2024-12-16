@@ -9,6 +9,7 @@ import { BASE_URL } from "@/config/api";
 import { useGetFundingDetail } from "@/hooks/api/useGetFundingDetail";
 import { usePostFunding } from "@/hooks/api/usePostFunding";
 import { PATH } from "@/lib/_shared/paths";
+import { FundingDetailType } from "@/types/api/funding";
 import Link from "next/link";
 import { useRef, useState } from "react";
 
@@ -22,11 +23,10 @@ export default function FundingDetail({ id }: Props) {
   // const searchParams = useSearchParams();
   // const router = useRouter();
 
-  const { data } = useGetFundingDetail(id);
+  const { data, isLoading } = useGetFundingDetail(id);
   const { mutate } = usePostFunding();
 
-  if (!data) return <Loading />;
-  console.log(data);
+  if (isLoading) return <Loading />;
 
   const {
     fundingId,
@@ -37,7 +37,7 @@ export default function FundingDetail({ id }: Props) {
     targetAmount,
     // organizationId,
     organizationName,
-  } = data;
+  } = data as FundingDetailType;
 
   const handleDonation = () => {
     if (!priceRef.current || !priceRef.current.value) return;

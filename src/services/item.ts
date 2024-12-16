@@ -30,9 +30,3 @@ export async function purchaseItem(itemId: number, quantity: number) {
   });
   return data as FinalResponse<MyItemType>;
 }
-
-// OK
-export async function getMyItems() {
-  const data = await fetchClient(`${API_ENDPOINTS.ITEM}/my-items`);
-  return data as FinalResponse<MyItemType[]>;
-}

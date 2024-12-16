@@ -1,6 +1,6 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
-import { FinalResponse, Pageable } from "@/types/api/common";
+import { Pageable } from "@/types/api/common";
 import { FundingType } from "@/types/api/funding";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
@@ -9,14 +9,14 @@ const getMyFunding = async (
   size: number,
   sort: string[]
 ) => {
-  const response: FinalResponse<Pageable<FundingType>> = await fetchClient(
+  const response: Pageable<FundingType> = await fetchClient(
     `${
       API_ENDPOINTS.FUNDING
     }/my-funding?page=${pageParam}&size=${size}&sort=${encodeURIComponent(
       sort.toString()
     )}`
   );
-  return response.data;
+  return response;
 };
 
 export const useGetMyFunding = (size: number, sort: string[]) => {

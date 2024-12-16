@@ -15,8 +15,7 @@ async function postPurchaseItems(itemId: number, quantity: number) {
     },
     body: JSON.stringify({ itemId, quantity }),
   });
-  if (data.status === 200) return data;
-  throw new Error(data.message);
+  return data;
 }
 
 export const usePostPurchaseItems = () => {

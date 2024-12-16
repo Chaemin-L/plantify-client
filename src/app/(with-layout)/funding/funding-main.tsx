@@ -1,6 +1,6 @@
 import ItemSlider from "@/app/(_components)/item-slider";
+import { getFundingList } from "@/hooks/api/useGetFundingList";
 import { PATH } from "@/lib/_shared/paths";
-import { getFundingList } from "@/services/funding";
 import Image from "next/image";
 import Link from "next/link";
 import AdSliderBanner from "./(components)/ad-slider-banner";

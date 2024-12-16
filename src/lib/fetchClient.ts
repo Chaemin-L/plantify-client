@@ -31,7 +31,7 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
   }
 
   const data = await response.json();
-  return data.data || data;
+  return data.data;
 };
 
 export default fetchClient;

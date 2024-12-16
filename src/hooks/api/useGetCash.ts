@@ -1,16 +1,12 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
 import { CashType } from "@/types/api/cash";
-import { FinalResponse } from "@/types/api/common";
 import { useQuery } from "@tanstack/react-query";
 
 // OK
 export async function getCash() {
-  const data: FinalResponse<CashType> = await fetchClient(
-    `${API_ENDPOINTS.CASH}`
-  );
-  if (data.status === 200) return data.data;
-  throw new Error();
+  const data: CashType = await fetchClient(`${API_ENDPOINTS.CASH}`);
+  return data;
 }
 
 export const useGetCash = () => {
