@@ -1,6 +1,6 @@
 import Loading from "@/app/loading";
 import { useGetMyItemsQuery } from "@/hooks/api/useGetMyItems";
-import { CategoryType, MyItemType } from "@/types/api/item";
+import { CategoryType } from "@/types/api/item";
 import clsx from "clsx";
 import Image from "next/image";
 import { Suspense, useState } from "react";
@@ -99,7 +99,7 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
         </ul>
         <div className="grid grid-cols-3 gap-1 md:gap-2 w-full ">
           {myItems.map((item) => {
-            const { itemId, itemName, imageUri, myItemIds } = item;
+            const { itemId, itemName, imageUri } = item;
             return (
               <button
                 key={itemId}

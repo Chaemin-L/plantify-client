@@ -1,5 +1,5 @@
 "use client";
-import { API_BASE_URL } from "@/config/api";
+import { API_ENDPOINTS } from "@/config/api";
 import { ApolloClient, HttpLink, InMemoryCache, split } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
@@ -8,7 +8,7 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { createClient } from "graphql-ws";
 
 const httpLink = new HttpLink({
-  uri: API_BASE_URL + "/graphql",
+  uri: API_ENDPOINTS.ITEM + "/using-items/graphql",
 });
 
 const wsLink = new GraphQLWsLink(
