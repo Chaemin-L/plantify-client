@@ -45,7 +45,7 @@ export default function FundingDetail({ id }: Props) {
     mutate({
       fundingId,
       price: Number(priceRef.current.value),
-      redirectUrl: `${BASE_URL}${PATH.FUNDING_LIST}/${fundingId}?success=true`,
+      redirectUri: `${BASE_URL}${PATH.FUNDING_LIST}/${fundingId}?success=true`,
     });
   };
 

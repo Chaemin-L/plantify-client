@@ -51,5 +51,5 @@ export interface OrganizationType {
 export interface PostFundingReq {
   fundingId: number;
   price: number;
-  redirectUrl: string;
+  redirectUri: string;
 }
