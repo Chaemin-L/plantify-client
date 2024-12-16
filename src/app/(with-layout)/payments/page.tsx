@@ -1,7 +1,9 @@
 "use client";
 import Select, { SelectItemType } from "@/app/(_components)/select";
+import { useGetAmount } from "@/hooks/api/useGetAmount";
 import { useGetPayments } from "@/hooks/api/useGetPayments";
 import { PATH } from "@/lib/_shared/paths";
+import { kdayjs } from "@/lib/kdayjs";
 import { PaymentCategoryType, PaymentSorting } from "@/types/pay";
 import { isPaymentCategoryType, isPaymentSortingType } from "@/utils/typeCheck";
 import clsx from "clsx";
@@ -21,6 +23,13 @@ export default function PaymentsPage() {
   const filter = searchParams.get("category") ?? "ALL";
   const sorting = searchParams.get("sorting") ?? "createdAt";
 
+  const startDate = kdayjs().subtract(1, "month").format("MM월 DD일");
+  const endDate = kdayjs().format("MM월 DD일");
+
+  const isAll = filter === "ALL";
+
+  const { data: totalPayments } = useGetAmount();
+
   const {
     data: allPayments,
     hasNextPage: allHasNextPage,
@@ -30,10 +39,14 @@ export default function PaymentsPage() {
   if (!isPaymentCategoryType(filter)) return notFound();
   if (!isPaymentSortingType(sorting)) return notFound();
 
-  const isAll = filter === "ALL";
-
   return (
     <>
+      <div className="space-y-1 text-white">
+        <span className="text-t4">
+          {startDate} ~ {endDate}
+        </span>
+        <h1 className="text-t2">{totalPayments?.toLocaleString()}원</h1>
+      </div>
       <Select
         baseUrl={PATH.PAYMENTS}
         name="category"
