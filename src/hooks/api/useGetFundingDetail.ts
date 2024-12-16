@@ -1,14 +1,19 @@
 import { API_ENDPOINTS } from "@/config/api";
-import fetchClient from "@/lib/fetchClient";
 import { FinalResponse } from "@/types/api/common";
 import { FundingDetailType } from "@/types/api/funding";
 import { useQuery } from "@tanstack/react-query";
 
 // OK
 export async function getFundingDetail(id: string) {
-  const data: FinalResponse<FundingDetailType> = await fetchClient(
-    `${API_ENDPOINTS.FUNDING}/${id}`
-  );
+  const data: FinalResponse<FundingDetailType> = await fetch(
+    `${API_ENDPOINTS.FUNDING}/${id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  ).then((res) => res.json());
   if (data.status === 200) return data.data;
   throw new Error(data.message);
 }

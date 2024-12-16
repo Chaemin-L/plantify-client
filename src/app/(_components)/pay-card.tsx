@@ -44,9 +44,9 @@ export default function PayCard({ pay, points }: Props) {
     loading.current = false;
   };
 
-  const handleBarcodeFullScreenMode: MouseEventHandler<
-    HTMLImageElement
-  > = async (e) => {
+  const handleBarcodeFullScreenMode: MouseEventHandler<HTMLImageElement> = (
+    e
+  ) => {
     const target = e.target as HTMLImageElement;
     loading.current = true;
     target.style.position = "absolute";
@@ -61,9 +61,7 @@ export default function PayCard({ pay, points }: Props) {
     );
   };
 
-  const handleQRFullScreenMode: MouseEventHandler<HTMLImageElement> = async (
-    e
-  ) => {
+  const handleQRFullScreenMode: MouseEventHandler<HTMLImageElement> = (e) => {
     const target = e.target as HTMLImageElement;
     loading.current = true;
     target.style.position = "absolute";
@@ -78,7 +76,7 @@ export default function PayCard({ pay, points }: Props) {
     });
   };
 
-  const handleCancelFullScreenMode = async (target: HTMLImageElement) => {
+  const handleCancelFullScreenMode = (target: HTMLImageElement) => {
     target.style.position = "static";
     target.style.transition = "all 0.3s";
     target.style.zIndex = "0";

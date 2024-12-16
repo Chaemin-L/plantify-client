@@ -1,4 +1,3 @@
-import { getFundingDetail } from "@/hooks/api/useGetFundingDetail";
 import FundingDetail from "./funding-detail";
 
 interface Props {
@@ -6,8 +5,6 @@ interface Props {
 }
 export default async function Page({ params }: Props) {
   const { id } = await params;
-
-  const data = await getFundingDetail(id);
 
   return (
     <>

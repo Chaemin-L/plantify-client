@@ -1,7 +1,7 @@
 import PayCard from "../../(_components)/pay-card";
 import FeatureLayout from "./feature-layout";
 
-export default async function PlantiPay() {
+export default function PlantiPay() {
   return (
     <FeatureLayout
       title="PlantiPay"

@@ -40,23 +40,5 @@ export default function ItemSlider({ title, items }: Props) {
         </ul>
       </div>
     </div>
-    // <Swiper
-    //   modules={[FreeMode]}
-    //   spaceBetween={12}
-    //   slidesPerView={2}
-    //   freeMode={true}
-    //   style={{ margin: -20, padding: 20 }}
-    // >
-    //   {items.map(({ title, category, percent, image }) => (
-    //     <SwiperSlide className="select-none cursor-grab active:cursor-grabbing">
-    //       <img src={image} className="rounded-t-xl" />
-    //       <div className="flex flex-col gap-2 bg-shadow-800 rounded-b-xl px-3 py-4">
-    //         <span className="text-bd4 font-normal">{category}</span>
-    //         <h1 className="text-bd4 line-clamp-1">{title}</h1>
-    //         <Progressbar percent={percent} />
-    //       </div>
-    //     </SwiperSlide>
-    //   ))}
-    // </Swiper>
   );
 }

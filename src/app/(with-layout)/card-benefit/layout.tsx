@@ -7,11 +7,10 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  params: Promise<{ category: string }>;
   children: React.ReactNode;
 };
 
-export default async function Layout({ children }: Props) {
+export default function Layout({ children }: Props) {
   return (
     <div className="space-y-5">
       <h1 className="text-t2">어디서 결제할 예정이신가요?</h1>

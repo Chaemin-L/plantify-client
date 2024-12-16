@@ -8,6 +8,7 @@ interface Props {
 }
 export default function BestFunding({ data }: Props) {
   const { fundingId, title, content, image, percent, targetAmount } = data;
+
   return (
     <Link
       href={`${PATH.FUNDING_LIST}/${fundingId}`}

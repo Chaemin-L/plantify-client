@@ -1,4 +1,3 @@
-"use client";
 import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
 import { FundingType } from "@/types/api/funding";

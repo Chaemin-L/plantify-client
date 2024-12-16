@@ -2,7 +2,7 @@ import { FundingType } from "@/types/api/funding";
 import ItemSlider from "../../(_components)/item-slider";
 import FeatureLayout from "./feature-layout";
 
-export default async function PlantiFunding() {
+export default function PlantiFunding() {
   return (
     <FeatureLayout
       title="PlantiFunding"
