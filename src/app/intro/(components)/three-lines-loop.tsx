@@ -1,3 +1,4 @@
+"use client";
 import { horizontalLoop } from "@/lib/_gsap";
 import { useEffect } from "react";
 
