@@ -105,8 +105,8 @@ export default function PayCard({ pay, points }: Props) {
           onClick={(swiper) => swiper.slideNext()}
           noSwipingClass="no-swiper"
         >
-          <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 overflow-hidden p-0 bg-accent-green will-change-transform ">
-            <div className=" w-full">
+          <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36  p-0 bg-accent-green will-change-transform ">
+            <div className=" w-full ">
               <Image
                 width={90}
                 height={90}
@@ -120,16 +120,18 @@ export default function PayCard({ pay, points }: Props) {
                   WebkitTransform: "rotate(0deg)",
                 }}
               />
-              <div className="w-full h-full">
-                <Image
-                  priority
-                  src="/icons/card-logo.png"
-                  width={180}
-                  height={300}
-                  loading="eager"
-                  className="absolute w-[35%] top-16 max-xs:top-10 right-10 "
-                  alt="카드 로고"
-                />
+              <div className="absolute w-full h-full ">
+                <div className="relative w-full h-full overflow-hidden">
+                  <Image
+                    priority
+                    src="/icons/card-logo.png"
+                    width={200}
+                    height={300}
+                    loading="eager"
+                    className="absolute w-[35%] top-16 max-xs:top-10 right-10 "
+                    alt="카드 로고"
+                  />
+                </div>
               </div>
             </div>
           </SwiperSlide>
