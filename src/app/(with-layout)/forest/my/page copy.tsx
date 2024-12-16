@@ -5,47 +5,41 @@ import { useForestField } from "@/hooks/useForestField";
 import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
 import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
 
-import { usePostCreateUsingItems } from "@/hooks/api/usePostUsingItems";
-import { GetUsingItemsRes } from "@/types/api/item";
+import { MyItemType, PostUsingItem } from "@/types/api/item";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { DraggableData, DraggableEvent } from "react-draggable";
 import DraggableItem from "./draggable-item";
 import MyBox from "./my-box-btn";
-import StoreBtn from "./store-btn";
 
 export default function Page() {
   const [editMode, setEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<null | number>(null);
   const [editError, setEditError] = useState<boolean>(false);
-  const [items, setItems] = useState<GetUsingItemsRes[]>([]);
+  const [items, setItems] = useState<PostUsingItem[]>(usingItems);
 
   const { cellWidth, cellHeight } = useResizeWindowCell();
   const { fillField, emptyField } = useForestField(cellWidth, cellHeight);
 
-  const { data, loading } = useGetUsingItems();
-  const [mutate] = usePostCreateUsingItems();
+  const { data } = useGetUsingItems();
+  console.log(data);
 
   useEffect(() => {
-    if (loading) return;
-
     setItems(
-      data?.getAllUsingItemsByUser.map(
-        ({ category, posX, posY, ...rest }: GetUsingItemsRes) => {
-          const fieldPosX = posX * cellWidth;
-          const fieldPosY = posY * cellHeight;
-          if (category === "GROUND")
-            fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
-          return {
-            category,
-            ...rest,
-            posX: fieldPosX,
-            posY: fieldPosY,
-          };
-        }
-      )
+      usingItems.map(({ category, posX, posY, ...rest }) => {
+        const fieldPosX = posX * cellWidth;
+        const fieldPosY = posY * cellHeight;
+        if (category === "GROUND")
+          fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
+        return {
+          category,
+          ...rest,
+          posX: fieldPosX,
+          posY: fieldPosY,
+        };
+      })
     );
-  }, [cellWidth, loading]);
+  }, [cellWidth]);
 
   useEffect(() => {
     if (!editMode) setEditingItem(null);
@@ -60,21 +54,23 @@ export default function Page() {
     setEditMode(false);
   };
 
-  const handleComplete = (item: GetUsingItemsRes) => {
+  const handleComplete = (item: PostUsingItem) => {
     if (!fillField(item)) setEditError(true);
     else {
       setEditMode(false);
     }
   };
 
-  const handleNewItem = (newItem: GetUsingItemsRes) => {
-    const { myItemId } = newItem;
-    mutate({ action: "CREATE", myItemId });
-    setItems((prev) => [...prev, newItem]);
+  const handleNewItem = (newItem: MyItemType) => {
+    const { myItemId, image, category } = newItem;
+    setItems((prev) => [
+      ...prev,
+      { myItemId, imageUri: image, category, posX: 0, posY: 0 },
+    ]);
     setEditingItem(myItemId);
   };
 
-  const handleClickItem = (item: GetUsingItemsRes) => {
+  const handleClickItem = (item: PostUsingItem) => {
     if (editingItem === null) {
       setEditingItem(item.myItemId);
       emptyField(item);
@@ -98,7 +94,7 @@ export default function Page() {
     if (xCond != yCond) {
       const isOver = x === 0; // 왼쪽 끝으로 마름모 반이 잘리는 현상 방지
       setItems((prev) =>
-        prev.map((item: GetUsingItemsRes) =>
+        prev.map((item: PostUsingItem) =>
           item.myItemId === id
             ? {
                 ...item,
@@ -110,7 +106,7 @@ export default function Page() {
       );
     } else
       setItems((prev) =>
-        prev.map((item: GetUsingItemsRes) =>
+        prev.map((item: PostUsingItem) =>
           item.myItemId === id ? { ...item, posX: x, posY: y } : item
         )
       );
@@ -210,166 +206,165 @@ export default function Page() {
       </div>
 
       {!editMode && <MyBox handleNewItem={handleNewItem} />}
-      {!editMode && <StoreBtn />}
     </div>
   );
 }
 
-// const usingItems: GetUsingItemsRes[] = [
-//   {
-//     myItemId: 1,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 1,
-//     posY: 7,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 2,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 1,
-//     posY: 6,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 11,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 1.5,
-//     posY: 7.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 13,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 0.5,
-//     posY: 6.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 14,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 1.5,
-//     posY: 5.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 13,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2,
-//     posY: 6,
-//     category: "GROUND",
-//   },
+const usingItems: PostUsingItem[] = [
+  {
+    myItemId: 1,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 1,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 2,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 1,
+    posY: 6,
+    category: "GROUND",
+  },
+  {
+    myItemId: 11,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 1.5,
+    posY: 7.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 13,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 0.5,
+    posY: 6.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 14,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 1.5,
+    posY: 5.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 13,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2,
+    posY: 6,
+    category: "GROUND",
+  },
 
-//   {
-//     myItemId: 15,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2.5,
-//     posY: 6.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 16,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 3,
-//     posY: 7,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 17,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 3,
-//     posY: 7,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 18,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2,
-//     posY: 8,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 19,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 3.5,
-//     posY: 7.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 20,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2.5,
-//     posY: 8.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 23,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 4,
-//     posY: 8,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 24,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 3,
-//     posY: 9,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 21,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 4.5,
-//     posY: 8.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 22,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 3.5,
-//     posY: 9.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 22,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 4,
-//     posY: 9,
-//     category: "GROUND",
-//   },
+  {
+    myItemId: 15,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2.5,
+    posY: 6.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 16,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 3,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 17,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 3,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 18,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2,
+    posY: 8,
+    category: "GROUND",
+  },
+  {
+    myItemId: 19,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 3.5,
+    posY: 7.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 20,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2.5,
+    posY: 8.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 23,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 4,
+    posY: 8,
+    category: "GROUND",
+  },
+  {
+    myItemId: 24,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 3,
+    posY: 9,
+    category: "GROUND",
+  },
+  {
+    myItemId: 21,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 4.5,
+    posY: 8.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 22,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 3.5,
+    posY: 9.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 22,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 4,
+    posY: 9,
+    category: "GROUND",
+  },
 
-//   {
-//     myItemId: 100,
-//     image: "/temp/forest/tree-item1.svg",
-//     posX: 1.5,
-//     posY: 5.5,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 101,
-//     image: "/temp/forest/tree-item2.svg",
-//     posX: 2,
-//     posY: 6,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 102,
-//     image: "/temp/forest/tree-item3.svg",
-//     posX: 2.5,
-//     posY: 6.5,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 103,
-//     image: "/temp/forest/tree-item2.svg",
-//     posX: 3,
-//     posY: 7,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 104,
-//     image: "/temp/forest/tree-item1.svg",
-//     posX: 3.5,
-//     posY: 7.5,
-//     category: "TREE",
-//   },
-// ];
+  {
+    myItemId: 100,
+    imageUri: "/temp/forest/tree-item1.svg",
+    posX: 1.5,
+    posY: 5.5,
+    category: "TREE",
+  },
+  {
+    myItemId: 101,
+    imageUri: "/temp/forest/tree-item2.svg",
+    posX: 2,
+    posY: 6,
+    category: "TREE",
+  },
+  {
+    myItemId: 102,
+    imageUri: "/temp/forest/tree-item3.svg",
+    posX: 2.5,
+    posY: 6.5,
+    category: "TREE",
+  },
+  {
+    myItemId: 103,
+    imageUri: "/temp/forest/tree-item2.svg",
+    posX: 3,
+    posY: 7,
+    category: "TREE",
+  },
+  {
+    myItemId: 104,
+    imageUri: "/temp/forest/tree-item1.svg",
+    posX: 3.5,
+    posY: 7.5,
+    category: "TREE",
+  },
+];

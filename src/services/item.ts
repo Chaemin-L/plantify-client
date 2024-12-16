@@ -1,7 +1,6 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
-import { FinalResponse } from "@/types/api/common";
-import { MyItemType, PostUsingItem } from "@/types/api/item";
+import { CreateUsingItemsReq, GetMyItemRes } from "@/types/api/item";
 
 // OK
 export async function postUsingItem(
@@ -9,24 +8,30 @@ export async function postUsingItem(
   posX: number,
   posY: number
 ) {
-  const data = await fetchClient(`${API_ENDPOINTS.ITEM}/my-items/using-items`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ myItemId, posX, posY }),
-  });
-  return data as FinalResponse<PostUsingItem>;
+  const data: CreateUsingItemsReq = await fetchClient(
+    `${API_ENDPOINTS.ITEM}/my-items/using-items`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ myItemId, posX, posY }),
+    }
+  );
+  return data;
 }
 
 // OK
 export async function purchaseItem(itemId: number, quantity: number) {
-  const data = await fetchClient(`${API_ENDPOINTS.ITEM}/my-items/purchase`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ itemId, quantity }),
-  });
-  return data as FinalResponse<MyItemType>;
+  const data: GetMyItemRes = await fetchClient(
+    `${API_ENDPOINTS.ITEM}/purchase`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ itemId, quantity }),
+    }
+  );
+  return data;
 }

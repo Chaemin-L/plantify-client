@@ -1,5 +1,3 @@
-import { ItemCategoryType } from "../forest";
-
 // export type CategoryType = "BACKGROUND" | "FLOWER" | "ETC";
 export type CategoryType = "GROUND" | "TREE" | "FLOWER" | "ETC";
 
@@ -14,28 +12,41 @@ export interface ItemType {
   updatedAt: Date;
 }
 
-export interface MyItemType {
+export type GetMyItemRes = {
+  itemId: number;
+  imageUri: string;
+  itemName: string;
+  category: CategoryType;
+  myItemIds: number[];
+};
+
+export type PurchaseItemRes = {
   myItemId: number;
   itemId: number;
   itemName: string;
-  image: string; // api not yet
+  imageUri: string;
   category: CategoryType;
-  quantity: number;
-  usingQuantity: number;
-  userId: number;
-}
+}[];
 
 export interface Position {
   posX: number;
   posY: number;
 }
-export interface MyUsingItemType extends Position {
+
+// POST usingItem Resquest
+export interface CreateUsingItemsReq {
+  action: "CREATE";
+  myItemId: number;
+}
+export interface UpdateUsingItemsReq extends Position {
+  action: "UPDATE" | "DELETE";
   usingItemId: number;
   myItemId: number;
 }
 
-export interface PostUsingItem extends Position {
+// GET, POST usingItem Response
+export interface GetUsingItemsRes extends Position {
   myItemId: number;
-  image: string; // api not yet
-  category: ItemCategoryType;
+  imageUri: string;
+  category: CategoryType;
 }

@@ -38,7 +38,7 @@ export default function DraggableItem({
   ...props
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const { myItemId, category, image } = item;
+  const { myItemId, category, imageUri: imageUri } = item;
   const isFocusing = editingItem === myItemId;
   const isGround = category === "GROUND";
 
@@ -63,7 +63,7 @@ export default function DraggableItem({
           style={{
             width,
             height: isGround ? height : 1.5 * height,
-            background: `url('${image}') no-repeat center / contain`,
+            background: `url('${imageUri}') no-repeat center / contain`,
           }}
         />
         {editMode && editingItem === myItemId && (

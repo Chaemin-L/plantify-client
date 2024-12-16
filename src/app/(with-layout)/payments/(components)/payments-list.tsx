@@ -52,8 +52,8 @@ export default function PaymentsList({
   return (
     <div className="space-y-5">
       <ul className="flex flex-col gap-5" ref={observerRef}>
-        {listData.map((payment) => (
-          <PaymentsItem key={payment.orderId} {...payment} />
+        {listData.map((payment, idx) => (
+          <PaymentsItem key={`${payment.createdAt}_${idx}`} {...payment} />
         ))}
       </ul>
     </div>

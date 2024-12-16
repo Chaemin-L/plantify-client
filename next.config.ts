@@ -5,13 +5,10 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["mud-kage.kakaocdn.net"],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/recommend",
-        destination: "http://localhost:8000/recommend",
-      },
-    ];
+  env: {
+    NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    NEXT_PUBLIC_GRAPHQL_WS_BASE_URL:
+      process.env.NEXT_PUBLIC_GRAPHQL_WS_BASE_URL,
   },
 };
 
