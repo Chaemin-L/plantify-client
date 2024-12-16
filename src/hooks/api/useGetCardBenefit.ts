@@ -17,7 +17,7 @@ export async function getCardBenefit(category: string) {
       }),
     }
   );
-  return data ?? { top_card: null, other_cards: [] };
+  return data;
 }
 
 export function useGetCardBenefit(category: BenefitCategory) {

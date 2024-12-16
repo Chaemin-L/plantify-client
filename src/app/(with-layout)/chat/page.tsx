@@ -61,7 +61,12 @@ export default function Chat() {
   }, [messages]);
 
   const handleSendMessage = () => {
-    if (message.length && message.trim() && socketRef.current) {
+    if (
+      socketRef.current &&
+      socketRef.current.readyState === WebSocket.OPEN &&
+      message.length &&
+      message.trim()
+    ) {
       const data: MessageType = { sender: "User", message };
       socketRef.current.send(JSON.stringify(data));
       setMessages((prev) => [...prev, data]);
