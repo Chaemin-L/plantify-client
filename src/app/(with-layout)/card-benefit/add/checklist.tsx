@@ -1,11 +1,14 @@
 "use client";
 
+import BottomFixedButton from "@/app/(_components)/bottom-fixed-button";
 import Checkbox from "@/app/(_components)/checkbox";
 import Loading from "@/app/loading";
 import { useGetCardSearch } from "@/hooks/api/useGetCardSearch";
+import { usePostMyCard } from "@/hooks/api/usePostMyCard";
 import { SearchCardType } from "@/types/api/card";
 import clsx from "clsx";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
+import SearchResult from "./search-result";
 
 interface Props {
   query: string;
@@ -13,7 +16,16 @@ interface Props {
 export default function CheckList({ query }: Props) {
   const { data, isLoading } = useGetCardSearch(query);
   const [checkedCard, setCheckedCard] = useState<SearchCardType[]>([]);
+
+  const { mutate } = usePostMyCard();
+
   const isEmpty = checkedCard.length === 0;
+
+  const handleClick: MouseEventHandler = async (e) => {
+    e.preventDefault();
+    mutate(checkedCard.map((card) => card.card_id));
+    setCheckedCard([]);
+  };
 
   if (isLoading)
     return (
@@ -78,17 +90,8 @@ export default function CheckList({ query }: Props) {
         ))}
       </div>
 
-      <div className="flex flex-col px-5">
-        {data!
-          .filter((card) => !checkedCard.includes(card))
-          .map((card, idx) => (
-            <Checkbox
-              key={`${card.card_id}_${idx}`}
-              label={card.name}
-              onClick={() => onCheck(card)}
-            />
-          ))}
-      </div>
+      <SearchResult data={data!} checkedCard={checkedCard} onCheck={onCheck} />
+      <BottomFixedButton onClick={handleClick}>확인</BottomFixedButton>
     </div>
   );
 }

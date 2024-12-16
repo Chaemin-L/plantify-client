@@ -20,7 +20,7 @@ export async function getCardBenefit(category: string) {
   return data ?? { top_card: null, other_cards: [] };
 }
 
-export function useCardBenefit(category: BenefitCategory) {
+export function useGetCardBenefit(category: BenefitCategory) {
   return useSuspenseQuery({
     queryKey: ["card-benefit", category],
     queryFn: async () => await getCardBenefit(getBenefitCategory(category)),

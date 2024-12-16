@@ -24,3 +24,15 @@ export interface SearchCardType {
   card_id: number;
   benefits: BenefitType[];
 }
+
+export interface GetMyCardRes {
+  card_id: number;
+  id: number;
+  card: {
+    name: string;
+    image: string;
+    company: string;
+    type: string;
+    id: number;
+  };
+}

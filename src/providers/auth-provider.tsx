@@ -10,7 +10,7 @@ interface AuthContextProps {
   // setAccessToken: (accessToken: string | null) => void | null;
 }
 
-const AuthContext = createContext<AuthContextProps>({
+export const AuthContext = createContext<AuthContextProps>({
   accessToken: "",
 });
 

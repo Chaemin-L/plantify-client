@@ -1,5 +1,4 @@
 "use client";
-import BottomFixedButton from "@/app/(_components)/bottom-fixed-button";
 import SearchBar from "@/app/(_components)/searchbar";
 import { FormEvent, useState } from "react";
 import CheckList from "./checklist";
@@ -11,6 +10,7 @@ export interface CardType {
 
 export default function CardAddPage() {
   const [query, setQuery] = useState("");
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     setQuery((e.target as HTMLFormElement).search.value);
@@ -19,8 +19,8 @@ export default function CardAddPage() {
   return (
     <div className="space-y-5 h-full">
       <SearchBar onSubmit={onSubmit} />
+
       <CheckList query={query} />
-      <BottomFixedButton>확인</BottomFixedButton>
     </div>
   );
 }

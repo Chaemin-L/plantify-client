@@ -1,7 +1,8 @@
 "use client";
 import { SelectItemType } from "@/app/(_components)/select";
+import { AuthContext } from "@/providers/auth-provider";
 import clsx from "clsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AllBenefit from "./all-benefit";
 import MyBenefit from "./my-benefit";
 
@@ -13,6 +14,7 @@ const tabMenus: SelectItemType<TabType>[] = [
 ];
 export default function CardBenefitPage() {
   const [tab, setTab] = useState<TabType>("my");
+  const { accessToken } = useContext(AuthContext);
 
   const handleClick = (menu: TabType) => setTab(menu);
 
@@ -36,7 +38,7 @@ export default function CardBenefitPage() {
       </ul>
 
       <div className="pt-5">
-        {tab === "all" ? <AllBenefit /> : <MyBenefit />}
+        {tab === "all" ? <AllBenefit token={accessToken} /> : <MyBenefit />}
       </div>
     </div>
   );
