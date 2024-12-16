@@ -14,7 +14,7 @@ export type CategoryType =
   | "SOCIAL";
 
 export interface FundingType {
-  fundingId: string;
+  fundingId: number;
   title: string;
   content: string;
   image: string;
@@ -47,4 +47,10 @@ export interface OrganizationType {
   organizationId: string;
   name: string;
   content: string;
+}
+
+export interface PostFundingReq {
+  fundingId: number;
+  price: number;
+  redirectUrl: string;
 }

@@ -17,6 +17,6 @@ export const useGetPay = () => {
   return useQuery({
     queryKey: PAY_QUERY_KEY,
     queryFn: async () => await getPay(),
-    staleTime: 1000 * 60, // 1 min
+    staleTime: 1000 * 60 * 3, // 3 min
   });
 };

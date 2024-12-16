@@ -19,6 +19,8 @@ export const useGetFundingDetail = (id: string) => {
     queryKey: ["funding-detail", id],
     queryFn: async () => await getFundingDetail(id),
     enabled: Boolean(id),
+    staleTime: 1000 * 60 * 10, // 10 min
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };

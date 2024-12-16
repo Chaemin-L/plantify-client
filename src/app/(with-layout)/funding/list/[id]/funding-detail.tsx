@@ -1,3 +1,4 @@
+"use client";
 import BottomFixedButton, {
   Button,
 } from "@/app/(_components)/bottom-fixed-button";
@@ -5,16 +6,22 @@ import BottomSheet from "@/app/(_components)/bottom-sheet";
 import FundingStatus from "@/app/(_components)/funding-status";
 import Loading from "@/app/loading";
 import { useGetFundingDetail } from "@/hooks/api/useGetFundingDetail";
+import { usePostFunding } from "@/hooks/api/usePostFunding";
 import { PATH } from "@/lib/_shared/paths";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface Props {
   id: string;
 }
 export default function FundingDetail({ id }: Props) {
   const [isOpen, setOpen] = useState(false);
+  const priceRef = useRef<HTMLInputElement>(null);
+  // const searchParams = useSearchParams();
+  // const router = useRouter();
+
   const { data } = useGetFundingDetail(id);
+  const { mutate } = usePostFunding();
 
   if (!data) return <Loading />;
 
@@ -28,6 +35,26 @@ export default function FundingDetail({ id }: Props) {
     // organizationId,
     organizationName,
   } = data;
+
+  const handleDonation = () => {
+    if (!priceRef.current || priceRef.current.value) return;
+
+    mutate({
+      fundingId,
+      price: Number(priceRef.current.value),
+      redirectUrl: `${PATH.FUNDING_LIST}/${fundingId}?success=true`,
+    });
+  };
+
+  // useEffect(() => {
+  //   const isSuccess = searchParams.get("success");
+  //   if (isSuccess) {
+  //     window.showToast("따뜻한 마음에 감사드립니다", "success");
+  //     setTimeout(() => {
+  //       router.replace(`${PATH.FUNDING_LIST}/${fundingId}`);
+  //     }, 3000);
+  //   }
+  // }, [fundingId, searchParams]);
 
   return (
     <>
@@ -86,11 +113,12 @@ export default function FundingDetail({ id }: Props) {
             <input
               id="funding_amount"
               type="number"
+              ref={priceRef}
               className="flex-1 outline-0 text-bd1 bg-transparent border-b border-shadow-600 focus:border-accent-green text-center tracking-wide"
             />
             <span>원</span>
           </div>
-          <Button>확인</Button>
+          <Button onClick={handleDonation}>확인</Button>
         </form>
       </BottomSheet>
     </>

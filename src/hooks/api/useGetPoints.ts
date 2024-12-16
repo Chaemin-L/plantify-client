@@ -18,5 +18,6 @@ export const useGetPoints = () => {
   return useQuery({
     queryKey: POINT_QUERY_KEY,
     queryFn: async () => await getPoints(),
+    staleTime: 1000 * 60 * 3, // 3 min
   });
 };

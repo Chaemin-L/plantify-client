@@ -6,6 +6,7 @@ import { CreateAccountReq, PayType } from "@/types/api/pay";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
 import { ACCOUNT_QUERY_KEY } from "./useGetAccounts";
+import { PAY_QUERY_KEY } from "./useGetPay";
 
 // deprecated
 export async function postAccounts(accounts: CreateAccountReq) {
@@ -28,8 +29,10 @@ export const usePostAccount = () => {
     mutationFn: async (accounts: CreateAccountReq) =>
       await postAccounts(accounts),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ACCOUNT_QUERY_KEY });
-      redirect(PATH.PAY_ACCOUNTS);
+      queryClient.invalidateQueries({
+        queryKey: [...ACCOUNT_QUERY_KEY, ...PAY_QUERY_KEY],
+      });
+      redirect(PATH.HOME);
     },
   });
 };
