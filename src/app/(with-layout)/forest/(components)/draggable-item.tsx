@@ -1,5 +1,5 @@
 "use client";
-import { PostUsingItem } from "@/types/api/item";
+import { GetUsingItemsRes } from "@/types/api/item";
 import clsx from "clsx";
 import { useRef } from "react";
 import Draggable, { DraggableProps } from "react-draggable";
@@ -16,14 +16,14 @@ type AllowedDraggableProps =
 
 interface Props
   extends Omit<Pick<DraggableProps, AllowedDraggableProps>, "cancel"> {
-  item: PostUsingItem;
+  item: GetUsingItemsRes;
   width: number;
   height: number;
   editMode: boolean;
   editingItem: number | null;
   editError: boolean;
   handleRemove: (myItemId: number) => void;
-  handleComplete: (item: PostUsingItem) => void;
+  handleComplete: (item: GetUsingItemsRes) => void;
 }
 
 export default function DraggableItem({

@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function GoForest() {
   return (
     <Link
-      href={PATH.FOREST_MY}
+      href={PATH.FOREST}
       className="relative h-full bg-accent-green rounded-xl  text-black p-5"
     >
       <span className="text-bd1">나만의 숲을 만들어요</span>

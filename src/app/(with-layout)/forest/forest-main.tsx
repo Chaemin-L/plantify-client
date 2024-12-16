@@ -6,15 +6,17 @@ import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
 import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
 
 import { usePostCreateUsingItems } from "@/hooks/api/usePostUsingItems";
-import { GetUsingItemsRes } from "@/types/api/item";
+import apolloClient from "@/lib/apolloClient";
+import { GetMyItemRes, GetUsingItemsRes } from "@/types/api/item";
+import { ApolloProvider } from "@apollo/client/react";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { DraggableData, DraggableEvent } from "react-draggable";
-import DraggableItem from "./draggable-item";
-import MyBox from "./my-box-btn";
-import StoreBtn from "./store-btn";
+import DraggableItem from "./(components)/draggable-item";
+import MyBox from "./(components)/my-box-btn";
+import StoreBtn from "./(components)/store-btn";
 
-export default function Page() {
+export default function ForestMain() {
   const [editMode, setEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<null | number>(null);
   const [editError, setEditError] = useState<boolean>(false);
@@ -67,10 +69,11 @@ export default function Page() {
     }
   };
 
-  const handleNewItem = (newItem: GetUsingItemsRes) => {
+  const handleNewItem = (newItem: GetMyItemRes) => {
+    console.log("newItem-itemId: ", newItem.myItemId);
     const { myItemId } = newItem;
-    mutate({ action: "CREATE", myItemId });
-    setItems((prev) => [...prev, newItem]);
+    mutate({ variables: { actions: [{ action: "CREATE", myItemId }] } });
+    setItems((prev) => [...prev, { ...newItem, posX: 0, posY: 0 }]);
     setEditingItem(myItemId);
   };
 
@@ -117,101 +120,107 @@ export default function Page() {
   };
 
   return (
-    <div
-      className={clsx(
-        "relative -mx-4 flex flex-col gap-3 h-full justify-center"
-      )}
-    >
-      <div>
-        {/** sky */}
-        {/* <div
+    <ApolloProvider client={apolloClient}>
+      <div
+        className={clsx(
+          "relative -mx-4 flex flex-col gap-3 h-full justify-center"
+        )}
+      >
+        <div>
+          {/** sky */}
+          {/* <div
           className="h-32 bg-blue-300 mx-auto"
           style={{ width: cellWidth * CELL_COL_CNT }}
         /> */}
-        {/** Field */}
-        <div
-          className="mx-auto p-auto"
-          style={{
-            width: cellWidth * CELL_COL_CNT,
-            background: "url(/temp/forest/ground-item1.png) repeat center",
-            backgroundSize: `${cellWidth}px ${cellHeight}px `,
-          }}
-        >
-          {/** Draggable Field */}
-          <div className="relative flex flex-wrap">
-            {items.map((item, idx) => (
-              <DraggableItem
-                key={idx}
-                item={item}
-                position={{ x: item.posX, y: item.posY }}
-                width={cellWidth} // custom variable
-                height={cellHeight} // custom variable
-                editMode={editMode}
-                editingItem={editingItem}
-                handleRemove={handleRemove}
-                handleComplete={handleComplete}
-                editError={editError}
-                disabled={
-                  !editMode || (editMode && editingItem !== item.myItemId)
-                }
-                onMouseDown={() => handleClickItem(item)}
-                onStop={(e: DraggableEvent, position: DraggableData) =>
-                  onControlledDrag(e, position, item.myItemId)
-                }
-                grid={[cellWidth / 2, cellHeight / 2]}
-                bounds="parent"
-                defaultPosition={{ x: 0, y: 0 }}
-              />
-            ))}
-
-            {Array(CELL_COL_CNT * CELL_ROW_CNT)
-              .fill(0)
-              .map((_, idx) => (
-                <div key={idx} className=" flex shrink-0">
-                  <div
-                    className="relative"
-                    style={{
-                      width: cellWidth,
-                      height: cellHeight,
-                      background:
-                        "url(/temp/forest/ground-item1.png) repeat center",
-                      backgroundSize: `${cellWidth}px ${cellHeight}px `,
-                    }}
-                  >
-                    {editMode && (
-                      <div className="absolute top-0 left-0 flex">
-                        <div
-                          className="box-border border-transparent w-0 h-0 opacity-20"
-                          style={{
-                            borderTop: `${cellHeight / 2}px solid transparent`,
-                            borderRight: `${cellHeight}px solid white`,
-                            borderBottom: `${
-                              cellHeight / 2
-                            }px solid transparent`,
-                          }}
-                        />
-                        <div
-                          className="box-border border-transparent w-0 h-0 opacity-20"
-                          style={{
-                            borderTop: `${cellHeight / 2}px solid transparent`,
-                            borderLeft: `${cellHeight}px solid white`,
-                            borderBottom: `${
-                              cellHeight / 2
-                            }px solid transparent`,
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </div>
+          {/** Field */}
+          <div
+            className="mx-auto p-auto"
+            style={{
+              width: cellWidth * CELL_COL_CNT,
+              background: "url(/temp/forest/ground-item1.png) repeat center",
+              backgroundSize: `${cellWidth}px ${cellHeight}px `,
+            }}
+          >
+            {/** Draggable Field */}
+            <div className="relative flex flex-wrap">
+              {items.map((item, idx) => (
+                <DraggableItem
+                  key={idx}
+                  item={item}
+                  position={{ x: item.posX, y: item.posY }}
+                  width={cellWidth} // custom variable
+                  height={cellHeight} // custom variable
+                  editMode={editMode}
+                  editingItem={editingItem}
+                  handleRemove={handleRemove}
+                  handleComplete={handleComplete}
+                  editError={editError}
+                  disabled={
+                    !editMode || (editMode && editingItem !== item.myItemId)
+                  }
+                  onMouseDown={() => handleClickItem(item)}
+                  onStop={(e: DraggableEvent, position: DraggableData) =>
+                    onControlledDrag(e, position, item.myItemId)
+                  }
+                  grid={[cellWidth / 2, cellHeight / 2]}
+                  bounds="parent"
+                  defaultPosition={{ x: 0, y: 0 }}
+                />
               ))}
+
+              {Array(CELL_COL_CNT * CELL_ROW_CNT)
+                .fill(0)
+                .map((_, idx) => (
+                  <div key={idx} className=" flex shrink-0">
+                    <div
+                      className="relative"
+                      style={{
+                        width: cellWidth,
+                        height: cellHeight,
+                        background:
+                          "url(/temp/forest/ground-item1.png) repeat center",
+                        backgroundSize: `${cellWidth}px ${cellHeight}px `,
+                      }}
+                    >
+                      {editMode && (
+                        <div className="absolute top-0 left-0 flex">
+                          <div
+                            className="box-border border-transparent w-0 h-0 opacity-20"
+                            style={{
+                              borderTop: `${
+                                cellHeight / 2
+                              }px solid transparent`,
+                              borderRight: `${cellHeight}px solid white`,
+                              borderBottom: `${
+                                cellHeight / 2
+                              }px solid transparent`,
+                            }}
+                          />
+                          <div
+                            className="box-border border-transparent w-0 h-0 opacity-20"
+                            style={{
+                              borderTop: `${
+                                cellHeight / 2
+                              }px solid transparent`,
+                              borderLeft: `${cellHeight}px solid white`,
+                              borderBottom: `${
+                                cellHeight / 2
+                              }px solid transparent`,
+                            }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {!editMode && <MyBox handleNewItem={handleNewItem} />}
-      {!editMode && <StoreBtn />}
-    </div>
+        {!editMode && <MyBox handleNewItem={handleNewItem} />}
+        {!editMode && <StoreBtn />}
+      </div>
+    </ApolloProvider>
   );
 }
 

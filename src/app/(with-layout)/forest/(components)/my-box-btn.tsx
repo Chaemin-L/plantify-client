@@ -1,13 +1,13 @@
 import Loading from "@/app/loading";
 import { useGetMyItemsQuery } from "@/hooks/api/useGetMyItems";
-import { CategoryType } from "@/types/api/item";
+import { CategoryType, GetMyItemRes } from "@/types/api/item";
 import clsx from "clsx";
 import Image from "next/image";
 import { Suspense, useState } from "react";
 import { createPortal } from "react-dom";
 
 interface Props {
-  handleNewItem: (myItemId: MyItemType) => void;
+  handleNewItem: (myItem: GetMyItemRes) => void;
 }
 export default function MyBoxBtn({ handleNewItem }: Props) {
   const [show, setShow] = useState<boolean>(false);
@@ -48,7 +48,7 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
 
 interface MyBoxProps {
   handleClose: () => void;
-  handleNewItem: (itemId: number) => void;
+  handleNewItem: (myItem: GetMyItemRes) => void;
 }
 
 const categories: { category: CategoryType; imageUri: string }[] = [
@@ -59,8 +59,6 @@ const categories: { category: CategoryType; imageUri: string }[] = [
 const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
   const [selectedCat, setSelectedCat] = useState<CategoryType>("GROUND");
   const { data: myItems } = useGetMyItemsQuery(selectedCat);
-
-  console.log(myItems);
 
   return (
     <div
@@ -99,13 +97,15 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
         </ul>
         <div className="grid grid-cols-3 gap-1 md:gap-2 w-full ">
           {myItems.map((item) => {
+            console.log("myItems-itemId: ", item);
+
             const { itemId, itemName, imageUri } = item;
             return (
               <button
                 key={itemId}
                 className="relative w-full p-3 flex flex-col justify-center items-center gap-3 hover:opacity-70 object-contain disabled:opacity-40"
                 onClick={() => {
-                  handleNewItem(itemId);
+                  handleNewItem(item);
                   handleClose();
                 }}
                 // disabled={quantity === usingQuantity}
