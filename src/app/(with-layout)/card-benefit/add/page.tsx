@@ -13,7 +13,7 @@ export default function CardAddPage() {
   const [query, setQuery] = useState("");
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setQuery(e.target.search.value);
+    setQuery((e.target as HTMLFormElement).search.value);
   };
 
   return (
