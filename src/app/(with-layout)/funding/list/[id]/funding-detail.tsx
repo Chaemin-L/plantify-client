@@ -1,19 +1,22 @@
-"use client";
 import BottomFixedButton, {
   Button,
 } from "@/app/(_components)/bottom-fixed-button";
 import BottomSheet from "@/app/(_components)/bottom-sheet";
 import FundingStatus from "@/app/(_components)/funding-status";
+import Loading from "@/app/loading";
+import { useGetFundingDetail } from "@/hooks/api/useGetFundingDetail";
 import { PATH } from "@/lib/_shared/paths";
-import { FundingDetailType } from "@/types/api/funding";
 import Link from "next/link";
 import { useState } from "react";
 
 interface Props {
-  data: FundingDetailType;
+  id: string;
 }
-export default function FundingDetail({ data }: Props) {
+export default function FundingDetail({ id }: Props) {
   const [isOpen, setOpen] = useState(false);
+  const { data } = useGetFundingDetail(id);
+
+  if (!data) return <Loading />;
 
   const {
     fundingId,

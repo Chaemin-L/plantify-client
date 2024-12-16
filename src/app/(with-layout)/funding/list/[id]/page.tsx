@@ -1,14 +1,13 @@
+"use client";
+import { useParams } from "next/navigation";
 import FundingDetail from "./funding-detail";
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
-export default async function Page({ params }: Props) {
-  const { id } = await params;
+export default function Page() {
+  const params = useParams<{ id: string }>();
 
   return (
     <>
-      <FundingDetail data={data!} />
+      <FundingDetail id={params.id} />
     </>
   );
 }
