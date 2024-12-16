@@ -6,7 +6,9 @@ export const PointMoney = ({ total }: { total: number }) => {
     <>
       <h1 className="card-title text-black">포인트 ・머니</h1>
       <div className="flex gap-2 items-center">
-        <span className="card-title text-black">{total}원</span>
+        <span className="card-title text-black">
+          {total.toLocaleString()}원
+        </span>
         <Link href={PATH.PAY_ACCOUNTS}>
           <img
             src="/icons/settings.png"

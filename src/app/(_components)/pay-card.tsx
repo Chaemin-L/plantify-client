@@ -21,6 +21,10 @@ export default function PayCard({ pay, points }: Props) {
   const loading = useRef<boolean>(false);
 
   const hasPay = pay !== null;
+  const payNum = pay.payNum
+    .toString()
+    .split("")
+    .map((num, idx) => (idx % 4 ? num : "  " + num));
 
   const handleMoveBodyTransitionEnd = (target: HTMLImageElement) => {
     setFullScreen(target);
@@ -77,12 +81,14 @@ export default function PayCard({ pay, points }: Props) {
   };
 
   const handleCancelFullScreenMode = (target: HTMLImageElement) => {
-    target.style.position = "static";
-    target.style.transition = "all 0.3s";
-    target.style.zIndex = "0";
-    target.style.transform = "scale(1/2) translate(0, 0)";
-    target.style.webkitTransform = "rotate(90deg) scale(2) translate(0, -100%)";
-
+    (target as HTMLElement & { style: object }).style = {
+      ...target.style,
+      position: "static",
+      transition: "all 0.3s",
+      zIndex: "0",
+      transform: "scale(1/2) translate(0, 0)",
+      webkitTransform: "rotate(90deg) scale(2) translate(0, -100%)",
+    };
     target.addEventListener("transitionend", () =>
       handleMoveOriginTransitionEnd(target)
     );
@@ -107,6 +113,7 @@ export default function PayCard({ pay, points }: Props) {
                 quality={100}
                 src="/icons/ic.png"
                 alt="카드 IC칩"
+                loading="eager"
                 className="h-[15%] w-auto absolute left-5 top-1/2 -translate-y-1/2 ml-5 rotate-0"
                 style={{
                   transform: "rotate(0deg)",
@@ -119,6 +126,7 @@ export default function PayCard({ pay, points }: Props) {
                   src="/icons/card-logo.png"
                   width={180}
                   height={300}
+                  loading="eager"
                   className="absolute w-[35%] top-16 max-xs:top-10 right-10 "
                   alt="카드 로고"
                 />
@@ -135,7 +143,7 @@ export default function PayCard({ pay, points }: Props) {
                   width={100}
                   height={100}
                   alt="페이 QRcode"
-                  className="no-swiper flex-1 w-auto h-full max-h-20 xs:max-h-24 transition-all"
+                  className="no-swiper flex-1 w-auto h-full max-h-20 xs:max-h-24 transition-all will-change-transform"
                   onClick={(e) => {
                     if (loading.current) return;
                     handleQRFullScreenMode(e);
@@ -147,7 +155,7 @@ export default function PayCard({ pay, points }: Props) {
                   src="/temp/barcode.png"
                   width={300}
                   height={300}
-                  className="no-swiper flex-4 min-w-0 h-full max-h-20 xs:max-h-24 aspect-[4/1] rounded-md transition-all"
+                  className="no-swiper flex-4 min-w-0 h-full max-h-20 xs:max-h-24 aspect-[4/1] rounded-md transition-all will-change-transform"
                   alt="페이 Barcode"
                   onClick={(e) => {
                     if (loading.current) return;
@@ -160,7 +168,7 @@ export default function PayCard({ pay, points }: Props) {
                   width={200}
                   height={150}
                   alt="카드 로고"
-                  loading="lazy"
+                  loading="eager"
                   src="/icons/card-back-logo.png"
                   className="absolute -bottom-0 left-6 xs:left-10 h-[35%] xs:h-[40%] w-auto"
                 />
@@ -168,14 +176,16 @@ export default function PayCard({ pay, points }: Props) {
                   <div className="flex items-center  gap-2">
                     <span className="text-bd3 xs:text-bd1">포인트</span>
                     <span className="text-t4 xs:text-t3">
-                      {points.pointBalance}원
+                      {points.pointBalance.toLocaleString()}원
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-bd3 xs:text-bd1">머니</span>
-                    <span className="text-t4 xs:text-t3">{pay.balance}원</span>
+                    <span className="text-t4 xs:text-t3">
+                      {pay.balance.toLocaleString()}원
+                    </span>
                   </div>
-                  <div>{pay.payNum}</div>
+                  <div className="no-swiper">{payNum}</div>
                 </div>
               </div>
             </div>

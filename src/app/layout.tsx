@@ -16,7 +16,7 @@ export default function RootLayout({
     <>
       <html lang="ko">
         <body
-          className={`${SPOQA_HAN_SANS_NEO.variable} ${SPOQA_HAN_SANS_NEO.className} antialiased bg-shadow-500 w-screen`}
+          className={`${SPOQA_HAN_SANS_NEO.variable} ${SPOQA_HAN_SANS_NEO.className} antialiased bg-shadow-800 w-screen`}
         >
           <div className="flex justify-center h-full w-full ">
             <div className="w-[500px] max-w-[500px] min-w-0 bg-darkBg text-white">

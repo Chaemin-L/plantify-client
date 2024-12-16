@@ -7,6 +7,7 @@ export const PAY_QUERY_KEY = ["pay"];
 
 export async function getPay() {
   const response: PayType = await fetchClient(`${API_ENDPOINTS.PAY}`);
+  if (response === null) return await getPay();
   return response;
 }
 
@@ -14,6 +15,7 @@ export const useGetPay = () => {
   return useQuery({
     queryKey: PAY_QUERY_KEY,
     queryFn: async () => await getPay(),
-    staleTime: 1000 * 60 * 3, // 3 min
+    refetchOnMount: "always",
+    retry: 2,
   });
 };
