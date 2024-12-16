@@ -41,7 +41,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     <AuthContext.Provider
       value={{
         accessToken,
-        setAccessToken,
+        // setAccessToken,
       }}
     >
       {children}
