@@ -3,7 +3,6 @@ import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
 import { Pageable } from "@/types/api/common";
 import { CategoryType, FundingType } from "@/types/api/funding";
-import getCategoryName from "@/utils/getCategoryName";
 import {
   InfiniteData,
   InfiniteQueryObserverResult,
@@ -12,7 +11,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 interface Props {
-  selectedCategory?: CategoryType;
+  selectedCategory: CategoryType;
   listData: FundingType[];
   fetchNextPage: () => Promise<
     InfiniteQueryObserverResult<
@@ -32,7 +31,6 @@ export default function FundingList({
 }: Props) {
   const observerRef = useRef(null);
   useEffect(() => {
-    console.log(hasNextPage);
     if (!hasNextPage) return;
 
     const observer = new IntersectionObserver(
@@ -59,7 +57,6 @@ export default function FundingList({
           image,
           title,
           percent,
-          category,
           targetAmount,
           organizationName,
         }) => (
@@ -71,7 +68,7 @@ export default function FundingList({
               <img src={image} className="w-[40%]  rounded-l-xl object-cover" />
               <div className="px-5 py-4 w-full h-fit flex justify-between flex-col ">
                 <div className=" max-md:mb-1 mb-2 max-md:text-bd4 text-bd2">
-                  {getCategoryName(selectedCategory || category)}
+                  {selectedCategory}
                 </div>
 
                 <div className="flex flex-col max-md:gap-3 md:gap-4 flex-1">
@@ -92,7 +89,11 @@ export default function FundingList({
           </li>
         )
       )}
-      {hasNextPage && <li ref={observerRef}>Loading...</li>}
+      {hasNextPage && (
+        <li ref={observerRef} className="text-center">
+          로딩중...
+        </li>
+      )}
     </ul>
   );
 }

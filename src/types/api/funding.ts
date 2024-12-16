@@ -36,11 +36,10 @@ export interface FundingDetailType extends FundingType {
 
 export interface MyFundingType {
   myFundingId: string;
-  fundingId: string;
   price: number;
-  status: StatusType;
   createdAt: Date;
   updatedAt: Date;
+  funding: FundingType;
 }
 
 export interface OrganizationType {
