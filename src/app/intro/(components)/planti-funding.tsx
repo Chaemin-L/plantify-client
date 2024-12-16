@@ -15,7 +15,7 @@ export default function PlantiFunding() {
 
 const data: FundingType[] = [
   {
-    fundingId: "1",
+    fundingId: 1,
     title: "장애인과 비 장애인의 같이가치 걷기 대회",
     content: "",
     image:
@@ -27,7 +27,7 @@ const data: FundingType[] = [
   },
 
   {
-    fundingId: "2",
+    fundingId: 2,
     title: "장애인과 비 장애인의 같이가치 걷기 대회",
     content: "",
     image:
@@ -39,7 +39,7 @@ const data: FundingType[] = [
   },
 
   {
-    fundingId: "3",
+    fundingId: 3,
     title: "장애아동의 즐거운 겨울방학을 응원해 주세요!",
     content: "",
     image:
@@ -50,7 +50,7 @@ const data: FundingType[] = [
     organizationName: "",
   },
   {
-    fundingId: "4",
+    fundingId: 4,
     title: "대한이 살았다 : 다시 쓰는 일제강점기 역사와 오늘",
     content: "",
     image:
@@ -61,7 +61,7 @@ const data: FundingType[] = [
     organizationName: "",
   },
   {
-    fundingId: "5",
+    fundingId: 5,
     title: "밑반찬 나눔으로 건강한 식생활을 지켜주세요.",
     content: "",
     image:
@@ -72,7 +72,7 @@ const data: FundingType[] = [
     organizationName: "",
   },
   {
-    fundingId: "6",
+    fundingId: 6,
     title: "사라지는 꿀벌과 야생벌, 관찰과 기록으로 함께 지켜요!",
     content: "",
     image:

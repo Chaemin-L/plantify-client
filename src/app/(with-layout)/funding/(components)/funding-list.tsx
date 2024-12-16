@@ -8,6 +8,7 @@ import {
   InfiniteData,
   InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
@@ -50,7 +51,14 @@ export default function FundingList({
               href={`${PATH.FUNDING_LIST}/${fundingId}`}
               className="flex rounded-xl  bg-shadow-800 h-[106px] md:h-[128px]"
             >
-              <img src={image} className="w-[40%]  rounded-l-xl object-cover" />
+              <Image
+                src={image}
+                width={100}
+                height={100}
+                alt="펀딩 이미지"
+                loading="lazy"
+                className="w-[40%]  rounded-l-xl object-cover"
+              />
               <div className="px-5 py-4 w-full h-fit flex justify-between flex-col ">
                 <div className=" max-md:mb-1 mb-2 max-md:text-bd4 text-bd2">
                   {selectedCategory}

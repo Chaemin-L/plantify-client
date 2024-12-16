@@ -1,6 +1,7 @@
 import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
 import { FundingType } from "@/types/api/funding";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
@@ -20,8 +21,12 @@ export default function BestFunding({ data }: Props) {
           {content}
         </p>
       </div>
-      <img
+      <Image
         src={image}
+        width={450}
+        height={300}
+        alt="베스트 펀딩 이미지"
+        loading="eager"
         className="w-full  aspect-[2/1.2] rounded-2xl object-cover"
       />
       <FundingStatus

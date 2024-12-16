@@ -1,9 +1,10 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css/pagination";
-import "swiper/css";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export interface LinkType {
   href?: string;
@@ -45,10 +46,13 @@ export default function LinkSlider({ links }: Props) {
               </p>
             </div>
             {icon && (
-              <img
+              <Image
                 src={icon}
+                width={200}
+                height={200}
                 className="absolute right-0 top-1/2 -translate-y-1/2 max-h-40 max-w-[40%]"
-                alt="기부사 검색"
+                alt={`${title} 로 이동`}
+                loading="lazy"
               />
             )}
           </button>

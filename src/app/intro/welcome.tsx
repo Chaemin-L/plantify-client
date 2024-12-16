@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { typingText, verticalMove } from "@/lib/gsap";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Welcome() {
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function Welcome() {
           width={200}
           height={200}
           alt="서비스 로고"
+          priority
           className="logo w-40 h-auto"
         />
       </div>
