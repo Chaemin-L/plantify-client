@@ -1,14 +1,18 @@
 "use client";
 import Accordion from "@/app/(_components)/accordion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
-  id: number;
+  organizationId: string;
   name: string;
-  description: string;
+  content: string;
 }
 
-export default function OrganizationItem({ id, name, description }: Props) {
+export default function OrganizationItem({
+  organizationId,
+  name,
+  content,
+}: Props) {
   const [orgId, setOrgId] = useState<string | undefined>();
 
   useEffect(() => {
@@ -17,7 +21,7 @@ export default function OrganizationItem({ id, name, description }: Props) {
 
   return (
     <div className="bg-shadow-700 rounded-xl">
-      <Accordion defaultValue={`#org_${id}` == orgId}>
+      <Accordion defaultValue={`#org_${organizationId}` == orgId}>
         <Accordion.Summary className="mr-2">
           <div className="text-t4 md:text-t3 select-none hover:bg-shadow-700 cursor-pointer p-3 py-4 rounded-xl">
             {name}
@@ -25,7 +29,7 @@ export default function OrganizationItem({ id, name, description }: Props) {
         </Accordion.Summary>
         <Accordion.Details>
           <p className="whitespace-pre-line text-bd3 md:text-bd2 p-2 rounded-b-xl">
-            {description}
+            {content}
           </p>
         </Accordion.Details>
       </Accordion>
