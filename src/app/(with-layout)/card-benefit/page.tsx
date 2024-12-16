@@ -1,9 +1,9 @@
 "use client";
-import clsx from "clsx";
-import AllBenefit from "./all-benefit";
-import { useState } from "react";
-import MyBenefit from "./my-benefit";
 import { SelectItemType } from "@/app/(_components)/select";
+import clsx from "clsx";
+import { useState } from "react";
+import AllBenefit from "./all-benefit";
+import MyBenefit from "./my-benefit";
 
 type TabType = "all" | "my";
 
@@ -36,8 +36,7 @@ export default function CardBenefitPage() {
       </ul>
 
       <div className="pt-5">
-        {tab === "all" && <AllBenefit />}
-        {tab === "my" && <MyBenefit />}
+        {tab === "all" ? <AllBenefit /> : <MyBenefit />}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export default function Checkbox({ label = "", ...props }: Props) {
   return (
-    <label className="flex gap-7 py-5">
+    <label className="flex gap-7 py-3">
       <input type="checkbox" {...props} className="peer hidden" />
       <Image
         src="/icons/checkbox-x.svg"

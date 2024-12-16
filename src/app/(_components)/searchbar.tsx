@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { FormEventHandler } from "react";
 
@@ -13,12 +12,12 @@ export default function SearchBar({ onSubmit }: Props) {
       onSubmit={onSubmit}
     >
       <input
-        type="text"
+        type="search"
         name="search"
         className="flex-1 bg-transparent focus:outline-0 text-t4"
         autoFocus
       />
-      <button>
+      <button type="submit">
         <Image src="/icons/search.svg" width={16} height={16} alt="검색" />
       </button>
     </form>

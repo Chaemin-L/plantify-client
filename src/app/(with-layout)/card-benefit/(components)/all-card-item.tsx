@@ -2,7 +2,7 @@ import { CardType } from "@/types/api/card";
 import { rotateCard } from "@/utils/rotateCard";
 import { useEffect } from "react";
 
-export default function CardItem({
+export default function AllCardItem({
   card_name,
   card_image,
   benefit_point,

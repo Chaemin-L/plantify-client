@@ -1,5 +1,4 @@
 export const Benefit = [
-  "all",
   "traffic",
   "communication",
   "travel",
@@ -12,5 +11,18 @@ export const Benefit = [
   "finance",
   "etc",
 ] as const;
+
+export type BenefitCategory =
+  | "traffic"
+  | "communication"
+  | "travel"
+  | "oiling"
+  | "mart"
+  | "shopping"
+  | "cafe"
+  | "culture"
+  | "hospital"
+  | "finance"
+  | "etc";
 
 export type BenefitType = (typeof Benefit)[number];

@@ -31,7 +31,7 @@ const fetchClient = async (url: string, options: RequestInit = {}) => {
   }
 
   const data = await response.json();
-  if (data.status === 200) return data;
+  return data.data || data;
 };
 
 export default fetchClient;

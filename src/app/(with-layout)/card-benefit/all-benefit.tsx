@@ -1,11 +1,13 @@
 "use client";
-import { SelectItemType } from "@/app/_deprecated/select";
-import { PATH } from "@/lib/_shared/paths";
-import CardList from "./(components)/card-list";
-import { useSearchParams } from "next/navigation";
 import Select from "@/app/(_components)/select";
+import { SelectItemType } from "@/app/_deprecated/select";
+import Loading from "@/app/loading";
+import { PATH } from "@/lib/_shared/paths";
 import { BenefitType } from "@/types/card";
-import { useCardBenefit } from "@/hooks/api/useCardBenefit";
+import { isBenefitType } from "@/utils/typeCheck";
+import { notFound, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import AllCardList from "./(components)/all-card-list";
 
 const categories: SelectItemType<BenefitType>[] = [
   // {
@@ -53,11 +55,7 @@ export default function AllBenefit() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "traffic";
 
-  // if (!isBenefitType(category)) return notFound();
-
-  const { data } = useCardBenefit(
-    categories.filter((c) => c.value === category)[0].label
-  );
+  if (!isBenefitType(category)) return notFound();
 
   return (
     <div className="flex flex-col gap-5">
@@ -67,7 +65,9 @@ export default function AllBenefit() {
         selected={category}
         items={categories}
       />
-      <CardList listData={data ? data : null} />
+      <Suspense fallback={<Loading />}>
+        <AllCardList category={category} />
+      </Suspense>
     </div>
   );
 }

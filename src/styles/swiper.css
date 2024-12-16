@@ -12,6 +12,9 @@
   z-index: 10;
 }
 
+.swiper-pagination-bullet {
+  background: #fefefe!;
+}
 /* .my-card .swiper-wrapper {
   display: flex;
   margin: auto;

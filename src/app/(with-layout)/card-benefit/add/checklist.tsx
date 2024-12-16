@@ -1,16 +1,30 @@
 "use client";
 
 import Checkbox from "@/app/(_components)/checkbox";
+import Loading from "@/app/loading";
+import { useGetCardSearch } from "@/hooks/api/useGetCardSearch";
+import { SearchCardType } from "@/types/api/card";
 import clsx from "clsx";
 import { useState } from "react";
-import { CardType } from "./page";
 
-export default function CheckList({ cardList }: { cardList: CardType[] }) {
-  const [checkedCard, setCheckedCard] = useState<CardType[]>([]);
+interface Props {
+  query: string;
+}
+export default function CheckList({ query }: Props) {
+  const { data, isLoading } = useGetCardSearch(query);
+  const [checkedCard, setCheckedCard] = useState<SearchCardType[]>([]);
+  const isEmpty = checkedCard.length === 0;
+
+  if (isLoading)
+    return (
+      <div className="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+        <Loading />
+      </div>
+    );
 
   const checkAll = () => {
-    for (let i = 0; i < cardList.length; i++) {
-      if (!checkedCard.includes(cardList[i])) {
+    for (let i = 0; i < data!.length; i++) {
+      if (!checkedCard.includes(data![i])) {
         return false;
       }
     }
@@ -21,19 +35,19 @@ export default function CheckList({ cardList }: { cardList: CardType[] }) {
     const isAllChecked = checkAll();
 
     if (isAllChecked) {
-      setCheckedCard(checkedCard.filter((card) => !cardList.includes(card)));
+      setCheckedCard(checkedCard?.filter((card) => !data!.includes(card)));
     } else {
-      cardList.forEach((card) => {
-        if (!checkedCard.includes(card)) {
+      data!.forEach((card) => {
+        if (!checkedCard?.includes(card)) {
           setCheckedCard((checkedCard) => [...checkedCard, card]);
         }
       });
     }
   };
 
-  const onCheck = (card: CardType) => {
+  const onCheck = (card: SearchCardType) => {
     if (checkedCard.includes(card)) {
-      setCheckedCard(checkedCard.filter((c) => c.id !== card.id));
+      setCheckedCard(checkedCard.filter((c) => c.card_id !== card.card_id));
     } else {
       setCheckedCard([...checkedCard, card]);
     }
@@ -41,31 +55,35 @@ export default function CheckList({ cardList }: { cardList: CardType[] }) {
 
   return (
     <div className="flex flex-col relative ">
-      <div className="px-5">
-        <Checkbox label="전체 선택" onClick={onCheckAll} />
-      </div>
-      <div className="bg-shadow-200 h-[1px] w-full" />
+      {(!isEmpty || query) && (
+        <>
+          <div className="px-5">
+            <Checkbox label="전체 선택" onClick={onCheckAll} />
+          </div>
+          <div className="bg-shadow-200 h-[1px] w-full" />
+        </>
+      )}
 
       <div
-        className={clsx("flex flex-col px-5", !checkedCard.length && "hidden")}
+        className={clsx(!checkedCard.length && "hidden", "flex flex-col px-5")}
       >
-        {checkedCard.map((card) => (
+        {checkedCard.map((card, idx) => (
           <Checkbox
-            key={card.id}
+            key={`${card.card_id}_${idx}`}
             label={card.name}
-            value={card.id}
+            value={card.card_id}
             checked
-            onClick={() => onCheck(card)}
+            onChange={() => onCheck(card)}
           />
         ))}
       </div>
 
       <div className="flex flex-col px-5">
-        {cardList
+        {data!
           .filter((card) => !checkedCard.includes(card))
-          .map((card) => (
+          .map((card, idx) => (
             <Checkbox
-              key={card.id}
+              key={`${card.card_id}_${idx}`}
               label={card.name}
               onClick={() => onCheck(card)}
             />

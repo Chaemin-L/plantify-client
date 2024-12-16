@@ -1,23 +1,25 @@
 "use client";
 import Accordion from "@/app/(_components)/accordion";
-import Loading from "@/app/loading";
-import { BenefitCardListType } from "@/types/api/card";
+import { useCardBenefit } from "@/hooks/api/useCardBenefit";
+import { CardType } from "@/types/api/card";
+import { BenefitCategory } from "@/types/card";
 import { useState } from "react";
-import CardItem from "./card-item";
+import AllCardItem from "./all-card-item";
 
 interface Props {
-  listData: BenefitCardListType | null;
+  category: BenefitCategory;
 }
 
-export default function CardList({ listData }: Props) {
+export default function AllCardList({ category }: Props) {
   const [showAll, setShowAll] = useState<boolean>(false);
+
+  const { data: listData, isFetching, error } = useCardBenefit(category);
   const toggleShowAll = () => setShowAll(!showAll);
 
-  if (!listData) {
-    return <Loading />;
+  if (isFetching) {
+    return <div>Loading...</div>;
   }
-
-  const topCard = listData.top_card;
+  console.log(listData);
 
   return (
     <>
@@ -26,18 +28,18 @@ export default function CardList({ listData }: Props) {
           <div className="space-y-5">
             <h1 className="card-title">추천 카드</h1>
             <Accordion.Summary>
-              <CardItem {...topCard} />
+              <AllCardItem {...listData.top_card} />
             </Accordion.Summary>
           </div>
           <Accordion.Details>
             <div className="ml-4 pt-7 text-bd3 font-bold flex flex-col gap-4">
               <div className="flex gap-10">
                 <span>할인대상</span>
-                <span>{topCard.discount_target}</span>
+                <span>{listData.top_card.discount_target}</span>
               </div>
               <div className="flex gap-10">
                 <span>할인종류</span>
-                <span>{topCard.discount_type}</span>
+                <span>{listData.top_card.discount_type}</span>
               </div>
             </div>
           </Accordion.Details>
@@ -47,16 +49,18 @@ export default function CardList({ listData }: Props) {
         <h1 className="card-title ">다른 카드 혜택</h1>
         <ul className="flex flex-col gap-6 py-5">
           {showAll
-            ? listData.other_cards.map((data, idx) => (
+            ? listData.other_cards.map((data: CardType, idx: number) => (
                 <li key={idx}>
-                  <CardItem {...data} />
+                  <AllCardItem {...data} />
                 </li>
               ))
-            : listData.other_cards.slice(0, 2).map((data, idx) => (
-                <li key={idx}>
-                  <CardItem {...data} />
-                </li>
-              ))}
+            : listData.other_cards
+                .slice(0, 2)
+                .map((data: CardType, idx: number) => (
+                  <li key={idx}>
+                    <AllCardItem {...data} />
+                  </li>
+                ))}
         </ul>
         <div
           className="-mb-5 -mx-5 text-t4 text-shadow-300 text-center py-4 cursor-pointer border-t border-shadow-500"
