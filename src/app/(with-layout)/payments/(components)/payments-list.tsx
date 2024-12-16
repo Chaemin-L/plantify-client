@@ -1,55 +1,42 @@
 "use client";
+import { useScrollObserver } from "@/hooks/useScrollObserver";
+import { Pageable } from "@/types/api/common";
+import { PaymentsType } from "@/types/api/pay";
 import { PaymentCategoryType } from "@/types/pay";
+import {
+  InfiniteData,
+  InfiniteQueryObserverResult,
+} from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import PaymentsItem from "./payments-item";
 
-export interface PaymentsType {
-  orderName: string;
-  transactionType: string;
-  amount: number;
-  createdAt: string;
+export type OrderByType = "latest" | "amount";
+
+interface Props {
+  listData: PaymentsType[];
+  hasNextPage: boolean;
+  fetchNextPage: () => Promise<
+    InfiniteQueryObserverResult<
+      InfiniteData<Pageable<PaymentsType>, unknown>,
+      Error
+    >
+  >;
 }
-export type OrderByType = "recent" | "desc";
 
-// dummy data
-const payments: PaymentsType[] = [
-  {
-    orderName: "YouTubePremium >",
-    transactionType: "-",
-    amount: 14900,
-    createdAt: "2024-11-04T12:00:00",
-  },
-  {
-    orderName: "KB국민(396*******1303)",
-    transactionType: "+",
-    amount: 20000,
-    createdAt: "2024-11-04T11:00:00",
-  },
-  {
-    orderName: "티빙 방송 스탠다드",
-    transactionType: "-",
-    amount: 8600,
-    createdAt: "2024-10-13T08:30:00",
-  },
-  {
-    orderName: "일본 eSIM 데이터 무제한 오사카... >",
-    transactionType: "-",
-    amount: 6700,
-    createdAt: "2024-10-13T08:00:00",
-  },
-  {
-    orderName: "KB국민(396*******1303)",
-    transactionType: "+",
-    amount: 20000,
-    createdAt: "2024-10-13T07:48:00",
-  },
-];
+export default function PaymentsList({
+  listData,
+  hasNextPage,
+  fetchNextPage,
+}: Props) {
+  const [selectedItem] = useState<PaymentCategoryType>("ALL");
+  const [, setOrderBy] = useState<OrderByType>("latest");
 
-export default function PaymentsList() {
-  const [selectedItem] = useState<PaymentCategoryType>("all");
-  const [, setOrderBy] = useState<OrderByType>("recent");
+  const { observerRef } = useScrollObserver<PaymentsType>(
+    hasNextPage,
+    fetchNextPage
+  );
 
-  const isAll = selectedItem === "all";
+  const isAll = selectedItem === "ALL";
 
   // TODO: data fetching (SWR)
 
@@ -59,14 +46,14 @@ export default function PaymentsList() {
 
   useEffect(() => {
     // 전체보기 클릭시, 이전 정렬 조건 초기화
-    setOrderBy((orderBy) => (isAll ? "recent" : orderBy));
+    setOrderBy((orderBy) => (isAll ? "latest" : orderBy));
   }, [selectedItem]);
 
   return (
     <div className="space-y-5">
-      <ul className="flex flex-col gap-5">
-        {payments.map((payment) => (
-          <PaymentsItem key={payment.createdAt} {...payment} />
+      <ul className="flex flex-col gap-5" ref={observerRef}>
+        {listData.map((payment) => (
+          <PaymentsItem key={payment.orderId} {...payment} />
         ))}
       </ul>
     </div>

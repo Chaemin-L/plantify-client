@@ -1,18 +1,19 @@
 import { kdayjs } from "@/lib/kdayjs";
-import { PaymentsType } from "./payments-list";
+import { PaymentsType } from "@/types/api/pay";
 
 export default function PaymentsItem({
   orderName,
-  transactionType,
+  status,
   amount,
   createdAt,
 }: PaymentsType) {
+  const isCharge = status === "CHARGE";
   return (
     <div className="flex flex-col gap-2">
       <div className="text-bd2 flex justify-between">
-        <span>{orderName}</span>
+        <span>{isCharge ? "PlantiPay 충전" : orderName}</span>
         <span>
-          {transactionType}
+          {isCharge ? "+ " : "- "}
           {amount.toLocaleString()}
         </span>
       </div>
@@ -20,7 +21,7 @@ export default function PaymentsItem({
         <span>{kdayjs(createdAt).format("YYYY-MM-DD")}</span>
         <span>|</span>
         <span> {kdayjs(createdAt).format("HH:mm")}</span> <span>|</span>
-        <span> {transactionType === "+" ? "충전" : "결제"}</span>
+        <span> {isCharge ? "충전" : "결제"}</span>
       </div>
     </div>
   );

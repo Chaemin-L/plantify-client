@@ -1,5 +1,14 @@
 import { BankNameType } from "../bank";
 
+export type SettlementsStatus =
+  | "CHARGE"
+  | "PENDING"
+  | "PAYMENT"
+  | "REFUND"
+  | "CANCELLATION"
+  | " SUCCESS"
+  | "FAILED";
+
 export interface PayType {
   payNum: number;
   balance: number;
@@ -30,6 +39,17 @@ export interface PointType {
   redeemedPoints?: number;
 }
 
+export interface PaymentsType {
+  paySettlementId: number;
+  status: SettlementsStatus;
+  amount: number;
+  orderId: string;
+  orderName: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+/** Request & Response */
 export interface CreateAccountReq {
   accountNum: number;
   bankName: BankNameType;

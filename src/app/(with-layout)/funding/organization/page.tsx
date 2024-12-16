@@ -1,7 +1,10 @@
 "use client";
 import SearchBar from "@/app/(_components)/searchbar";
+import Loading from "@/app/loading";
+import { useGetOrganizations } from "@/hooks/api/useGetOrganizations";
+import { OrganizationType } from "@/types/api/funding";
 import { useRouter } from "next/navigation";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import OrganizationItem from "../(components)/organization-item";
 
 const organizations = Array(20)
@@ -26,10 +29,17 @@ const organizations = Array(20)
   .map((item, idx) => ({ ...item, id: idx }));
 
 export default function OrganizationPage() {
-  const [listData, setListData] = useState(organizations);
+  const { data: organizations, isLoading } = useGetOrganizations();
+  const [listData, setListData] = useState<OrganizationType[]>([]);
   const router = useRouter();
 
-  // TODO: data fetching (SWR)
+  useEffect(() => {
+    if (!organizations) return;
+    setListData(organizations);
+  }, [organizations]);
+
+  if (isLoading || !listData) return <Loading />;
+
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     router.replace(`/funding/organization`);
@@ -38,7 +48,7 @@ export default function OrganizationPage() {
       ""
     );
     setListData(
-      organizations.filter((org) => org.name.includes(searchKeyword))
+      organizations!.filter((org) => org.name.includes(searchKeyword))
     );
   };
 
@@ -47,7 +57,7 @@ export default function OrganizationPage() {
       <SearchBar onSubmit={onSubmit} />
       <ul className="flex flex-col gap-3">
         {listData.map((org) => (
-          <li key={org.id} id={`org_${org.id}`}>
+          <li key={org.organizationId} id={`org_${org.organizationId}`}>
             <OrganizationItem {...org} />
           </li>
         ))}

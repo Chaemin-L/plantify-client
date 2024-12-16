@@ -5,6 +5,7 @@ import BottomFixedButton, {
 import BottomSheet from "@/app/(_components)/bottom-sheet";
 import FundingStatus from "@/app/(_components)/funding-status";
 import Loading from "@/app/loading";
+import { BASE_URL } from "@/config/api";
 import { useGetFundingDetail } from "@/hooks/api/useGetFundingDetail";
 import { usePostFunding } from "@/hooks/api/usePostFunding";
 import { PATH } from "@/lib/_shared/paths";
@@ -14,6 +15,7 @@ import { useRef, useState } from "react";
 interface Props {
   id: string;
 }
+
 export default function FundingDetail({ id }: Props) {
   const [isOpen, setOpen] = useState(false);
   const priceRef = useRef<HTMLInputElement>(null);
@@ -37,12 +39,12 @@ export default function FundingDetail({ id }: Props) {
   } = data;
 
   const handleDonation = () => {
-    if (!priceRef.current || priceRef.current.value) return;
+    if (!priceRef.current || !priceRef.current.value) return;
 
     mutate({
       fundingId,
       price: Number(priceRef.current.value),
-      redirectUrl: `${PATH.FUNDING_LIST}/${fundingId}?success=true`,
+      redirectUrl: `${BASE_URL}${PATH.FUNDING_LIST}/${fundingId}?success=true`,
     });
   };
 
@@ -105,7 +107,7 @@ export default function FundingDetail({ id }: Props) {
         기부하기
       </BottomFixedButton>
       <BottomSheet isOpen={isOpen} setOpen={setOpen} snapPoints={[300]}>
-        <form className="h-full flex flex-col justify-between">
+        <div className="h-full flex flex-col justify-between">
           <label htmlFor="funding_amount" className="text-t3">
             기부 금액
           </label>
@@ -119,7 +121,7 @@ export default function FundingDetail({ id }: Props) {
             <span>원</span>
           </div>
           <Button onClick={handleDonation}>확인</Button>
-        </form>
+        </div>
       </BottomSheet>
     </>
   );

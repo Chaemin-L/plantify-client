@@ -1,5 +1,6 @@
 "use client";
 import FundingStatus from "@/app/(_components)/funding-status";
+import { useScrollObserver } from "@/hooks/useScrollObserver";
 import { PATH } from "@/lib/_shared/paths";
 import { Pageable } from "@/types/api/common";
 import { CategoryType, FundingType } from "@/types/api/funding";
@@ -8,7 +9,6 @@ import {
   InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 
 interface Props {
   selectedCategory: CategoryType;
@@ -29,25 +29,10 @@ export default function FundingList({
   fetchNextPage,
   hasNextPage,
 }: Props) {
-  const observerRef = useRef(null);
-  useEffect(() => {
-    if (!hasNextPage) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (observerRef.current) observer.observe(observerRef.current);
-
-    return () => {
-      if (observerRef.current) observer.disconnect();
-    };
-  }, [fetchNextPage, hasNextPage]);
+  const { observerRef } = useScrollObserver<FundingType>(
+    hasNextPage,
+    fetchNextPage
+  );
 
   return (
     <ul className="flex flex-col max-md:gap-3 gap-5">

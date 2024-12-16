@@ -1,45 +1,53 @@
 "use client";
+import Select, { SelectItemType } from "@/app/(_components)/select";
+import { useGetPayments } from "@/hooks/api/useGetPayments";
 import { PATH } from "@/lib/_shared/paths";
-import PaymentsList from "./(components)/payments-list";
+import { PaymentCategoryType, PaymentSorting } from "@/types/pay";
+import { isPaymentCategoryType, isPaymentSortingType } from "@/utils/typeCheck";
 import clsx from "clsx";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
-import { PaymentCategoryType, PaymentSorting } from "@/types/pay";
-import Select, { SelectItemType } from "@/app/(_components)/select";
-import { isPaymentCategoryType, isPaymentSortingType } from "@/utils/typeCheck";
+import FilteredPaymentsList from "./(components)/filtered-payments-list";
+import PaymentsList from "./(components)/payments-list";
 
 const categories: SelectItemType<PaymentCategoryType>[] = [
-  { label: "전체", value: "all" },
-  { label: "결제", value: "pay" },
-  { label: "충전", value: "add" },
+  { label: "전체", value: "ALL" },
+  { label: "결제", value: "PAYMENT" },
+  { label: "충전", value: "CHARGE" },
 ];
 
 export default function PaymentsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const category = searchParams.get("category") ?? "all";
-  const sorting = searchParams.get("sorting") ?? "latest";
+  const filter = searchParams.get("category") ?? "ALL";
+  const sorting = searchParams.get("sorting") ?? "createdAt";
 
-  if (!isPaymentCategoryType(category)) return notFound();
+  if (!isPaymentCategoryType(filter)) return notFound();
   if (!isPaymentSortingType(sorting)) return notFound();
 
-  const isAll = category === "all";
+  const {
+    data: allPayments,
+    hasNextPage: allHasNextPage,
+    fetchNextPage: allFetchNextPage,
+  } = useGetPayments(20, [sorting]);
+
+  const isAll = filter === "ALL";
 
   return (
     <>
       <Select
         baseUrl={PATH.PAYMENTS}
         name="category"
-        selected={category}
+        selected={filter}
         items={categories}
       />
       <div className="py-3 border-y border-white justify-end gap-2 flex divide-white select-none text-bd3 font-bold ">
         <button
           onClick={() =>
             router.replace(
-              `${PATH.PAYMENTS}?category=${category}&sorting=${PaymentSorting[0]}`
+              `${PATH.PAYMENTS}?category=${filter}&sorting=${PaymentSorting[0]}`
             )
           }
-          className={clsx(sorting !== "latest" && "opacity-80")}
+          className={clsx(sorting !== "createdAt" && "opacity-80")}
         >
           최신순
         </button>
@@ -49,17 +57,26 @@ export default function PaymentsPage() {
             <button
               onClick={() =>
                 router.replace(
-                  `${PATH.PAYMENTS}?category=${category}&sorting=${PaymentSorting[1]}`
+                  `${PATH.PAYMENTS}?category=${filter}&sorting=${PaymentSorting[1]}`
                 )
               }
-              className={clsx(sorting !== "desc" && "opacity-70")}
+              className={clsx(sorting !== "amount" && "opacity-70")}
             >
               고액순
             </button>
           </>
         )}
       </div>
-      <PaymentsList />
+      {filter === "ALL" && (
+        <PaymentsList
+          listData={allPayments?.pages.map((p) => p.content).flat() ?? []}
+          hasNextPage={allHasNextPage}
+          fetchNextPage={allFetchNextPage}
+        />
+      )}
+      {filter !== "ALL" && (
+        <FilteredPaymentsList filter={filter} sorting={sorting} />
+      )}
     </>
   );
 }
