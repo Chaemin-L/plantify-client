@@ -10,14 +10,12 @@ export async function signIn(code: string) {
       method: "POST",
     });
 
-  if (data.status === 200) {
-    const {
-      data: { accessToken, refreshToken },
-    } = data;
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
-    redirect(PATH.HOME);
-  } else throw new Error("로그인에 실패하였습니다.");
+  const {
+    data: { accessToken, refreshToken },
+  } = data;
+  localStorage.setItem("accessToken", accessToken);
+  localStorage.setItem("refreshToken", refreshToken);
+  redirect(PATH.HOME);
 }
 
 export async function validateToken(token: string) {
