@@ -10,9 +10,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 interface Props {
   pay: PayType;
   points: PointType;
+  disabled?: boolean;
 }
 
-export default function PayCard({ pay, points }: Props) {
+export default function PayCard({ pay, points, disabled = false }: Props) {
   const [fullScreen, setFullScreen] = useState<boolean | HTMLImageElement>(
     false
   );
@@ -147,7 +148,7 @@ export default function PayCard({ pay, points }: Props) {
                   alt="페이 QRcode"
                   className="no-swiper flex-1 w-auto h-full max-h-20 xs:max-h-24 transition-all will-change-transform"
                   onClick={(e) => {
-                    if (loading.current) return;
+                    if (loading.current || disabled) return;
                     handleQRFullScreenMode(e);
                   }}
                 />
@@ -160,7 +161,7 @@ export default function PayCard({ pay, points }: Props) {
                   className="no-swiper flex-4 min-w-0 h-full max-h-20 xs:max-h-24 aspect-[4/1] rounded-md transition-all will-change-transform"
                   alt="페이 Barcode"
                   onClick={(e) => {
-                    if (loading.current) return;
+                    if (loading.current || disabled) return;
                     handleBarcodeFullScreenMode(e);
                   }}
                 />

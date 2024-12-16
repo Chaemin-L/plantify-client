@@ -2,7 +2,11 @@
 import { horizontalLoop } from "@/lib/_gsap";
 import { useEffect } from "react";
 
-export default function ThreeLinesLoop() {
+interface Props {
+  className?: string;
+}
+
+export default function ThreeLinesLoop({ className }: Props) {
   useEffect(() => {
     horizontalLoop(".marquee-left", { repeat: -1, speed: 0.3 });
     horizontalLoop(".marquee-right", {
@@ -12,8 +16,8 @@ export default function ThreeLinesLoop() {
     });
   }, []);
   return (
-    <div className="absolute  left-0 bottom-20 right-0">
-      <div className="relative overflow-hidden text-t1 text-shadow-600 flex flex-col gap-4">
+    <div className={`w-full h-full overflow-hidden ${className}`}>
+      <div className="relative overflow-hidden text-t1 text-shadow-600 flex flex-col gap-4 ">
         <div className="w-fit flex ">
           {Array(6)
             .fill(null)
