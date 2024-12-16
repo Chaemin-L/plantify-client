@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import EventSliderBanner from "../forest/(components)/event-slider-banner";
+import EventSliderBanner from "./(components)/event-slider-banner";
 import GoCardBenefit from "./(components)/go-card-benefit";
 import PayNotice from "./(components)/pay-notice";
 
@@ -14,7 +14,7 @@ const PaySection = dynamic(
   { ssr: false }
 );
 const LatestFundingSection = dynamic(
-  () => import("@/app/(with-layout)/pay/latest-funding-section"),
+  () => import("@/app/(with-layout)/pay/(components)/latest-funding-section"),
   { ssr: false }
 );
 

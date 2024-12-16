@@ -1,10 +1,10 @@
-import Ranking from "./(components)/ranking";
-import GoForest from "./(components)/go-forest";
-import EventSliderBanner from "./(components)/event-slider-banner";
 import { PATH } from "@/lib/_shared/paths";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import EventSliderBanner from "../pay/(components)/event-slider-banner";
 import FeatureGroup from "./(components)/feature-group";
+import GoForest from "./(components)/go-forest";
+import Ranking from "./(components)/ranking";
 
 export default function ForestPage() {
   return (

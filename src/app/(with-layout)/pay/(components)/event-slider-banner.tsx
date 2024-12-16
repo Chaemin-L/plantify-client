@@ -11,12 +11,17 @@ const events: LinkType[] = [
     onClick: () => showToast("어쩌구", "info"),
   },
   {
-    title: "이벤트 1",
-    description: "이벤트 설명",
+    href: "https://www.tossbank.com/",
+    title: "토스뱅크",
+    description: "은행을 바꾸는 은행,\n토스뱅크",
+    icon: "/icons/toss_bank2.svg",
+    // icon: "https://threedio-prod-var-cdn.icons8.com/qh/preview_sets/previews/Qqcyav2BkXdny30Y.webp",
   },
   {
-    title: "이벤트 2",
-    description: "이벤트 설명",
+    href: "https://www.hankyung.com/",
+    title: "한국경제신문",
+    description: "한경 60년 미래를 봅니다",
+    icon: "/icons/news.svg",
   },
 ];
 

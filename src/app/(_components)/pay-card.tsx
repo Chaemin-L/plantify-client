@@ -114,8 +114,11 @@ export default function PayCard({ pay, points }: Props) {
                 }}
               />
               <div className="w-full h-full">
-                <img
+                <Image
+                  priority
                   src="/icons/card-logo.png"
+                  width={180}
+                  height={300}
                   className="absolute w-[35%] top-16 max-xs:top-10 right-10 "
                   alt="카드 로고"
                 />
@@ -125,10 +128,12 @@ export default function PayCard({ pay, points }: Props) {
           <SwiperSlide className="card aspect-[1.6/1] w-full min-h-36 bg-white p-4">
             <div className="w-full h-full text-black flex flex-col items-center justify-center gap-2">
               <div id="pay" className="flex-1 flex gap-4 items-center ">
-                <img
+                <Image
                   ref={qrcodeRef}
                   id="qrcode"
                   src="/temp/qr.png"
+                  width={100}
+                  height={100}
                   alt="페이 QRcode"
                   className="no-swiper flex-1 w-auto h-full max-h-20 xs:max-h-24 transition-all"
                   onClick={(e) => {
@@ -151,7 +156,11 @@ export default function PayCard({ pay, points }: Props) {
                 />
               </div>
               <div className="flex-1 w-full h-full flex max-xs:text-xs">
-                <img
+                <Image
+                  width={200}
+                  height={150}
+                  alt="카드 로고"
+                  loading="lazy"
                   src="/icons/card-back-logo.png"
                   className="absolute -bottom-0 left-6 xs:left-10 h-[35%] xs:h-[40%] w-auto"
                 />
