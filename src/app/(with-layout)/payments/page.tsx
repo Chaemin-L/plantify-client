@@ -21,14 +21,14 @@ export default function PaymentsPage() {
   const filter = searchParams.get("category") ?? "ALL";
   const sorting = searchParams.get("sorting") ?? "createdAt";
 
-  if (!isPaymentCategoryType(filter)) return notFound();
-  if (!isPaymentSortingType(sorting)) return notFound();
-
   const {
     data: allPayments,
     hasNextPage: allHasNextPage,
     fetchNextPage: allFetchNextPage,
   } = useGetPayments(20, [sorting]);
+
+  if (!isPaymentCategoryType(filter)) return notFound();
+  if (!isPaymentSortingType(sorting)) return notFound();
 
   const isAll = filter === "ALL";
 

@@ -9,16 +9,6 @@ export interface CardType {
   name: string;
 }
 
-// const cardList = [
-//   { id: 1, name: "카드1" },
-//   { id: 2, name: "카드2" },
-//   { id: 3, name: "카드3" },
-//   { id: 4, name: "카드4" },
-//   { id: 5, name: "카드5" },
-//   { id: 6, name: "카드6" },
-//   { id: 7, name: "카드7" },
-// ];
-
 export default function CardAddPage() {
   const [query, setQuery] = useState("");
   const onSubmit = (e: FormEvent) => {

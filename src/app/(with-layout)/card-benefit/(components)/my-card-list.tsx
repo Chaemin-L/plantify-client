@@ -6,10 +6,6 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-interface Props {
-  listData: SearchCardType[];
-}
-
 const listData: SearchCardType[] = Array(5).fill({
   name: "카드이름",
   image_url:
@@ -24,7 +20,6 @@ const listData: SearchCardType[] = Array(5).fill({
   ],
 });
 
-// export default function MyCardList({ listData }: Props) {
 export default function MyCardList() {
   return (
     <Swiper
@@ -44,20 +39,15 @@ export default function MyCardList() {
       modules={[EffectCoverflow, Pagination]}
       className="w-full h-[300px]"
     >
-      {listData.map(
-        (
-          { name, image_url, company_name, card_type, card_id, benefits },
-          idx
-        ) => {
-          return (
-            <SwiperSlide key={`${card_id}_${idx}`} className="h-full">
-              <div className="h-full w-full flex flex-col justify-center items-cente mx-auto px-auto">
-                <img src={image_url} className="w-36" />
-              </div>
-            </SwiperSlide>
-          );
-        }
-      )}
+      {listData.map(({ image_url, card_id }, idx) => {
+        return (
+          <SwiperSlide key={`${card_id}_${idx}`} className="h-full">
+            <div className="h-full w-full flex flex-col justify-center items-cente mx-auto px-auto">
+              <img src={image_url} className="w-36" />
+            </div>
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 }

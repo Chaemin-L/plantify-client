@@ -13,7 +13,7 @@ interface Props {
 export default function AllCardList({ category }: Props) {
   const [showAll, setShowAll] = useState<boolean>(false);
 
-  const { data: listData, isFetching, error } = useCardBenefit(category);
+  const { data: listData, isFetching } = useCardBenefit(category);
   const toggleShowAll = () => setShowAll(!showAll);
 
   if (isFetching) {
