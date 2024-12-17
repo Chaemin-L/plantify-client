@@ -8,7 +8,7 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { createClient } from "graphql-ws";
 
 const httpLink = new HttpLink({
-  uri: API_ENDPOINTS.ITEM + "/using-items/graphql",
+  uri: API_ENDPOINTS.ITEM + "/my-items/using-items/graphql",
 });
 
 const wsLink = new GraphQLWsLink(

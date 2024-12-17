@@ -70,7 +70,6 @@ export default function ForestMain() {
   };
 
   const handleNewItem = (newItem: GetMyItemRes) => {
-    console.log("newItem-itemId: ", newItem.myItemId);
     const { myItemId } = newItem;
     mutate({ variables: { actions: [{ action: "CREATE", myItemId }] } });
     setItems((prev) => [...prev, { ...newItem, posX: 0, posY: 0 }]);

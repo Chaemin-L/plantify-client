@@ -1,5 +1,5 @@
-import { CELL_ROW_CNT, CELL_COL_CNT } from "@/lib/_shared/item";
-import { PostUsingItem } from "@/types/api/item";
+import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
+import { GetUsingItemsRes } from "@/types/api/item";
 import { useRef } from "react";
 
 export function useForestField(cellWidth: number, cellHeight: number) {
@@ -19,7 +19,7 @@ export function useForestField(cellWidth: number, cellHeight: number) {
   );
 
   // posX, posY 은 현재 필드 기준 실제 위치(px)값.
-  const fillField = ({ category, posX, posY }: PostUsingItem) => {
+  const fillField = ({ category, posX, posY }: GetUsingItemsRes) => {
     const x = posX / xUnit;
     const y = posY / yUnit;
 
@@ -35,7 +35,7 @@ export function useForestField(cellWidth: number, cellHeight: number) {
     }
   };
 
-  const emptyField = ({ category, posX, posY }: PostUsingItem) => {
+  const emptyField = ({ category, posX, posY }: GetUsingItemsRes) => {
     const x = posX / xUnit;
     const y = posY / yUnit;
 

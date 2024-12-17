@@ -13,11 +13,11 @@ export interface ItemType {
 }
 
 export type GetMyItemRes = {
+  myItemId: number;
   itemId: number;
   imageUri: string;
   itemName: string;
   category: CategoryType;
-  myItemIds: number[];
 };
 
 export type PurchaseItemRes = {
@@ -38,6 +38,7 @@ export interface CreateUsingItemsReq {
   action: "CREATE";
   myItemId: number;
 }
+
 export interface UpdateUsingItemsReq extends Position {
   action: "UPDATE" | "DELETE";
   usingItemId: number;

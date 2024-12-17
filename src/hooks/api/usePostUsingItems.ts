@@ -1,18 +1,16 @@
 import { gql, useMutation } from "@apollo/client";
 
 const CREATE_USING_ITEMS = gql`
-  mutation ManageUsingItems($action: UsingItemActionInput!) {
-    manageUsingItems(action: $action) {
-      action
+  mutation ManageUsingItems($actions: [UsingItemActionInput!]!) {
+    manageUsingItems(actions: $actions) {
       myItemId
     }
   }
 `;
 
 const POST_USING_ITEMS = gql`
-  mutation ManageUsingItems($action: UsingItemActionInput!) {
-    manageUsingItems(action: $action) {
-      action
+  mutation ManageUsingItems($actions: [UsingItemActionInput!]!) {
+    manageUsingItems(actions: $actions) {
       usingItemId
       myItemId
       posX

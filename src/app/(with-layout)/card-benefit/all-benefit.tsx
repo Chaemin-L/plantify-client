@@ -1,4 +1,3 @@
-"use client";
 import Select from "@/app/(_components)/select";
 import { SelectItemType } from "@/app/_deprecated/select";
 import Loading from "@/app/loading";
