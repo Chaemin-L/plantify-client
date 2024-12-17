@@ -15,7 +15,7 @@ export default function ItemSlider({ title, items }: Props) {
     <div className="flex flex-col gap-4 overflow-x-hidden">
       <h2 className="text-t3  text-white">{title}</h2>
       <div className="overflow-auto">
-        <ul className="flex overflow-auto gap-3 w-fit">
+        <ul className="flex overflow-auto gap-3 w-fit scrollbar-hide">
           {items.map(({ fundingId, title, category, percent, image }) => (
             <li key={fundingId} className="w-40">
               <Link

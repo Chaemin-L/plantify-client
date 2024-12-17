@@ -37,7 +37,7 @@ export default function FundingList({
   );
 
   return (
-    <ul className="flex flex-col max-md:gap-3 gap-5">
+    <ul className="flex flex-col max-md:gap-3 gap-5 scrollbar-hide">
       {listData.map((data) => (
         <MemorizedFundingItem
           key={data.fundingId}

@@ -3,7 +3,7 @@ import { GetMyCardRes } from "@/types/api/card";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // const listData: SearchCardType[] = Array(5).fill({
@@ -22,9 +22,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 interface Props {
   listData: GetMyCardRes;
+  autoPlay?: boolean;
 }
 
-export default function MyCardList({ listData }: Props) {
+export default function MyCardList({ listData, autoPlay = false }: Props) {
   return (
     <Swiper
       effect={"coverflow"}
@@ -32,6 +33,15 @@ export default function MyCardList({ listData }: Props) {
       centeredSlides={true}
       slidesPerView={3}
       spaceBetween={30}
+      preventClicks={autoPlay}
+      autoplay={
+        autoPlay && {
+          delay: 1000,
+          disableOnInteraction: false,
+        }
+      }
+      loop={autoPlay}
+      allowTouchMove={!autoPlay}
       coverflowEffect={{
         rotate: 0,
         stretch: 0,
@@ -40,15 +50,15 @@ export default function MyCardList({ listData }: Props) {
         slideShadows: true,
       }}
       pagination={true}
-      modules={[EffectCoverflow, Pagination]}
+      modules={[EffectCoverflow, Pagination, Autoplay]}
       className="w-full h-[300px]"
     >
       {listData.map(({ card_id, card }, idx) => {
         const { card_image } = card;
         return (
-          <SwiperSlide key={`${card_id}_${idx}`} className="h-full">
+          <SwiperSlide key={`${card_id}_${idx}`} className={"h-full"}>
             <div className="h-full w-full flex flex-col justify-center items-cente mx-auto px-auto">
-              <img src={card_image} className="w-36" />
+              <img src={card_image} className="w-36 select-none" />
             </div>
           </SwiperSlide>
         );
