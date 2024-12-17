@@ -1,12 +1,11 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
 import { PostFundingReq } from "@/types/api/funding";
-import { PayType } from "@/types/api/pay";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 // OK
 export async function postFunding(funding: PostFundingReq) {
-  const data: PayType = await fetchClient(
+  const data: string = await fetchClient(
     `${API_ENDPOINTS.FUNDING}/my-funding`,
     {
       method: "POST",
@@ -17,12 +16,7 @@ export async function postFunding(funding: PostFundingReq) {
 }
 
 export const usePostFunding = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (request: PostFundingReq) => await postFunding(request),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["my-funding"] });
-    },
   });
 };

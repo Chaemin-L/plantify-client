@@ -13,7 +13,7 @@
 }
 
 .swiper-pagination-bullet {
-  background: #fefefe!;
+  background-color: #fcfcfc !important;
 }
 /* .my-card .swiper-wrapper {
   display: flex;

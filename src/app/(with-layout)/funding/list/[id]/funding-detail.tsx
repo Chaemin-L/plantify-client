@@ -5,13 +5,15 @@ import BottomFixedButton, {
 import BottomSheet from "@/app/(_components)/bottom-sheet";
 import FundingStatus from "@/app/(_components)/funding-status";
 import Loading from "@/app/loading";
-import { BASE_URL } from "@/config/api";
+import { API_ENDPOINTS, BASE_URL } from "@/config/api";
 import { useGetFundingDetail } from "@/hooks/api/useGetFundingDetail";
 import { usePostFunding } from "@/hooks/api/usePostFunding";
 import { PATH } from "@/lib/_shared/paths";
+import fetchClient from "@/lib/fetchClient";
 import { FundingDetailType } from "@/types/api/funding";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   id: string;
@@ -20,11 +22,34 @@ interface Props {
 export default function FundingDetail({ id }: Props) {
   const [isOpen, setOpen] = useState(false);
   const priceRef = useRef<HTMLInputElement>(null);
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
 
   const { data, isLoading } = useGetFundingDetail(id);
-  const { mutate } = usePostFunding();
+  const { mutateAsync } = usePostFunding();
+
+  // orderId 확인 및 처리
+  useEffect(() => {
+    const orderId = searchParams.get("orderId");
+    if (orderId) {
+      checkDonation(orderId);
+    }
+  }, [searchParams]);
+
+  const checkDonation = async (orderId: string) => {
+    try {
+      await fetchClient(
+        `${API_ENDPOINTS.FUNDING}/my-funding/callback?orderId=${orderId}`
+      );
+      window.showToast("따뜻한 마음에 감사드립니다", "success");
+      setTimeout(() => {
+        router.replace(`${PATH.FUNDING_LIST}/${id}`);
+      }, 3000);
+    } catch (error) {
+      console.error("기부 확인 실패:", error);
+    }
+  };
 
   if (isLoading) return <Loading />;
 
@@ -39,25 +64,20 @@ export default function FundingDetail({ id }: Props) {
     organizationName,
   } = data as FundingDetailType;
 
-  const handleDonation = () => {
+  const handleDonation = async () => {
     if (!priceRef.current || !priceRef.current.value) return;
 
-    mutate({
+    await mutateAsync({
       fundingId,
       price: Number(priceRef.current.value),
-      redirectUri: `${BASE_URL}${PATH.FUNDING_LIST}/${fundingId}?success=true`,
+      redirectUri: `${BASE_URL}${PATH.FUNDING_LIST}/${fundingId}`,
+    }).then((token) => {
+      if (token)
+        redirect(
+          `https://payments-client-seven.vercel.app/payement?token=${token}`
+        );
     });
   };
-
-  // useEffect(() => {
-  //   const isSuccess = searchParams.get("success");
-  //   if (isSuccess) {
-  //     window.showToast("따뜻한 마음에 감사드립니다", "success");
-  //     setTimeout(() => {
-  //       router.replace(`${PATH.FUNDING_LIST}/${fundingId}`);
-  //     }, 3000);
-  //   }
-  // }, [fundingId, searchParams]);
 
   return (
     <>
