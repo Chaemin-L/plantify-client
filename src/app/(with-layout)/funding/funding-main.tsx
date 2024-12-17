@@ -27,7 +27,7 @@ export default async function FundingMain({ token }: Props) {
   );
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 scrollbar-hide">
       {/** 슬라이더 */}
       <AdSliderBanner />
 
