@@ -35,7 +35,7 @@ export default function Chat() {
         console.log(">> AI 채팅 서버 연결 성공!");
       };
       ws.onmessage = (event) => {
-        // console.log(">> 메시지 수신 ", event.data);
+        console.log(">> 메시지 수신 ", event.data);
         const { message } = JSON.parse(event.data);
         if (message === START_FLAG) {
           setRMessage("");
@@ -75,8 +75,8 @@ export default function Chat() {
   }, [rMessage, sMessage]);
 
   useEffect(() => {
-    // setSMessage("");
-    // setRMessage("");
+    setSMessage("");
+    setRMessage("");
   }, [messages]);
 
   const handleSendMessage = () => {
