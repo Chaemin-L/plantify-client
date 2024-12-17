@@ -1,14 +1,14 @@
+"use client";
+import Loading from "@/app/loading";
+import { useGetMyCards } from "@/hooks/api/useGetMyCards";
 import { PATH } from "@/lib/_shared/paths";
-import { getMyCards } from "@/services/card";
 import Link from "next/link";
 import MyCardList from "./(components)/my-card-list";
 
-interface Props {
-  token: string;
-}
+export default function MyBenefit() {
+  const { data: listData } = useGetMyCards();
 
-export default async function MyBenefit({ token }: Props) {
-  const listData = await getMyCards(token);
+  if (!listData) return <Loading />;
 
   return (
     <div className="flex flex-col gap-5">
