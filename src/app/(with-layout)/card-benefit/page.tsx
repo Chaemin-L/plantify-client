@@ -1,7 +1,7 @@
 "use client";
 import { SelectItemType } from "@/app/(_components)/select";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AllBenefit from "./all-benefit";
 import MyBenefit from "./my-benefit";
 
@@ -14,7 +14,12 @@ const tabMenus: SelectItemType<TabType>[] = [
 export default function CardBenefitPage() {
   const [tab, setTab] = useState<TabType>("my");
   const handleClick = (menu: TabType) => setTab(menu);
-  const accessToken = localStorage.getItem("accessToken");
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setAccessToken(token);
+  }, []);
 
   return (
     <div>
