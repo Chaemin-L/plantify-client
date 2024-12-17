@@ -29,9 +29,12 @@ export default function Header() {
           !isTabMain ? "hidden" : "flex items-center justify-between p-4"
         )}
       >
-        <img
+        <Image
           src="/icons/logo.png"
-          className="inline w-8 h-fit -mx-0.5"
+          width={36}
+          height={24}
+          priority
+          className="inline w-8 h-auto -mx-0.5"
           alt="플랜티파이 로고"
         />
 
