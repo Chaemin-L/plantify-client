@@ -7,7 +7,6 @@ export const PAY_QUERY_KEY = ["pay"];
 
 export async function getPay() {
   const response: PayType = await fetchClient(`${API_ENDPOINTS.PAY}`);
-  if (response === null) return await getPay();
   return response;
 }
 
