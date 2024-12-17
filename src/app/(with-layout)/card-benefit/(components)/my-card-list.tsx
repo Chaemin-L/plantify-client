@@ -1,5 +1,8 @@
 "use client";
+import { useDeleteMyCard } from "@/hooks/api/useDeleteMyCard";
+import { PATH } from "@/lib/_shared/paths";
 import { GetMyCardRes } from "@/types/api/card";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -26,6 +29,12 @@ interface Props {
 }
 
 export default function MyCardList({ listData, autoPlay = false }: Props) {
+  const { mutate } = useDeleteMyCard();
+
+  const handleDeleteCard = (card_id: number) => {
+    mutate(card_id);
+  };
+
   return (
     <Swiper
       effect={"coverflow"}
@@ -53,16 +62,37 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
       modules={[EffectCoverflow, Pagination, Autoplay]}
       className="w-full h-[300px]"
     >
-      {listData.map(({ card_id, card }, idx) => {
+      {listData.map(({ myCard_id, card_id, card }, idx) => {
         const { card_image } = card;
         return (
-          <SwiperSlide key={`${card_id}_${idx}`} className={"h-full"}>
-            <div className="h-full w-full flex flex-col justify-center items-cente mx-auto px-auto">
-              <img src={card_image} className="w-36 select-none" />
+          <SwiperSlide key={`${card_id}_${idx}`} className="h-full">
+            <div className="relative h-full w-full flex flex-col justify-center items-center mx-auto px-auto">
+              {!autoPlay && (
+                <button
+                  className="absoltue bottom-full rounded-full p-2 aspect-square bg-shadow-600"
+                  onClick={() => handleDeleteCard(myCard_id)}
+                >
+                  X
+                </button>
+              )}
+              <img
+                src={card_image}
+                className="w-full select-none aspect-[1/1.6]"
+              />
             </div>
           </SwiperSlide>
         );
       })}
+      <SwiperSlide key="add-card" className="h-full">
+        <Link
+          href={PATH.CARD_BENEFIT_ADD}
+          className="h-full w-full flex flex-col justify-center items-center mx-auto px-auto  "
+        >
+          <div className="w-full aspect-[1/1.6] bg-shadow-600 rounded-md flex justify-center items-center">
+            +
+          </div>
+        </Link>
+      </SwiperSlide>
     </Swiper>
   );
 }
