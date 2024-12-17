@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import MyCardList from "../card-benefit/(components)/my-card-list";
 import EventSliderBanner from "./(components)/event-slider-banner";
+import GoCardBenefit from "./(components)/go-card-benefit";
 import PayNotice from "./(components)/pay-notice";
 
 const PaySection = dynamic(
@@ -36,12 +37,12 @@ export default function HomePage() {
         <LatestFundingSection />
 
         {/** 더 큰 혜택 찾기 */}
-        {/* <GoCardBenefit /> */}
 
-        <div className="bg-transparent -space-y-4">
+        <div className="bg-transparent">
           <h2 className="card-title">카드 혜택</h2>
-          <Link href={PATH.CARD_BENEFIT}>
+          <Link href={PATH.CARD_BENEFIT} className="space-y-5">
             <MyCardList listData={listData} autoPlay={true} />
+            <GoCardBenefit />
           </Link>
         </div>
 

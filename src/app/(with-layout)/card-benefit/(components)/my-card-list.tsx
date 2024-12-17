@@ -58,15 +58,15 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
         modifier: 1,
         slideShadows: true,
       }}
-      pagination={true}
+      pagination={!autoPlay && true}
       modules={[EffectCoverflow, Pagination, Autoplay]}
-      className="w-full h-[300px]"
+      className="w-full mt-5"
     >
       {listData.map(({ myCard_id, card_id, card }, idx) => {
         const { card_image } = card;
         return (
           <SwiperSlide key={`${card_id}_${idx}`} className="h-full">
-            <div className="relative h-full w-full flex flex-col justify-center items-center mx-auto px-auto">
+            <div className="relative h-full w-full flex flex-col justify-center items-center ">
               {!autoPlay && (
                 <button
                   className="absoltue bottom-full rounded-full p-2 aspect-square bg-shadow-600"
@@ -83,16 +83,18 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
           </SwiperSlide>
         );
       })}
-      <SwiperSlide key="add-card" className="h-full">
-        <Link
-          href={PATH.CARD_BENEFIT_ADD}
-          className="h-full w-full flex flex-col justify-center items-center mx-auto px-auto  "
-        >
-          <div className="w-full aspect-[1/1.6] bg-shadow-600 rounded-md flex justify-center items-center">
-            +
-          </div>
-        </Link>
-      </SwiperSlide>
+      {!autoPlay && (
+        <SwiperSlide key="add-card" className="h-full">
+          <Link
+            href={PATH.CARD_BENEFIT_ADD}
+            className="h-full w-full flex flex-col justify-center items-center mx-auto px-auto  "
+          >
+            <div className="w-full aspect-[1/1.6] bg-shadow-600 rounded-md flex justify-center items-center">
+              +
+            </div>
+          </Link>
+        </SwiperSlide>
+      )}
     </Swiper>
   );
 }
