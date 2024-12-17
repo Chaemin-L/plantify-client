@@ -15,7 +15,7 @@ export const AuthContext = createContext<AuthContextProps>({
 });
 
 export default function AuthProvider({ children }: PropsWithChildren) {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string>("");
 
   const verify = async () => {
     const accessToken = localStorage.getItem("accessToken");
