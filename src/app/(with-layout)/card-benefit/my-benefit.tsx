@@ -9,8 +9,8 @@ export default function MyBenefit() {
   if (!listData) return <Loading />;
 
   return (
-    <div className="flex flex-col gap-5">
-      <h1 className="text-t2">어디서 결제할 예정이신가요?</h1>
+    <div className="flex flex-col gap-10">
+      <h1 className="text-t2">나의 카드 혜택</h1>
       <MyCardList listData={listData} />
     </div>
   );

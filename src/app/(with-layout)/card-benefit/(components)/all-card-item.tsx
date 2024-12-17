@@ -1,4 +1,4 @@
-import { CardType } from "@/types/api/card";
+import { BenefitCardType } from "@/types/api/card";
 import { rotateCard } from "@/utils/rotateCard";
 import { useEffect } from "react";
 
@@ -6,7 +6,7 @@ export default function AllCardItem({
   card_name,
   card_image,
   benefit_point,
-}: CardType) {
+}: BenefitCardType) {
   const isPositive = benefit_point > 0;
 
   useEffect(() => {

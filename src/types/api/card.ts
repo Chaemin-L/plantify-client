@@ -1,4 +1,4 @@
-export interface CardType {
+export interface BenefitCardType {
   card_name: string;
   card_image: string;
   discount_target?: string;
@@ -7,8 +7,8 @@ export interface CardType {
 }
 
 export interface BenefitCardListType {
-  top_card: CardType;
-  other_cards: CardType[];
+  top_card: BenefitCardType;
+  other_cards: BenefitCardType[];
 }
 
 interface BenefitType {
@@ -27,9 +27,16 @@ export interface SearchCardType {
 }
 
 export type MyCardType = {
-  card_id: number;
   myCard_id: number;
-  card: CardType;
+  card_id: number;
+  card: {
+    card_name: string;
+    card_image: string;
+    company: string;
+    type: string;
+    card_id: number;
+    benefits: string[];
+  };
 };
 
 export type GetMyCardRes = MyCardType[];

@@ -58,6 +58,8 @@ export default function AllBenefit() {
 
   return (
     <div className="flex flex-col gap-5">
+      <h1 className="text-t2">어디서 결제하실 예정이신가요?</h1>
+
       <Select
         baseUrl={PATH.CARD_BENEFIT}
         name="category"
