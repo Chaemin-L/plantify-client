@@ -5,7 +5,7 @@ import BottomFixedButton, {
 import BottomSheet from "@/app/(_components)/bottom-sheet";
 import FundingStatus from "@/app/(_components)/funding-status";
 import Loading from "@/app/loading";
-import { API_ENDPOINTS, BASE_URL } from "@/config/api";
+import { API_ENDPOINTS, BASE_URL, PAYMENT_BASE_URL } from "@/config/api";
 import { useGetFundingDetail } from "@/hooks/api/useGetFundingDetail";
 import { usePostFunding } from "@/hooks/api/usePostFunding";
 import { PATH } from "@/lib/_shared/paths";
@@ -72,10 +72,7 @@ export default function FundingDetail({ id }: Props) {
       price: Number(priceRef.current.value),
       redirectUri: `${BASE_URL}${PATH.FUNDING_LIST}/${fundingId}`,
     }).then((token) => {
-      if (token)
-        redirect(
-          `https://payments-client-seven.vercel.app/payement?token=${token}`
-        );
+      if (token) redirect(`${PAYMENT_BASE_URL}/payment?token=${token}`);
     });
   };
 
