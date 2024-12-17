@@ -16,7 +16,7 @@ export default function Welcome() {
         <br />
         <span className="typing-text text-accent-green" /> 여러분
       </h1>
-      <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ">
+      <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/3 ">
         <Image
           src="/icons/logo.png"
           width={200}
