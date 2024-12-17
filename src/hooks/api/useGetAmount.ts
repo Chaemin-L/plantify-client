@@ -2,7 +2,7 @@ import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
 import { useQuery } from "@tanstack/react-query";
 
-const QUERY_KEY = ["pay"];
+const QUERY_KEY = ["total_amount"];
 
 async function getAmount() {
   const response: number = await fetchClient(

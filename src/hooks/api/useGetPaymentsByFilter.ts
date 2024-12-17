@@ -28,7 +28,7 @@ export const useGetPaymentsByFilter = (
   sort: string[]
 ) => {
   return useInfiniteQuery({
-    queryKey: ["settlements-category"],
+    queryKey: ["settlements-category", filter],
     queryFn: ({ pageParam = 0 }) =>
       getPaymentsByFilter(filter, pageParam, size, sort),
     initialPageParam: 0,
