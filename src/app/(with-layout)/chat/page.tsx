@@ -16,8 +16,12 @@ interface MessageType {
   message: string;
 }
 
+const START_FLAG = "<SOS>";
+const END_FLAG = "<EOS>";
+
 export default function Chat() {
-  const [message, setMessage] = useState<string>("");
+  const [sMessage, setSMessage] = useState<string>("");
+  const [rMessage, setRMessage] = useState<string>("");
   const [messages, setMessages] = useState<MessageType[]>([]);
   const { containerRef, scrollToBottom } = useScrollToBottom();
   const socketRef = useRef<WebSocket | null>(null);
@@ -31,9 +35,20 @@ export default function Chat() {
         console.log(">> AI 채팅 서버 연결 성공!");
       };
       ws.onmessage = (event) => {
-        console.log(">> 메시지 수신 ");
-        const data = JSON.parse(event.data);
-        setMessages((prev) => [...prev, data]);
+        // console.log(">> 메시지 수신 ", event.data);
+        const { message } = JSON.parse(event.data);
+        if (message === START_FLAG) {
+          setRMessage("");
+        } else {
+          setRMessage((prev) => {
+            if (message === END_FLAG) {
+              const data: MessageType = { sender: "AI", message: prev };
+              setMessages((prev) => [...prev, data]);
+              return prev;
+            }
+            return prev + message;
+          });
+        }
       };
 
       ws.onerror = (error) => {
@@ -57,21 +72,25 @@ export default function Chat() {
 
   useEffect(() => {
     scrollToBottom();
-    setMessage("");
+  }, [rMessage, sMessage]);
+
+  useEffect(() => {
+    // setSMessage("");
+    // setRMessage("");
   }, [messages]);
 
   const handleSendMessage = () => {
     if (
       socketRef.current &&
       socketRef.current.readyState === WebSocket.OPEN &&
-      message.length &&
-      message.trim()
+      sMessage.length &&
+      sMessage.trim()
     ) {
-      const data: MessageType = { sender: "User", message };
+      const data: MessageType = { sender: "User", message: sMessage };
       socketRef.current.send(JSON.stringify(data));
       setMessages((prev) => [...prev, data]);
     }
-    setMessage("");
+    setSMessage("");
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -82,7 +101,7 @@ export default function Chat() {
   };
 
   const handleTextarea: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    setMessage(e.target.value);
+    setSMessage(e.target.value);
   };
 
   return (
@@ -111,12 +130,20 @@ export default function Chat() {
             </li>
           ))
         )}
+        {rMessage.length !== 0 && (
+          <li
+            key="streaming"
+            className="text-white bg-shadow-700  p-3 whitespace-pre-wrap rounded-2xl text-bd2 max-w-[90%] w-fit min-h-fit break-words max-h-fit"
+          >
+            <p className="w-full">{rMessage}</p>
+          </li>
+        )}
       </ul>
       <div className="flex gap-4 bg-shadow-700 -mx-4 p-3 items-top fixed bottom-0 w-full max-w-[500px]">
         <textarea
           className="bg-transparent focus:outline-0 w-full text-bd2"
           name="mychat"
-          value={message}
+          value={sMessage}
           onChange={handleTextarea}
           onKeyUp={handleKeyPress}
         />

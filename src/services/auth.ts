@@ -24,12 +24,12 @@ export async function validateToken(token: string) {
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => res.json());
-  console.log("response", response);
+  // console.log("response", response);
   return response;
 }
 
 export async function requestAccessToken(token: string) {
-  console.log("requestAccessToken 실행", token);
+  // console.log("requestAccessToken 실행", token);
   const response: FinalResponse<string | null> = await fetch(
     `${API_ENDPOINTS.AUTH}/refresh`,
     {
