@@ -1,12 +1,13 @@
 "use client";
 import Loading from "@/app/loading";
 import { PATH } from "@/lib/_shared/paths";
+import { GetMyCardRes } from "@/types/api/card";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import MyCardList from "../card-benefit/(components)/my-card-list";
 import EventSliderBanner from "./(components)/event-slider-banner";
-import GoCardBenefit from "./(components)/go-card-benefit";
 import PayNotice from "./(components)/pay-notice";
 
 const PaySection = dynamic(
@@ -35,7 +36,14 @@ export default function HomePage() {
         <LatestFundingSection />
 
         {/** 더 큰 혜택 찾기 */}
-        <GoCardBenefit />
+        {/* <GoCardBenefit /> */}
+
+        <div className="bg-transparent -space-y-4">
+          <h2 className="card-title">카드 혜택</h2>
+          <Link href={PATH.CARD_BENEFIT}>
+            <MyCardList listData={listData} autoPlay={true} />
+          </Link>
+        </div>
 
         {/** 획득 배지 및 펀딩 */}
         {/* <BadgeStatus /> */}
@@ -53,3 +61,14 @@ export default function HomePage() {
     </Suspense>
   );
 }
+
+const listData: GetMyCardRes = Array(6).fill({
+  card_id: 0,
+  myCard_id: 0,
+  card: {
+    card_name: "현대",
+    card_image:
+      "https://d1c5n4ri2guedi.cloudfront.net/card/13/card_img/28201/13card.png",
+    benefit_point: 10,
+  },
+});
