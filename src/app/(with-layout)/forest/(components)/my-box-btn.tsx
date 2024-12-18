@@ -20,8 +20,8 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
         onClick={toggleShow}
       >
         <Image
-          src="/icons/forest-settings.png"
-          blurDataURL="/icons/forest-settings.png"
+          src="/icons/forest-setting.png"
+          blurDataURL="/icons/forest-setting.png"
           width={48}
           height={48}
           alt="보관함"
