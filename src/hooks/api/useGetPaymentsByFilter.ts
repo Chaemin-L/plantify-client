@@ -1,4 +1,3 @@
-import { SortingType } from "@/app/(with-layout)/payments/(components)/filtered-payments-list";
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
 import { Pageable } from "@/types/api/common";
@@ -25,12 +24,11 @@ const getPaymentsByFilter = async (
 
 export const useGetPaymentsByFilter = (
   filter: FilterType,
-  sorting: SortingType,
   size: number,
   sort: string[]
 ) => {
   return useInfiniteQuery({
-    queryKey: ["settlements-category", filter, sorting],
+    queryKey: ["settlements-category", filter, [...sort]],
     queryFn: ({ pageParam = 0 }) =>
       getPaymentsByFilter(filter, pageParam, size, sort),
     initialPageParam: 0,

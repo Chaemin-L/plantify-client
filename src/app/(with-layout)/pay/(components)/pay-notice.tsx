@@ -5,12 +5,10 @@ import { kdayjs } from "@/lib/kdayjs";
 import Link from "next/link";
 
 export default function PayNotice() {
-  const { data, isLoading } = useGetPaymentsByFilter(
-    "PAYMENT",
+  const { data, isLoading } = useGetPaymentsByFilter("PAYMENT", 1, [
     "createdAt",
-    1,
-    ["createdAt", "desc"]
-  );
+    "desc",
+  ]);
   const payment = data?.pages[0].content[0];
 
   if (isLoading && !payment) return <Loading />;

@@ -34,7 +34,7 @@ export default function PaymentsPage() {
     data: allPayments,
     hasNextPage: allHasNextPage,
     fetchNextPage: allFetchNextPage,
-  } = useGetPayments(20, [sorting]);
+  } = useGetPayments(20, [sorting, "desc"]);
 
   if (!isPaymentCategoryType(filter)) return notFound();
   if (!isPaymentSortingType(sorting)) return notFound();
