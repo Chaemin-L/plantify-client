@@ -25,15 +25,16 @@ export default function PayNotice() {
         <p className="text-xs">{kdayjs(createdAt).format("YYYY.MM.DD")}</p>
       </div>
       <div>
-        <div className="flex justify-between items-end">
-          <p className="text-bd2 whitespace-pre">
-            {orderName}에서{"\n"}
-            {amount}원 결제했어요
-          </p>
+        <div className="flex flex-col justify-between text-bd2 ">
+          <div className="flex ">
+            <p className="line-clamp-1 ">{orderName}</p>
+            <span className="whitespace-nowrap pr-[20%]">에서</span>
+          </div>
+          <p>{amount}원 결제했어요</p>
 
           <Link
             href={PATH.PAYMENTS}
-            className="text-btn2 px-3 py-2 bg-accent-red rounded-full"
+            className="w-fit self-end text-btn2 px-3 py-2 bg-accent-red rounded-full"
           >
             이용내역
           </Link>
