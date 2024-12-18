@@ -23,6 +23,12 @@ const events: LinkType[] = [
     description: "한경 60년 미래를 봅니다",
     icon: "/icons/news.svg",
   },
+  {
+    href: "https://repick.site/",
+    title: "리픽",
+    description: "증권 레포트 분석이 필요할 때,",
+    icon: "/icons/report.webp",
+  },
 ];
 
 export default function EventSliderBanner() {
