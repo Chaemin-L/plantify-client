@@ -1,6 +1,5 @@
 "use client";
 
-import { useGetUsingItems } from "@/hooks/api/useGetUsingMyItems";
 import { useForestField } from "@/hooks/useForestField";
 import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
 import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
@@ -26,12 +25,12 @@ export default function ForestMain() {
   const { fillField, emptyField } = useForestField(cellWidth, cellHeight);
 
   const { data: cash } = useGetCash();
-  const { data: usingItems, loading } = useGetUsingItems();
+  // const { data: usingItems, loading } = useGetUsingItems();
   const [create] = usePostCreateUsingItems();
   // const [update] = usePostUpdateUsingItems();
 
   useEffect(() => {
-    if (loading) return;
+    // if (loading) return;
 
     setItems(
       // usingItems?.getAllUsingItemsByUser.map(
