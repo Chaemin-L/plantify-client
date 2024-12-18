@@ -3,11 +3,25 @@ import { TextPlugin } from "gsap/TextPlugin";
 
 gsap.registerPlugin(TextPlugin);
 
+interface OptionType {
+  repeat?: number;
+  duration?: number;
+  yoyo?: boolean;
+}
+
 // Please use it in useEffect
-export function typingText(selector: string, text: string) {
-  const tl = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
+export function typingText(
+  selector: string,
+  text: string,
+  options?: OptionType
+) {
+  const tl = gsap.timeline({
+    repeat: options?.repeat || -1,
+    repeatDelay: 1,
+    yoyo: options?.yoyo || true,
+  });
   tl.to(selector, {
-    duration: 1.5,
+    duration: options?.duration || 1.5,
     text: { value: text, delimiter: "" },
     ease: "none",
   });

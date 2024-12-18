@@ -6,6 +6,7 @@ export default function PlantiFit() {
   return (
     <FeatureLayout
       title="PlantiFit"
+      keyword="피핏"
       description={`다양한 혜택 한 번에, 피핏\n숨겨진 카드 혜택까지 모두 모아`}
     >
       <MyCardList listData={dummyMyCardList} autoPlay />

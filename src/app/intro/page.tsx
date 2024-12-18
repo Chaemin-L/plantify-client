@@ -2,7 +2,7 @@ import PlantiFit from "./(components)/planti-fit";
 import PlantiForest from "./(components)/planti-forest";
 import PlantiFunding from "./(components)/planti-funding";
 import PlantiPay from "./(components)/planti-pay";
-import PlantiPrompt from "./(components)/planti-prompt";
+import PlantiPick from "./(components)/planti-pick";
 import PlantiCTA from "./(components)/plantify-cta";
 import ScrollFeature from "./scroll-features";
 
@@ -14,7 +14,7 @@ export default function Page() {
         <PlantiFunding />
         <PlantiFit />
         <PlantiForest />
-        <PlantiPrompt />
+        <PlantiPick />
         <PlantiCTA />
       </ScrollFeature>
     </>

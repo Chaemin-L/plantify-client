@@ -5,6 +5,7 @@ export default function PlantiPay() {
   return (
     <FeatureLayout
       title="PlantiPay"
+      keyword="피피"
       description={`나만의 페이, 피피\n한 번의 터치로 한 번의 결제`}
     >
       <div>

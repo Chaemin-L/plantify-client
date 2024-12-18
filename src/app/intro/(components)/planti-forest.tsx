@@ -5,6 +5,7 @@ export default function PlantiForest() {
   return (
     <FeatureLayout
       title="PlantiForest"
+      keyword="피포"
       description={`나만의 숲꾸미기, 피포\n자유롭게 꾸미는 내 손 안의 숲 `}
     >
       <Image

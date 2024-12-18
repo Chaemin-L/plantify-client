@@ -6,6 +6,7 @@ export default function PlantiFunding() {
   return (
     <FeatureLayout
       title="PlantiFunding"
+      keyword="피프"
       description={`손쉬운 기부 펀딩, 피프\n쌓여있는 포인트로 언제 어디서나`}
     >
       <ItemSlider title="" items={data}></ItemSlider>

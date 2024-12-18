@@ -9,7 +9,8 @@ export default function PlantiCTA() {
     <div className="h-screen relative">
       <FeatureLayout
         title="PlantiFy+"
-        description={`다양하게 확장 가능한 플랜티파이\n플랜티파이에서 지금 바로\n플랜티가 되어보세요!`}
+        keyword="Plantify"
+        description={`다양하게 확장 가능한 Plantify\n플랜티파이에서 지금 바로\n플랜티가 되어보세요!`}
       >
         <div className="w-full h-full flex flex-col justify-center items-center py-[20%]">
           <Image
