@@ -6,7 +6,6 @@ import Progressbar from "./progressbar";
 interface Props {
   // styling
   size?: "sm" | "lg" | "reactive";
-  showProgress?: boolean;
   // data
   percent: number;
   leftTop?: string | ReactNode;
@@ -17,7 +16,6 @@ interface Props {
 
 export default function FundingStatus({
   size = "lg",
-  showProgress,
   percent,
   leftBottom = "",
   leftTop = "",
@@ -33,14 +31,7 @@ export default function FundingStatus({
             "flex justify-between items-center"
           )}
         >
-          <div className="flex gap-2 items-center">
-            {showProgress && (
-              <div className="rounded-full border border-accent-green w-fit p-0.5 md:p-1 text-[8px] md:text-bd4 text-accent-green whitespace-nowrap ">
-                진행중 {/** progress */}
-              </div>
-            )}
-            <span className=" line-clamp-1">{leftTop}</span>
-          </div>
+          <span className=" line-clamp-1">{leftTop}</span>
           {rightTop}
         </div>
       )}

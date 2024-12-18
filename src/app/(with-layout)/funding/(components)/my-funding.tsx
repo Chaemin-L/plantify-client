@@ -1,10 +1,11 @@
+"use client";
 import FundingStatus from "@/app/(_components)/funding-status";
+import { useGetMyFunding } from "@/hooks/api/useGetMyFunding";
 import { PATH } from "@/lib/_shared/paths";
-import { FundingType } from "@/types/api/funding";
 import Link from "next/link";
 import React from "react";
 
-const dummy: FundingType[] = [];
+// const dummy: FundingType[] = [];
 // Array(3)
 //   .fill({
 //     title: "우리 아이가 다시 일어설 수만 있다면",
@@ -15,7 +16,15 @@ const dummy: FundingType[] = [];
 //   .map((item, idx) => ({ ...item, id: idx }));
 
 export default function MyFunding() {
-  const isEmpty = dummy.length === 0;
+  const { data } = useGetMyFunding(3, ["myFundingId"]);
+
+  const listData =
+    data?.pages
+      .map((p) => p.content)
+      .flat()
+      .map((content) => content.funding) ?? [];
+  const isEmpty = listData.length === 0;
+
   return (
     <>
       <div className="flex justify-between px-2">
@@ -39,7 +48,7 @@ export default function MyFunding() {
             </p>
           ) : (
             <ul className="w-full flex flex-col gap-5 cursor-pointer">
-              {dummy.map((item, idx) => (
+              {listData.map((item, idx) => (
                 <li
                   key={idx}
                   className="h-fit w-full hover:bg-shadow-700 rounded-2xl transition-colors "
