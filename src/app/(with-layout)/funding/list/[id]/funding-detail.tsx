@@ -11,6 +11,7 @@ import { usePostFunding } from "@/hooks/api/usePostFunding";
 import { PATH } from "@/lib/_shared/paths";
 import fetchClient from "@/lib/fetchClient";
 import { FundingDetailType } from "@/types/api/funding";
+import Link from "next/link";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -103,9 +104,12 @@ export default function FundingDetail({ id }: Props) {
           </div>
           <div>
             <div>
-              <span className="text-bd3 sm:text-bd2 text-shadow-500">
+              <Link
+                href={PATH.FUNDING_ORGANIZATION}
+                className="text-bd3 sm:text-bd2 text-shadow-500"
+              >
                 {organizationName}
-              </span>
+              </Link>
               <h1 className="text-t2 break-keep">{title}</h1>
             </div>
             <FundingStatus
