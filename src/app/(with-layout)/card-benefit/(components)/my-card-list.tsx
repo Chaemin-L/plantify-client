@@ -1,9 +1,10 @@
 "use client";
 import { useDeleteMyCard } from "@/hooks/api/useDeleteMyCard";
 import { PATH } from "@/lib/_shared/paths";
-import { GetMyCardRes } from "@/types/api/card";
+import { GetMyCardRes, MyCardType } from "@/types/api/card";
+import { rotateCard } from "@/utils/rotateCard";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -33,8 +34,8 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const { mutate } = useDeleteMyCard();
 
-  const handleDeleteCard = (card_id: number) => {
-    mutate(card_id);
+  const handleDeleteCard = (myCard_id: number) => {
+    mutate(myCard_id);
   };
 
   return (
@@ -62,27 +63,17 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
           slideShadows: true,
         }}
         modules={[EffectCoverflow, Autoplay]}
-        className="relative w-full mt-5"
+        className="flex w-full mt-5"
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        direction="horizontal"
       >
-        {listData.map(({ myCard_id, card_id, card }, idx) => {
-          const { card_image } = card;
+        {listData.map((data, idx) => {
           return (
-            <SwiperSlide key={`${card_id}_${idx}`} className=" h-full">
-              <div className=" h-full w-full flex flex-col justify-center items-center ">
-                {!autoPlay && (
-                  <button
-                    className="absolute bottom-full  rounded-full p-1 aspect-square bg-shadow-600"
-                    onClick={() => handleDeleteCard(myCard_id)}
-                  >
-                    X
-                  </button>
-                )}
-                <img
-                  src={card_image}
-                  className="w-full select-none aspect-[1/1.6]"
-                />
-              </div>
+            <SwiperSlide
+              key={`${data.myCard_id}_${idx}`}
+              className="w-fit h-fit"
+            >
+              <SlideItem idx={idx} data={data} />
             </SwiperSlide>
           );
         })}
@@ -92,7 +83,7 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
               href={PATH.CARD_BENEFIT_ADD}
               className="h-full w-full flex flex-col justify-center items-center mx-auto px-auto  "
             >
-              <div className="w-full aspect-[1/1.6] bg-shadow-600 rounded-md flex justify-center items-center">
+              <div className="w-full aspect-[1/1.5] bg-shadow-600 rounded-md flex justify-center items-center">
                 +
               </div>
             </Link>
@@ -101,17 +92,60 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
       </Swiper>
       <div className="mt-10 flex flex-col gap-5">
         <div>
-          <h2 className="text-t2">{listData[activeIndex].card.card_name}</h2>
+          <div className="flex justify-between">
+            <h2 className="text-t2 break-words">
+              {listData[activeIndex]?.card.card_name}
+            </h2>
+            {!autoPlay && listData[activeIndex] && (
+              <button
+                className="rounded-full px-3 aspect-square bg-shadow-700 text-bd3"
+                onClick={() =>
+                  handleDeleteCard(listData[activeIndex]?.myCard_id)
+                }
+              >
+                X
+              </button>
+            )}
+          </div>
           <span className="text-bd3 lg:text-bd2 text-shadow-300">
-            {listData[activeIndex].card.company}
+            {listData[activeIndex]?.card.company}
           </span>
         </div>
         <div className="flex flex-col gap-2 text-bd3 lg:text-bd2">
-          {listData[activeIndex].card.benefits.map((benefit) => (
-            <p>• &nbsp;{benefit}</p>
+          {listData[activeIndex]?.card.benefits.map((benefit, idx) => (
+            <p key={`${idx}_${listData[activeIndex].myCard_id}`}>
+              • &nbsp;{benefit}
+            </p>
           ))}
         </div>
       </div>
     </>
   );
 }
+
+interface SlideItemProps {
+  idx: number;
+  data: MyCardType;
+}
+
+const SlideItem = ({ data: myCard }: SlideItemProps) => {
+  const {
+    myCard_id,
+    card: { card_image },
+  } = myCard;
+
+  useEffect(() => {
+    rotateCard(`my_card_${myCard_id}_old`, `my_card_${myCard_id}_new`, false);
+  }, []);
+
+  return (
+    <div className="w-full h-full flex justify-center items-center ">
+      <img
+        id={`my_card_${myCard_id}_new`}
+        src={card_image}
+        className="max-w-full max-h-full"
+      />
+      <img hidden id={`my_card_${myCard_id}_old`} src={card_image} />
+    </div>
+  );
+};

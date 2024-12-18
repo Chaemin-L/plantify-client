@@ -14,7 +14,7 @@ export const useDeleteMyCard = () => {
   return useMutation({
     mutationFn: async (cardId: number) => await deleteMyCard(cardId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["my_cards"] });
+      queryClient.invalidateQueries({ queryKey: ["my-cards"] });
     },
   });
 };
