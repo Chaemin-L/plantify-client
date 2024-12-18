@@ -4,6 +4,7 @@ import { useScrollObserver } from "@/hooks/useScrollObserver";
 import { PATH } from "@/lib/_shared/paths";
 import { Pageable } from "@/types/api/common";
 import { CategoryType, FundingType } from "@/types/api/funding";
+import getCategoryName from "@/utils/getCategoryName";
 import {
   InfiniteData,
   InfiniteQueryObserverResult,
@@ -60,8 +61,7 @@ interface ItemProps {
 }
 
 const FundingItem = ({ selectedCategory, data }: ItemProps) => {
-  const { fundingId, image, title, percent, targetAmount, organizationName } =
-    data;
+  const { fundingId, image, title, percent, targetAmount, curAmount } = data;
   return (
     <li key={fundingId}>
       <Link
@@ -78,7 +78,7 @@ const FundingItem = ({ selectedCategory, data }: ItemProps) => {
         />
         <div className="px-5 py-4 w-full h-fit flex justify-between flex-col ">
           <div className=" max-md:mb-1 mb-2 max-md:text-bd4 text-bd2">
-            {selectedCategory}
+            {getCategoryName(selectedCategory)}
           </div>
 
           <div className="flex flex-col max-md:gap-3 md:gap-4 flex-1">
@@ -90,8 +90,8 @@ const FundingItem = ({ selectedCategory, data }: ItemProps) => {
             <FundingStatus
               size="sm"
               percent={percent}
-              targetAmount={targetAmount}
-              rightBottom={<span>{organizationName}</span>}
+              leftBottom={`목표 금액: ${targetAmount.toLocaleString()}원`}
+              rightBottom={`${curAmount.toLocaleString()}원`}
             />
           </div>
         </div>

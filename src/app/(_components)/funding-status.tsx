@@ -9,8 +9,8 @@ interface Props {
   showProgress?: boolean;
   // data
   percent: number;
-  targetAmount: number;
   leftTop?: string | ReactNode;
+  leftBottom?: string | ReactNode;
   rightTop?: string | ReactNode;
   rightBottom?: string | ReactNode;
 }
@@ -19,7 +19,7 @@ export default function FundingStatus({
   size = "lg",
   showProgress,
   percent,
-  targetAmount,
+  leftBottom = "",
   leftTop = "",
   rightTop = "",
   rightBottom = "",
@@ -51,8 +51,8 @@ export default function FundingStatus({
           " flex justify-between"
         )}
       >
-        <span>{targetAmount.toLocaleString()}원</span>
-        {rightBottom}
+        <div> {leftBottom}</div>
+        <div> {rightBottom}</div>
       </div>
     </div>
   );

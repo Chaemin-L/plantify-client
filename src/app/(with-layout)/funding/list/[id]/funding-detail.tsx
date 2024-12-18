@@ -11,7 +11,6 @@ import { usePostFunding } from "@/hooks/api/usePostFunding";
 import { PATH } from "@/lib/_shared/paths";
 import fetchClient from "@/lib/fetchClient";
 import { FundingDetailType } from "@/types/api/funding";
-import Link from "next/link";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -59,6 +58,7 @@ export default function FundingDetail({ id }: Props) {
     title,
     content,
     percent,
+    curAmount,
     targetAmount,
     // organizationId,
     organizationName,
@@ -101,17 +101,20 @@ export default function FundingDetail({ id }: Props) {
       </button>
     )} */}
           </div>
-          <h1 className="text-t2">{title}</h1>
-          <FundingStatus
-            percent={percent}
-            targetAmount={targetAmount}
-            rightBottom={
-              // TODO: organizationId 대체
-              <Link href={`${PATH.FUNDING_ORGANIZATION}#org_${fundingId}`}>
+          <div>
+            <div>
+              <span className="text-bd3 sm:text-bd2 text-shadow-500">
                 {organizationName}
-              </Link>
-            }
-          />
+              </span>
+              <h1 className="text-t2 break-keep">{title}</h1>
+            </div>
+            <FundingStatus
+              percent={percent}
+              rightTop={<div className="text-accent-red">{percent}%</div>}
+              leftBottom={`목표금액: ${targetAmount.toLocaleString()}원`}
+              rightBottom={`${curAmount.toLocaleString()}원`}
+            />
+          </div>
         </div>
         <div className="text-bd1 max-md:text-bd2 whitespace-pre-wrap break-word flex flex-col gap-6">
           {content.split("\n").map((paragraph, idx) => (

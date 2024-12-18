@@ -18,7 +18,7 @@ export interface FundingType {
   title: string;
   content: string;
   image: string;
-  curAmount?: number;
+  curAmount: number;
   targetAmount: number;
   percent: number;
   status?: StatusType;

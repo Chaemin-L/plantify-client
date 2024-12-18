@@ -8,7 +8,8 @@ interface Props {
   data: FundingType;
 }
 export default function BestFunding({ data }: Props) {
-  const { fundingId, title, content, image, percent, targetAmount } = data;
+  const { fundingId, title, content, image, percent, targetAmount, curAmount } =
+    data;
 
   return (
     <Link
@@ -31,8 +32,9 @@ export default function BestFunding({ data }: Props) {
       />
       <FundingStatus
         percent={percent}
-        targetAmount={targetAmount}
-        rightBottom={<span>{percent}%</span>}
+        rightTop={<div className="text-accent-red">{percent}%</div>}
+        leftBottom={`목표 금액: ${targetAmount.toLocaleString()}원`}
+        rightBottom={`${curAmount.toLocaleString()}원`}
       />
     </Link>
   );
