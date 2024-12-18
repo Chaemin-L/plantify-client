@@ -26,11 +26,11 @@ export default function ToastProvider() {
   }, []);
 
   return (
-    <div className="fixed top-4 left-1/2 -translate-x-1/2 space-y-1">
+    <div className="fixed top-8 left-1/2 -translate-x-1/2 space-y-1">
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className="py-2 px-4 rounded-full bg-shadow-50 text-black"
+          className="py-2 px-4 rounded-full bg-shadow-50 text-black whitespace-nowrap"
         >
           {toast.message}
         </div>

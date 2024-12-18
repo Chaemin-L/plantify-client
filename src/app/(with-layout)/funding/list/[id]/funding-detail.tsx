@@ -46,7 +46,7 @@ export default function FundingDetail({ id }: Props) {
         router.replace(`${PATH.FUNDING_LIST}/${id}`);
       }, 3000);
     } catch (error) {
-      console.error("기부 확인 실패:", error);
+      console.error("기부 실패:", error);
     }
   };
 
