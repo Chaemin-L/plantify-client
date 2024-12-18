@@ -1,4 +1,3 @@
-("");
 import Loading from "@/app/loading";
 import { useGetPaymentsByFilter } from "@/hooks/api/useGetPaymentsByFilter";
 import { PATH } from "@/lib/_shared/paths";

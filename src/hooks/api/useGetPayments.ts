@@ -24,5 +24,6 @@ export const useGetPayments = (
     queryFn: ({ pageParam = 0 }) => getPayments(pageParam, size, sort),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.pageable.pageNumber + 1,
+    retry: 3,
   });
 };

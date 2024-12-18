@@ -24,7 +24,9 @@ export const usePostPurchaseItems = () => {
   return useMutation({
     mutationFn: async ({ itemId, quantity }: PurchaseItemRequest) =>
       await postPurchaseItems(itemId, quantity).then(() =>
-        queryClient.invalidateQueries({ queryKey: CASH_QUERY_KEY })
+        queryClient.invalidateQueries({
+          queryKey: [...CASH_QUERY_KEY, "my-items"],
+        })
       ),
   });
 };

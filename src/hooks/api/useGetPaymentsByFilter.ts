@@ -33,5 +33,6 @@ export const useGetPaymentsByFilter = (
       getPaymentsByFilter(filter, pageParam, size, sort),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.pageable.pageNumber + 1,
+    retry: 3,
   });
 };

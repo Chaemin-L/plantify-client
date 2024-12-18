@@ -15,6 +15,6 @@ export const useGetPay = () => {
     queryKey: PAY_QUERY_KEY,
     queryFn: async () => await getPay(),
     refetchOnMount: "always",
-    retry: 2,
+    retry: 3,
   });
 };

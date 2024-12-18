@@ -25,4 +25,6 @@ export const PATH = {
 
   // in forest
   FOREST_STORE: "/forest/store",
+
+  ERROR: "/error",
 };
