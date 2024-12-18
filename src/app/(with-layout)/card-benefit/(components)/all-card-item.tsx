@@ -16,13 +16,13 @@ export default function AllCardItem({
   return (
     <>
       <div className=" flex gap-[3%]">
-        <div className="w-1/4 flex justify-center items-center  rounded-xl overflow-hidden aspect-square">
+        <div className="w-1/4 flex justify-center items-center  rounded-lg aspect-[1/1.5]">
           <img
             id={`${card_name}_preview`}
-            className="max-w-full max-h-full"
             src={card_image}
             alt={`${card_name}이미지`}
           />
+          <img hidden id={`${card_name}_image`} src={card_image} />
         </div>
         <div className=" flex flex-col justify-center gap-2">
           <span className="text-bd3 font-bold">{card_name}</span>
@@ -31,7 +31,6 @@ export default function AllCardItem({
           </span>
         </div>
       </div>
-      <img hidden id={`${card_name}_image`} src={card_image} />
     </>
   );
 }

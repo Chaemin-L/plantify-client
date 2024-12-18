@@ -140,12 +140,8 @@ const SlideItem = ({ data: myCard }: SlideItemProps) => {
   }, []);
 
   return (
-    <div className="w-full h-full flex justify-center items-center ">
-      <img
-        id={`my_card_${myCard_id}_new`}
-        src={card_image}
-        className="max-w-full max-h-full"
-      />
+    <div className="w-full aspect-[1/1.5] flex justify-center items-center ">
+      <img id={`my_card_${myCard_id}_new`} src={card_image} className="" />
       <img hidden id={`my_card_${myCard_id}_old`} src={card_image} />
     </div>
   );

@@ -22,7 +22,17 @@ export function rotateCard(
     } else {
       if (isHorizontal) {
         newImage.style.transform = "rotate(90deg)";
-        newImage.style.aspectRatio = "1.5/1";
+        newImage.style.minHeight =
+          newImage.parentElement?.clientWidth.toString()! + "px";
+
+        newImage.style.minWidth =
+          newImage.parentElement?.clientHeight.toString()! + "px";
+
+        console.log(
+          newImage.parentElement,
+          newImage.height,
+          newImage.parentElement?.clientHeight
+        );
       } else {
         newImage.style.aspectRatio = "1/1.5";
       }
