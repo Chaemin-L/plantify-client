@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Plantify 페이",
   description:
-    "Plantify 페이로 결제하고, 최근 기부 펀딩에 참여해봐요. 나의 숨겨진 카드 혜택까지 찾을 수 있어요!",
+    "Plantify 페이로 결제하고, 내 숨겨진 카드 혜택까지 찾아볼까요? 최근 펀딩형 기부에도 참여해 얻은 캐시로 나만의 숲도 꾸며볼 수 있어요!",
 };
 
 export default function RootLayout({

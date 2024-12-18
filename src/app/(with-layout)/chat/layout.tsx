@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Plantify - 홈",
-  description: "나의 페이/카드 정보가 궁금할 때",
-  keywords: ["plantify", "pay", "point", "money", "페이", "포인트", "기부"],
+  title: "AI 채팅",
+  description:
+    "펀딩 관련한 모르는 정보들에게 대해 도움을 받을 수 있는 AI 채팅입니다. 나에게 맞는 추천 펀딩도 받아보세요!",
 };
 
 export default function Layout({
