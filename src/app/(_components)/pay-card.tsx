@@ -146,7 +146,7 @@ export default function PayCard({ pay, points, disabled = false }: Props) {
                   width={100}
                   height={100}
                   alt="페이 QRcode"
-                  className="no-swiper flex-1 w-auto h-full max-h-20 xs:max-h-24 transition-all will-change-transform"
+                  className="no-swiper flex-1 w-auto h-full max-h-16 xs:max-h-24 transition-all will-change-transform"
                   onClick={(e) => {
                     if (loading.current || disabled) return;
                     handleQRFullScreenMode(e);
@@ -158,7 +158,7 @@ export default function PayCard({ pay, points, disabled = false }: Props) {
                   src="/temp/barcode.png"
                   width={300}
                   height={300}
-                  className="no-swiper flex-4 min-w-0 h-full max-h-20 xs:max-h-24 aspect-[4/1] rounded-md transition-all will-change-transform"
+                  className="no-swiper flex-4 min-w-0 h-full max-h-16 xs:max-h-24 aspect-[4/1] rounded-md transition-all will-change-transform"
                   alt="페이 Barcode"
                   onClick={(e) => {
                     if (loading.current || disabled) return;
@@ -175,7 +175,7 @@ export default function PayCard({ pay, points, disabled = false }: Props) {
                   src="/icons/card-back-logo.png"
                   className="absolute -bottom-0 left-6 xs:left-10 h-[35%] xs:h-[40%] w-auto"
                 />
-                <div className="w-full flex flex-col gap-1 mr-1.5 sm:mr-4 items-end justify-end *:h-fit">
+                <div className="w-full flex flex-col gap-0.5 mr-1.5 sm:mr-4 items-end justify-end *:h-fit">
                   <div className="flex items-center  gap-2">
                     <span className="text-bd3 xs:text-bd1">포인트</span>
                     <span className="text-t4 xs:text-t3">
