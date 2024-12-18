@@ -41,7 +41,7 @@ export default function Page() {
     else addAccount(rest);
 
     resetAccount();
-    redirect(PATH.PAY_ACCOUNTS);
+    redirect(PATH.HOME);
   };
 
   useEffect(() => {
