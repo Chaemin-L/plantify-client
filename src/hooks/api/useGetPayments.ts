@@ -15,7 +15,10 @@ const getPayments = async (pageParam: number, size: number, sort: string[]) => {
   return response;
 };
 
-export const useGetPayments = (size: number, sort: string[]) => {
+export const useGetPayments = (
+  size: number,
+  sort: string[] = ["createdAt", "desc"]
+) => {
   return useInfiniteQuery({
     queryKey: ["settlements"],
     queryFn: ({ pageParam = 0 }) => getPayments(pageParam, size, sort),
