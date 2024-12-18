@@ -38,8 +38,7 @@ export default function ForestMain() {
       dummy.map(({ category, posX, posY, ...rest }: GetUsingItemsRes) => {
         const fieldPosX = posX * cellWidth;
         const fieldPosY = posY * cellHeight;
-        if (category === "GROUND")
-          fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
+        fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
         return {
           category,
           ...rest,
