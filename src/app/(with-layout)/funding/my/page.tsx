@@ -10,7 +10,12 @@ import FundingList from "../(components)/funding-list";
 
 export default function MyFundingPage() {
   const { data } = useGetMyFunding(15, ["myFundingId"]);
-  const listData = data?.pages.map((p) => p.content).flat() ?? [];
+
+  const listData =
+    data?.pages
+      .map((p) => p.content)
+      .flat()
+      .map((content) => content.funding) ?? [];
   const isEmpty = listData.length === 0;
 
   return (

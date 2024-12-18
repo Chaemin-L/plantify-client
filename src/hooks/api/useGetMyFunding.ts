@@ -9,13 +9,14 @@ const getMyFunding = async (
   size: number,
   sort: string[]
 ) => {
-  const response: Pageable<FundingType> = await fetchClient(
-    `${
-      API_ENDPOINTS.FUNDING
-    }/my-funding?page=${pageParam}&size=${size}&sort=${encodeURIComponent(
-      sort.toString()
-    )}`
-  );
+  const response: Pageable<{ createdAt: Date; funding: FundingType }> =
+    await fetchClient(
+      `${
+        API_ENDPOINTS.FUNDING
+      }/my-funding?page=${pageParam}&size=${size}&sort=${encodeURIComponent(
+        sort.toString()
+      )}`
+    );
   return response;
 };
 

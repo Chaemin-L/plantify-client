@@ -39,9 +39,9 @@ export default function FundingList({
 
   return (
     <ul className="flex flex-col max-md:gap-3 gap-5 scrollbar-hide">
-      {listData.map((data) => (
+      {listData.map((data, idx) => (
         <MemorizedFundingItem
-          key={data.fundingId}
+          key={`${idx}_${data.fundingId}`}
           selectedCategory={selectedCategory}
           data={data}
         />
@@ -62,6 +62,7 @@ interface ItemProps {
 
 const FundingItem = ({ selectedCategory, data }: ItemProps) => {
   const { fundingId, image, title, percent, targetAmount, curAmount } = data;
+  console.log(targetAmount, curAmount);
   return (
     <li key={fundingId}>
       <Link
