@@ -3,7 +3,6 @@ import { getFundingList } from "@/hooks/api/useGetFundingList";
 import { PATH } from "@/lib/_shared/paths";
 import Image from "next/image";
 import Link from "next/link";
-import AdSliderBanner from "./(components)/ad-slider-banner";
 import BestFunding from "./(components)/best-funding";
 import MyFunding from "./(components)/my-funding";
 
@@ -29,7 +28,25 @@ export default async function FundingMain({ token }: Props) {
   return (
     <div className="flex flex-col gap-5 scrollbar-hide">
       {/** 슬라이더 */}
-      <AdSliderBanner />
+      {/* <AdSliderBanner /> */}
+      <Link
+        href={PATH.FUNDING_ORGANIZATION}
+        className="card w-full h-fit py-full flex items-center justify-between"
+      >
+        <div className="space-y-1 max-w-[50%]">
+          <h1 className=" text-t3">기부사 검색</h1>
+          <p className="text-bd3 max-xs:whitespace-pre-wrap">
+            기부사에 대해{"\n"}더 깊이 알아보아요
+          </p>
+        </div>
+        <Image
+          src="/icons/company.svg"
+          width={200}
+          height={200}
+          className="max-h-40 max-w-[40%] -my-4"
+          alt={`기부사 검색 페이지로 이동`}
+        />
+      </Link>
 
       {/** 베스트 펀딩 */}
       <BestFunding data={fundingByPercent[0]} />
