@@ -27,26 +27,26 @@ export default function ForestMain() {
 
   const { data: cash } = useGetCash();
   const { data: usingItems, loading } = useGetUsingItems();
-  const [mutate] = usePostCreateUsingItems();
+  const [create] = usePostCreateUsingItems();
+  // const [update] = usePostUpdateUsingItems();
 
   useEffect(() => {
     if (loading) return;
 
     setItems(
-      usingItems?.getAllUsingItemsByUser.map(
-        ({ category, posX, posY, ...rest }: GetUsingItemsRes) => {
-          const fieldPosX = posX * cellWidth;
-          const fieldPosY = posY * cellHeight;
-          if (category === "GROUND")
-            fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
-          return {
-            category,
-            ...rest,
-            posX: fieldPosX,
-            posY: fieldPosY,
-          };
-        }
-      )
+      // usingItems?.getAllUsingItemsByUser.map(
+      dummy.map(({ category, posX, posY, ...rest }: GetUsingItemsRes) => {
+        const fieldPosX = posX * cellWidth;
+        const fieldPosY = posY * cellHeight;
+        if (category === "GROUND")
+          fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
+        return {
+          category,
+          ...rest,
+          posX: fieldPosX,
+          posY: fieldPosY,
+        };
+      })
     );
   }, [cellWidth, loading]);
 
@@ -72,7 +72,11 @@ export default function ForestMain() {
 
   const handleNewItem = (newItem: GetMyItemRes) => {
     const { myItemId } = newItem;
-    mutate({ variables: { actions: [{ action: "CREATE", myItemId }] } });
+    create({
+      variables: {
+        actions: [{ action: "CREATE", myItemId }],
+      },
+    });
     setItems((prev) => [...prev, { ...newItem, posX: 0, posY: 0 }]);
     setEditingItem(myItemId);
   };
@@ -153,7 +157,7 @@ export default function ForestMain() {
           >
             {/** Draggable Field */}
             <div className="relative flex flex-wrap">
-              {items.map((item, idx) => (
+              {items?.map((item, idx) => (
                 <DraggableItem
                   key={idx}
                   item={item}
@@ -234,161 +238,161 @@ export default function ForestMain() {
   );
 }
 
-// const usingItems: GetUsingItemsRes[] = [
-//   {
-//     myItemId: 1,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 1,
-//     posY: 7,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 2,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 1,
-//     posY: 6,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 11,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 1.5,
-//     posY: 7.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 13,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 0.5,
-//     posY: 6.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 14,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 1.5,
-//     posY: 5.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 13,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2,
-//     posY: 6,
-//     category: "GROUND",
-//   },
+const dummy: GetUsingItemsRes[] = [
+  {
+    myItemId: 1,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 1,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 2,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 1,
+    posY: 6,
+    category: "GROUND",
+  },
+  {
+    myItemId: 11,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 1.5,
+    posY: 7.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 13,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 0.5,
+    posY: 6.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 14,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 1.5,
+    posY: 5.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 13,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2,
+    posY: 6,
+    category: "GROUND",
+  },
 
-//   {
-//     myItemId: 15,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2.5,
-//     posY: 6.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 16,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 3,
-//     posY: 7,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 17,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 3,
-//     posY: 7,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 18,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2,
-//     posY: 8,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 19,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 3.5,
-//     posY: 7.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 20,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 2.5,
-//     posY: 8.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 23,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 4,
-//     posY: 8,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 24,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 3,
-//     posY: 9,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 21,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 4.5,
-//     posY: 8.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 22,
-//     image: "/temp/forest/ground-item5.png",
-//     posX: 3.5,
-//     posY: 9.5,
-//     category: "GROUND",
-//   },
-//   {
-//     myItemId: 22,
-//     image: "/temp/forest/ground-item3.png",
-//     posX: 4,
-//     posY: 9,
-//     category: "GROUND",
-//   },
+  {
+    myItemId: 15,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2.5,
+    posY: 6.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 16,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 3,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 17,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 3,
+    posY: 7,
+    category: "GROUND",
+  },
+  {
+    myItemId: 18,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2,
+    posY: 8,
+    category: "GROUND",
+  },
+  {
+    myItemId: 19,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 3.5,
+    posY: 7.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 20,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 2.5,
+    posY: 8.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 23,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 4,
+    posY: 8,
+    category: "GROUND",
+  },
+  {
+    myItemId: 24,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 3,
+    posY: 9,
+    category: "GROUND",
+  },
+  {
+    myItemId: 21,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 4.5,
+    posY: 8.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 22,
+    imageUri: "/temp/forest/ground-item5.png",
+    posX: 3.5,
+    posY: 9.5,
+    category: "GROUND",
+  },
+  {
+    myItemId: 22,
+    imageUri: "/temp/forest/ground-item3.png",
+    posX: 4,
+    posY: 9,
+    category: "GROUND",
+  },
 
-//   {
-//     myItemId: 100,
-//     image: "/temp/forest/tree-item1.svg",
-//     posX: 1.5,
-//     posY: 5.5,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 101,
-//     image: "/temp/forest/tree-item2.svg",
-//     posX: 2,
-//     posY: 6,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 102,
-//     image: "/temp/forest/tree-item3.svg",
-//     posX: 2.5,
-//     posY: 6.5,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 103,
-//     image: "/temp/forest/tree-item2.svg",
-//     posX: 3,
-//     posY: 7,
-//     category: "TREE",
-//   },
-//   {
-//     myItemId: 104,
-//     image: "/temp/forest/tree-item1.svg",
-//     posX: 3.5,
-//     posY: 7.5,
-//     category: "TREE",
-//   },
-// ];
+  {
+    myItemId: 100,
+    imageUri: "/temp/forest/tree-item1.svg",
+    posX: 1.5,
+    posY: 5.5,
+    category: "TREE",
+  },
+  {
+    myItemId: 101,
+    imageUri: "/temp/forest/tree-item2.svg",
+    posX: 2,
+    posY: 6,
+    category: "TREE",
+  },
+  {
+    myItemId: 102,
+    imageUri: "/temp/forest/tree-item3.svg",
+    posX: 2.5,
+    posY: 6.5,
+    category: "TREE",
+  },
+  {
+    myItemId: 103,
+    imageUri: "/temp/forest/tree-item2.svg",
+    posX: 3,
+    posY: 7,
+    category: "TREE",
+  },
+  {
+    myItemId: 104,
+    imageUri: "/temp/forest/tree-item1.svg",
+    posX: 3.5,
+    posY: 7.5,
+    category: "TREE",
+  },
+];
