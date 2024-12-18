@@ -1,4 +1,6 @@
+import { TanstackQueryClientProvider } from "@/providers/tanstack-provider";
 import "@/styles/swiper.css";
+import { Provider } from "jotai";
 import { SPOQA_HAN_SANS_NEO } from "../styles/fonts/fonts";
 import "./globals.css";
 
@@ -20,7 +22,9 @@ export default function RootLayout({
         >
           <div className="flex justify-center h-full w-full ">
             <div className="w-[500px] max-w-[500px] min-w-0 bg-darkBg text-white">
-              {children}
+              <TanstackQueryClientProvider>
+                <Provider>{children}</Provider>
+              </TanstackQueryClientProvider>
             </div>
           </div>
         </body>

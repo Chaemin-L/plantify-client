@@ -1,11 +1,9 @@
 import Header from "@/app/(_components)/header";
 import "@/app/globals.css";
 import AuthProvider from "@/providers/auth-provider";
-import { TanstackQueryClientProvider } from "@/providers/tanstack-provider";
 import ToastProvider from "@/providers/toast-provider";
 
 import "@/styles/swiper.css";
-import { Provider } from "jotai";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,18 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <TanstackQueryClientProvider>
-        <div className="flex justify-center h-full w-full bg-shadow-50">
-          <div className="w-[500px] max-w-[500px] min-w-0 bg-shadow-900 text-white h-screen  flex flex-col">
-            <Header />
-            <main className="w-full px-4 pb-9 flex-1 overflow-auto">
-              <Provider>
-                <AuthProvider>{children}</AuthProvider>
-              </Provider>
-            </main>
-          </div>
+      <div className="flex justify-center h-full w-full bg-shadow-50">
+        <div className="w-[500px] max-w-[500px] min-w-0 bg-shadow-900 text-white h-screen  flex flex-col">
+          <Header />
+          <main className="w-full px-4 pb-9 flex-1 overflow-auto">
+            <AuthProvider>{children}</AuthProvider>
+          </main>
         </div>
-      </TanstackQueryClientProvider>
+      </div>
       <ToastProvider />
     </>
   );

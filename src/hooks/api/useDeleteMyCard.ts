@@ -12,6 +12,7 @@ async function deleteMyCard(cardId: number) {
 
 export const useDeleteMyCard = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (cardId: number) => await deleteMyCard(cardId),
     onSuccess: () => {
