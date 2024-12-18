@@ -60,13 +60,15 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
   const [selectedCat, setSelectedCat] = useState<CategoryType>("GROUND");
   const { data: myItems } = useGetMyItemsQuery(selectedCat);
 
+  const isEmpty = myItems.length === 0;
+
   return (
     <div
       className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center bg-shadow-900/40 z-50"
       onClick={handleClose}
     >
       <div
-        className="w-[600px] min-h-[500px] max-w-[90%] p-4 bg-shadow-900 border border-shadow-800 rounded-xl  text-white "
+        className="w-[600px] min-h-[500px] max-w-[90%] p-4 bg-shadow-900 border flex flex-col border-shadow-800 rounded-xl  text-white "
         onClick={(e) => e.stopPropagation()}
       >
         <h1 className="text-t2">보관함</h1>
@@ -95,39 +97,44 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
             );
           })}
         </ul>
-        <div className="grid grid-cols-3 gap-1 md:gap-2 w-full ">
-          {myItems.map((item) => {
-            console.log("myItems-itemId: ", item);
-
-            const { itemId, itemName, imageUri } = item;
-            return (
-              <button
-                key={itemId}
-                className="relative w-full p-3 flex flex-col justify-center items-center gap-3 hover:opacity-70 object-contain disabled:opacity-40"
-                onClick={() => {
-                  handleNewItem(item);
-                  handleClose();
-                }}
-                // disabled={quantity === usingQuantity}
-              >
-                <span className="absolute top-0 right-4 text-bd4">
-                  {myItems.length}
-                  {/* {usingQuantity} / {quantity} */}
-                </span>
-                <img
-                  className="w-[80%] max-h-[100px]"
-                  src={imageUri}
-                  width={200}
-                  height={200}
-                  alt={`${itemName}`}
-                />
-                <span className="text-bd3 md:text-bd2 whitespace-pre">
-                  {item.itemName}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        {isEmpty ? (
+          <div className="w-full h-full flex-1 flex justify-center items-center text-bd2 text-shadow-600">
+            아직 존재하는 아이템이 없습니다
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-1 md:gap-2 w-full ">
+            {myItems.map((item) => {
+              const { itemId, itemName, imageUri } = item;
+              return (
+                <button
+                  key={itemId}
+                  className="relative w-full p-3 flex flex-col justify-center items-center gap-3 hover:opacity-70 object-contain disabled:opacity-40"
+                  onClick={() => {
+                    handleNewItem(item);
+                    handleClose();
+                  }}
+                  // disabled={quantity === usingQuantity}
+                >
+                  <span className="absolute top-0 right-4 text-bd4">
+                    {myItems.length}
+                    {/* {usingQuantity} / {quantity} */}
+                  </span>
+                  <img
+                    className="w-[80%] max-h-[100px]"
+                    src={imageUri}
+                    width={200}
+                    height={200}
+                    alt={itemName}
+                    fetchPriority="high"
+                  />
+                  <span className="text-bd3 md:text-bd2 whitespace-pre">
+                    {item.itemName}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
