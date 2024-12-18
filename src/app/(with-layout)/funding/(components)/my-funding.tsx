@@ -81,7 +81,6 @@ const FundingItem = (props: Props) => {
     >
       <FundingStatus
         size="reactive"
-        showProgress
         leftTop={title}
         percent={percent}
         leftBottom={`목표 금액: ${targetAmount.toLocaleString()}원`}
