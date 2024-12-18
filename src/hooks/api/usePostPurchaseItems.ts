@@ -1,6 +1,7 @@
 import { API_ENDPOINTS } from "@/config/api";
 import fetchClient from "@/lib/fetchClient";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CASH_QUERY_KEY } from "./useGetCash";
 
 interface PurchaseItemRequest {
   itemId: number;
@@ -19,8 +20,11 @@ async function postPurchaseItems(itemId: number, quantity: number) {
 }
 
 export const usePostPurchaseItems = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ itemId, quantity }: PurchaseItemRequest) =>
-      await postPurchaseItems(itemId, quantity),
+      await postPurchaseItems(itemId, quantity).then(() =>
+        queryClient.invalidateQueries({ queryKey: CASH_QUERY_KEY })
+      ),
   });
 };
