@@ -8,14 +8,13 @@ export type SortingType = "createdAt" | "amount";
 
 interface Props {
   filter: "CHARGE" | "PAYMENT";
-  sorting: SortingType;
+  // sorting: SortingType;
 }
 
-export default function FilteredPaymentsList({ filter, sorting }: Props) {
+export default function FilteredPaymentsList({ filter }: Props) {
   const { data, hasNextPage, fetchNextPage } = useGetPaymentsByFilter(
     filter,
-    20,
-    [sorting, "desc"]
+    20
   );
 
   const { observerRef } = useScrollObserver<PaymentsType>(

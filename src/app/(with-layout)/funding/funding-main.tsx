@@ -21,7 +21,7 @@ export default async function FundingMain({ token }: Props) {
   const { content: fundingByPercent } = await getFundingList(
     0,
     8,
-    ["percent", "desc"],
+    ["percent", "DESC"],
     token
   );
 

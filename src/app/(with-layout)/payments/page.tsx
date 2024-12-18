@@ -4,8 +4,8 @@ import { useGetAmount } from "@/hooks/api/useGetAmount";
 import { useGetPayments } from "@/hooks/api/useGetPayments";
 import { PATH } from "@/lib/_shared/paths";
 import { kdayjs } from "@/lib/kdayjs";
-import { PaymentCategoryType, PaymentSorting } from "@/types/pay";
-import { isPaymentCategoryType, isPaymentSortingType } from "@/utils/typeCheck";
+import { PaymentCategoryType } from "@/types/pay";
+import { isPaymentCategoryType } from "@/utils/typeCheck";
 import clsx from "clsx";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import FilteredPaymentsList from "./(components)/filtered-payments-list";
@@ -26,7 +26,7 @@ export default function PaymentsPage() {
   const startDate = kdayjs().subtract(1, "month").format("MM월 DD일");
   const endDate = kdayjs().format("MM월 DD일");
 
-  const isAll = filter === "ALL";
+  // const isAll = filter === "ALL";
 
   const { data: totalPayments } = useGetAmount();
 
@@ -34,10 +34,10 @@ export default function PaymentsPage() {
     data: allPayments,
     hasNextPage: allHasNextPage,
     fetchNextPage: allFetchNextPage,
-  } = useGetPayments(20, [sorting, "desc"]);
+  } = useGetPayments(20);
 
   if (!isPaymentCategoryType(filter)) return notFound();
-  if (!isPaymentSortingType(sorting)) return notFound();
+  // if (!isPaymentSortingType(sorting)) return notFound();
 
   return (
     <>
@@ -57,14 +57,15 @@ export default function PaymentsPage() {
         <button
           onClick={() =>
             router.replace(
-              `${PATH.PAYMENTS}?category=${filter}&sorting=${PaymentSorting[0]}`
+              // `${PATH.PAYMENTS}?category=${filter}&sorting=${PaymentSorting[0]}`
+              `${PATH.PAYMENTS}?category=${filter}`
             )
           }
           className={clsx(sorting !== "createdAt" && "opacity-80")}
         >
           최신순
         </button>
-        {!isAll && (
+        {/* {!isAll && (
           <>
             <span>|</span>
             <button
@@ -78,7 +79,7 @@ export default function PaymentsPage() {
               고액순
             </button>
           </>
-        )}
+        )} */}
       </div>
       {filter === "ALL" && (
         <PaymentsList
@@ -88,7 +89,8 @@ export default function PaymentsPage() {
         />
       )}
       {filter !== "ALL" && (
-        <FilteredPaymentsList filter={filter} sorting={sorting} />
+        // <FilteredPaymentsList filter={filter} sorting={sorting} />
+        <FilteredPaymentsList filter={filter} />
       )}
     </>
   );

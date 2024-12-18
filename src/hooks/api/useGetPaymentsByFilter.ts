@@ -25,10 +25,10 @@ const getPaymentsByFilter = async (
 export const useGetPaymentsByFilter = (
   filter: FilterType,
   size: number,
-  sort: string[]
+  sort: string[] = ["createdAt", "DESC"]
 ) => {
   return useInfiniteQuery({
-    queryKey: ["settlements-category", filter, [...sort]],
+    queryKey: ["settlements-category", filter],
     queryFn: ({ pageParam = 0 }) =>
       getPaymentsByFilter(filter, pageParam, size, sort),
     initialPageParam: 0,

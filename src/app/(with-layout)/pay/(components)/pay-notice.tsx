@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function PayNotice() {
   const { data, isLoading } = useGetPaymentsByFilter("PAYMENT", 1, [
     "createdAt",
-    "desc",
+    "DESC",
   ]);
   const payment = data?.pages[0].content[0];
 
