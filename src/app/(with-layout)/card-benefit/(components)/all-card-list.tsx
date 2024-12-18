@@ -1,5 +1,6 @@
 "use client";
 import Accordion from "@/app/(_components)/accordion";
+import Loading from "@/app/loading";
 import { useGetCardBenefit } from "@/hooks/api/useGetCardBenefit";
 import { BenefitCardType } from "@/types/api/card";
 import { BenefitCategory } from "@/types/card";
@@ -17,7 +18,7 @@ export default function AllCardList({ category }: Props) {
   const toggleShowAll = () => setShowAll(!showAll);
 
   if (isFetching) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

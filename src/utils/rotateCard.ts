@@ -23,10 +23,10 @@ export function rotateCard(
       if (isHorizontal) {
         newImage.style.transform = "rotate(90deg)";
         newImage.style.minHeight =
-          newImage.parentElement?.clientWidth.toString()! + "px";
+          newImage.parentElement?.clientWidth.toString() + "px";
 
         newImage.style.minWidth =
-          newImage.parentElement?.clientHeight.toString()! + "px";
+          newImage.parentElement?.clientHeight.toString() + "px";
       } else {
         newImage.style.aspectRatio = "1/1.5";
       }
