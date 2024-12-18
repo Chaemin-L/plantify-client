@@ -49,14 +49,14 @@ export default function AllCardList({ category }: Props) {
         <ul className="flex flex-col gap-6 py-5">
           {showAll
             ? listData.other_cards.map((data: BenefitCardType, idx: number) => (
-                <li key={idx}>
+                <li key={`${idx}_${data.card_name}`}>
                   <AllCardItem {...data} />
                 </li>
               ))
             : listData.other_cards
                 .slice(0, 2)
                 .map((data: BenefitCardType, idx: number) => (
-                  <li key={idx}>
+                  <li key={`${idx}_${data.card_name}`}>
                     <AllCardItem {...data} />
                   </li>
                 ))}

@@ -5,7 +5,7 @@ export function rotateCard(
 ) {
   const img = document.getElementById(oldElementId);
 
-  img?.addEventListener("load", () => {
+  const rotateElement = () => {
     const image = document.getElementById(oldElementId) as HTMLImageElement;
 
     const isHorizontal = image.width > image.height;
@@ -27,15 +27,12 @@ export function rotateCard(
 
         newImage.style.minWidth =
           newImage.parentElement?.clientHeight.toString()! + "px";
-
-        console.log(
-          newImage.parentElement,
-          newImage.height,
-          newImage.parentElement?.clientHeight
-        );
       } else {
         newImage.style.aspectRatio = "1/1.5";
       }
     }
-  });
+  };
+
+  img?.addEventListener("load", rotateElement);
+  img?.addEventListener("change", rotateElement);
 }
