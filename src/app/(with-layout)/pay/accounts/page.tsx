@@ -117,11 +117,11 @@ export default function AccountListPage() {
               inputMode="numeric"
               onKeyDown={handleKeyDown}
             />
-            <span>만원</span>
+            <span className="whitespace-nowrap">만원</span>
           </div>
           <div className="text-right text-shadow-600 text-bd3 md:text-bd2">
             거래 후 잔액:{" "}
-            {(pay?.balance ?? 0 + Number(charge) * 10000).toLocaleString()}원
+            {((pay?.balance || 0) + charge.balance * 10000).toLocaleString()}원
           </div>
           <ul className="flex gap-2 justify-end">
             {chargeUnits.map((unit) => (
