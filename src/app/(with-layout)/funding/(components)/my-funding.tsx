@@ -2,6 +2,7 @@ import FundingStatus from "@/app/(_components)/funding-status";
 import { PATH } from "@/lib/_shared/paths";
 import { FundingType } from "@/types/api/funding";
 import Link from "next/link";
+import React from "react";
 
 const dummy: FundingType[] = [];
 // Array(3)
@@ -43,7 +44,7 @@ export default function MyFunding() {
                   key={idx}
                   className="h-fit w-full hover:bg-shadow-700 rounded-2xl transition-colors "
                 >
-                  <FundingItem {...item} />
+                  <MemorizedFundingItem {...item} />
                 </li>
               ))}
             </ul>
@@ -59,10 +60,10 @@ interface Props {
   title: string;
   percent: number;
   targetAmount: number;
-  organizationName?: string;
+  curAmount: number;
 }
 const FundingItem = (props: Props) => {
-  const { title, percent, targetAmount, organizationName } = props;
+  const { title, percent, targetAmount, curAmount } = props;
 
   return (
     <Link
@@ -74,9 +75,11 @@ const FundingItem = (props: Props) => {
         showProgress
         leftTop={title}
         percent={percent}
-        targetAmount={targetAmount}
-        rightBottom={organizationName}
+        leftBottom={`목표 금액: ${targetAmount.toLocaleString()}원`}
+        rightBottom={`${curAmount.toLocaleString()}원`}
       />
     </Link>
   );
 };
+
+const MemorizedFundingItem = React.memo(FundingItem);
