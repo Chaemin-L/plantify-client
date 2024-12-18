@@ -16,12 +16,12 @@ export default function MyBoxBtn({ handleNewItem }: Props) {
   return (
     <>
       <button
-        className=" absolute right-4 bottom-4 p-2 rounded-full bg-accent-green w-fit aspect-square text-shadow-900 z-30 shadow-lg "
+        className=" absolute right-4 bottom-4 p-2 rounded-lg bg-shadow-500 w-fit aspect-square text-shadow-900 z-30 shadow-lg "
         onClick={toggleShow}
       >
         <Image
-          src="/icons/storage.webp"
-          blurDataURL="/icons/storage.webp"
+          src="/icons/forest-settings.png"
+          blurDataURL="/icons/forest-settings.png"
           width={48}
           height={48}
           alt="보관함"

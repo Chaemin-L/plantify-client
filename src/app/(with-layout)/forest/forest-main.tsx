@@ -5,11 +5,11 @@ import { useForestField } from "@/hooks/useForestField";
 import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
 import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
 
+import { useGetCash } from "@/hooks/api/useGetCash";
 import { usePostCreateUsingItems } from "@/hooks/api/usePostUsingItems";
-import apolloClient from "@/lib/apolloClient";
 import { GetMyItemRes, GetUsingItemsRes } from "@/types/api/item";
-import { ApolloProvider } from "@apollo/client/react";
 import clsx from "clsx";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DraggableData, DraggableEvent } from "react-draggable";
 import DraggableItem from "./(components)/draggable-item";
@@ -25,14 +25,15 @@ export default function ForestMain() {
   const { cellWidth, cellHeight } = useResizeWindowCell();
   const { fillField, emptyField } = useForestField(cellWidth, cellHeight);
 
-  const { data, loading } = useGetUsingItems();
+  const { data: cash } = useGetCash();
+  const { data: usingItems, loading } = useGetUsingItems();
   const [mutate] = usePostCreateUsingItems();
 
   useEffect(() => {
     if (loading) return;
 
     setItems(
-      data?.getAllUsingItemsByUser.map(
+      usingItems?.getAllUsingItemsByUser.map(
         ({ category, posX, posY, ...rest }: GetUsingItemsRes) => {
           const fieldPosX = posX * cellWidth;
           const fieldPosY = posY * cellHeight;
@@ -119,12 +120,22 @@ export default function ForestMain() {
   };
 
   return (
-    <ApolloProvider client={apolloClient}>
+    <>
       <div
         className={clsx(
           "relative -mx-4 flex flex-col gap-3 h-full justify-center"
         )}
       >
+        <div className="mr-4 flex items-center justify-end py-2 gap-2">
+          <Image
+            width={16}
+            height={16}
+            src="/icons/tree-coin.svg"
+            alt="트리코인"
+            className="w-4 h-4"
+          />
+          <span className="text-white ">{cash?.cashBalance}</span>
+        </div>
         <div>
           {/** sky */}
           {/* <div
@@ -219,7 +230,7 @@ export default function ForestMain() {
         {!editMode && <MyBox handleNewItem={handleNewItem} />}
         {!editMode && <StoreBtn />}
       </div>
-    </ApolloProvider>
+    </>
   );
 }
 
