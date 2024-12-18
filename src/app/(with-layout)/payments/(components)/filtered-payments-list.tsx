@@ -14,6 +14,7 @@ interface Props {
 export default function FilteredPaymentsList({ filter, sorting }: Props) {
   const { data, hasNextPage, fetchNextPage } = useGetPaymentsByFilter(
     filter,
+    sorting,
     20,
     [sorting]
   );
