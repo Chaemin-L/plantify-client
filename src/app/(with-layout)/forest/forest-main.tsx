@@ -46,7 +46,8 @@ export default function ForestMain() {
         };
       })
     );
-  }, [cellWidth, loading]);
+    // }, [cellWidth, loading]);
+  }, [cellWidth]);
 
   useEffect(() => {
     if (!editMode) setEditingItem(null);
