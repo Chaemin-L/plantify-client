@@ -5,8 +5,10 @@ import Checkbox from "@/app/(_components)/checkbox";
 import Loading from "@/app/loading";
 import { useGetCardSearch } from "@/hooks/api/useGetCardSearch";
 import { usePostMyCard } from "@/hooks/api/usePostMyCard";
+import { PATH } from "@/lib/_shared/paths";
 import { SearchCardType } from "@/types/api/card";
 import clsx from "clsx";
+import { redirect } from "next/navigation";
 import { MouseEventHandler, useState } from "react";
 import SearchResult from "./search-result";
 
@@ -25,6 +27,7 @@ export default function CheckList({ query }: Props) {
     e.preventDefault();
     mutate(checkedCard.map((card) => card.card_id));
     setCheckedCard([]);
+    redirect(PATH.CARD_BENEFIT);
   };
 
   if (isLoading)

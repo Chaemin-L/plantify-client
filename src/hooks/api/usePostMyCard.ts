@@ -1,9 +1,8 @@
 import { API_ENDPOINTS } from "@/config/api";
-import { PATH } from "@/lib/_shared/paths";
 import fetchClient from "@/lib/fetchClient";
 import { GetMyCardRes } from "@/types/api/card";
-import { useMutation } from "@tanstack/react-query";
-import { redirect } from "next/navigation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { MY_CARDS } from "./useGetMyCards";
 
 async function postMyCard(request: number[]) {
   (await fetchClient(API_ENDPOINTS.CARD_MY, {
@@ -13,10 +12,11 @@ async function postMyCard(request: number[]) {
 }
 
 export const usePostMyCard = () => {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (request: number[]) => await postMyCard(request),
-    onSuccess: () => {
-      redirect(PATH.CARD_BENEFIT);
-    },
+    mutationFn: async (request: number[]) =>
+      await postMyCard(request).then(() =>
+        queryClient.invalidateQueries({ queryKey: MY_CARDS })
+      ),
   });
 };

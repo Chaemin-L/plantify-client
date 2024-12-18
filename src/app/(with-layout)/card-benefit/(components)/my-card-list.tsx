@@ -90,13 +90,14 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
           </SwiperSlide>
         )}
       </Swiper>
-      <div className="mt-10 flex flex-col gap-5">
-        <div>
-          <div className="flex justify-between">
-            <h2 className="text-t2 break-words">
-              {listData[activeIndex]?.card.card_name}
-            </h2>
-            {!autoPlay && listData[activeIndex] && (
+      {!autoPlay && listData[activeIndex] && (
+        <div className="mt-10 flex flex-col gap-5">
+          <div>
+            <div className="flex justify-between">
+              <h2 className="text-t2 break-words">
+                {listData[activeIndex]?.card.card_name}
+              </h2>
+
               <button
                 className="rounded-full px-3 aspect-square bg-shadow-700 text-bd3"
                 onClick={() =>
@@ -105,20 +106,20 @@ export default function MyCardList({ listData, autoPlay = false }: Props) {
               >
                 X
               </button>
-            )}
+            </div>
+            <span className="text-bd3 lg:text-bd2 text-shadow-300">
+              {listData[activeIndex]?.card.company}
+            </span>
           </div>
-          <span className="text-bd3 lg:text-bd2 text-shadow-300">
-            {listData[activeIndex]?.card.company}
-          </span>
+          <div className="flex flex-col gap-2 text-bd3 lg:text-bd2">
+            {listData[activeIndex]?.card.benefits.map((benefit, idx) => (
+              <p key={`${idx}_${listData[activeIndex].myCard_id}`}>
+                • &nbsp;{benefit}
+              </p>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-2 text-bd3 lg:text-bd2">
-          {listData[activeIndex]?.card.benefits.map((benefit, idx) => (
-            <p key={`${idx}_${listData[activeIndex].myCard_id}`}>
-              • &nbsp;{benefit}
-            </p>
-          ))}
-        </div>
-      </div>
+      )}
     </>
   );
 }
