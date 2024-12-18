@@ -127,5 +127,15 @@ const listData: GetMyCardRes = [
     },
   },
 ].map((data, idx) => {
-  return { ...data, card_id: idx, myCard_id: idx };
+  return {
+    card_id: idx,
+    myCard_id: idx,
+    card: {
+      ...data.card,
+      company: "",
+      type: "",
+      benefits: [""],
+      card_id: idx,
+    },
+  };
 });
