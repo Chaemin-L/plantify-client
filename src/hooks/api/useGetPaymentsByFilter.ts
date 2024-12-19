@@ -9,28 +9,19 @@ type FilterType = "CHARGE" | "PAYMENT";
 const getPaymentsByFilter = async (
   filter: FilterType,
   pageParam: number,
-  size: number,
-  sort: string[]
+  size: number
 ) => {
   const response: Pageable<PaymentsType> = await fetchClient(
-    `${
-      API_ENDPOINTS.PAY
-    }/settlements/${filter}?page=${pageParam}&size=${size}&sort=${encodeURIComponent(
-      sort.toString()
-    )}`
+    `${API_ENDPOINTS.PAY}/settlements/${filter}?page=${pageParam}&size=${size}`
   );
   return response;
 };
 
-export const useGetPaymentsByFilter = (
-  filter: FilterType,
-  size: number,
-  sort: string[] = ["createdAt", "DESC"]
-) => {
+export const useGetPaymentsByFilter = (filter: FilterType, size: number) => {
   return useInfiniteQuery({
     queryKey: ["settlements-category", filter],
     queryFn: ({ pageParam = 0 }) =>
-      getPaymentsByFilter(filter, pageParam, size, sort),
+      getPaymentsByFilter(filter, pageParam, size),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.pageable.pageNumber + 1,
     retry: 3,
