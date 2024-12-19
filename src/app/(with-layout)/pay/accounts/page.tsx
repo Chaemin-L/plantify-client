@@ -8,10 +8,12 @@ import { useGetAccounts } from "@/hooks/api/useGetAccounts";
 import { useGetPay } from "@/hooks/api/useGetPay";
 import { usePostChargePay } from "@/hooks/api/usePostChargePay";
 import { PATH } from "@/lib/_shared/paths";
+import { accountAtom } from "@/stores/atoms/accountAtom";
 import { PostChargePayReq } from "@/types/api/pay";
 import getBankId from "@/utils/getBankName";
+import { useResetAtom } from "jotai/utils";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ChangeEventHandler,
   KeyboardEventHandler,
@@ -31,6 +33,9 @@ const initialCharge: PostChargePayReq = {
 export default function AccountListPage() {
   const [charge, setCharge] = useState<PostChargePayReq>(initialCharge);
   const [isOpen, setOpen] = useState<boolean>(false);
+  const resetAccount = useResetAtom(accountAtom);
+
+  const router = useRouter();
 
   const { data: accounts, isLoading: accountsFetching } = useGetAccounts();
   const { data: pay, isLoading: payFetching } = useGetPay();
@@ -55,6 +60,11 @@ export default function AccountListPage() {
     e.preventDefault();
     chargeBalance({ ...charge, balance: charge.balance * 10000 });
     setOpen(false);
+  };
+
+  const handleAddAccount: MouseEventHandler<HTMLButtonElement> = (e) => {
+    resetAccount();
+    router.push(PATH.PAY_ACCOUNTS_ADD);
   };
 
   return (
@@ -98,9 +108,9 @@ export default function AccountListPage() {
         ))}
       </ul>
       <BottomFixedButton>
-        <Link href={PATH.PAY_ACCOUNTS_ADD} className="w-full block h-full">
+        <button onClick={handleAddAccount} className="w-full block h-full">
           계좌 추가하기
-        </Link>
+        </button>
       </BottomFixedButton>
       <BottomSheet isOpen={isOpen} setOpen={setOpen} snapPoints={[300]}>
         <form className="h-full flex flex-col justify-between">
