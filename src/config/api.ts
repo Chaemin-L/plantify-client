@@ -10,6 +10,7 @@ const CLIENT_SECRET = process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET;
 export const API_ENDPOINTS = {
   AUTH: `${API_BASE_URL}/v1/auth`,
   PAY: `${API_BASE_URL}/v1/pay`,
+  NOTIFICATION: `${API_BASE_URL}/v1/notifications/subscribe`,
   CHAT: `${CHAT_BASE_URL}/chat`,
   FUNDING: `${API_BASE_URL}/v1/funding`,
   ITEM: `${API_BASE_URL}/v1/items`,

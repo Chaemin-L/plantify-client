@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import MyCardList from "../card-benefit/(components)/my-card-list";
 import EventSliderBanner from "./(components)/event-slider-banner";
 import GoCardBenefit from "./(components)/go-card-benefit";
+import PaymentNotification from "./(components)/notifications";
 import PayNotice from "./(components)/pay-notice";
 
 const PaySection = dynamic(
@@ -24,6 +25,7 @@ export default function HomePage() {
   return (
     <Suspense fallback={<Loading />}>
       <div className="flex flex-col gap-5 w-full">
+        <PaymentNotification />
         {/** 알림 */}
         <PayNotice />
 
