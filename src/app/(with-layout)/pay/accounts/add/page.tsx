@@ -58,7 +58,6 @@ export default function Page() {
     const isDup = !!account.accounts.filter(
       (acc) => acc.accountNum == parseInt(bankNum)
     ).length;
-    console.log(isDup, account.accounts, bankNum);
     if (isDup) {
       error.current = true;
       setArsCert(false);

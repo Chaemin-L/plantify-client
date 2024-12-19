@@ -129,10 +129,7 @@ export default function ForestMain() {
   };
 
   const handleClickItem = (item: GetUsingItemsRes) => {
-    console.log("handleClick", editMode, editingItem);
     if (editingItem === null) {
-      console.log("handleClick after", item.id);
-
       setEditingItem(item.id);
       emptyField(item);
     }
