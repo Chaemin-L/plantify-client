@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const GET_USING_ITEMS = gql`
+export const GET_USING_ITEMS = gql`
   query getAllUsingItemsByUser {
     getAllUsingItemsByUser {
       id
@@ -11,6 +11,7 @@ const GET_USING_ITEMS = gql`
       category
       createdAt
       updatedAt
+      __typename
     }
   }
 `;

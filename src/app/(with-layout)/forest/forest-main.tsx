@@ -67,10 +67,10 @@ export default function ForestMain() {
     if (editingItem) setEditMode(true);
   }, [editingItem]);
 
-  const handleRemove = (id: number) => {
+  const handleRemove = async (id: number) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
     setEditMode(false);
-    update({
+    await update({
       variables: {
         actions: [
           {
@@ -101,35 +101,45 @@ export default function ForestMain() {
     }
   };
 
-  const handleNewItem = (newItem: GetMyItemRes) => {
+  const handleNewItem = async (newItem: GetMyItemRes) => {
     const { myItemId } = newItem;
-    const response = create({
+    const response = (await create({
       variables: {
         actions: [{ action: "CREATE", myItemId }],
       },
-    }) as unknown as UpdateUsingItemsRes;
+    })) as unknown as { data: UpdateUsingItemsRes };
+    console.log("response", response);
     setItems((prev) => [
       ...prev,
       {
         ...newItem,
         posX: 0,
         posY: 0,
-        id: Number(response.id),
+        id: Number(response.data.manageUsingItems[0].id),
       },
     ]);
-    setEditingItem(response.id);
+    // setEditingItem(response.id);
+    // setEditMode(true);
+    // handleClickItem({
+    //   ...newItem,
+    //   posX: 0,
+    //   posY: 0,
+    //   id: Number(response.data.manageUsingItems[0].id),
+    // });
   };
 
   const handleClickItem = (item: GetUsingItemsRes) => {
-    console.log("handleClick");
+    console.log("handleClick", editMode, editingItem);
     if (editingItem === null) {
+      console.log("handleClick after", item.id);
+
       setEditingItem(item.id);
       emptyField(item);
     }
   };
 
   const onControlledDrag = (
-    e: DraggableEvent,
+    // e: DraggableEvent,
     position: DraggableData,
     id: number
   ) => {
@@ -213,7 +223,7 @@ export default function ForestMain() {
                   disabled={!editMode || (editMode && editingItem !== item.id)}
                   onMouseDown={() => handleClickItem(item)}
                   onStop={(e: DraggableEvent, position: DraggableData) =>
-                    onControlledDrag(e, position, item.id)
+                    onControlledDrag(position, item.id)
                   }
                   grid={[cellWidth / 2, cellHeight / 2]}
                   bounds="parent"
