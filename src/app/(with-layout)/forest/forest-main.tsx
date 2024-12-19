@@ -67,15 +67,15 @@ export default function ForestMain() {
     if (editingItem) setEditMode(true);
   }, [editingItem]);
 
-  const handleRemove = (item: GetUsingItemsRes) => {
-    setItems((prev) => prev.filter((item) => item.id !== item.id));
+  const handleRemove = (id: number) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
     setEditMode(false);
     update({
       variables: {
         actions: [
           {
             action: "DELETE",
-            usingItemId: item.id,
+            usingItemId: id,
           },
         ],
       },
@@ -206,7 +206,7 @@ export default function ForestMain() {
                   height={cellHeight} // custom variable
                   editMode={editMode}
                   editingItem={editingItem}
-                  handleRemove={() => handleRemove(item)}
+                  handleRemove={() => handleRemove(item.id)}
                   handleComplete={() => handleComplete(item)}
                   editError={editError}
                   disabled={!editMode || (editMode && editingItem !== item.id)}

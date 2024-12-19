@@ -22,7 +22,7 @@ interface Props
   editMode: boolean;
   editingItem: number | null;
   editError: boolean;
-  handleRemove: (myItemId: number) => void;
+  handleRemove: (id: number) => void;
   handleComplete: (item: GetUsingItemsRes) => void;
 }
 
