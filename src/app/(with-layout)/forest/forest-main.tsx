@@ -117,12 +117,12 @@ export default function ForestMain() {
         id: Number(response.id),
       },
     ]);
-    setEditingItem(myItemId);
+    setEditingItem(response.id);
   };
 
   const handleClickItem = (item: GetUsingItemsRes) => {
     if (editingItem === null) {
-      setEditingItem(item.myItemId);
+      setEditingItem(item.id);
       emptyField(item);
     }
   };
@@ -137,7 +137,8 @@ export default function ForestMain() {
 
     const xCond = x % cellWidth === 0;
     const yCond = y % cellHeight === 0;
-    const targetItem = items.find((item) => item.myItemId === id);
+    const targetItem = items.find((item) => item.id === id);
+    console.log(items, id);
 
     if (!targetItem) return;
 
@@ -157,7 +158,7 @@ export default function ForestMain() {
     } else
       setItems((prev) =>
         prev.map((item: GetUsingItemsRes) =>
-          item.myItemId === id ? { ...item, posX: x, posY: y } : item
+          item.id === id ? { ...item, posX: x, posY: y } : item
         )
       );
   };
@@ -198,7 +199,7 @@ export default function ForestMain() {
             <div className="relative flex flex-wrap">
               {items?.map((item, idx) => (
                 <DraggableItem
-                  key={idx}
+                  key={item.id}
                   item={item}
                   position={{ x: item.posX, y: item.posY }}
                   width={cellWidth} // custom variable
@@ -206,11 +207,9 @@ export default function ForestMain() {
                   editMode={editMode}
                   editingItem={editingItem}
                   handleRemove={() => handleRemove(item)}
-                  handleComplete={handleComplete}
+                  handleComplete={() => handleComplete(item)}
                   editError={editError}
-                  disabled={
-                    !editMode || (editMode && editingItem !== item.myItemId)
-                  }
+                  disabled={!editMode || (editMode && editingItem !== item.id)}
                   onMouseDown={() => handleClickItem(item)}
                   onStop={(e: DraggableEvent, position: DraggableData) =>
                     onControlledDrag(e, position, item.id)

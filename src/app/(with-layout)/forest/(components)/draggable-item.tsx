@@ -38,12 +38,12 @@ export default function DraggableItem({
   ...props
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const { myItemId, category, imageUri: imageUri } = item;
-  const isFocusing = editingItem === myItemId;
+  const { id, category, imageUri: imageUri } = item;
+  const isFocusing = editingItem === id;
   const isGround = category === "GROUND";
 
   return (
-    <Draggable key={`${myItemId}`} nodeRef={ref} cancel="button" {...props}>
+    <Draggable key={`${id}`} nodeRef={ref} cancel="button" {...props}>
       <div
         ref={ref}
         className={clsx(
@@ -54,7 +54,7 @@ export default function DraggableItem({
       >
         <div
           className={clsx(
-            (editMode && editingItem == null) || editingItem === myItemId
+            (editMode && editingItem == null) || editingItem === id
               ? editError
                 ? "drop-shadow-[0px_5px_5px_red]"
                 : "drop-shadow-[0px_5px_5px_black]"
@@ -66,11 +66,11 @@ export default function DraggableItem({
             background: `url('${imageUri}') no-repeat center / contain`,
           }}
         />
-        {editMode && editingItem === myItemId && (
+        {editMode && editingItem === id && (
           <>
             <button
               className="absolute z-20 -left-4 -top-8 w-6 h-6  bg-[url('/icons/remove.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
-              onClick={() => handleRemove(myItemId)}
+              onClick={() => handleRemove(id)}
             />
             <button
               className="absolute z-20 -right-4 -top-8 w-6 h-6 bg-[url('/icons/check.svg')] bg-center bg-contain drop-shadow-[0px_5px_5px_black]"
