@@ -62,7 +62,6 @@ interface ItemProps {
 
 const FundingItem = ({ selectedCategory, data }: ItemProps) => {
   const { fundingId, image, title, percent, targetAmount, curAmount } = data;
-  console.log(targetAmount, curAmount);
   return (
     <li key={fundingId}>
       <Link

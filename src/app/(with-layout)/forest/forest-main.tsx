@@ -146,7 +146,6 @@ export default function ForestMain() {
     const xCond = x % cellWidth === 0;
     const yCond = y % cellHeight === 0;
     const targetItem = items.find((item) => item.id === id);
-    console.log(items, id);
 
     if (!targetItem) return;
 
