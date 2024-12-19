@@ -33,7 +33,7 @@ export default function ForestMain() {
   const { fillField, emptyField } = useForestField(cellWidth, cellHeight);
 
   const { data: cash } = useGetCash();
-  const { data: usingItems, loading } = useGetUsingItems();
+  const { data: usingItems, loading, refetch } = useGetUsingItems();
   const [create] = usePostCreateUsingItems();
   const [update] = usePostUpdateUsingItems();
 
@@ -79,14 +79,14 @@ export default function ForestMain() {
           },
         ],
       },
-    });
+    }).then(() => refetch());
   };
 
-  const handleComplete = (item: GetUsingItemsRes) => {
+  const handleComplete = async (item: GetUsingItemsRes) => {
     if (!fillField(item)) setEditError(true);
     else {
       setEditMode(false);
-      update({
+      await update({
         variables: {
           actions: [
             {
@@ -97,7 +97,7 @@ export default function ForestMain() {
             },
           ],
         },
-      });
+      }).then(() => refetch());
     }
   };
 
@@ -108,7 +108,6 @@ export default function ForestMain() {
         actions: [{ action: "CREATE", myItemId }],
       },
     })) as unknown as { data: { manageUsingItems: UpdateUsingItemsRes[] } };
-    console.log("response", response);
     setItems((prev) => [
       ...prev,
       {
@@ -118,6 +117,7 @@ export default function ForestMain() {
         id: Number(response.data.manageUsingItems[0].id),
       },
     ]);
+
     // setEditingItem(response.id);
     // setEditMode(true);
     // handleClickItem({
