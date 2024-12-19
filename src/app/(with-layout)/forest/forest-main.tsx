@@ -107,7 +107,7 @@ export default function ForestMain() {
       variables: {
         actions: [{ action: "CREATE", myItemId }],
       },
-    })) as unknown as { data: UpdateUsingItemsRes };
+    })) as unknown as { data: { manageUsingItems: UpdateUsingItemsRes[] } };
     console.log("response", response);
     setItems((prev) => [
       ...prev,
