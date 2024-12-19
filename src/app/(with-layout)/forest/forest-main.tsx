@@ -197,7 +197,7 @@ export default function ForestMain() {
           >
             {/** Draggable Field */}
             <div className="relative flex flex-wrap">
-              {items?.map((item, idx) => (
+              {items?.map((item) => (
                 <DraggableItem
                   key={item.id}
                   item={item}
