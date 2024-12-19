@@ -121,6 +121,7 @@ export default function ForestMain() {
   };
 
   const handleClickItem = (item: GetUsingItemsRes) => {
+    console.log("handleClick");
     if (editingItem === null) {
       setEditingItem(item.id);
       emptyField(item);

@@ -18,6 +18,7 @@ export type GetMyItemRes = {
   imageUri: string;
   itemName: string;
   category: CategoryType;
+  quantity: number;
 };
 
 export type PurchaseItemRes = {

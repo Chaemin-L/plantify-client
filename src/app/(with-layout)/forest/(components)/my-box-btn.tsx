@@ -104,7 +104,7 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
         ) : (
           <div className="grid grid-cols-3 gap-1 md:gap-2 w-full ">
             {myItems.map((item) => {
-              const { itemId, itemName, imageUri } = item;
+              const { itemId, itemName, imageUri, quantity } = item;
               return (
                 <button
                   key={itemId}
@@ -113,11 +113,10 @@ const MyBox = ({ handleClose, handleNewItem }: MyBoxProps) => {
                     handleNewItem(item);
                     handleClose();
                   }}
-                  // disabled={quantity === usingQuantity}
+                  disabled={quantity === 0}
                 >
                   <span className="absolute top-0 right-4 text-bd4">
-                    {myItems.length}
-                    {/* {usingQuantity} / {quantity} */}
+                    {quantity}
                   </span>
                   <img
                     className="w-[80%] max-h-[100px]"
