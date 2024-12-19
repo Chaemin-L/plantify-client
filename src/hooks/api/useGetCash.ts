@@ -15,5 +15,6 @@ export const useGetCash = () => {
   return useQuery({
     queryKey: CASH_QUERY_KEY,
     queryFn: async () => await getCash(),
+    retry: 3,
   });
 };

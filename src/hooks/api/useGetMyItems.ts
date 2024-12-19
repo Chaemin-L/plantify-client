@@ -14,8 +14,6 @@ export async function getMyItems(category: CategoryType) {
 export const useGetMyItemsQuery = (category: CategoryType) => {
   return useSuspenseQuery({
     queryKey: ["my-items", category],
-    queryFn: async () => {
-      return await getMyItems(category);
-    },
+    queryFn: async () => await getMyItems(category),
   });
 };

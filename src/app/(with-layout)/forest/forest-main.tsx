@@ -5,7 +5,11 @@ import { useResizeWindowCell } from "@/hooks/useResizeWindowCell";
 import { CELL_COL_CNT, CELL_ROW_CNT } from "@/lib/_shared/item";
 
 import { useGetCash } from "@/hooks/api/useGetCash";
-import { usePostCreateUsingItems } from "@/hooks/api/usePostUsingItems";
+import { useGetUsingItems } from "@/hooks/api/useGetUsingMyItems";
+import {
+  usePostCreateUsingItems,
+  usePostUpdateUsingItems,
+} from "@/hooks/api/usePostUsingItems";
 import { GetMyItemRes, GetUsingItemsRes } from "@/types/api/item";
 import clsx from "clsx";
 import Image from "next/image";
@@ -25,29 +29,31 @@ export default function ForestMain() {
   const { fillField, emptyField } = useForestField(cellWidth, cellHeight);
 
   const { data: cash } = useGetCash();
-  // const { data: usingItems, loading } = useGetUsingItems();
+  const { data: usingItems, loading } = useGetUsingItems();
   const [create] = usePostCreateUsingItems();
-  // const [update] = usePostUpdateUsingItems();
+  const [update] = usePostUpdateUsingItems();
 
   useEffect(() => {
-    // if (loading) return;
+    if (loading) return;
 
     setItems(
-      // usingItems?.getAllUsingItemsByUser.map(
-      dummy.map(({ category, posX, posY, ...rest }: GetUsingItemsRes) => {
-        const fieldPosX = posX * cellWidth;
-        const fieldPosY = posY * cellHeight;
-        fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
-        return {
-          category,
-          ...rest,
-          posX: fieldPosX,
-          posY: fieldPosY,
-        };
-      })
+      usingItems?.getAllUsingItemsByUser.map(
+        // dummy.map(
+        ({ category, posX, posY, ...rest }: GetUsingItemsRes) => {
+          const fieldPosX = posX * cellWidth;
+          const fieldPosY = posY * cellHeight;
+          fillField({ ...rest, category, posX: fieldPosX, posY: fieldPosY });
+          return {
+            category,
+            ...rest,
+            posX: fieldPosX,
+            posY: fieldPosY,
+          };
+        }
+      )
     );
-    // }, [cellWidth, loading]);
-  }, [cellWidth]);
+  }, [cellWidth, usingItems]);
+  // }, [cellWidth]);
 
   useEffect(() => {
     if (!editMode) setEditingItem(null);
@@ -66,17 +72,33 @@ export default function ForestMain() {
     if (!fillField(item)) setEditError(true);
     else {
       setEditMode(false);
+      update({
+        variables: {
+          actions: [
+            {
+              action: "UPDATE",
+              usingItemId: item.id,
+              posX: item.posX / cellWidth,
+              posY: item.posY / cellHeight,
+            },
+          ],
+        },
+      });
     }
   };
 
   const handleNewItem = (newItem: GetMyItemRes) => {
     const { myItemId } = newItem;
-    create({
+    const response = create({
       variables: {
         actions: [{ action: "CREATE", myItemId }],
       },
     });
-    setItems((prev) => [...prev, { ...newItem, posX: 0, posY: 0 }]);
+    setItems((prev) => [
+      ...prev,
+      //@ts-ignore
+      { ...newItem, posX: 0, posY: 0, id: Number(response.id) },
+    ]);
     setEditingItem(myItemId);
   };
 
@@ -105,10 +127,10 @@ export default function ForestMain() {
       const isOver = x === 0; // 왼쪽 끝으로 마름모 반이 잘리는 현상 방지
       setItems((prev) =>
         prev.map((item: GetUsingItemsRes) =>
-          item.myItemId === id
+          item.id === id
             ? {
                 ...item,
-                posX: isOver ? x + cellHeight : x - cellHeight,
+                posX: isOver ? x + cellWidth / 2 : x - cellWidth / 2,
                 posY: y,
               }
             : item
@@ -173,7 +195,7 @@ export default function ForestMain() {
                   }
                   onMouseDown={() => handleClickItem(item)}
                   onStop={(e: DraggableEvent, position: DraggableData) =>
-                    onControlledDrag(e, position, item.myItemId)
+                    onControlledDrag(e, position, item.id)
                   }
                   grid={[cellWidth / 2, cellHeight / 2]}
                   bounds="parent"
@@ -237,161 +259,161 @@ export default function ForestMain() {
   );
 }
 
-const dummy: GetUsingItemsRes[] = [
-  {
-    myItemId: 1,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 1,
-    posY: 7,
-    category: "GROUND",
-  },
-  {
-    myItemId: 2,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 1,
-    posY: 6,
-    category: "GROUND",
-  },
-  {
-    myItemId: 11,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 1.5,
-    posY: 7.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 13,
-    imageUri: "/temp/forest/ground-item5.png",
-    posX: 0.5,
-    posY: 6.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 14,
-    imageUri: "/temp/forest/ground-item5.png",
-    posX: 1.5,
-    posY: 5.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 13,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 2,
-    posY: 6,
-    category: "GROUND",
-  },
+// const dummy: GetUsingItemsRes[] = [
+//   {
+//     myItemId: 1001,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 1,
+//     posY: 7,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1002,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 1,
+//     posY: 6,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1011,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 1.5,
+//     posY: 7.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1013,
+//     imageUri: "/temp/forest/ground-item5.png",
+//     posX: 0.5,
+//     posY: 6.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1014,
+//     imageUri: "/temp/forest/ground-item5.png",
+//     posX: 1.5,
+//     posY: 5.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1015,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 2,
+//     posY: 6,
+//     category: "GROUND",
+//   },
 
-  {
-    myItemId: 15,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 2.5,
-    posY: 6.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 16,
-    imageUri: "/temp/forest/ground-item5.png",
-    posX: 3,
-    posY: 7,
-    category: "GROUND",
-  },
-  {
-    myItemId: 17,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 3,
-    posY: 7,
-    category: "GROUND",
-  },
-  {
-    myItemId: 18,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 2,
-    posY: 8,
-    category: "GROUND",
-  },
-  {
-    myItemId: 19,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 3.5,
-    posY: 7.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 20,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 2.5,
-    posY: 8.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 23,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 4,
-    posY: 8,
-    category: "GROUND",
-  },
-  {
-    myItemId: 24,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 3,
-    posY: 9,
-    category: "GROUND",
-  },
-  {
-    myItemId: 21,
-    imageUri: "/temp/forest/ground-item5.png",
-    posX: 4.5,
-    posY: 8.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 22,
-    imageUri: "/temp/forest/ground-item5.png",
-    posX: 3.5,
-    posY: 9.5,
-    category: "GROUND",
-  },
-  {
-    myItemId: 22,
-    imageUri: "/temp/forest/ground-item3.png",
-    posX: 4,
-    posY: 9,
-    category: "GROUND",
-  },
+//   {
+//     myItemId: 1016,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 2.5,
+//     posY: 6.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1017,
+//     imageUri: "/temp/forest/ground-item5.png",
+//     posX: 3,
+//     posY: 7,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1018,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 3,
+//     posY: 7,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1019,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 2,
+//     posY: 8,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1020,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 3.5,
+//     posY: 7.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1021,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 2.5,
+//     posY: 8.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1022,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 4,
+//     posY: 8,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1023,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 3,
+//     posY: 9,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1024,
+//     imageUri: "/temp/forest/ground-item5.png",
+//     posX: 4.5,
+//     posY: 8.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1025,
+//     imageUri: "/temp/forest/ground-item5.png",
+//     posX: 3.5,
+//     posY: 9.5,
+//     category: "GROUND",
+//   },
+//   {
+//     myItemId: 1026,
+//     imageUri: "/temp/forest/ground-item3.png",
+//     posX: 4,
+//     posY: 9,
+//     category: "GROUND",
+//   },
 
-  {
-    myItemId: 100,
-    imageUri: "/temp/forest/tree-item1.svg",
-    posX: 1.5,
-    posY: 5.5,
-    category: "TREE",
-  },
-  {
-    myItemId: 101,
-    imageUri: "/temp/forest/tree-item2.svg",
-    posX: 2,
-    posY: 6,
-    category: "TREE",
-  },
-  {
-    myItemId: 102,
-    imageUri: "/temp/forest/tree-item3.svg",
-    posX: 2.5,
-    posY: 6.5,
-    category: "TREE",
-  },
-  {
-    myItemId: 103,
-    imageUri: "/temp/forest/tree-item2.svg",
-    posX: 3,
-    posY: 7,
-    category: "TREE",
-  },
-  {
-    myItemId: 104,
-    imageUri: "/temp/forest/tree-item1.svg",
-    posX: 3.5,
-    posY: 7.5,
-    category: "TREE",
-  },
-];
+//   {
+//     myItemId: 1027,
+//     imageUri: "/temp/forest/tree-item1.svg",
+//     posX: 1.5,
+//     posY: 5.5,
+//     category: "TREE",
+//   },
+//   {
+//     myItemId: 1028,
+//     imageUri: "/temp/forest/tree-item2.svg",
+//     posX: 2,
+//     posY: 6,
+//     category: "TREE",
+//   },
+//   {
+//     myItemId: 1029,
+//     imageUri: "/temp/forest/tree-item3.svg",
+//     posX: 2.5,
+//     posY: 6.5,
+//     category: "TREE",
+//   },
+//   {
+//     myItemId: 1030,
+//     imageUri: "/temp/forest/tree-item2.svg",
+//     posX: 3,
+//     posY: 7,
+//     category: "TREE",
+//   },
+//   {
+//     myItemId: 1031,
+//     imageUri: "/temp/forest/tree-item1.svg",
+//     posX: 3.5,
+//     posY: 7.5,
+//     category: "TREE",
+//   },
+// ];

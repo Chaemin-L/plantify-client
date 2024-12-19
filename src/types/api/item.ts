@@ -47,7 +47,20 @@ export interface UpdateUsingItemsReq extends Position {
 
 // GET, POST usingItem Response
 export interface GetUsingItemsRes extends Position {
+  id: number;
   myItemId: number;
   imageUri: string;
   category: CategoryType;
+}
+
+export interface UpdateUsingItemsRes extends Position {
+  id: number;
+  myItemId: number;
+  userId: number;
+  imageUri: string;
+  posX: number;
+  posY: number;
+  category: CategoryType;
+  createdAt: string;
+  updatedAt: string;
 }

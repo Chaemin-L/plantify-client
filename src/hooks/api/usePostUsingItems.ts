@@ -11,7 +11,6 @@ const CREATE_USING_ITEMS = gql`
 const POST_USING_ITEMS = gql`
   mutation ManageUsingItems($actions: [UsingItemActionInput!]!) {
     manageUsingItems(actions: $actions) {
-      usingItemId
       myItemId
       posX
       posY
