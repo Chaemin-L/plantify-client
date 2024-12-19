@@ -1,3 +1,4 @@
+import { UpdateUsingItemsRes } from "@/types/api/item";
 import { gql, useMutation } from "@apollo/client";
 
 const CREATE_USING_ITEMS = gql`
@@ -23,5 +24,5 @@ export function usePostCreateUsingItems() {
 }
 
 export function usePostUpdateUsingItems() {
-  return useMutation(POST_USING_ITEMS);
+  return useMutation<UpdateUsingItemsRes>(POST_USING_ITEMS);
 }

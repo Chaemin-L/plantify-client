@@ -10,7 +10,11 @@ import {
   usePostCreateUsingItems,
   usePostUpdateUsingItems,
 } from "@/hooks/api/usePostUsingItems";
-import { GetMyItemRes, GetUsingItemsRes } from "@/types/api/item";
+import {
+  GetMyItemRes,
+  GetUsingItemsRes,
+  UpdateUsingItemsRes,
+} from "@/types/api/item";
 import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -63,9 +67,19 @@ export default function ForestMain() {
     if (editingItem) setEditMode(true);
   }, [editingItem]);
 
-  const handleRemove = (myItemId: number) => {
-    setItems((prev) => prev.filter((item) => item.myItemId !== myItemId));
+  const handleRemove = (item: GetUsingItemsRes) => {
+    setItems((prev) => prev.filter((item) => item.id !== item.id));
     setEditMode(false);
+    update({
+      variables: {
+        actions: [
+          {
+            action: "DELETE",
+            usingItemId: item.id,
+          },
+        ],
+      },
+    });
   };
 
   const handleComplete = (item: GetUsingItemsRes) => {
@@ -93,11 +107,15 @@ export default function ForestMain() {
       variables: {
         actions: [{ action: "CREATE", myItemId }],
       },
-    });
+    }) as unknown as UpdateUsingItemsRes;
     setItems((prev) => [
       ...prev,
-      //@ts-ignore
-      { ...newItem, posX: 0, posY: 0, id: Number(response.id) },
+      {
+        ...newItem,
+        posX: 0,
+        posY: 0,
+        id: Number(response.id),
+      },
     ]);
     setEditingItem(myItemId);
   };
@@ -187,7 +205,7 @@ export default function ForestMain() {
                   height={cellHeight} // custom variable
                   editMode={editMode}
                   editingItem={editingItem}
-                  handleRemove={handleRemove}
+                  handleRemove={() => handleRemove(item)}
                   handleComplete={handleComplete}
                   editError={editError}
                   disabled={
